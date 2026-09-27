@@ -1,0 +1,87 @@
+/* ------------------------------------------------------------------
+   FIMMICK design tokens
+   Light, comprehension-first surfaces; navy ink typography; logo magenta
+   and lime as purposeful accents; one focused dark platform surface.
+------------------------------------------------------------------- */
+:root {
+  /* Brand (sampled from the approved logo) */
+  --brand-magenta: #e5007f;
+  --brand-lime: #8dc63f;
+  --brand-grey: #434343;
+
+  /* Ink and text */
+  --ink: #0d1433;
+  --ink-2: #1d2654;
+  --text: #161c35;
+  --muted: #545d7a;
+  --subtle: #7a8299;
+
+  /* Surfaces */
+  --canvas: #f4f5f8;
+  --surface: #ffffff;
+  --surface-2: #eef0f5;
+  --line: #e1e4ec;
+  --line-strong: #c9cedb;
+
+  /* Accents with accessible text variants */
+  --magenta: var(--brand-magenta);
+  --magenta-ink: #b0005f;
+  --magenta-soft: #fde8f3;
+  --lime: var(--brand-lime);
+  --lime-ink: #3d6112;
+  --lime-soft: #edf6e0;
+  --sky-soft: #e8eefb;
+  --amber-soft: #fff3dc;
+  --amber-ink: #7a4b00;
+
+  /* Dark platform surface */
+  --night: #0a0f26;
+  --night-2: #131a3a;
+  --night-line: #2a3363;
+  --night-text: #e8ebf7;
+  --night-muted: #a9b1d1;
+
+  /* Flow motif roles */
+  --flow-source: #64708f;
+  --flow-work: var(--brand-magenta);
+  --flow-review: var(--brand-lime);
+  --flow-result: var(--ink);
+
+  /* Type */
+  --font-sans: var(--font-manrope), "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang HK", "Noto Sans TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+  --fs-hero: clamp(2.5rem, 1.6rem + 3.6vw, 4.6rem);
+  --fs-h1: clamp(2.1rem, 1.5rem + 2.4vw, 3.5rem);
+  --fs-h2: clamp(1.65rem, 1.3rem + 1.4vw, 2.5rem);
+  --fs-h3: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
+  --fs-lead: clamp(1.08rem, 1rem + 0.35vw, 1.3rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-micro: 0.8125rem;
+  --lh-body: 1.65;
+  --lh-tight: 1.08;
+
+  /* Space and shape */
+  --container: 1280px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --section: clamp(4.5rem, 3rem + 5vw, 8rem);
+  --radius-s: 8px;
+  --radius: 14px;
+  --radius-l: 22px;
+  --shadow-1: 0 1px 2px rgb(13 20 51 / 6%), 0 1px 1px rgb(13 20 51 / 4%);
+  --shadow-2: 0 12px 32px -12px rgb(13 20 51 / 22%), 0 2px 6px rgb(13 20 51 / 6%);
+  --shadow-3: 0 30px 60px -24px rgb(13 20 51 / 35%);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 180ms;
+  --t-med: 420ms;
+  --focus: 0 0 0 3px var(--surface), 0 0 0 5px var(--ink-2);
+
+  --header-h: 72px;
+}
+
+:root:lang(zh-Hant-HK),
+:root:lang(zh-Hans) {
+  --lh-body: 1.85;
+  --lh-tight: 1.22;
+}
