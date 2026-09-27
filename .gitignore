@@ -1,0 +1,34 @@
+# dependencies
+/node_modules
+
+# Next.js / build output
+/.next/
+/out/
+/dist/
+next-env.d.ts
+*.tsbuildinfo
+
+# testing
+/coverage
+/test-results/
+/playwright-report/
+/blob-report/
+
+# media render intermediates
+/video/frames/
+/video/.render/
+
+# env and secrets
+.env*
+!.env.example
+*.pem
+
+# hosting-local state
+.vercel
+/.wrangler/
+/.sites-runtime/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+npm-debug.log*
