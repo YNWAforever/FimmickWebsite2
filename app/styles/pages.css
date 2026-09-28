@@ -60,6 +60,7 @@
 
 .gateways { display: grid; gap: 20px; }
 @media (min-width: 1000px) { .gateways { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.gateways > *, .cases-feature > *, .resource-feature > *, .home-hero__grid > *, .detail-grid > *, .contact-grid > * { min-width: 0; }
 .gateway { padding: clamp(24px, 3vw, 36px); border-radius: 28px; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
 .gateway h3 { font-size: 1.5rem; }
 .gateway-list { list-style: none; display: grid; gap: 8px; margin-top: 6px; }
