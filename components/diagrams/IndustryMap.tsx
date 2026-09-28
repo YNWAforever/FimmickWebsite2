@@ -28,7 +28,8 @@ export function IndustryMap({ industries, labels }: { industries: IndustryView[]
   const current = industries.find((i) => i.id === active) ?? industries[0];
   return (
     <div className="selector selector--side">
-      <ul className="selector-options" role="group" aria-label={labels.group}>
+      <div role="group" aria-label={labels.group}>
+      <ul className="selector-options">
         {industries.map((industry) => (
           <li key={industry.id}>
             <button type="button" className="selector-btn" aria-pressed={industry.id === active} aria-controls="industry-panel" onClick={() => setActive(industry.id)}>
@@ -38,6 +39,7 @@ export function IndustryMap({ industries, labels }: { industries: IndustryView[]
           </li>
         ))}
       </ul>
+      </div>
       <div className="selector-panel" id="industry-panel" key={current.id} aria-live="polite">
         <h3>{current.name}</h3>
         <p className="muted">{current.problem}</p>

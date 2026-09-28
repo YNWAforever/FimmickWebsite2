@@ -15,7 +15,8 @@ export function Roadmap({ steps, labels }: { steps: RoadmapStep[]; labels: { gro
   const step = steps.find((s) => s.id === active) ?? steps[0];
   return (
     <div>
-      <ol className="roadmap-steps" role="group" aria-label={labels.group}>
+      <div role="group" aria-label={labels.group}>
+      <ol className="roadmap-steps">
         {steps.map((s) => (
           <li key={s.id}>
             <button type="button" aria-pressed={s.id === active} aria-controls="roadmap-detail" onClick={() => setActive(s.id)}>
@@ -25,6 +26,7 @@ export function Roadmap({ steps, labels }: { steps: RoadmapStep[]; labels: { gro
           </li>
         ))}
       </ol>
+      </div>
       <div className="selector-panel roadmap-detail" id="roadmap-detail" key={step.id} aria-live="polite">
         <h3>
           {step.number} · {step.name}

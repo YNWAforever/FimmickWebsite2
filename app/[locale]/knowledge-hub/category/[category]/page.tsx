@@ -10,7 +10,8 @@ import { knowledgeCategories } from "../../categories";
 
 type Props = { params: Promise<{ locale: string; category: string }> };
 
-export const dynamicParams = false;
+/** Encoded names such as "Learning %26 Culture" must still resolve; unknown names 404 via find(). */
+export const dynamicParams = true;
 export function generateStaticParams() {
   return locales.flatMap((locale) => knowledgeCategories.map((c) => ({ locale, category: c.slug })));
 }
