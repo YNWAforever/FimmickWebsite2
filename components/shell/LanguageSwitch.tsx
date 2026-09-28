@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { safeQueryForLocaleSwitch } from "@/lib/safe-query";
 
 export type LanguageOption = { code: "en" | "zh-hant" | "zh-hans"; label: string; short: string; lang: string; current: boolean };
@@ -13,6 +13,7 @@ function targetPath(pathname: string, code: LanguageOption["code"]) {
 
 export function LanguageSwitch({ options, label }: { options: LanguageOption[]; label: string }) {
   const pathname = usePathname() || "/en";
+  const router = useRouter();
   return (
     <span className="lang-switch" role="group" aria-label={label}>
       {options.map((option) =>
@@ -32,7 +33,7 @@ export function LanguageSwitch({ options, label }: { options: LanguageOption[]; 
               const query = safeQueryForLocaleSwitch(window.location.search);
               if (query) {
                 event.preventDefault();
-                window.location.assign(`${targetPath(pathname, option.code)}${query}${window.location.hash}`);
+                router.push(`${targetPath(pathname, option.code)}${query}${window.location.hash}`);
               }
             }}
           >

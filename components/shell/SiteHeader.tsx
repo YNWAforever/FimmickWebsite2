@@ -42,11 +42,13 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
     });
   }, []);
 
-  // Close menus on navigation.
-  useEffect(() => {
+  // Close menus on navigation (state adjusted during render, not in an effect).
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
     setOpen(null);
     setDrawer(false);
-  }, [pathname]);
+  }
 
   // Escape and outside click for mega panels.
   useEffect(() => {

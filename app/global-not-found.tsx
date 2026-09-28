@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/components.css";
@@ -22,9 +23,9 @@ export default function GlobalNotFound() {
             <h1>We couldn&apos;t find that page</h1>
             <p className="lead" lang="zh-Hant-HK">找不到此頁面</p>
             <div className="btn-row" style={{ marginTop: 24 }}>
-              <a className="btn" href="/en">English home</a>
-              <a className="btn btn--ghost" href="/zh-hant" lang="zh-Hant-HK">繁體中文首頁</a>
-              <a className="btn btn--ghost" href="/en/contact">Contact</a>
+              <Link className="btn" href="/en">English home</Link>
+              <Link className="btn btn--ghost" href="/zh-hant" lang="zh-Hant-HK">繁體中文首頁</Link>
+              <Link className="btn btn--ghost" href="/en/contact">Contact</Link>
             </div>
           </div>
         </main>

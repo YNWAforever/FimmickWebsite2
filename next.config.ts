@@ -51,6 +51,7 @@ const nextConfig: NextConfig = {
       // Other pages temporarily resolve to Traditional Chinese pending a
       // Simplified translation decision (see docs/redesign/route-migration.csv).
       { source: "/zh-hans", destination: "/zh-hant", permanent: false },
+      { source: "/zh-hans/knowledge-hub/category/:c", destination: "/zh-hant/knowledge-hub/category/:c", permanent: false },
       { source: "/zh-hans/:path((?!knowledge-hub).*)", destination: "/zh-hant/:path", permanent: false },
       // Pre-locale WordPress URLs still linked from old material.
       { source: "/events/:slug", destination: "/en/events/:slug", permanent: true },

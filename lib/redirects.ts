@@ -38,6 +38,9 @@ export const localeMoves: LegacyMove[] = [
   { from: "/growth", to: "/solutions", reason: "Growth solutions page replaced by the solutions overview", evidence: "production-sitemap" },
   { from: "/ai-workshop", to: "/workshop", reason: "Reference alias for the production workshop page", evidence: "reference-repo" },
   { from: "/insights", to: "/resources", reason: "Reference insights alias for the Resource Centre", evidence: "reference-repo" },
+  { from: "/case-studies/regional-beauty-loyalty-orchestration", to: "/case-studies", reason: "Reference-only case with unverified metrics; case library", evidence: "reference-repo" },
+  { from: "/case-studies/asia-operating-footprint", to: "/case-studies", reason: "Reference-only portfolio claim with unverified figures; case library", evidence: "reference-repo" },
+  { from: "/about/asia-delivery", to: "/about", reason: "Reference-only page with unverified market counts", evidence: "reference-repo" },
 ];
 
 /** Resolve a locale-neutral path through the move table (single hop, no chains). */
