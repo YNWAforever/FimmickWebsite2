@@ -35,4 +35,8 @@ Capture method: sitemap download, prerendered HTML parse (`scripts/migration/con
 
 ## Deployment mapping
 
-Unresolved. Production runs on Vercel, but the Vercel project, its Git connection and production branch were **not** inspected (no access was used or granted in this session). See `release-runbook.md` → blockers.
+- `YNWAforever/FimmickWebsite2` is already connected to a Vercel project, **`fimmick-website2` (team `ynwaforevers-projects`)**; this was observed through GitHub deployment records created by `vercel[bot]`.
+  - Every branch push creates a *Preview* deployment, protected by Vercel SSO and served with `X-Robots-Tag: noindex`. For example, commit `dc56d11` → `fimmick-website2-at0uswgpe-ynwaforevers-projects.vercel.app`.
+  - Pushes to `main` create a *Production* deployment of that project. The README-only baseline commit `f4a8901` produced one at `fimmick-website2-aj05ag7ab-ynwaforevers-projects.vercel.app`.
+- **`www.fimmick.com` is not served by this project.** After those deployments its response kept the same ETag (`d9bcf1b2…`) and `Last-Modified: 11 Sep 2026`.
+- The Vercel project behind `www.fimmick.com` was not inspected. See `release-runbook.md` → B1.
