@@ -26,6 +26,7 @@ npm run test:e2e       # Playwright (run `npm run build` first)
 npm run video:render   # re-render the explainer film + captions
 node scripts/build-guides.mjs          # regenerate guide PDFs
 node scripts/migration/verify-routes.mjs  # verify legacy URLs (server on :3100)
+node scripts/qa-sweep.mjs                 # overflow, console and link sweep (server on :3100)
 ```
 
 ## Structure

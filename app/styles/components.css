@@ -279,7 +279,7 @@ a.chip:hover { border-color: var(--ink-2); }
 .related-block h2 { font-size: 1.35rem; margin-bottom: 16px; }
 
 /* ---------- Tables ---------- */
-.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.table-wrap { position: relative; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 table.data { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
 table.data th, table.data td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
 table.data th { background: var(--canvas); color: var(--muted); font-weight: 750; font-size: var(--fs-micro); letter-spacing: 0.04em; text-transform: uppercase; }
