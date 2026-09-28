@@ -232,5 +232,16 @@ test.describe("locale continuity and media", () => {
     await page.goto("/en");
     const hidden = await page.evaluate(() => [...document.querySelectorAll(".reveal")].filter((el) => getComputedStyle(el).opacity !== "1").length);
     expect(hidden).toBe(0);
+    expect(await page.locator(".hero-pipeline__pulse").evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
+  });
+
+  test("homepage hero shows the four-step pipeline with people deciding", async ({ page }) => {
+    for (const [path, review] of [["/en", "People decide"], ["/zh-hant", "由人決定"], ["/zh-hans", "由人决定"]]) {
+      await page.goto(path);
+      const steps = page.locator(".home-hero .hero-pipeline li");
+      await expect(steps).toHaveCount(4);
+      await expect(steps.nth(2)).toContainText(review);
+      await expect(steps.nth(2)).toHaveAttribute("data-role", "review");
+    }
   });
 });

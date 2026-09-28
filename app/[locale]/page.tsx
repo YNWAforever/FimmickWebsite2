@@ -10,7 +10,7 @@ import { cases, caseKindLabel } from "@/content/cases";
 import { objectives, services } from "@/content/services";
 import { guides, explainerVideo } from "@/content/resources";
 import { ui } from "@/content/ui";
-import { FlowScene } from "@/components/diagrams/FlowScene";
+import { HeroPipeline } from "@/components/diagrams/HeroPipeline";
 import { ExampleTabs, EcosystemMapBlock, HeatmapTable, IndustryMapBlock, PlatformLayersBlock, workstreamCardsData } from "@/components/blocks";
 import { CtaBand, Faq, LinkButton, SectionHead, TextLink } from "@/components/ui";
 import { ExplainerPlayer } from "@/components/media/ExplainerPlayer";
@@ -47,22 +47,24 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       {/* 1. Hero */}
-      <section className="home-hero">
-        <div className="container home-hero__grid">
+      <section className="home-hero section--night">
+        <div className="container">
           <div className="home-hero__copy">
             <p className="eyebrow">{t(hero.eyebrow, locale)}</p>
-            <h1 className="home-hero__title">{t(hero.title, locale)}</h1>
+            <h1 className="home-hero__title">
+              {t(hero.titleLead, locale)} <span className="home-hero__accent">{t(hero.titleAccent, locale)}</span>
+            </h1>
             <p className="lead">{t(hero.body, locale)}</p>
             <p className="home-hero__support">{t(hero.support, locale)}</p>
             <div className="btn-row">
-              <LinkButton to={href(locale, "/solutions")}>{t(ui.exploreSolutions, locale)}</LinkButton>
+              <LinkButton to={href(locale, "/solutions")} variant="light">{t(ui.exploreSolutions, locale)}</LinkButton>
               <LinkButton to={href(locale, "/contact?intent=demo")} variant="ghost">
                 {t(ui.requestDemo, locale)}
               </LinkButton>
             </div>
-            <p className="micro muted home-hero__line">{en ? "FIMMICK AIP — Agentic AI Platform · AI for Real Business Impact." : zh("FIMMICK AIP — 企業 AI 智能體平台 · AI for Real Business Impact.", locale)}</p>
+            <p className="micro home-hero__line">{en ? "FIMMICK AIP — Agentic AI Platform · AI for Real Business Impact." : zh("FIMMICK AIP — 企業 AI 智能體平台 · AI for Real Business Impact.", locale)}</p>
           </div>
-          <FlowScene locale={locale} />
+          <HeroPipeline locale={locale} />
         </div>
       </section>
 
