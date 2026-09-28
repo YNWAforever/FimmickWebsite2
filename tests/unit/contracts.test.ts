@@ -13,6 +13,12 @@ import { safeQueryForLocaleSwitch } from "@/lib/safe-query";
 import { localeMoves, resolveLegacyHref, resolveMove } from "@/lib/redirects";
 import { filterResources, articleIndex } from "@/lib/resources";
 import { publicPages } from "@/lib/pages";
+import { businessFunctions } from "@/content/functions";
+import { agentAnatomy, capabilities, taskPatterns, workflowTemplates } from "@/content/platform-pages";
+import { t } from "@/lib/i18n";
+import { toHans } from "@/lib/hans";
+import { hansPairs } from "@/lib/hans-table";
+import * as OpenCC from "opencc-js";
 
 /** Walk any object and collect every {en, zh} pair. */
 function bilingualPairs(value: unknown, out: { en: unknown; zh: unknown }[] = []) {
@@ -28,7 +34,9 @@ describe("catalogue scope (master instruction §4, §8)", () => {
   it("has the required record counts", () => {
     expect(solutions).toHaveLength(4);
     expect(products).toHaveLength(6);
-    expect(services).toHaveLength(15);
+    expect(services).toHaveLength(16);
+    expect(businessFunctions).toHaveLength(7);
+    expect(capabilities).toHaveLength(5);
     expect(industries).toHaveLength(8);
     expect(workstreams).toHaveLength(4);
     expect(programme).toHaveLength(6);
@@ -36,10 +44,15 @@ describe("catalogue scope (master instruction §4, §8)", () => {
     expect(pillars).toHaveLength(8);
   });
 
-  it("preserves the 15 existing service slugs", () => {
+  it("preserves the production service slugs, including digital-experience", () => {
     expect(services.map((s) => s.id).sort()).toEqual(
-      ["ai-transformation", "digitalmarketing", "marketing-automation", "crm-sales", "seo-aeo", "social-listening", "koc-community", "ecommerce-growth", "business-intelligence", "data-hub", "content-creative", "customer-experience", "workflow-automation", "whatsapp-automation", "ai-training"].sort(),
+      ["ai-transformation", "digitalmarketing", "marketing-automation", "crm-sales", "seo-aeo", "social-listening", "koc-community", "ecommerce-growth", "digital-experience", "business-intelligence", "data-hub", "content-creative", "customer-experience", "workflow-automation", "whatsapp-automation", "ai-training"].sort(),
     );
+  });
+
+  it("keeps the seven production workforce functions as function pages", () => {
+    expect(businessFunctions.map((f) => f.id)).toEqual(["growth", "operations", "finance", "hr", "cx", "expansion", "executive"]);
+    for (const f of businessFunctions) expect(localeMoves.find((m) => m.from === `/workforce/${f.id}`)?.to).toBe(`/functions/${f.id}`);
   });
 
   it("preserves the six ecosystem slugs", () => {
@@ -47,14 +60,14 @@ describe("catalogue scope (master instruction §4, §8)", () => {
   });
 
   it("has every bilingual string filled in both locales", () => {
-    const all = bilingualPairs([solutions, products, services, industries, workstreams, programme, members, cases, pillars]);
+    const all = bilingualPairs([solutions, products, services, industries, workstreams, programme, members, cases, pillars, businessFunctions, capabilities, workflowTemplates, agentAnatomy, taskPatterns]);
     expect(all.length).toBeGreaterThan(500);
     const empty = (x: unknown): boolean => (Array.isArray(x) ? x.length === 0 || x.some((i) => (Array.isArray(i) ? i.some((j) => !j) : !i)) : !x);
     for (const pair of all) expect(empty(pair.en) || empty(pair.zh), JSON.stringify(pair).slice(0, 120)).toBe(false);
   });
 
   it("does not reintroduce retired employment metaphors in customer-facing copy", () => {
-    const text = JSON.stringify([solutions, products, services, industries, workstreams, members, pillars]).toLowerCase();
+    const text = JSON.stringify([solutions, products, services, industries, workstreams, members, pillars, businessFunctions, capabilities, workflowTemplates, agentAnatomy, taskPatterns]).toLowerCase();
     for (const phrase of ["ai workforce", "digital employee", "hire ai", "ai staff", "ai teammate"]) expect(text).not.toContain(phrase);
   });
 
@@ -123,12 +136,14 @@ describe("legacy route migration", () => {
     }
   });
   it("rewrites old in-article links to current URLs", () => {
-    expect(resolveLegacyHref("/workforce", "en")).toBe("/en/solutions");
-    expect(resolveLegacyHref("/platform/agents", "zh-hant")).toBe("/zh-hant/platform");
+    expect(resolveLegacyHref("/workforce", "en")).toBe("/en/functions");
+    expect(resolveLegacyHref("/workforce/cx", "zh-hant")).toBe("/zh-hant/functions/cx");
+    expect(resolveLegacyHref("/platform/agents", "zh-hant")).toBe("/zh-hant/platform/agents");
     expect(resolveLegacyHref("https://www.fimmick.com/en/services/ai-transformation", "en")).toBe("/en/ai-transformation");
     expect(resolveLegacyHref("/zh-hk/contact", "en")).toBe("/zh-hant/contact");
     expect(resolveLegacyHref("https://example.com/x", "en")).toBe("https://example.com/x");
-    expect(resolveLegacyHref("/about", "zh-hans")).toBe("/zh-hant/about");
+    expect(resolveLegacyHref("/about", "zh-hans")).toBe("/zh-hans/about");
+    expect(resolveLegacyHref("/zh-cn/services", "en")).toBe("/zh-hans/services");
   });
 });
 
@@ -154,6 +169,13 @@ describe("sitemap and media", () => {
     expect(paths).toContain("/services/crm-sales");
     expect(paths).not.toContain("/services/ai-transformation");
     expect(paths.some((p) => p.startsWith("/launch-plan"))).toBe(false);
+    for (const p of ["/functions/cx", "/platform/architecture", "/platform/agents", "/platform/marketplace", "/platform/pricing", "/platform/intelligence", "/services/digital-experience", "/growth", "/insights", "/about/asia-delivery"]) expect(paths).toContain(p);
+  });
+  it("publishes core pages in all three locales and archive articles only where they exist", () => {
+    const pages = publicPages();
+    expect(pages.find((p) => p.path === "/services")!.locales).toEqual(["en", "zh-hant", "zh-hans"]);
+    const article = pages.find((p) => p.kind === "article" && !p.locales.includes("zh-hans"));
+    expect(article).toBeDefined();
   });
   it("film script covers the full duration without gaps", () => {
     expect(explainerScenes[0].start).toBe(0);
@@ -161,5 +183,28 @@ describe("sitemap and media", () => {
     for (let i = 1; i < explainerScenes.length; i++) expect(explainerScenes[i].start).toBe(explainerScenes[i - 1].end);
     expect(explainerMedia.durationSeconds).toBeGreaterThanOrEqual(30);
     expect(explainerMedia.durationSeconds).toBeLessThanOrEqual(45);
+  });
+});
+
+describe("Simplified Chinese rendering", () => {
+  it("converts Traditional copy, including word-level cases", () => {
+    expect(toHans("審閱回覆")).toBe("审阅回复");
+    expect(toHans("每週檢視反覆出現的問題")).toBe("每周检视反复出现的问题");
+    expect(toHans("為甚麼")).toBe("为什么");
+    expect(toHans("FIMMICK AIP")).toBe("FIMMICK AIP");
+  });
+  it("t() returns converted copy for zh-hans and leaves other locales untouched", () => {
+    const copy = { en: "Request a Demo", zh: "預約產品示範" };
+    expect(t(copy, "en")).toBe("Request a Demo");
+    expect(t(copy, "zh-hant")).toBe("預約產品示範");
+    expect(t(copy, "zh-hans")).toBe("预约产品示范");
+    expect(t({ en: [["a", "b"]], zh: [["資料", "紀錄"]] }, "zh-hans")).toEqual([["资料", "纪录"]]);
+  });
+  it("covers every Traditional character used in the content (table is not stale)", () => {
+    const convert = OpenCC.Converter({ from: "hk", to: "cn" });
+    const keys = new Set([...hansPairs].filter((_, i) => i % 2 === 0));
+    const zhText = JSON.stringify(bilingualPairs([solutions, products, services, industries, workstreams, programme, members, cases, pillars, businessFunctions, capabilities, workflowTemplates]).map((p) => p.zh));
+    const missing = [...new Set(zhText.match(/[㐀-鿿]/g) ?? [])].filter((c) => convert(c) !== c && !keys.has(c));
+    expect(missing, "run npm run i18n:hans").toEqual([]);
   });
 });

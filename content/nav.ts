@@ -27,11 +27,18 @@ export const pillars: NavPillar[] = [
     groups: [
       { heading: { en: "Business jobs", zh: "業務工作" }, links: solutions.map((s) => ({ label: s.name, href: `/solutions/${s.id}` })) },
       { heading: { en: "Products", zh: "產品" }, links: [...products.map((p) => ({ label: { en: p.name, zh: p.name }, href: `/products/${p.id}` })), { label: { en: "All products", zh: "全部產品" }, href: "/products" }] },
-      { heading: { en: "Explore", zh: "深入了解" }, links: [
-        { label: { en: "All solutions", zh: "全部解決方案" }, href: "/solutions" },
-        { label: { en: "Examples & demos", zh: "示例與示範" }, href: "/cases-and-demos" },
+      { heading: { en: "Platform", zh: "平台" }, links: [
+        { label: { en: "Architecture", zh: "平台架構" }, href: "/platform/architecture" },
+        { label: { en: "AI agents & tasks", zh: "AI 智能體與任務" }, href: "/platform/agents" },
+        { label: { en: "Workflow templates", zh: "流程範本" }, href: "/platform/marketplace" },
         { label: { en: "Integrations", zh: "系統串接" }, href: "/platform/integrations" },
         { label: { en: "Governance", zh: "管治" }, href: "/platform/governance" },
+        { label: { en: "Pricing & engagement", zh: "收費及合作模式" }, href: "/platform/pricing" },
+      ] },
+      { heading: { en: "Explore", zh: "深入了解" }, links: [
+        { label: { en: "All solutions", zh: "全部解決方案" }, href: "/solutions" },
+        { label: { en: "Workflows by function", zh: "按職能劃分的流程" }, href: "/functions" },
+        { label: { en: "Examples & demos", zh: "示例與示範" }, href: "/cases-and-demos" },
       ] },
     ],
     featured: { label: { en: "Inspect a sample workflow", zh: "查看示例流程" }, href: "/platform#layers", note: { en: "Source, work, review and record in one scenario.", zh: "以一個情境展示來源、工作、審閱及記錄。" } },
@@ -85,7 +92,8 @@ export const pillars: NavPillar[] = [
     overview: { label: { en: "Resource Centre", zh: "資源中心" }, href: "/resources" },
     groups: [
       { heading: { en: "Formats", zh: "類型" }, links: [
-        { label: { en: "Insights & Knowledge Hub", zh: "洞察與知識庫" }, href: "/knowledge-hub" },
+        { label: { en: "Insights", zh: "洞察" }, href: "/insights" },
+        { label: { en: "Knowledge Hub archive", zh: "知識庫存檔" }, href: "/knowledge-hub" },
         { label: { en: "Guides & playbooks", zh: "指南與實務手冊" }, href: "/resources/guides" },
         { label: { en: "Videos & demos", zh: "影片與示範" }, href: "/resources/videos" },
         { label: { en: "Events", zh: "活動" }, href: "/events" },
@@ -112,6 +120,7 @@ export const pillars: NavPillar[] = [
         { label: { en: "How we work", zh: "工作方式" }, href: "/about/how-we-work" },
         { label: { en: "Why FIMMICK", zh: "為何選擇 FIMMICK" }, href: "/about/why-fimmick" },
         { label: { en: "Leadership", zh: "領導團隊" }, href: "/about/team" },
+        { label: { en: "Regional delivery", zh: "區域交付" }, href: "/about/asia-delivery" },
         { label: { en: "Contact & offices", zh: "聯絡及辦事處" }, href: "/contact" },
       ] },
     ],

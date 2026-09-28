@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -38,10 +38,10 @@ export default async function HowToStartPage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Start with one defined workflow." : "由一個清楚的流程開始。"} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Start with one defined workflow." : zh("由一個清楚的流程開始。", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "Three ways to work with us" : "三種合作方式"} title={en ? "How much should FIMMICK do?" : "由 FIMMICK 承擔多少？"} />
+          <SectionHead eyebrow={en ? "Three ways to work with us" : zh("三種合作方式", locale)} title={en ? "How much should FIMMICK do?" : zh("由 FIMMICK 承擔多少？", locale)} />
           <div className="start-grid">
             {startOptions.map((o, i) => (
               <div key={o.id} className="start-card">
@@ -49,31 +49,31 @@ export default async function HowToStartPage({ params }: LocaleParams) {
                 <h3>{t(o.title, locale)}</h3>
                 <p className="muted">{t(o.forWho, locale)}</p>
                 <ul className="check-list small">{t(o.includes, locale).map((x) => <li key={x}>{x}</li>)}</ul>
-                <p className="small"><strong>{en ? "You provide: " : "你需要提供："}</strong>{t(o.youProvide, locale)}</p>
+                <p className="small"><strong>{en ? "You provide: " : zh("你需要提供：", locale)}</strong>{t(o.youProvide, locale)}</p>
                 <Link className="btn btn--small" href={href(locale, paths.contact({ intent: o.intent as never }))}>{t(o.cta, locale)}</Link>
               </div>
             ))}
           </div>
           <div className="grid grid-2" style={{ marginTop: 24 }}>
             <Link className="hub-card" href={href(locale, "/ai-transformation")}>
-              <h3>{en ? "Planning a wider change?" : "規劃更大範圍的轉變？"}</h3>
-              <p className="muted small">{en ? "Start with AI Transformation: readiness, roadmap, workflow design and governance." : "由 AI 轉型開始：準備度、路線圖、流程設計及管治。"}</p>
-              <span className="card-foot">{en ? "AI Transformation" : "AI 轉型"} →</span>
+              <h3>{en ? "Planning a wider change?" : zh("規劃更大範圍的轉變？", locale)}</h3>
+              <p className="muted small">{en ? "Start with AI Transformation: readiness, roadmap, workflow design and governance." : zh("由 AI 轉型開始：準備度、路線圖、流程設計及管治。", locale)}</p>
+              <span className="card-foot">{en ? "AI Transformation" : zh("AI 轉型", locale)} →</span>
             </Link>
             <Link className="hub-card" href={href(locale, "/services")}>
-              <h3>{en ? "Need specialists for one job?" : "需要專家處理一項工作？"}</h3>
-              <p className="muted small">{en ? "Fifteen services with defined deliverables and starting scopes." : "十五項服務，各有明確交付成果及起步範圍。"}</p>
-              <span className="card-foot">{en ? "Services" : "專業服務"} →</span>
+              <h3>{en ? "Need specialists for one job?" : zh("需要專家處理一項工作？", locale)}</h3>
+              <p className="muted small">{en ? "Sixteen services with defined deliverables and starting scopes." : zh("十六項服務，各有明確交付成果及起步範圍。", locale)}</p>
+              <span className="card-foot">{en ? "Services" : zh("專業服務", locale)} →</span>
             </Link>
           </div>
         </div>
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Starting scopes" : "起步範圍"} title={en ? "Typical first scopes by business job" : "按業務工作劃分的一般起步範圍"} />
+          <SectionHead eyebrow={en ? "Starting scopes" : zh("起步範圍", locale)} title={en ? "Typical first scopes by business job" : zh("按業務工作劃分的一般起步範圍", locale)} />
           <div className="table-wrap">
             <table className="data">
-              <thead><tr><th scope="col">{en ? "Business job" : "業務工作"}</th><th scope="col">{t(ui.startingScope, locale)}</th></tr></thead>
+              <thead><tr><th scope="col">{en ? "Business job" : zh("業務工作", locale)}</th><th scope="col">{t(ui.startingScope, locale)}</th></tr></thead>
               <tbody>
                 {solutions.map((s) => (
                   <tr key={s.id}><td><Link href={href(locale, paths.solution(s.id))}>{t(s.name, locale)}</Link></td><td>{t(s.startingScope, locale)}</td></tr>
@@ -85,17 +85,17 @@ export default async function HowToStartPage({ params }: LocaleParams) {
       </section>
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "What happens after you contact us" : "聯絡我們之後"} title={en ? "Four steps, no surprises" : "四個步驟，清楚透明"} />
+          <SectionHead eyebrow={en ? "What happens after you contact us" : zh("聯絡我們之後", locale)} title={en ? "Four steps, no surprises" : zh("四個步驟，清楚透明", locale)} />
           <ol className="steps steps--row">{steps.map((s) => <li key={s.title.en}><h3>{t(s.title, locale)}</h3><p>{t(s.copy, locale)}</p></li>)}</ol>
         </div>
       </section>
       <section className="section section--surface">
         <div className="container split">
-          <div className="stack"><p className="eyebrow">{t(ui.faqs, locale)}</p><h2>{en ? "Before you get in touch" : "聯絡我們之前"}</h2></div>
+          <div className="stack"><p className="eyebrow">{t(ui.faqs, locale)}</p><h2>{en ? "Before you get in touch" : zh("聯絡我們之前", locale)}</h2></div>
           <Faq items={faqs} locale={locale} />
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Tell us which work to improve" : "告訴我們想改善哪項工作"} primary={{ label: t(ui.requestDemo, locale), to: "/contact?intent=demo" }} secondary={{ label: en ? "Explore a partnership" : "探討合作", to: paths.contact({ intent: "partnership" }) }} />
+      <EnquirySection locale={locale} title={en ? "Tell us which work to improve" : zh("告訴我們想改善哪項工作", locale)} primary={{ label: t(ui.requestDemo, locale), to: "/contact?intent=demo" }} secondary={{ label: en ? "Explore a partnership" : zh("探討合作", locale), to: paths.contact({ intent: "partnership" }) }} />
     </>
   );
 }

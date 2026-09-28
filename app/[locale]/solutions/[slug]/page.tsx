@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { href, t, type Locale } from "@/lib/i18n";
+import { href, t, type Locale, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -37,17 +37,17 @@ export default async function SolutionPage({ params }: SlugParams) {
   const related = casesFor({ service: s.services[0], product: s.products[0] }, 3);
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Solutions" : "解決方案", path: "/solutions" }, { name: t(s.name, locale), path: paths.solution(s.id) }])} />
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Solutions" : zh("解決方案", locale), path: "/solutions" }, { name: t(s.name, locale), path: paths.solution(s.id) }])} />
       <PageHero
         locale={locale}
-        crumbs={[{ label: en ? "Solutions" : "解決方案", path: "/solutions" }, { label: t(s.name, locale) }]}
-        eyebrow={`${en ? "Solution" : "解決方案"} ${s.number}`}
+        crumbs={[{ label: en ? "Solutions" : zh("解決方案", locale), path: "/solutions" }, { label: t(s.name, locale) }]}
+        eyebrow={`${en ? "Solution" : zh("解決方案", locale)} ${s.number}`}
         title={t(s.name, locale)}
         lead={t(s.job, locale)}
         actions={
           <>
             <LinkButton to={href(locale, contact)} variant="accent">{t(ui.discussConfiguration, locale)}</LinkButton>
-            <LinkButton to="#example" variant="ghost">{en ? "Try the example" : "試用示例"}</LinkButton>
+            <LinkButton to="#example" variant="ghost">{en ? "Try the example" : zh("試用示例", locale)}</LinkButton>
           </>
         }
         aside={
@@ -56,14 +56,14 @@ export default async function SolutionPage({ params }: SlugParams) {
               <h2 className="h3" style={{ fontSize: "1rem" }}>{t(ui.outputs, locale)}</h2>
               <p style={{ fontWeight: 650, color: "var(--ink)" }}>{t(s.deliverable, locale)}</p>
             </div>
-            <StatusPanel locale={locale} availability="discuss" mode="illustrative-sample" extra={[{ label: en ? "Products" : "產品", value: s.products.map((p) => productById(p).name).join(" · ") }]} />
+            <StatusPanel locale={locale} availability="discuss" mode="illustrative-sample" extra={[{ label: en ? "Products" : zh("產品", locale), value: s.products.map((p) => productById(p).name).join(" · ") }]} />
           </div>
         }
       />
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "The problem" : "問題"} title={t(s.problem, locale)} />
+          <SectionHead eyebrow={en ? "The problem" : zh("問題", locale)} title={t(s.problem, locale)} />
           <div className="io-grid">
             <div className="io-card">
               <h3>{t(ui.inputs, locale)}</h3>
@@ -79,7 +79,7 @@ export default async function SolutionPage({ params }: SlugParams) {
 
       <section className="section section--surface">
         <div className="container stack" style={{ ["--stack" as string]: "24px" }}>
-          <SectionHead eyebrow={en ? "Workflow" : "流程"} title={en ? "How the work moves" : "工作如何推進"} />
+          <SectionHead eyebrow={en ? "Workflow" : zh("流程", locale)} title={en ? "How the work moves" : zh("工作如何推進", locale)} />
           <FlowStrip locale={locale} steps={s.workflow} />
           <div className="decision-callout">
             <strong>{t(ui.humanDecision, locale)}</strong>
@@ -91,7 +91,7 @@ export default async function SolutionPage({ params }: SlugParams) {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={t(ui.relatedProducts, locale)} title={en ? "Products that do this work" : "負責這項工作的產品"} />
+          <SectionHead eyebrow={t(ui.relatedProducts, locale)} title={en ? "Products that do this work" : zh("負責這項工作的產品", locale)} />
           <div className="grid grid-2">
             {s.products.map((id) => {
               const p = productById(id);
@@ -111,7 +111,7 @@ export default async function SolutionPage({ params }: SlugParams) {
 
       <section className="section section--surface" id="example">
         <div className="container">
-          <SectionHead eyebrow={en ? "Sample" : "示例"} title={en ? "Try it on sample data" : "以示例資料試用"} />
+          <SectionHead eyebrow={en ? "Sample" : zh("示例", locale)} title={en ? "Try it on sample data" : zh("以示例資料試用", locale)} />
           <ExampleBlock locale={locale} id={s.example} />
         </div>
       </section>
@@ -119,7 +119,7 @@ export default async function SolutionPage({ params }: SlugParams) {
       {s.id === "content-production" ? (
         <section className="section">
           <div className="container">
-            <SectionHead eyebrow={en ? "Before and after" : "前後對比"} title={en ? "From chat approvals to a reviewed, recorded workflow" : "由聊天批核到有審閱、有記錄的流程"} />
+            <SectionHead eyebrow={en ? "Before and after" : zh("前後對比", locale)} title={en ? "From chat approvals to a reviewed, recorded workflow" : zh("由聊天批核到有審閱、有記錄的流程", locale)} />
             <BeforeAfterBlock locale={locale} />
           </div>
         </section>
@@ -130,7 +130,7 @@ export default async function SolutionPage({ params }: SlugParams) {
           <div className="stack">
             <p className="eyebrow">{t(ui.startingScope, locale)}</p>
             <h2>{t(s.startingScope, locale)}</h2>
-            <p className="muted">{en ? "Scope, timing and connections are agreed before work starts. No fixed timeline is promised in advance." : "範圍、時間及系統串接會在開始前議定，不會預先承諾固定時間表。"}</p>
+            <p className="muted">{en ? "Scope, timing and connections are agreed before work starts. No fixed timeline is promised in advance." : zh("範圍、時間及系統串接會在開始前議定，不會預先承諾固定時間表。", locale)}</p>
             <Chips items={s.industries.map((i) => ({ label: t(industryById(i).name, locale), to: href(locale, paths.industry(i)) }))} />
           </div>
           <Faq items={s.faqs} locale={locale} />
@@ -150,7 +150,7 @@ export default async function SolutionPage({ params }: SlugParams) {
       ) : null}
       <EnquirySection
         locale={locale}
-        title={en ? `Discuss ${t(s.short, locale).toLowerCase()} for your team` : `討論適合你團隊的${t(s.short, locale)}方案`}
+        title={en ? `Discuss ${t(s.short, locale).toLowerCase()} for your team` : zh(`討論適合你團隊的${t(s.short, locale)}方案`, locale)}
         body={t(s.startingScope, locale)}
         primary={{ label: t(ui.discussConfiguration, locale), to: contact }}
         secondary={{ label: t(ui.requestDemo, locale), to: paths.contact({ intent: "demo", solution: s.id }) }}

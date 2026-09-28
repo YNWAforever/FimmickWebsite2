@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { href, t, type Locale } from "@/lib/i18n";
+import { href, t, type Locale, zh } from "@/lib/i18n";
 import { ui } from "@/content/ui";
 import { pillars } from "@/content/nav";
 import { company } from "@/content/company";
@@ -52,9 +52,9 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <p>
             © 2026 FIMMICK. {t(ui.rights, locale)}
           </p>
-          <nav aria-label={locale === "en" ? "Legal and utility" : "法律及實用連結"}>
-            <Link href={href(locale, "/how-to-start")}>{locale === "en" ? "How to start" : "如何開始"}</Link>
-            <Link href={href(locale, "/contact")}>{locale === "en" ? "Contact" : "聯絡我們"}</Link>
+          <nav aria-label={locale === "en" ? "Legal and utility" : zh("法律及實用連結", locale)}>
+            <Link href={href(locale, "/how-to-start")}>{locale === "en" ? "How to start" : zh("如何開始", locale)}</Link>
+            <Link href={href(locale, "/contact")}>{locale === "en" ? "Contact" : zh("聯絡我們", locale)}</Link>
             <a href={aipLoginUrl} rel="noopener">{t(ui.login, locale)}</a>
             <Link href={href(locale, "/privacy")}>{t(ui.privacy, locale)}</Link>
             <Link href={href(locale, "/terms")}>{t(ui.terms, locale)}</Link>

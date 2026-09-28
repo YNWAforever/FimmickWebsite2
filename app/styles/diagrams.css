@@ -143,6 +143,9 @@
 .flow-strip li[data-role="result"] { --role: var(--flow-result); }
 .flow-strip h3 { font-size: 1rem; margin: 6px 0; }
 .flow-strip p { font-size: var(--fs-small); color: var(--muted); }
+/* Seven-step run (platform architecture): one row on wide screens, 4 + 3 below. */
+@media (min-width: 720px) { .flow-strip--seven { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1180px) { .flow-strip--seven { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; } .flow-strip--seven li { padding: 14px; } }
 .flow-strip .role { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--subtle); }
 
 /* ------------------------------------------------------------------

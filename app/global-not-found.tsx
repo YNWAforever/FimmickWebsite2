@@ -25,6 +25,7 @@ export default function GlobalNotFound() {
             <div className="btn-row" style={{ marginTop: 24 }}>
               <Link className="btn" href="/en">English home</Link>
               <Link className="btn btn--ghost" href="/zh-hant" lang="zh-Hant-HK">繁體中文首頁</Link>
+              <Link className="btn btn--ghost" href="/zh-hans" lang="zh-Hans">简体中文首页</Link>
               <Link className="btn btn--ghost" href="/en/contact">Contact</Link>
             </div>
           </div>

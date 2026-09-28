@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { href, formatDate } from "@/lib/i18n";
+import { href, formatDate, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { eventById, eventIsoDate, legacyEvents } from "@/lib/resources";
@@ -71,12 +71,12 @@ export default async function EventPage({ params }: SlugParams) {
       />
       <article className="section">
         <div className="container">
-          <Crumbs locale={locale} items={[{ label: en ? "Events" : "活動", path: "/events" }, { label: e.title }]} />
+          <Crumbs locale={locale} items={[{ label: en ? "Events" : zh("活動", locale), path: "/events" }, { label: e.title }]} />
           <div className="detail-grid">
             <div>
               <div className="archive-banner" role="note">
-                <strong>{en ? "Past event" : "已舉行的活動"}</strong>
-                <span>{en ? "This event has taken place and registration is closed. The record is kept for reference." : "此活動已舉行，報名已截止；紀錄保留作參考，並以英文提供。"}</span>
+                <strong>{en ? "Past event" : zh("已舉行的活動", locale)}</strong>
+                <span>{en ? "This event has taken place and registration is closed. The record is kept for reference." : zh("此活動已舉行，報名已截止；紀錄保留作參考，並以英文提供。", locale)}</span>
               </div>
               <h1 lang="en" style={{ fontSize: "clamp(1.8rem, 1.4rem + 1.6vw, 2.7rem)" }}>{e.title}</h1>
               <p className="lead" lang="en" style={{ marginTop: 16 }}>{e.summary}</p>
@@ -86,19 +86,19 @@ export default async function EventPage({ params }: SlugParams) {
             </div>
             <aside className="detail-aside">
               <dl className="status-panel">
-                <div><dt>{en ? "Date" : "日期"}</dt><dd>{e.date}</dd></div>
-                {e.time ? <div><dt>{en ? "Time (HKT)" : "時間（香港時間）"}</dt><dd>{e.time}</dd></div> : null}
-                <div><dt>{en ? "Format" : "形式"}</dt><dd>{e.format ?? "—"}</dd></div>
-                <div><dt>{en ? "Language" : "語言"}</dt><dd>{e.language ?? "—"}</dd></div>
-                {e.venue ? <div><dt>{en ? "Venue" : "地點"}</dt><dd className="small">{e.venue}</dd></div> : null}
-                <div><dt>{en ? "Status" : "狀態"}</dt><dd>{en ? `Past · ${formatDate(iso, "en")}` : `已舉行・${formatDate(iso, "zh-hant")}`}</dd></div>
+                <div><dt>{en ? "Date" : zh("日期", locale)}</dt><dd>{e.date}</dd></div>
+                {e.time ? <div><dt>{en ? "Time (HKT)" : zh("時間（香港時間）", locale)}</dt><dd>{e.time}</dd></div> : null}
+                <div><dt>{en ? "Format" : zh("形式", locale)}</dt><dd>{e.format ?? "—"}</dd></div>
+                <div><dt>{en ? "Language" : zh("語言", locale)}</dt><dd>{e.language ?? "—"}</dd></div>
+                {e.venue ? <div><dt>{en ? "Venue" : zh("地點", locale)}</dt><dd className="small">{e.venue}</dd></div> : null}
+                <div><dt>{en ? "Status" : zh("狀態", locale)}</dt><dd>{en ? `Past · ${formatDate(iso, "en")}` : zh(`已舉行・${formatDate(iso, "zh-hant")}`, locale)}</dd></div>
               </dl>
-              <Link className="text-link" href={href(locale, "/events")}>← {en ? "All events" : "全部活動"}</Link>
+              <Link className="text-link" href={href(locale, "/events")}>← {en ? "All events" : zh("全部活動", locale)}</Link>
             </aside>
           </div>
         </div>
       </article>
-      <EnquirySection locale={locale} title={en ? "Interested in a similar session?" : "對類似活動有興趣？"} primary={{ label: en ? "Ask about events" : "查詢活動", to: "/contact?intent=event" }} secondary={{ label: en ? "Leadership workshop" : "管理層工作坊", to: "/workshop" }} />
+      <EnquirySection locale={locale} title={en ? "Interested in a similar session?" : zh("對類似活動有興趣？", locale)} primary={{ label: en ? "Ask about events" : zh("查詢活動", locale), to: "/contact?intent=event" }} secondary={{ label: en ? "Leadership workshop" : zh("管理層工作坊", locale), to: "/workshop" }} />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { integrationNotes, integrationTypes, governanceBoundary } from "@/content/platform";
@@ -22,7 +22,7 @@ export default async function IntegrationsPage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: en ? "Platform" : "平台", path: "/platform" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Platform" : "平台"} title={t(copy.title, locale)} lead={t(copy.lead, locale)} actions={<LinkButton to={href(locale, "/contact?intent=deployment")} variant="accent">{en ? "Discuss a connection" : "討論系統串接"}</LinkButton>} />
+      <PageHero locale={locale} crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Platform" : zh("平台", locale)} title={t(copy.title, locale)} lead={t(copy.lead, locale)} actions={<LinkButton to={href(locale, "/contact?intent=deployment")} variant="accent">{en ? "Discuss a connection" : zh("討論系統串接", locale)}</LinkButton>} />
       <section className="section">
         <div className="container">
           <div className="grid grid-2">
@@ -37,14 +37,14 @@ export default async function IntegrationsPage({ params }: LocaleParams) {
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Connection types" : "串接類型"} title={en ? "What we typically connect, and how" : "一般串接的系統及方式"} />
+          <SectionHead eyebrow={en ? "Connection types" : zh("串接類型", locale)} title={en ? "What we typically connect, and how" : zh("一般串接的系統及方式", locale)} />
           <div className="table-wrap">
             <table className="data">
               <thead>
                 <tr>
-                  <th scope="col">{en ? "Type" : "類型"}</th>
-                  <th scope="col">{en ? "Examples" : "例子"}</th>
-                  <th scope="col">{en ? "Default mode" : "預設模式"}</th>
+                  <th scope="col">{en ? "Type" : zh("類型", locale)}</th>
+                  <th scope="col">{en ? "Examples" : zh("例子", locale)}</th>
+                  <th scope="col">{en ? "Default mode" : zh("預設模式", locale)}</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,7 +67,7 @@ export default async function IntegrationsPage({ params }: LocaleParams) {
           <ServiceCards locale={locale} ids={["data-hub", "workflow-automation", "crm-sales"]} />
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Check whether your systems can connect" : "確認你的系統能否串接"} primary={{ label: en ? "Discuss deployment support" : "討論部署支援", to: "/contact?intent=deployment" }} />
+      <EnquirySection locale={locale} title={en ? "Check whether your systems can connect" : zh("確認你的系統能否串接", locale)} primary={{ label: en ? "Discuss deployment support" : zh("討論部署支援", locale), to: "/contact?intent=deployment" }} />
     </>
   );
 }

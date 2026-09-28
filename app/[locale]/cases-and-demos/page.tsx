@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -31,26 +31,26 @@ export default async function DemosPage({ params }: LocaleParams) {
     <>
       <PageHero
         locale={locale}
-        crumbs={[{ label: en ? "Case studies" : "成功案例", path: "/case-studies" }, { label: t(copy.title, locale) }]}
-        eyebrow={en ? "Illustrative examples — sample data" : "流程示範・示例資料"}
+        crumbs={[{ label: en ? "Case studies" : zh("成功案例", locale), path: "/case-studies" }, { label: t(copy.title, locale) }]}
+        eyebrow={en ? "Illustrative examples — sample data" : zh("流程示範・示例資料", locale)}
         title={t(copy.title, locale)}
         lead={t(copy.lead, locale)}
-        notice={en ? "Nothing on this page is a customer result." : "本頁內容均非客戶成果。"}
+        notice={en ? "Nothing on this page is a customer result." : zh("本頁內容均非客戶成果。", locale)}
       />
       <section className="section">
         <div className="container split">
           <div className="stack">
-            <p className="eyebrow">{en ? "Product demonstration" : "產品示範"}</p>
+            <p className="eyebrow">{en ? "Product demonstration" : zh("產品示範", locale)}</p>
             <h2>{t(explainerVideo.title, locale)}</h2>
             <p className="muted">{t(explainerVideo.mode, locale)}</p>
-            <Link className="text-link" href={href(locale, "/resources/videos")}>{en ? "Transcript and captions" : "文字稿及字幕"} →</Link>
+            <Link className="text-link" href={href(locale, "/resources/videos")}>{en ? "Transcript and captions" : zh("文字稿及字幕", locale)} →</Link>
           </div>
           <ExplainerPlayer locale={locale} media={explainerMedia} title={t(explainerVideo.title, locale)} transcriptHref={href(locale, "/resources/videos#transcript")} />
         </div>
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Interactive examples" : "互動示例"} title={en ? "Four workflows on sample data" : "以示例資料運作的四個流程"} />
+          <SectionHead eyebrow={en ? "Interactive examples" : zh("互動示例", locale)} title={en ? "Four workflows on sample data" : zh("以示例資料運作的四個流程", locale)} />
           <ExampleTabs locale={locale} initial="intelligence" />
           <div className="grid grid-4" style={{ marginTop: 32 }}>
             {(Object.keys(exampleMeta) as ExampleId[]).map((id) => {
@@ -59,14 +59,14 @@ export default async function DemosPage({ params }: LocaleParams) {
                 <Link key={id} className="hub-card" href={href(locale, paths.solution(m.solution))}>
                   <h3>{t(m.title, locale)}</h3>
                   <p className="small muted">{t(solutionById(m.solution).name, locale)} · {m.products.map((p) => productById(p).name).join(", ")}</p>
-                  <span className="card-foot">{en ? "Solution page" : "解決方案頁面"} →</span>
+                  <span className="card-foot">{en ? "Solution page" : zh("解決方案頁面", locale)} →</span>
                 </Link>
               );
             })}
           </div>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "See it with your own workflow" : "以你的流程了解"} primary={{ label: en ? "Request a Demo" : "預約產品示範", to: "/contact?intent=demo" }} secondary={{ label: en ? "Case library" : "案例庫", to: "/case-studies" }} />
+      <EnquirySection locale={locale} title={en ? "See it with your own workflow" : zh("以你的流程了解", locale)} primary={{ label: en ? "Request a Demo" : zh("預約產品示範", locale), to: "/contact?intent=demo" }} secondary={{ label: en ? "Case library" : zh("案例庫", locale), to: "/case-studies" }} />
     </>
   );
 }

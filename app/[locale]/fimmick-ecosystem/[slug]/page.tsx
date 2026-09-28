@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -36,16 +36,16 @@ export default async function MemberPage({ params }: SlugParams) {
   const related = casesFor({ service: m.services[0], industry: m.industries[0] }, 3).filter((c) => c.kind === "client-work");
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Ecosystem" : "生態系統", path: "/fimmick-ecosystem" }, { name: m.name, path: paths.member(m.id) }])} />
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Ecosystem" : zh("生態系統", locale), path: "/fimmick-ecosystem" }, { name: m.name, path: paths.member(m.id) }])} />
       <PageHero
         locale={locale}
-        crumbs={[{ label: en ? "Ecosystem" : "生態系統", path: "/fimmick-ecosystem" }, { label: m.name }]}
+        crumbs={[{ label: en ? "Ecosystem" : zh("生態系統", locale), path: "/fimmick-ecosystem" }, { label: m.name }]}
         eyebrow={`${t(group.name, locale)} · ${t(m.role, locale)}`}
         title={m.name}
         lead={t(m.need, locale)}
         actions={
           <>
-            <LinkButton to={href(locale, contact)} variant="accent">{en ? "Explore a partnership" : "探討合作"}</LinkButton>
+            <LinkButton to={href(locale, contact)} variant="accent">{en ? "Explore a partnership" : zh("探討合作", locale)}</LinkButton>
             {m.externalUrl ? (
               <a className="btn btn--ghost" href={m.externalUrl.url} rel="noopener noreferrer" target="_blank">
                 {t(m.externalUrl.label, locale)} <span aria-hidden="true">↗</span>
@@ -66,13 +66,13 @@ export default async function MemberPage({ params }: SlugParams) {
         <div className="container">
           <div className="io-grid">
             <div className="io-card">
-              <h2 style={{ fontSize: "1.1rem", marginBottom: 12 }}>{en ? "Audience" : "受眾"}</h2>
+              <h2 style={{ fontSize: "1.1rem", marginBottom: 12 }}>{en ? "Audience" : zh("受眾", locale)}</h2>
               <p>{t(m.audience, locale)}</p>
-              <h2 style={{ fontSize: "1.1rem", margin: "20px 0 12px" }}>{en ? "FIMMICK's relationship" : "與 FIMMICK 的關係"}</h2>
+              <h2 style={{ fontSize: "1.1rem", margin: "20px 0 12px" }}>{en ? "FIMMICK's relationship" : zh("與 FIMMICK 的關係", locale)}</h2>
               <p>{t(m.relationship, locale)}</p>
             </div>
             <div className="io-card io-card--out">
-              <h2 style={{ fontSize: "1.1rem", marginBottom: 12 }}>{en ? "What it offers" : "提供甚麼"}</h2>
+              <h2 style={{ fontSize: "1.1rem", marginBottom: 12 }}>{en ? "What it offers" : zh("提供甚麼", locale)}</h2>
               <ul className="check-list">{t(m.offers, locale).map((o) => <li key={o}>{o}</li>)}</ul>
             </div>
           </div>
@@ -81,19 +81,19 @@ export default async function MemberPage({ params }: SlugParams) {
       <section className="section section--surface">
         <div className="container split">
           <div className="stack">
-            <p className="eyebrow">{en ? "Why it matters" : "重要之處"}</p>
+            <p className="eyebrow">{en ? "Why it matters" : zh("重要之處", locale)}</p>
             <h2>{t(m.why, locale)}</h2>
             <p className="muted">{t(m.scope, locale)}</p>
             {m.canonicalInternal ? (
               <p>
-                <Link className="text-link" href={href(locale, m.canonicalInternal)}>{en ? "Full platform explanation" : "完整平台介紹"} →</Link>
+                <Link className="text-link" href={href(locale, m.canonicalInternal)}>{en ? "Full platform explanation" : zh("完整平台介紹", locale)} →</Link>
                 {" · "}
-                <Link className="text-link" href={href(locale, "/products")}>{en ? "Six products" : "六個產品"} →</Link>
+                <Link className="text-link" href={href(locale, "/products")}>{en ? "Six products" : zh("六個產品", locale)} →</Link>
               </p>
             ) : null}
           </div>
           <div className="io-card">
-            <h3 style={{ marginBottom: 12 }}>{en ? "Activity" : "相關活動"}</h3>
+            <h3 style={{ marginBottom: 12 }}>{en ? "Activity" : zh("相關活動", locale)}</h3>
             <ul className="dot-list small">{t(m.activity, locale).map((a) => <li key={a}>{a}</li>)}</ul>
             <p className="micro muted" style={{ marginTop: 16 }}>{t(ecosystemBoundary, locale)}</p>
           </div>
@@ -106,11 +106,11 @@ export default async function MemberPage({ params }: SlugParams) {
         <IndustryCards locale={locale} ids={m.industries} />
       </RelatedSection>
       {related.length ? (
-        <RelatedSection title={en ? "Related client work" : "相關客戶項目"}>
+        <RelatedSection title={en ? "Related client work" : zh("相關客戶項目", locale)}>
           <CaseCards locale={locale} items={related} />
         </RelatedSection>
       ) : null}
-      <EnquirySection locale={locale} title={t(m.partnershipPrompt, locale)} body={en ? "Partnership terms are agreed directly with the member; nothing is committed by sending an enquiry." : "合作條款與相關成員直接議定；提交查詢並不構成任何承諾。"} primary={{ label: en ? "Explore a partnership" : "探討合作", to: contact }} secondary={{ label: en ? "Ecosystem overview" : "生態系統概覽", to: "/fimmick-ecosystem" }} />
+      <EnquirySection locale={locale} title={t(m.partnershipPrompt, locale)} body={en ? "Partnership terms are agreed directly with the member; nothing is committed by sending an enquiry." : zh("合作條款與相關成員直接議定；提交查詢並不構成任何承諾。", locale)} primary={{ label: en ? "Explore a partnership" : zh("探討合作", locale), to: contact }} secondary={{ label: en ? "Ecosystem overview" : zh("生態系統概覽", locale), to: "/fimmick-ecosystem" }} />
     </>
   );
 }

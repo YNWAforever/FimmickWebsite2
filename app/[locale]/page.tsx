@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, isLocale, t, type Locale } from "@/lib/i18n";
+import { href, isLocale, t, type Locale, zh } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { hero, homeFaqs, sections, startOptions } from "@/content/home";
@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...pageMetadata({
       locale,
       path: "/",
-      title: locale === "en" ? "FIMMICK — Agentic AI Platform & Business Solutions" : "FIMMICK — 企業 AI 智能體平台與業務解決方案",
+      title: locale === "en" ? "FIMMICK — Agentic AI Platform & Business Solutions" : zh("FIMMICK — 企業 AI 智能體平台與業務解決方案", locale),
       description: t(hero.body, locale),
     }),
-    title: { absolute: locale === "en" ? "FIMMICK — Agentic AI Platform & Business Solutions" : "FIMMICK — 企業 AI 智能體平台與業務解決方案" },
+    title: { absolute: locale === "en" ? "FIMMICK — Agentic AI Platform & Business Solutions" : zh("FIMMICK — 企業 AI 智能體平台與業務解決方案", locale) },
   };
 }
 
@@ -60,7 +60,7 @@ export default async function HomePage({ params }: Props) {
                 {t(ui.requestDemo, locale)}
               </LinkButton>
             </div>
-            <p className="micro muted home-hero__line">{en ? "FIMMICK AIP — Agentic AI Platform · AI for Real Business Impact." : "FIMMICK AIP — 企業 AI 智能體平台 · AI for Real Business Impact."}</p>
+            <p className="micro muted home-hero__line">{en ? "FIMMICK AIP — Agentic AI Platform · AI for Real Business Impact." : zh("FIMMICK AIP — 企業 AI 智能體平台 · AI for Real Business Impact.", locale)}</p>
           </div>
           <FlowScene locale={locale} />
         </div>
@@ -69,7 +69,7 @@ export default async function HomePage({ params }: Props) {
       {/* 2. Choose the work */}
       <section className="section" aria-labelledby="choose-work">
         <div className="container">
-          <SectionHead eyebrow={t(sections.chooseWork.eyebrow, locale)} title={<span id="choose-work">{t(sections.chooseWork.title, locale)}</span>} action={<TextLink to={href(locale, "/solutions")}>{en ? "Compare all four" : "比較四項工作"}</TextLink>} />
+          <SectionHead eyebrow={t(sections.chooseWork.eyebrow, locale)} title={<span id="choose-work">{t(sections.chooseWork.title, locale)}</span>} action={<TextLink to={href(locale, "/solutions")}>{en ? "Compare all four" : zh("比較四項工作", locale)}</TextLink>} />
           <div className="job-grid">
             {solutions.map((s, index) => (
               <Link key={s.id} href={href(locale, paths.solution(s.id))} className="job-card reveal" style={{ ["--delay" as string]: `${index * 80}ms` }}>
@@ -77,7 +77,7 @@ export default async function HomePage({ params }: Props) {
                 <h3>{t(s.name, locale)}</h3>
                 <p className="muted">{t(s.job, locale)}</p>
                 <div className="job-card__deliverable">
-                  <span>{en ? "You receive" : "你會得到"}</span>
+                  <span>{en ? "You receive" : zh("你會得到", locale)}</span>
                   <p>{t(s.deliverable, locale)}</p>
                 </div>
                 <ul className="chips">
@@ -88,7 +88,7 @@ export default async function HomePage({ params }: Props) {
                   ))}
                 </ul>
                 <span className="card-foot">
-                  {en ? "See the workflow" : "查看流程"} <span aria-hidden="true">→</span>
+                  {en ? "See the workflow" : zh("查看流程", locale)} <span aria-hidden="true">→</span>
                 </span>
               </Link>
             ))}
@@ -99,7 +99,7 @@ export default async function HomePage({ params }: Props) {
       {/* 3. Inspect an example */}
       <section className="section section--surface" aria-labelledby="inspect">
         <div className="container">
-          <SectionHead eyebrow={t(sections.inspect.eyebrow, locale)} title={<span id="inspect">{t(sections.inspect.title, locale)}</span>} lead={en ? "Four working examples with fixed sample data. Change the inputs and the prepared work, review state and output change with them." : "四個以固定示例資料運作的示例。改變輸入，準備好的工作、審閱狀態及輸出都會一同改變。"} />
+          <SectionHead eyebrow={t(sections.inspect.eyebrow, locale)} title={<span id="inspect">{t(sections.inspect.title, locale)}</span>} lead={en ? "Four working examples with fixed sample data. Change the inputs and the prepared work, review state and output change with them." : zh("四個以固定示例資料運作的示例。改變輸入，準備好的工作、審閱狀態及輸出都會一同改變。", locale)} />
           <ExampleTabs locale={locale} initial="content" />
         </div>
       </section>
@@ -107,7 +107,7 @@ export default async function HomePage({ params }: Props) {
       {/* 4. Case studies */}
       <section className="section" aria-labelledby="cases">
         <div className="container">
-          <SectionHead eyebrow={t(sections.cases.eyebrow, locale)} title={<span id="cases">{t(sections.cases.title, locale)}</span>} action={<LinkButton to={href(locale, "/case-studies")} variant="ghost" small>{en ? "Case library" : "案例庫"}</LinkButton>} />
+          <SectionHead eyebrow={t(sections.cases.eyebrow, locale)} title={<span id="cases">{t(sections.cases.title, locale)}</span>} action={<LinkButton to={href(locale, "/case-studies")} variant="ghost" small>{en ? "Case library" : zh("案例庫", locale)}</LinkButton>} />
           <div className="cases-feature">
             <Link className="case-hero reveal" href={href(locale, paths.case(internal.slug))}>
               <span className="chip chip--lime">{t(caseKindLabel[internal.kind], locale)}</span>
@@ -119,7 +119,7 @@ export default async function HomePage({ params }: Props) {
                 ))}
               </ul>
               <span className="card-foot">
-                {en ? "Read how we did it" : "了解我們的做法"} <span aria-hidden="true">→</span>
+                {en ? "Read how we did it" : zh("了解我們的做法", locale)} <span aria-hidden="true">→</span>
               </span>
             </Link>
             <div className="cases-list">
@@ -136,7 +136,7 @@ export default async function HomePage({ params }: Props) {
               <p className="micro muted">
                 {en
                   ? "Client cases are anonymised summaries; figures from the previous site are withheld until their scope and dates are documented. Product examples on this site are labelled separately as samples."
-                  : "客戶案例為匿名摘要；舊網站的數字在記錄範圍及日期前暫不引用。本網站的產品示例另行標示為示例。"}
+                  : zh("客戶案例為匿名摘要；舊網站的數字在記錄範圍及日期前暫不引用。本網站的產品示例另行標示為示例。", locale)}
               </p>
             </div>
           </div>
@@ -149,8 +149,8 @@ export default async function HomePage({ params }: Props) {
           <SectionHead
             eyebrow={t(sections.platform.eyebrow, locale)}
             title={<span id="platform">{t(sections.platform.title, locale)}</span>}
-            lead={en ? "FIMMICK AIP — Agentic AI Platform coordinates configured work: the data it may use, the tasks it prepares, where people decide and what gets recorded." : "FIMMICK AIP — 企業 AI 智能體平台協調已配置的工作：可用的資料、準備的任務、由人決定的環節，以及需要記錄的內容。"}
-            action={<LinkButton to={href(locale, "/platform")} variant="ghost" small>{en ? "Full platform story" : "完整平台介紹"}</LinkButton>}
+            lead={en ? "FIMMICK AIP — Agentic AI Platform coordinates configured work: the data it may use, the tasks it prepares, where people decide and what gets recorded." : zh("FIMMICK AIP — 企業 AI 智能體平台協調已配置的工作：可用的資料、準備的任務、由人決定的環節，以及需要記錄的內容。", locale)}
+            action={<LinkButton to={href(locale, "/platform")} variant="ghost" small>{en ? "Full platform story" : zh("完整平台介紹", locale)}</LinkButton>}
           />
           <PlatformLayersBlock locale={locale} />
         </div>
@@ -162,9 +162,9 @@ export default async function HomePage({ params }: Props) {
           <SectionHead eyebrow={t(sections.change.eyebrow, locale)} title={<span id="change">{t(sections.change.title, locale)}</span>} />
           <div className="gateways">
             <div className="gateway reveal">
-              <p className="eyebrow">{en ? "AI Transformation" : "AI 轉型"}</p>
-              <h3>{en ? "For leaders planning the change" : "為規劃轉變的管理層而設"}</h3>
-              <p className="muted">{en ? "Readiness, roadmap, workflow design and governance — the decisions behind a responsible AI programme." : "準備度、路線圖、流程設計及管治——負責任 AI 計劃背後的決策。"}</p>
+              <p className="eyebrow">{en ? "AI Transformation" : zh("AI 轉型", locale)}</p>
+              <h3>{en ? "For leaders planning the change" : zh("為規劃轉變的管理層而設", locale)}</h3>
+              <p className="muted">{en ? "Readiness, roadmap, workflow design and governance — the decisions behind a responsible AI programme." : zh("準備度、路線圖、流程設計及管治——負責任 AI 計劃背後的決策。", locale)}</p>
               <ul className="gateway-list">
                 {workstreamCardsData(locale).map((w) => (
                   <li key={w.id}>
@@ -174,17 +174,17 @@ export default async function HomePage({ params }: Props) {
                   </li>
                 ))}
               </ul>
-              <p className="micro muted" style={{ fontWeight: 750, marginTop: 18 }}>{en ? "Example deliverable" : "成果示例"}</p>
+              <p className="micro muted" style={{ fontWeight: 750, marginTop: 18 }}>{en ? "Example deliverable" : zh("成果示例", locale)}</p>
               <HeatmapTable locale={locale} />
               <div className="btn-row" style={{ marginTop: 20 }}>
-                <LinkButton to={href(locale, "/ai-transformation")}>{en ? "AI Transformation" : "AI 轉型"}</LinkButton>
-                <TextLink to={href(locale, paths.contact({ intent: "transformation" }))}>{en ? "Discuss a transformation scope" : "討論轉型範圍"}</TextLink>
+                <LinkButton to={href(locale, "/ai-transformation")}>{en ? "AI Transformation" : zh("AI 轉型", locale)}</LinkButton>
+                <TextLink to={href(locale, paths.contact({ intent: "transformation" }))}>{en ? "Discuss a transformation scope" : zh("討論轉型範圍", locale)}</TextLink>
               </div>
             </div>
             <div className="gateway gateway--services reveal" style={{ ["--delay" as string]: "100ms" }}>
-              <p className="eyebrow">{en ? "Services" : "專業服務"}</p>
-              <h3>{en ? "For teams that need specialists" : "為需要專家的團隊而設"}</h3>
-              <p className="muted">{en ? "Fifteen services with defined deliverables. Commission a service on its own — no AIP subscription required." : "十五項服務，每項都有明確交付成果；可單獨委託，無須訂閱 AIP。"}</p>
+              <p className="eyebrow">{en ? "Services" : zh("專業服務", locale)}</p>
+              <h3>{en ? "For teams that need specialists" : zh("為需要專家的團隊而設", locale)}</h3>
+              <p className="muted">{en ? "Sixteen services with defined deliverables. Commission a service on its own — no AIP subscription required." : zh("十六項服務，每項都有明確交付成果；可單獨委託，無須訂閱 AIP。", locale)}</p>
               <div className="objective-grid">
                 {objectives.map((o) => (
                   <div key={o.id}>
@@ -202,8 +202,8 @@ export default async function HomePage({ params }: Props) {
                 ))}
               </div>
               <div className="btn-row" style={{ marginTop: 20 }}>
-                <LinkButton to={href(locale, "/services")}>{en ? "All services" : "全部服務"}</LinkButton>
-                <TextLink to={href(locale, paths.contact({ intent: "service" }))}>{en ? "Discuss a service" : "討論服務"}</TextLink>
+                <LinkButton to={href(locale, "/services")}>{en ? "All services" : zh("全部服務", locale)}</LinkButton>
+                <TextLink to={href(locale, paths.contact({ intent: "service" }))}>{en ? "Discuss a service" : zh("討論服務", locale)}</TextLink>
               </div>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default async function HomePage({ params }: Props) {
           <SectionHead
             eyebrow={t(sections.industries.eyebrow, locale)}
             title={<span id="industries">{t(sections.industries.title, locale)}</span>}
-            action={<TextLink to={href(locale, "/industries")}>{en ? "All eight industries" : "全部八個行業"}</TextLink>}
+            action={<TextLink to={href(locale, "/industries")}>{en ? "All eight industries" : zh("全部八個行業", locale)}</TextLink>}
           />
           <IndustryMapBlock locale={locale} ids={["property-real-estate", "retail-ecommerce", "b2b-professional-services", "hospitality-travel"]} />
         </div>
@@ -228,11 +228,11 @@ export default async function HomePage({ params }: Props) {
           <SectionHead
             eyebrow={t(sections.ecosystem.eyebrow, locale)}
             title={<span id="ecosystem">{t(sections.ecosystem.title, locale)}</span>}
-            lead={en ? "Beyond client work, FIMMICK builds and runs its own platforms, communities and ventures — practical experience in technology, creators, communities, commerce and culture." : "除客戶項目外，FIMMICK 亦建立及營運自家平台、社群及項目——在技術、創作者、社群、商業及文化方面累積實戰經驗。"}
+            lead={en ? "Beyond client work, FIMMICK builds and runs its own platforms, communities and ventures — practical experience in technology, creators, communities, commerce and culture." : zh("除客戶項目外，FIMMICK 亦建立及營運自家平台、社群及項目——在技術、創作者、社群、商業及文化方面累積實戰經驗。", locale)}
             action={
               <div className="btn-row">
-                <LinkButton to={href(locale, "/fimmick-ecosystem")} variant="ghost" small>{en ? "Ecosystem overview" : "生態系統概覽"}</LinkButton>
-                <TextLink to={href(locale, "/about/our-story")}>{en ? "Our story" : "我們的故事"}</TextLink>
+                <LinkButton to={href(locale, "/fimmick-ecosystem")} variant="ghost" small>{en ? "Ecosystem overview" : zh("生態系統概覽", locale)}</LinkButton>
+                <TextLink to={href(locale, "/about/our-story")}>{en ? "Our story" : zh("我們的故事", locale)}</TextLink>
               </div>
             }
           />
@@ -243,36 +243,36 @@ export default async function HomePage({ params }: Props) {
       {/* 9. Resources */}
       <section className="section section--surface" aria-labelledby="resources">
         <div className="container">
-          <SectionHead eyebrow={t(sections.resources.eyebrow, locale)} title={<span id="resources">{t(sections.resources.title, locale)}</span>} action={<LinkButton to={href(locale, "/resources")} variant="ghost" small>{en ? "Resource Centre" : "資源中心"}</LinkButton>} />
+          <SectionHead eyebrow={t(sections.resources.eyebrow, locale)} title={<span id="resources">{t(sections.resources.title, locale)}</span>} action={<LinkButton to={href(locale, "/resources")} variant="ghost" small>{en ? "Resource Centre" : zh("資源中心", locale)}</LinkButton>} />
           <div className="resource-feature">
             <div className="resource-video">
               <ExplainerPlayer locale={locale} media={explainerMedia} title={t(explainerVideo.title, locale)} compact />
               <p className="micro muted" style={{ marginTop: 10 }}>
-                <span className="chip">{en ? "Video" : "影片"}</span> {t(explainerVideo.mode, locale)}{" "}
-                <Link href={href(locale, "/resources/videos")}>{en ? "Transcript and captions" : "文字稿及字幕"}</Link>
+                <span className="chip">{en ? "Video" : zh("影片", locale)}</span> {t(explainerVideo.mode, locale)}{" "}
+                <Link href={href(locale, "/resources/videos")}>{en ? "Transcript and captions" : zh("文字稿及字幕", locale)}</Link>
               </p>
             </div>
             <div className="resource-stack">
               <Link className="card card--link" href={href(locale, "/resources/guides")}>
                 <span className="card-meta">
-                  <span className="chip chip--lime">{en ? "Guide · PDF" : "指南・PDF"}</span>
+                  <span className="chip chip--lime">{en ? "Guide · PDF" : zh("指南・PDF", locale)}</span>
                 </span>
                 <h3>{t(guides[0].title, locale)}</h3>
                 <p className="small muted">{t(guides[0].summary, locale)}</p>
               </Link>
               <Link className="card card--link" href={href(locale, paths.article(latestArticle.slug))}>
                 <span className="card-meta">
-                  <span className="chip">{en ? "Article" : "文章"}</span>
+                  <span className="chip">{en ? "Article" : zh("文章", locale)}</span>
                   {latestArticle.published}
                 </span>
                 <h3>{articleMeta.title}</h3>
               </Link>
               <Link className="card card--link" href={href(locale, "/workshop")}>
                 <span className="card-meta">
-                  <span className="chip chip--magenta">{en ? "Workshop · on request" : "工作坊・按需安排"}</span>
+                  <span className="chip chip--magenta">{en ? "Workshop · on request" : zh("工作坊・按需安排", locale)}</span>
                 </span>
-                <h3>{en ? "AI Transformation Workshop for leadership teams" : "管理團隊 AI 轉型工作坊"}</h3>
-                <p className="small muted">{en ? "Past events are in the Events archive; new dates are announced there when confirmed." : "過往活動見活動檔案；新活動日期確認後會於該處公布。"}</p>
+                <h3>{en ? "AI Transformation Workshop for leadership teams" : zh("管理團隊 AI 轉型工作坊", locale)}</h3>
+                <p className="small muted">{en ? "Past events are in the Events archive; new dates are announced there when confirmed." : zh("過往活動見活動檔案；新活動日期確認後會於該處公布。", locale)}</p>
               </Link>
             </div>
           </div>
@@ -282,7 +282,7 @@ export default async function HomePage({ params }: Props) {
       {/* 10. How to start */}
       <section className="section" aria-labelledby="start">
         <div className="container">
-          <SectionHead eyebrow={t(sections.start.eyebrow, locale)} title={<span id="start">{t(sections.start.title, locale)}</span>} action={<TextLink to={href(locale, "/how-to-start")}>{en ? "Compare options" : "比較選項"}</TextLink>} />
+          <SectionHead eyebrow={t(sections.start.eyebrow, locale)} title={<span id="start">{t(sections.start.title, locale)}</span>} action={<TextLink to={href(locale, "/how-to-start")}>{en ? "Compare options" : zh("比較選項", locale)}</TextLink>} />
           <div className="start-grid">
             {startOptions.map((o, index) => (
               <div key={o.id} className="start-card reveal" style={{ ["--delay" as string]: `${index * 80}ms` }}>
@@ -301,8 +301,8 @@ export default async function HomePage({ params }: Props) {
             ))}
           </div>
           <p className="partner-line">
-            {en ? "Brand, community or venture partner? " : "品牌、社群或項目合作夥伴？"}
-            <Link href={href(locale, paths.contact({ intent: "partnership" }))}>{en ? "Explore an ecosystem partnership →" : "探討生態系統合作 →"}</Link>
+            {en ? "Brand, community or venture partner? " : zh("品牌、社群或項目合作夥伴？", locale)}
+            <Link href={href(locale, paths.contact({ intent: "partnership" }))}>{en ? "Explore an ecosystem partnership →" : zh("探討生態系統合作 →", locale)}</Link>
           </p>
         </div>
       </section>
@@ -317,15 +317,15 @@ export default async function HomePage({ params }: Props) {
         </div>
         <div className="container" style={{ marginTop: 56 }}>
           <CtaBand
-            title={en ? "Tell us which work you want to improve." : "告訴我們你想改善哪項工作。"}
-            body={en ? "We reply by email to arrange a conversation. Sending a request does not book a meeting until we confirm a time with you." : "我們會以電郵回覆安排傾談。在與你確認時間前，提交要求並不代表已預約會面。"}
+            title={en ? "Tell us which work you want to improve." : zh("告訴我們你想改善哪項工作。", locale)}
+            body={en ? "We reply by email to arrange a conversation. Sending a request does not book a meeting until we confirm a time with you." : zh("我們會以電郵回覆安排傾談。在與你確認時間前，提交要求並不代表已預約會面。", locale)}
             actions={
               <>
                 <LinkButton to={href(locale, "/contact?intent=demo")} variant="accent">
                   {t(ui.requestDemo, locale)}
                 </LinkButton>
                 <LinkButton to={href(locale, "/how-to-start")} variant="light">
-                  {en ? "How to start" : "如何開始"}
+                  {en ? "How to start" : zh("如何開始", locale)}
                 </LinkButton>
               </>
             }

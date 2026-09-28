@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t, formatDate } from "@/lib/i18n";
+import { href, t, formatDate, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { eventIsoDate, legacyEvents } from "@/lib/resources";
@@ -25,37 +25,37 @@ export default async function EventsPage({ params }: LocaleParams) {
     <>
       <PageHero
         locale={locale}
-        crumbs={[{ label: en ? "Resources" : "資源中心", path: "/resources" }, { label: t(copy.title, locale) }]}
+        crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]}
         eyebrow={t(copy.title, locale)}
-        title={en ? "Events archive" : "活動檔案"}
+        title={en ? "Events archive" : zh("活動檔案", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>
-            <LinkButton to={href(locale, "/contact?intent=event")} variant="accent">{en ? "Ask about upcoming events" : "查詢未來活動"}</LinkButton>
-            <LinkButton to={href(locale, "/workshop")} variant="ghost">{en ? "Private leadership workshop" : "私人管理層工作坊"}</LinkButton>
+            <LinkButton to={href(locale, "/contact?intent=event")} variant="accent">{en ? "Ask about upcoming events" : zh("查詢未來活動", locale)}</LinkButton>
+            <LinkButton to={href(locale, "/workshop")} variant="ghost">{en ? "Private leadership workshop" : zh("私人管理層工作坊", locale)}</LinkButton>
           </>
         }
       />
       <section className="section">
         <div className="container">
-          <h2 style={{ fontSize: "1.5rem", marginBottom: 20 }}>{en ? "Past events" : "過往活動"} <span className="muted small">({sorted.length})</span></h2>
+          <h2 style={{ fontSize: "1.5rem", marginBottom: 20 }}>{en ? "Past events" : zh("過往活動", locale)} <span className="muted small">({sorted.length})</span></h2>
           <div className="related-grid">
             {sorted.map((e) => (
               <Link key={e.id} className="card card--link" href={href(locale, `/events/${e.id}`)} lang="en">
                 <span className="card-meta">
-                  <span className="chip chip--sky">{e.format ?? (en ? "Event" : "活動")}</span>
+                  <span className="chip chip--sky">{e.format ?? (en ? "Event" : zh("活動", locale))}</span>
                   <time dateTime={eventIsoDate(e.date)}>{formatDate(eventIsoDate(e.date), locale)}</time>
-                  <span>· {en ? "Past" : "已舉行"}</span>
+                  <span>· {en ? "Past" : zh("已舉行", locale)}</span>
                 </span>
                 <h3>{e.title}</h3>
                 <p className="small muted">{e.summary}</p>
-                <span className="micro muted">{en ? "Language: " : "語言："}{e.language ?? "—"} · {en ? "Record in English" : "英文紀錄"}</span>
+                <span className="micro muted">{en ? "Language: " : zh("語言：", locale)}{e.language ?? "—"} · {en ? "Record in English" : zh("英文紀錄", locale)}</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Bring a session to your team" : "為你的團隊安排一節"} body={en ? "Requests are confirmed by our team; submitting one is not a booking." : "申請會由我們的團隊確認；提交申請並不等於已預約。"} primary={{ label: en ? "Request a workshop" : "申請工作坊", to: "/contact?intent=workshop" }} />
+      <EnquirySection locale={locale} title={en ? "Bring a session to your team" : zh("為你的團隊安排一節", locale)} body={en ? "Requests are confirmed by our team; submitting one is not a booking." : zh("申請會由我們的團隊確認；提交申請並不等於已預約。", locale)} primary={{ label: en ? "Request a workshop" : zh("申請工作坊", locale), to: "/contact?intent=workshop" }} />
     </>
   );
 }

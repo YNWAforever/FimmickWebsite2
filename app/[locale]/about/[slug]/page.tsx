@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { href, t, type Locale } from "@/lib/i18n";
+import { href, t, type Locale, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
-import { aboutPages, leaders, methodSteps, principles, timeline, whyFimmick, type AboutPage } from "@/content/company";
+import { aboutPages, deliverySteps, leaders, methodSteps, offices, principles, timeline, whyFimmick, type AboutPage } from "@/content/company";
 import { caseBySlug } from "@/content/cases";
 import { members } from "@/content/ecosystem";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
@@ -28,6 +28,10 @@ const meta: Record<AboutPage, { title: { en: string; zh: string }; lead: { en: s
   "why-fimmick": {
     title: { en: "Why FIMMICK", zh: "為何選擇 FIMMICK" },
     lead: { en: "A partner should understand the work, design it with you, run the first version and hand over capability. FIMMICK combines platform, transformation and specialist services to do that.", zh: "合作夥伴應該理解工作、與你一同設計、推行首個版本並移交能力。FIMMICK 結合平台、轉型及專業服務做到這一點。" },
+  },
+  "asia-delivery": {
+    title: { en: "Regional delivery", zh: "區域交付" },
+    lead: { en: "FIMMICK works from Hong Kong with an office in Taiwan and contact points in Singapore, Mainland China, the United Kingdom and the UAE. Here is how multi-market work is organised.", zh: "FIMMICK 以香港為基地，在台灣設有辦事處，並在新加坡、中國內地、英國及阿聯酋設有聯絡點。以下說明跨市場工作的組織方式。" },
   },
   team: {
     title: { en: "Leadership", zh: "領導團隊" },
@@ -63,9 +67,9 @@ function Body({ slug, locale }: { slug: AboutPage; locale: Locale }) {
         <section className="section section--surface">
           <div className="container split">
             <div className="stack">
-              <p className="eyebrow">{en ? "What the journey created" : "歷程帶來的成果"}</p>
-              <h2>{en ? "A platform, a practice and an ecosystem" : "一個平台、一套實務及一個生態系統"}</h2>
-              <p className="muted">{en ? "FIMMICK AIP grew out of our own delivery work. The transformation practice grew out of redesigning that work. The ecosystem — creator programmes, communities, a travel platform and a social enterprise — grew out of building audiences and ventures ourselves." : "FIMMICK AIP 源自我們自身的交付工作；轉型實務源自重新設計這些工作；而生態系統——創作者計劃、社群、旅遊平台及社會企業——則源自我們親身建立受眾及項目。"}</p>
+              <p className="eyebrow">{en ? "What the journey created" : zh("歷程帶來的成果", locale)}</p>
+              <h2>{en ? "A platform, a practice and an ecosystem" : zh("一個平台、一套實務及一個生態系統", locale)}</h2>
+              <p className="muted">{en ? "FIMMICK AIP grew out of our own delivery work. The transformation practice grew out of redesigning that work. The ecosystem — creator programmes, communities, a travel platform and a social enterprise — grew out of building audiences and ventures ourselves." : zh("FIMMICK AIP 源自我們自身的交付工作；轉型實務源自重新設計這些工作；而生態系統——創作者計劃、社群、旅遊平台及社會企業——則源自我們親身建立受眾及項目。", locale)}</p>
             </div>
             <CaseCards locale={locale} items={[caseBySlug("fimmick-ai-native-operating-model")!]} />
           </div>
@@ -83,15 +87,57 @@ function Body({ slug, locale }: { slug: AboutPage; locale: Locale }) {
       <>
         <section className="section">
           <div className="container">
-            <SectionHead eyebrow={en ? "Method" : "方法"} title={en ? "Four steps" : "四個步驟"} />
+            <SectionHead eyebrow={en ? "Method" : zh("方法", locale)} title={en ? "Four steps" : zh("四個步驟", locale)} />
             <ol className="steps steps--row">{methodSteps.map((s) => <li key={s.title.en}><h3>{t(s.title, locale)}</h3><p>{t(s.copy, locale)}</p></li>)}</ol>
           </div>
         </section>
         <section className="section section--surface">
           <div className="container">
-            <SectionHead eyebrow={en ? "Principles" : "原則"} title={en ? "What we hold to" : "我們堅守的原則"} />
+            <SectionHead eyebrow={en ? "Principles" : zh("原則", locale)} title={en ? "What we hold to" : zh("我們堅守的原則", locale)} />
             <div className="grid grid-2">{principles.map((p) => <div key={p.title.en} className="io-card"><h3 style={{ fontSize: "1.1rem", marginBottom: 8 }}>{t(p.title, locale)}</h3><p className="muted">{t(p.copy, locale)}</p></div>)}</div>
-            <p style={{ marginTop: 24 }}><Link className="text-link" href={href(locale, "/ai-transformation")}>{en ? "AI Transformation programme" : "AI 轉型計劃"} →</Link></p>
+            <p style={{ marginTop: 24 }}><Link className="text-link" href={href(locale, "/ai-transformation")}>{en ? "AI Transformation programme" : zh("AI 轉型計劃", locale)} →</Link></p>
+          </div>
+        </section>
+      </>
+    );
+  }
+  if (slug === "asia-delivery") {
+    return (
+      <>
+        <section className="section">
+          <div className="container">
+            <SectionHead eyebrow={en ? "Offices and contact points" : zh("辦事處及聯絡點", locale)} title={en ? "Where to reach us" : zh("聯絡我們的地點", locale)} />
+            <div className="grid grid-3">
+              {offices.map((o) => (
+                <div key={o.email} className="io-card">
+                  <h3 style={{ fontSize: "1.1rem", marginBottom: 8 }}>{t(o.name, locale)}</h3>
+                  {o.address ? <p className="small muted">{t(o.address, locale)}</p> : null}
+                  <p className="small" style={{ marginTop: 8 }}>
+                    {o.phone ? <><a href={`tel:${o.phone.replace(/s/g, "")}`}>{o.phone}</a><br /></> : null}
+                    <a href={`mailto:${o.email}`}>{o.email}</a>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="section section--surface">
+          <div className="container">
+            <SectionHead eyebrow={en ? "Multi-market engagements" : zh("跨市場合作", locale)} title={en ? "How work across markets is organised" : zh("跨市場工作的組織方式", locale)} />
+            <ol className="steps steps--row">{deliverySteps.map((s) => <li key={s.title.en}><h3>{t(s.title, locale)}</h3><p>{t(s.copy, locale)}</p></li>)}</ol>
+          </div>
+        </section>
+        <section className="section">
+          <div className="container split">
+            <div className="stack">
+              <p className="eyebrow">{en ? "Languages" : zh("語言", locale)}</p>
+              <h2>{en ? "English, Traditional Chinese and Simplified Chinese" : zh("英文、繁體中文及簡體中文", locale)}</h2>
+              <p className="muted">{en ? "Workflows can prepare drafts in each language, but localisation is more than translation: tone, terms and claims are reviewed by people who know each market." : zh("流程可以準備各語言的草稿，但本地化不只是翻譯：語調、用詞及宣稱都由熟悉當地市場的人審閱。", locale)}</p>
+            </div>
+            <div className="stack">
+              <p className="distinction">{en ? "We do not publish market counts, client counts or regional figures on this page without documented evidence. Ask us about relevant experience in your market." : zh("在未有書面證據前，我們不會在此頁公布市場數目、客戶數目或區域數字；歡迎查詢我們在你所在市場的相關經驗。", locale)}</p>
+              <p><Link className="text-link" href={href(locale, "/functions/expansion")}>{en ? "Market expansion workflows" : zh("市場拓展流程", locale)} →</Link></p>
+            </div>
           </div>
         </section>
       </>
@@ -102,7 +148,7 @@ function Body({ slug, locale }: { slug: AboutPage; locale: Locale }) {
       <section className="section">
         <div className="container">
           <div className="grid grid-2">{whyFimmick.map((w, i) => <div key={w.title.en} className="io-card"><span className="number-tag">0{i + 1}</span><h2 style={{ fontSize: "1.25rem", margin: "8px 0 10px" }}>{t(w.title, locale)}</h2><p className="muted">{t(w.copy, locale)}</p></div>)}</div>
-          <p className="distinction" style={{ marginTop: 24 }}>{en ? "We do not publish client counts, agent counts or savings figures without documented evidence. Ask us for relevant, verifiable examples during a conversation." : "在未有書面證據前，我們不會公布客戶數目、智能體數目或節省數字；歡迎在傾談時查詢相關、可核實的例子。"}</p>
+          <p className="distinction" style={{ marginTop: 24 }}>{en ? "We do not publish client counts, agent counts or savings figures without documented evidence. Ask us for relevant, verifiable examples during a conversation." : zh("在未有書面證據前，我們不會公布客戶數目、智能體數目或節省數字；歡迎在傾談時查詢相關、可核實的例子。", locale)}</p>
         </div>
       </section>
     );
@@ -120,7 +166,7 @@ function Body({ slug, locale }: { slug: AboutPage; locale: Locale }) {
             </article>
           ))}
         </div>
-        <p className="micro muted" style={{ marginTop: 20 }}>{en ? "Additional leadership profiles will be added once they are approved for publication." : "其他領導層簡介獲批准公開後會在此加入。"}</p>
+        <p className="micro muted" style={{ marginTop: 20 }}>{en ? "Additional leadership profiles will be added once they are approved for publication." : zh("其他領導層簡介獲批准公開後會在此加入。", locale)}</p>
       </div>
     </section>
   );
@@ -133,9 +179,9 @@ export default async function AboutSubPage({ params }: SlugParams) {
   const en = locale === "en";
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: en ? "About" : "關於 FIMMICK", path: "/about" }, { label: t(meta[slug].title, locale) }]} eyebrow={en ? "About FIMMICK" : "關於 FIMMICK"} title={t(meta[slug].title, locale)} lead={t(meta[slug].lead, locale)} actions={<LinkButton to={href(locale, "/contact?intent=general")} variant="ghost">{en ? "Contact us" : "聯絡我們"}</LinkButton>} />
+      <PageHero locale={locale} crumbs={[{ label: en ? "About" : zh("關於 FIMMICK", locale), path: "/about" }, { label: t(meta[slug].title, locale) }]} eyebrow={en ? "About FIMMICK" : zh("關於 FIMMICK", locale)} title={t(meta[slug].title, locale)} lead={t(meta[slug].lead, locale)} actions={<LinkButton to={href(locale, "/contact?intent=general")} variant="ghost">{en ? "Contact us" : zh("聯絡我們", locale)}</LinkButton>} />
       <Body slug={slug} locale={locale} />
-      <EnquirySection locale={locale} title={en ? "Work with FIMMICK" : "與 FIMMICK 合作"} primary={{ label: en ? "How to start" : "如何開始", to: "/how-to-start" }} secondary={{ label: en ? "Contact us" : "聯絡我們", to: "/contact?intent=general" }} />
+      <EnquirySection locale={locale} title={en ? "Work with FIMMICK" : zh("與 FIMMICK 合作", locale)} primary={{ label: en ? "How to start" : zh("如何開始", locale), to: "/how-to-start" }} secondary={{ label: en ? "Contact us" : zh("聯絡我們", locale), to: "/contact?intent=general" }} />
     </>
   );
 }

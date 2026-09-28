@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { cases, caseKindLabel } from "@/content/cases";
@@ -46,12 +46,12 @@ export default async function CaseStudiesPage({ params, searchParams }: Props) {
   const usedServices = services.filter((s) => cases.some((c) => c.services.includes(s.id)));
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Real work, described honestly." : "真實工作，如實描述。"} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Real work, described honestly." : zh("真實工作，如實描述。", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
-          <nav className="filter-bar" aria-label={en ? "Filter case studies" : "篩選案例"}>
+          <nav className="filter-bar" aria-label={en ? "Filter case studies" : zh("篩選案例", locale)}>
             <div className="filter-group">
-              <span className="filter-label">{en ? "Type" : "類型"}</span>
+              <span className="filter-label">{en ? "Type" : zh("類型", locale)}</span>
               <Link className="filter-pill" href={q({ kind: undefined })} aria-current={!kind ? "true" : undefined} scroll={false}>{t(ui.all, locale)}</Link>
               {(["client-work", "internal-application"] as CaseKind[]).map((k) => (
                 <Link key={k} className="filter-pill" href={q({ kind: k })} aria-current={kind === k ? "true" : undefined} scroll={false}>
@@ -60,7 +60,7 @@ export default async function CaseStudiesPage({ params, searchParams }: Props) {
               ))}
             </div>
             <div className="filter-group">
-              <span className="filter-label">{en ? "Industry" : "行業"}</span>
+              <span className="filter-label">{en ? "Industry" : zh("行業", locale)}</span>
               <Link className="filter-pill" href={q({ industry: undefined })} aria-current={!industry ? "true" : undefined} scroll={false}>{t(ui.all, locale)}</Link>
               {industries.map((i) => {
                 const n = cases.filter((c) => matches(c, "industry") && c.industries.includes(i.id)).length;
@@ -72,7 +72,7 @@ export default async function CaseStudiesPage({ params, searchParams }: Props) {
               })}
             </div>
             <div className="filter-group">
-              <span className="filter-label">{en ? "Capability" : "能力"}</span>
+              <span className="filter-label">{en ? "Capability" : zh("能力", locale)}</span>
               <Link className="filter-pill" href={q({ capability: undefined })} aria-current={!capability ? "true" : undefined} scroll={false}>{t(ui.all, locale)}</Link>
               {usedServices.map((s) => (
                 <Link key={s.id} className="filter-pill" href={q({ capability: s.id })} aria-current={capability === s.id ? "true" : undefined} scroll={false}>
@@ -87,13 +87,13 @@ export default async function CaseStudiesPage({ params, searchParams }: Props) {
           </div>
           {shown.length ? <CaseCards locale={locale} items={shown} /> : <p className="empty-state">{t(ui.noResults, locale)}</p>}
           <div className="distinction" style={{ marginTop: 32 }}>
-            {en ? "Looking for product demonstrations? They are labelled samples, collected separately in " : "想查看產品示範？它們屬已標示的示例，另行收錄於"}
-            <Link href={href(locale, "/cases-and-demos")}>{en ? "Examples & demos" : "示例與示範"}</Link>
+            {en ? "Looking for product demonstrations? They are labelled samples, collected separately in " : zh("想查看產品示範？它們屬已標示的示例，另行收錄於", locale)}
+            <Link href={href(locale, "/cases-and-demos")}>{en ? "Examples & demos" : zh("示例與示範", locale)}</Link>
             {en ? "." : "。"}
           </div>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Discuss a similar piece of work" : "討論類似的工作"} primary={{ label: t(ui.discussScope, locale), to: "/contact?intent=general" }} />
+      <EnquirySection locale={locale} title={en ? "Discuss a similar piece of work" : zh("討論類似的工作", locale)} primary={{ label: t(ui.discussScope, locale), to: "/contact?intent=general" }} />
     </>
   );
 }

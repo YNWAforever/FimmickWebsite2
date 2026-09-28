@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -29,21 +29,21 @@ export default async function ProductsPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow="FIMMICK AIP"
-        title={en ? "Six products for four business jobs." : "六個產品，對應四項業務工作。"}
+        title={en ? "Six products for four business jobs." : zh("六個產品，對應四項業務工作。", locale)}
         lead={t(copy.lead, locale)}
         actions={<LinkButton to={href(locale, "/contact?intent=configuration")} variant="accent">{t(ui.discussConfiguration, locale)}</LinkButton>}
       />
       {solutions.map((s, index) => (
         <section key={s.id} className={index % 2 ? "section section--tight section--surface" : "section section--tight"}>
           <div className="container">
-            <SectionHead eyebrow={`${s.number} · ${t(s.short, locale)}`} title={t(s.name, locale)} lead={t(s.deliverable, locale)} action={<Link className="text-link" href={href(locale, paths.solution(s.id))}>{en ? "Solution overview" : "解決方案概覽"} <span className="arrow" aria-hidden="true">→</span></Link>} />
+            <SectionHead eyebrow={`${s.number} · ${t(s.short, locale)}`} title={t(s.name, locale)} lead={t(s.deliverable, locale)} action={<Link className="text-link" href={href(locale, paths.solution(s.id))}>{en ? "Solution overview" : zh("解決方案概覽", locale)} <span className="arrow" aria-hidden="true">→</span></Link>} />
             <div className="grid grid-2">
               {products.filter((p) => p.solution === s.id).map((p) => (
                 <Link key={p.id} className="hub-card" href={href(locale, paths.product(p.id))}>
                   <span className="chip chip--magenta" style={{ alignSelf: "flex-start" }}>{t(p.descriptor, locale)}</span>
                   <h3>{p.name}</h3>
                   <p className="muted">{t(p.summary, locale)}</p>
-                  <p className="small"><strong>{en ? "Output: " : "輸出："}</strong>{t(p.output, locale)}</p>
+                  <p className="small"><strong>{en ? "Output: " : zh("輸出：", locale)}</strong>{t(p.output, locale)}</p>
                   <span className="card-foot">{t(ui.learnMore, locale)} →</span>
                 </Link>
               ))}
@@ -51,7 +51,7 @@ export default async function ProductsPage({ params }: LocaleParams) {
           </div>
         </section>
       ))}
-      <EnquirySection locale={locale} title={en ? "Which product fits your workflow?" : "哪個產品適合你的流程？"} primary={{ label: t(ui.requestDemo, locale), to: "/contact?intent=demo" }} secondary={{ label: en ? "How to start" : "如何開始", to: "/how-to-start" }} />
+      <EnquirySection locale={locale} title={en ? "Which product fits your workflow?" : zh("哪個產品適合你的流程？", locale)} primary={{ label: t(ui.requestDemo, locale), to: "/contact?intent=demo" }} secondary={{ label: en ? "How to start" : zh("如何開始", locale), to: "/how-to-start" }} />
     </>
   );
 }

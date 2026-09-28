@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t, formatDate } from "@/lib/i18n";
+import { href, t, formatDate, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -27,7 +27,6 @@ const stamp = (s: number) => `0:${String(s).padStart(2, "0")}`;
 export default async function VideosPage({ params }: LocaleParams) {
   const locale = await resolveLocale(params);
   const en = locale === "en";
-  const lk = en ? "en" : "zh";
   return (
     <>
       <JsonLd
@@ -39,11 +38,11 @@ export default async function VideosPage({ params }: LocaleParams) {
           thumbnailUrl: `${canonicalOrigin}${explainerMedia.poster}`,
           uploadDate: explainerVideo.published,
           duration: `PT${explainerMedia.durationSeconds}S`,
-          contentUrl: `${canonicalOrigin}${explainerMedia.sources[locale].mp4}`,
+          contentUrl: `${canonicalOrigin}${explainerMedia.sources[en ? "en" : "zh-hant"].mp4}`,
           inLanguage: en ? "en" : "zh-Hant-HK",
         }}
       />
-      <PageHero locale={locale} crumbs={[{ label: en ? "Resources" : "資源中心", path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Resources" : "資源中心"} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Resources" : zh("資源中心", locale)} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container detail-grid">
           <div className="stack">
@@ -51,29 +50,29 @@ export default async function VideosPage({ params }: LocaleParams) {
             <h2>{t(explainerVideo.title, locale)}</h2>
             <p className="muted">{t(explainerVideo.summary, locale)}</p>
             <p className="notice">{t(explainerVideo.mode, locale)}</p>
-            <p className="micro muted">{formatDate(explainerVideo.published, locale)} · {explainerMedia.durationSeconds}s · {en ? "No audio track. Captions: English, Traditional Chinese." : "沒有音軌。字幕：英文、繁體中文。"}</p>
+            <p className="micro muted">{formatDate(explainerVideo.published, locale)} · {explainerMedia.durationSeconds}s · {en ? "No audio track. Captions: English, Traditional Chinese." : zh("沒有音軌。字幕：英文、繁體中文。", locale)}</p>
           </div>
           <aside className="detail-aside">
             <div className="transcript" id="transcript">
-              <h2 style={{ fontSize: "1.2rem", marginBottom: 16 }}>{en ? "Transcript" : "文字稿"}</h2>
+              <h2 style={{ fontSize: "1.2rem", marginBottom: 16 }}>{en ? "Transcript" : zh("文字稿", locale)}</h2>
               <ol>
                 {explainerScenes.map((s) => (
                   <li key={s.start}>
                     <time>{stamp(s.start)}</time>
                     <p>
-                      <strong>{s.title[lk]}</strong>
+                      <strong>{t(s.title, locale)}</strong>
                       <br />
-                      {s.caption[lk]}
+                      {t(s.caption, locale)}
                     </p>
                   </li>
                 ))}
               </ol>
             </div>
-            <Link className="btn btn--ghost" href={href(locale, "/platform")}>{en ? "Read the platform story" : "閱讀平台介紹"} →</Link>
+            <Link className="btn btn--ghost" href={href(locale, "/platform")}>{en ? "Read the platform story" : zh("閱讀平台介紹", locale)} →</Link>
           </aside>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "See the workflow with your own content" : "以你自己的內容了解流程"} primary={{ label: en ? "Request a Demo" : "預約產品示範", to: paths.contact({ intent: "demo", resource: "fimmick-aip-explainer" }) }} />
+      <EnquirySection locale={locale} title={en ? "See the workflow with your own content" : zh("以你自己的內容了解流程", locale)} primary={{ label: en ? "Request a Demo" : zh("預約產品示範", locale), to: paths.contact({ intent: "demo", resource: "fimmick-aip-explainer" }) }} />
     </>
   );
 }

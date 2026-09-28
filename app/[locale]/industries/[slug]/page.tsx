@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -37,14 +37,14 @@ export default async function IndustryPage({ params }: SlugParams) {
   const evidence = casesFor({ industry: i.id }, 3);
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Industries" : "行業應用", path: "/industries" }, { name: t(i.name, locale), path: paths.industry(i.id) }])} />
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Industries" : zh("行業應用", locale), path: "/industries" }, { name: t(i.name, locale), path: paths.industry(i.id) }])} />
       <PageHero
         locale={locale}
-        crumbs={[{ label: en ? "Industries" : "行業應用", path: "/industries" }, { label: t(i.name, locale) }]}
-        eyebrow={en ? "Industry application" : "行業應用"}
+        crumbs={[{ label: en ? "Industries" : zh("行業應用", locale), path: "/industries" }, { label: t(i.name, locale) }]}
+        eyebrow={en ? "Industry application" : zh("行業應用", locale)}
         title={t(i.name, locale)}
         lead={t(i.problem, locale)}
-        actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Discuss your workflow" : "討論你的流程"}</LinkButton>}
+        actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Discuss your workflow" : zh("討論你的流程", locale)}</LinkButton>}
         aside={
           <div className="io-card io-card--out">
             <h2 style={{ fontSize: "1rem", marginBottom: 8 }}>{t(ui.outputs, locale)}</h2>
@@ -56,19 +56,19 @@ export default async function IndustryPage({ params }: SlugParams) {
       />
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "Suggested workflow" : "建議流程"} title={en ? "From source information to a reviewed result" : "由來源資料到經審閱的成果"} lead={t(i.proof, locale)} />
+          <SectionHead eyebrow={en ? "Suggested workflow" : zh("建議流程", locale)} title={en ? "From source information to a reviewed result" : zh("由來源資料到經審閱的成果", locale)} lead={t(i.proof, locale)} />
           <ol className="journey">
             {i.journey.map((step) => (
               <li key={step.step.en} data-human={!!step.human}>
                 <strong>{t(step.step, locale)}</strong>
                 <p>{t(step.copy, locale)}</p>
-                <span className="who">{step.human ? (en ? "Your team decides" : "由你的團隊決定") : step.product ? productById(step.product).name : ""}</span>
+                <span className="who">{step.human ? (en ? "Your team decides" : zh("由你的團隊決定", locale)) : step.product ? productById(step.product).name : ""}</span>
               </li>
             ))}
           </ol>
           <div className="io-grid" style={{ marginTop: 32 }}>
             <div className="io-card">
-              <h3>{en ? "Source information" : "來源資料"}</h3>
+              <h3>{en ? "Source information" : zh("來源資料", locale)}</h3>
               <ul className="dot-list">{t(i.sources, locale).map((s) => <li key={s}>{s}</li>)}</ul>
             </div>
             <div className="decision-callout">
@@ -77,9 +77,9 @@ export default async function IndustryPage({ params }: SlugParams) {
             </div>
           </div>
           <p className="distinction" style={{ marginTop: 24 }}>
-            <strong>{en ? "Transformation need: " : "轉型需要："}</strong>
+            <strong>{en ? "Transformation need: " : zh("轉型需要：", locale)}</strong>
             {t(i.transformationNeed, locale)}{" "}
-            <Link href={href(locale, "/ai-transformation")}>{en ? "AI Transformation →" : "AI 轉型 →"}</Link>
+            <Link href={href(locale, "/ai-transformation")}>{en ? "AI Transformation →" : zh("AI 轉型 →", locale)}</Link>
           </p>
         </div>
       </section>
@@ -95,7 +95,7 @@ export default async function IndustryPage({ params }: SlugParams) {
           {evidence.length ? (
             <CaseCards locale={locale} items={evidence} />
           ) : (
-            <p className="muted">{en ? "No published case for this sector yet. The workflow above is a labelled example; ask us about relevant experience." : "此行業暫未有公開案例。以上流程為已標示的示例，歡迎查詢相關經驗。"}</p>
+            <p className="muted">{en ? "No published case for this sector yet. The workflow above is a labelled example; ask us about relevant experience." : zh("此行業暫未有公開案例。以上流程為已標示的示例，歡迎查詢相關經驗。", locale)}</p>
           )}
         </div>
       </section>
@@ -113,7 +113,7 @@ export default async function IndustryPage({ params }: SlugParams) {
           </div>
         </section>
       ) : null}
-      <EnquirySection locale={locale} title={en ? `Discuss ${t(i.name, locale)} workflows` : `討論${t(i.name, locale)}流程`} body={t(i.startingScope, locale)} primary={{ label: en ? "Discuss your workflow" : "討論你的流程", to: contact }} secondary={{ label: en ? "All industries" : "全部行業", to: "/industries" }} />
+      <EnquirySection locale={locale} title={en ? `Discuss ${t(i.name, locale)} workflows` : zh(`討論${t(i.name, locale)}流程`, locale)} body={t(i.startingScope, locale)} primary={{ label: en ? "Discuss your workflow" : zh("討論你的流程", locale), to: contact }} secondary={{ label: en ? "All industries" : zh("全部行業", locale), to: "/industries" }} />
     </>
   );
 }

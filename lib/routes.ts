@@ -1,3 +1,5 @@
+import type { FunctionId } from "@/content/functions";
+import type { CapabilityId } from "@/content/platform-pages";
 import type { IndustryId, MemberId, ProductId, ServiceId, SolutionId, WorkstreamId } from "@/content/types";
 import { contextQuery, type EnquiryContext } from "./intent";
 
@@ -9,6 +11,8 @@ export const paths = {
   industry: (id: IndustryId) => `/industries/${id}`,
   workstream: (id: WorkstreamId) => `/ai-transformation/${id}`,
   member: (id: MemberId) => `/fimmick-ecosystem/${id}`,
+  function: (id: FunctionId) => `/functions/${id}`,
+  capability: (id: CapabilityId) => `/platform/${id}`,
   case: (slug: string) => `/case-studies/${slug}`,
   article: (slug: string) => `/knowledge-hub/${slug}`,
   event: (slug: string) => `/events/${slug}`,

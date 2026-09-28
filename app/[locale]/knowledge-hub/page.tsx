@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/ui";
@@ -24,12 +24,12 @@ export default async function KnowledgeHubPage({ params, searchParams }: Props) 
   const page = Number.parseInt((await searchParams).page || "1", 10) || 1;
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: locale === "en" ? "Resources" : "資源中心", path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={locale === "en" ? "Insights & articles" : "洞察與文章"} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: locale === "en" ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={locale === "en" ? "Insights & articles" : zh("洞察與文章", locale)} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
-          <nav className="filter-bar" aria-label={locale === "en" ? "Categories" : "分類"}>
+          <nav className="filter-bar" aria-label={locale === "en" ? "Categories" : zh("分類", locale)}>
             <div className="filter-group">
-              <span className="filter-label">{locale === "en" ? "Category" : "分類"}</span>
+              <span className="filter-label">{locale === "en" ? "Category" : zh("分類", locale)}</span>
               {knowledgeCategories.map((c) => (
                 <Link key={c.slug} className="filter-pill" href={href(locale, `/knowledge-hub/category/${encodeURIComponent(c.slug)}`)}>
                   {c.slug}

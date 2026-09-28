@@ -1,14 +1,21 @@
+import { toHans, toHansDeep } from "./hans";
+
 /**
  * Locale contract.
  *
- * Internal identities are `en` and `zh-HK`. Public URL segments follow the
- * current production convention: `/en` and `/zh-hant`. `/zh-hk` (reference
- * site) permanently redirects to `/zh-hant`. `/zh-hans` is retained only for
- * the preserved Simplified Chinese Knowledge Hub archive.
+ * Internal identities are `en`, `zh-HK` and `zh-CN`. Public URL segments
+ * follow the production convention: `/en`, `/zh-hant` and `/zh-hans`.
+ * `/zh-hk` (reference site) permanently redirects to `/zh-hant`.
+ *
+ * Copy is authored in English and Traditional Chinese (Hong Kong). The
+ * Simplified Chinese pages are converted from the Traditional copy at render
+ * time (lib/hans.ts); the preserved Knowledge Hub archive keeps its native
+ * Simplified articles.
  */
-export const locales = ["en", "zh-hant"] as const;
+export const locales = ["en", "zh-hant", "zh-hans"] as const;
 export type Locale = (typeof locales)[number];
-export type LegacyLocale = Locale | "zh-hans";
+/** Kept as an alias: every public locale is now a full site locale. */
+export type LegacyLocale = Locale;
 
 export const defaultLocale: Locale = "en";
 
@@ -19,14 +26,20 @@ export const localeMeta: Record<LegacyLocale, { identity: string; htmlLang: stri
 };
 
 export function isLocale(value: string | undefined | null): value is Locale {
-  return value === "en" || value === "zh-hant";
+  return value === "en" || value === "zh-hant" || value === "zh-hans";
 }
 
-/** Bilingual copy. `zh` is Traditional Chinese for Hong Kong. */
+/** Bilingual copy. `zh` is Traditional Chinese for Hong Kong; Simplified is derived. */
 export type L<T = string> = { en: T; zh: T };
 
 export function t<T>(value: L<T>, locale: Locale): T {
-  return locale === "en" ? value.en : value.zh;
+  if (locale === "en") return value.en;
+  return locale === "zh-hans" ? toHansDeep(value.zh) : value.zh;
+}
+
+/** A Traditional Chinese literal, converted when rendering Simplified Chinese. */
+export function zh(text: string, locale: Locale): string {
+  return locale === "zh-hans" ? toHans(text) : text;
 }
 
 /** Prefix a locale-neutral route (e.g. `/platform`) with the locale segment. */

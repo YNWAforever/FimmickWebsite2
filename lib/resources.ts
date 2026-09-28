@@ -2,7 +2,7 @@ import articleIndexJson from "@/content/legacy/article-index.json";
 import eventsJson from "@/content/legacy/events.json";
 import { explainerVideo, guides, workshopResource } from "@/content/resources";
 import type { ResourceFormat, ResourceTopic } from "@/content/types";
-import type { LegacyLocale, Locale } from "./i18n";
+import { t, type LegacyLocale, type Locale } from "./i18n";
 
 export type ArticleLocaleMeta = {
   title: string;
@@ -76,13 +76,12 @@ let cache: Partial<Record<Locale, ResourceItem[]>> = {};
 
 export function allResources(locale: Locale): ResourceItem[] {
   if (cache[locale]) return cache[locale]!;
-  const lk = locale === "en" ? "en" : "zh";
   const items: ResourceItem[] = [];
   for (const guide of guides) {
-    items.push({ id: `guide:${guide.slug}`, format: "guide", topic: guide.topic, title: guide.title[lk], summary: guide.summary[lk], date: guide.published, contentLanguage: "bilingual", href: `/resources/guides#${guide.slug}` });
+    items.push({ id: `guide:${guide.slug}`, format: "guide", topic: guide.topic, title: t(guide.title, locale), summary: t(guide.summary, locale), date: guide.published, contentLanguage: "bilingual", href: `/resources/guides#${guide.slug}` });
   }
-  items.push({ id: `video:${explainerVideo.slug}`, format: "video", topic: explainerVideo.topic, title: explainerVideo.title[lk], summary: explainerVideo.summary[lk], date: explainerVideo.published, contentLanguage: "bilingual", href: "/resources/videos" });
-  items.push({ id: "workshop", format: "workshop", topic: workshopResource.topic, title: workshopResource.title[lk], summary: workshopResource.summary[lk], date: "", contentLanguage: "bilingual", href: "/workshop", status: "on-request" });
+  items.push({ id: `video:${explainerVideo.slug}`, format: "video", topic: explainerVideo.topic, title: t(explainerVideo.title, locale), summary: t(explainerVideo.summary, locale), date: explainerVideo.published, contentLanguage: "bilingual", href: "/resources/videos" });
+  items.push({ id: "workshop", format: "workshop", topic: workshopResource.topic, title: t(workshopResource.title, locale), summary: t(workshopResource.summary, locale), date: "", contentLanguage: "bilingual", href: "/workshop", status: "on-request" });
   for (const event of legacyEvents) {
     items.push({ id: `event:${event.id}`, format: "event", topic: eventTopic(event), title: event.title, summary: event.summary, date: eventIsoDate(event.date), contentLanguage: "en", href: `/events/${event.id}`, status: "past" });
   }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * QA sweep against a running build (default http://localhost:3100):
- *  - every non-article page in EN and zh-HK at 360 px and 720 px
+ *  - every non-article page in EN, zh-HK and zh-Hans at 360 px and 720 px
  *    (720 px ≈ a 1440 px screen at 200% zoom): horizontal overflow + console errors
  *  - every internal link found on those pages: HTTP status (following redirects)
  *
@@ -12,7 +12,7 @@ import { chromium } from "@playwright/test";
 const base = process.env.BASE_URL || "http://localhost:3100";
 const sitemap = await (await fetch(`${base}/sitemap.xml`)).text();
 const all = [...sitemap.matchAll(/<loc>https:\/\/www\.fimmick\.com([^<]+)<\/loc>/g)].map((m) => m[1]);
-const pages = [...new Set(all.filter((p) => !/\/(knowledge-hub|events)\/[^/]+$/.test(p) && !p.startsWith("/zh-hans")))];
+const pages = [...new Set(all.filter((p) => !/\/(knowledge-hub|events)\/[^/]+$/.test(p)))];
 pages.push("/en/knowledge-hub/ai-workforce-vs-ai-tools", "/zh-hant/events/ai-agent-strategy-seminar", "/en/knowledge-hub/category/CRM");
 
 const browser = await chromium.launch();

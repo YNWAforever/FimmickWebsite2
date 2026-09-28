@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState, type FormEvent } from "react";
 import { track } from "@/lib/analytics";
+import type { Locale } from "@/lib/i18n";
 
 export type ContextItem = { key: string; value: string; label: string; kind: string };
 export type ContactStrings = {
@@ -57,7 +58,7 @@ const newKey = () => (typeof crypto !== "undefined" && "randomUUID" in crypto ? 
  * only when the server confirms acceptance; otherwise an honest email handoff
  * is offered.
  */
-export function ContactForm({ lang, intents, initialIntent, initialContext, email, s }: { lang: "en" | "zh-hant"; intents: { id: string; label: string }[]; initialIntent: string; initialContext: ContextItem[]; email: string; s: ContactStrings }) {
+export function ContactForm({ lang, intents, initialIntent, initialContext, email, s }: { lang: Locale; intents: { id: string; label: string }[]; initialIntent: string; initialContext: ContextItem[]; email: string; s: ContactStrings }) {
   const [fields, setFields] = useState<Fields>(empty);
   const [intent, setIntent] = useState(initialIntent);
   const [context, setContext] = useState<ContextItem[]>(initialContext);

@@ -86,7 +86,7 @@ export async function POST(request: Request) {
 
   const rawContext = (payload.context && typeof payload.context === "object" ? payload.context : {}) as Record<string, string>;
   const context = parseContext(rawContext);
-  const lang = payload.lang === "zh-hant" ? "zh-hant" : "en";
+  const lang = payload.lang === "zh-hant" || payload.lang === "zh-hans" ? payload.lang : "en";
 
   const target = process.env.ENQUIRY_FORWARD_URL;
   if (!target) return json({ status: 503, body: { status: "unavailable" } });

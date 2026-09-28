@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -24,7 +24,7 @@ export default async function GovernancePage({ params }: LocaleParams) {
   const ws = workstreamById("governance-adoption");
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: en ? "Platform" : "平台", path: "/platform" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Platform" : "平台"} title={en ? "Useful AI work, with people in charge." : "讓 AI 做有用的工作，由人掌舵。"} lead={t(copy.lead, locale)} actions={<LinkButton to={href(locale, paths.workstream(ws.id))} variant="ghost">{t(ws.name, locale)}</LinkButton>} />
+      <PageHero locale={locale} crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Platform" : zh("平台", locale)} title={en ? "Useful AI work, with people in charge." : zh("讓 AI 做有用的工作，由人掌舵。", locale)} lead={t(copy.lead, locale)} actions={<LinkButton to={href(locale, paths.workstream(ws.id))} variant="ghost">{t(ws.name, locale)}</LinkButton>} />
       <section className="section">
         <div className="container">
           <div className="grid grid-2">
@@ -41,14 +41,14 @@ export default async function GovernancePage({ params }: LocaleParams) {
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Where governance sits" : "管治所在"} title={en ? "The approvals and records layers in practice" : "審批及記錄層的實際運作"} />
+          <SectionHead eyebrow={en ? "Where governance sits" : zh("管治所在", locale)} title={en ? "The approvals and records layers in practice" : zh("審批及記錄層的實際運作", locale)} />
           <PlatformLayersBlock locale={locale} variant="light" />
           <p style={{ marginTop: 24 }}>
-            <TextLink to={href(locale, "/ai-transformation/governance-adoption")}>{en ? "Governance & Adoption for leadership teams" : "為管理團隊而設的管治與推行"}</TextLink>
+            <TextLink to={href(locale, "/ai-transformation/governance-adoption")}>{en ? "Governance & Adoption for leadership teams" : zh("為管理團隊而設的管治與推行", locale)}</TextLink>
           </p>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Discuss review points for your workflow" : "討論你流程中的審閱環節"} primary={{ label: en ? "Discuss governance" : "討論管治", to: paths.contact({ intent: "transformation", workstream: "governance-adoption" }) }} />
+      <EnquirySection locale={locale} title={en ? "Discuss review points for your workflow" : zh("討論你流程中的審閱環節", locale)} primary={{ label: en ? "Discuss governance" : zh("討論管治", locale), to: paths.contact({ intent: "transformation", workstream: "governance-adoption" }) }} />
     </>
   );
 }

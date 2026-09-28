@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -39,26 +39,26 @@ export default async function TransformationPage({ params }: LocaleParams) {
       <PageHero
         locale={locale}
         crumbs={[{ label: t(copy.title, locale) }]}
-        eyebrow={en ? "For leadership teams" : "為管理團隊而設"}
-        title={en ? "Plan the change before scaling the tools." : "先規劃轉變，再擴大工具應用。"}
+        eyebrow={en ? "For leadership teams" : zh("為管理團隊而設", locale)}
+        title={en ? "Plan the change before scaling the tools." : zh("先規劃轉變，再擴大工具應用。", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>
-            <LinkButton to={href(locale, paths.contact({ intent: "transformation" }))} variant="accent">{en ? "Discuss a transformation scope" : "討論轉型範圍"}</LinkButton>
-            <LinkButton to={href(locale, "/workshop")} variant="ghost">{en ? "Leadership workshop" : "管理層工作坊"}</LinkButton>
+            <LinkButton to={href(locale, paths.contact({ intent: "transformation" }))} variant="accent">{en ? "Discuss a transformation scope" : zh("討論轉型範圍", locale)}</LinkButton>
+            <LinkButton to={href(locale, "/workshop")} variant="ghost">{en ? "Leadership workshop" : zh("管理層工作坊", locale)}</LinkButton>
           </>
         }
       />
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "Four decision pathways" : "四條決策路徑"} title={en ? "The questions leaders need answered" : "管理層需要解答的問題"} />
+          <SectionHead eyebrow={en ? "Four decision pathways" : zh("四條決策路徑", locale)} title={en ? "The questions leaders need answered" : zh("管理層需要解答的問題", locale)} />
           <div className="grid grid-2">
             {workstreams.map((w) => (
               <Link key={w.id} className="hub-card" href={href(locale, paths.workstream(w.id))}>
                 <span className="number-tag">{w.code}</span>
                 <h3>{t(w.name, locale)}</h3>
                 <p className="muted">{t(w.leadershipQuestion, locale)}</p>
-                <p className="small"><strong>{en ? "You receive: " : "你會得到："}</strong>{t(w.artifactLabel, locale)} — {w.deliverables.map((d) => t(d.title, locale)).join(", ")}</p>
+                <p className="small"><strong>{en ? "You receive: " : zh("你會得到：", locale)}</strong>{t(w.artifactLabel, locale)} — {w.deliverables.map((d) => t(d.title, locale)).join(", ")}</p>
                 <span className="card-foot">{t(ui.learnMore, locale)} →</span>
               </Link>
             ))}
@@ -67,7 +67,7 @@ export default async function TransformationPage({ params }: LocaleParams) {
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Where are you now?" : "你現在處於哪個階段？"} title={en ? "Pick the statement closest to your situation" : "選出最接近你情況的描述"} lead={en ? "An indicative starting point for a conversation — not a diagnosis or a maturity score." : "作為傾談起點的參考，並非診斷或成熟度分數。"} />
+          <SectionHead eyebrow={en ? "Where are you now?" : zh("你現在處於哪個階段？", locale)} title={en ? "Pick the statement closest to your situation" : zh("選出最接近你情況的描述", locale)} lead={en ? "An indicative starting point for a conversation — not a diagnosis or a maturity score." : zh("作為傾談起點的參考，並非診斷或成熟度分數。", locale)} />
           <div className="grid grid-2">
             {readinessTopics.map((r) => {
               const w = workstreamById(r.suggests);
@@ -75,7 +75,7 @@ export default async function TransformationPage({ params }: LocaleParams) {
                 <Link key={r.id} className="hub-card" href={href(locale, paths.workstream(w.id))}>
                   <h3>“{t(r.label, locale)}”</h3>
                   <p className="muted">{t(r.prompt, locale)}</p>
-                  <span className="card-foot">{en ? "Start with" : "由此開始："} {t(w.name, locale)} →</span>
+                  <span className="card-foot">{en ? "Start with" : zh("由此開始：", locale)} {t(w.name, locale)} →</span>
                 </Link>
               );
             })}
@@ -84,30 +84,30 @@ export default async function TransformationPage({ params }: LocaleParams) {
       </section>
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "Six workstreams" : "六個工作範疇"} title={en ? "How the programme connects" : "計劃如何連貫"} lead={en ? "Select a workstream to see the decision it supports, its inputs, the deliverable and who is responsible." : "選擇一個範疇，查看它支援的決定、所需輸入、成果及負責人。"} />
+          <SectionHead eyebrow={en ? "Six workstreams" : zh("六個工作範疇", locale)} title={en ? "How the programme connects" : zh("計劃如何連貫", locale)} lead={en ? "Select a workstream to see the decision it supports, its inputs, the deliverable and who is responsible." : zh("選擇一個範疇，查看它支援的決定、所需輸入、成果及負責人。", locale)} />
           <RoadmapBlock locale={locale} />
         </div>
       </section>
       <section className="section section--surface">
         <div className="container split">
           <div className="stack">
-            <p className="eyebrow">{en ? "Sample artifact" : "成果示例"}</p>
-            <h2>{en ? "A readiness heatmap, with the evidence behind each rating" : "附評級依據的準備度熱圖"}</h2>
-            <p className="muted">{en ? "Illustrative data. In an engagement each rating links to interview notes, workflow examples and system facts." : "示例資料。在實際項目中，每個評級都會連結到訪談筆記、流程例子及系統資料。"}</p>
-            <Link className="text-link" href={href(locale, "/resources/guides")}>{en ? "Download the AI readiness checklist" : "下載 AI 準備度清單"} →</Link>
+            <p className="eyebrow">{en ? "Sample artifact" : zh("成果示例", locale)}</p>
+            <h2>{en ? "A readiness heatmap, with the evidence behind each rating" : zh("附評級依據的準備度熱圖", locale)}</h2>
+            <p className="muted">{en ? "Illustrative data. In an engagement each rating links to interview notes, workflow examples and system facts." : zh("示例資料。在實際項目中，每個評級都會連結到訪談筆記、流程例子及系統資料。", locale)}</p>
+            <Link className="text-link" href={href(locale, "/resources/guides")}>{en ? "Download the AI readiness checklist" : zh("下載 AI 準備度清單", locale)} →</Link>
           </div>
           <HeatmapTable locale={locale} />
         </div>
       </section>
       <section className="section section--tight">
         <div className="container related-block">
-          <h2>{en ? "Services that deliver the programme" : "推行計劃的相關服務"}</h2>
+          <h2>{en ? "Services that deliver the programme" : zh("推行計劃的相關服務", locale)}</h2>
           <ServiceCards locale={locale} ids={["ai-training", "data-hub", "workflow-automation"]} />
         </div>
       </section>
       <section className="section section--tight section--surface">
         <div className="container related-block">
-          <h2>{en ? "Evidence" : "實證"}</h2>
+          <h2>{en ? "Evidence" : zh("實證", locale)}</h2>
           <CaseCards locale={locale} items={[internal]} />
         </div>
       </section>
@@ -115,12 +115,12 @@ export default async function TransformationPage({ params }: LocaleParams) {
         <div className="container split">
           <div className="stack">
             <p className="eyebrow">{t(ui.faqs, locale)}</p>
-            <h2>{en ? "Before you start" : "開始之前"}</h2>
+            <h2>{en ? "Before you start" : zh("開始之前", locale)}</h2>
           </div>
           <Faq items={faqs} locale={locale} />
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Discuss where AI should change your work" : "討論 AI 應在哪裏改變你的工作"} primary={{ label: en ? "Discuss a transformation scope" : "討論轉型範圍", to: paths.contact({ intent: "transformation" }) }} secondary={{ label: en ? "Request a workshop" : "申請工作坊", to: paths.contact({ intent: "workshop" }) }} />
+      <EnquirySection locale={locale} title={en ? "Discuss where AI should change your work" : zh("討論 AI 應在哪裏改變你的工作", locale)} primary={{ label: en ? "Discuss a transformation scope" : zh("討論轉型範圍", locale), to: paths.contact({ intent: "transformation" }) }} secondary={{ label: en ? "Request a workshop" : zh("申請工作坊", locale), to: paths.contact({ intent: "workshop" }) }} />
     </>
   );
 }

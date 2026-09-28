@@ -239,7 +239,7 @@ export type ContentData = {
   };
 };
 
-const PRICE = /(\$|HK\$|港幣|元|價錢|\bprice\b|\d+\s?(?:dollars|hkd))/i;
+const PRICE = /(\$|HK\$|港幣|港币|元|價錢|价钱|價格|价格|\bprice\b|\d+\s?(?:dollars|hkd))/i;
 
 export function ContentExample({ data }: { data: ContentData }) {
   const first = data.scenarios[0];

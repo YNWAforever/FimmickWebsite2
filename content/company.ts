@@ -77,5 +77,13 @@ export const leaders: { name: string; role: L; bio: L; linkedin?: string }[] = [
   },
 ];
 
-export const aboutPages = ["our-story", "how-we-work", "why-fimmick", "team"] as const;
+/** How multi-market engagements are organised (method, not a capacity claim). */
+export const deliverySteps: { title: L; copy: L }[] = [
+  { title: { en: "One accountable lead", zh: "一位負責主管" }, copy: { en: "Each engagement has one FIMMICK lead who owns scope, schedule and reporting across every market involved.", zh: "每項合作都有一位 FIMMICK 主管，負責所有相關市場的範圍、進度及報告。" } },
+  { title: { en: "A reviewer for each language", zh: "每種語言都有審閱人" }, copy: { en: "English, Traditional Chinese and Simplified Chinese outputs are checked by a named native-language reviewer before approval.", zh: "英文、繁體中文及簡體中文的輸出，在批准前都由指定的母語審閱人檢查。" } },
+  { title: { en: "Market-by-market approvals", zh: "按市場批核" }, copy: { en: "Local claims, channels and rules are approved per market — a Hong Kong approval does not carry over to Taiwan or Singapore.", zh: "當地宣稱、渠道及規則按市場逐一批准——香港的批核不會自動適用於台灣或新加坡。" } },
+  { title: { en: "One set of records", zh: "同一套紀錄" }, copy: { en: "Sources, decisions and exports for every market sit in the same record, so regional teams can compare like with like.", zh: "各市場的來源、決定及匯出都保存在同一套紀錄中，方便區域團隊作同等比較。" } },
+];
+
+export const aboutPages = ["our-story", "how-we-work", "why-fimmick", "team", "asia-delivery"] as const;
 export type AboutPage = (typeof aboutPages)[number];

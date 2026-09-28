@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -24,7 +24,7 @@ export default async function IndustriesPage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "One set of products, configured for your sector." : "同一套產品，按你的行業配置。"} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "One set of products, configured for your sector." : zh("同一套產品，按你的行業配置。", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
           <div className="grid grid-4">
@@ -45,17 +45,17 @@ export default async function IndustriesPage({ params }: LocaleParams) {
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Explore by sector" : "按行業探索"} title={en ? "Select a sector to see its workflow" : "選擇行業，查看其流程"} />
+          <SectionHead eyebrow={en ? "Explore by sector" : zh("按行業探索", locale)} title={en ? "Select a sector to see its workflow" : zh("選擇行業，查看其流程", locale)} />
           <IndustryMapBlock locale={locale} />
         </div>
       </section>
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "Industry-to-product map" : "行業與產品對照"} title={en ? "Same products, different jobs" : "同一產品，不同工作"} lead={en ? "FIMMICK does not build separate software per sector. Each industry applies a subset of the six products to its own workflow." : "FIMMICK 不會為每個行業另建軟件；各行業按自身流程應用六個產品中的部分產品。"} />
+          <SectionHead eyebrow={en ? "Industry-to-product map" : zh("行業與產品對照", locale)} title={en ? "Same products, different jobs" : zh("同一產品，不同工作", locale)} lead={en ? "FIMMICK does not build separate software per sector. Each industry applies a subset of the six products to its own workflow." : zh("FIMMICK 不會為每個行業另建軟件；各行業按自身流程應用六個產品中的部分產品。", locale)} />
           <IndustryMatrix locale={locale} />
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Discuss your sector's workflow" : "討論你所屬行業的流程"} primary={{ label: t(ui.discussScope, locale), to: "/contact?intent=configuration" }} />
+      <EnquirySection locale={locale} title={en ? "Discuss your sector's workflow" : zh("討論你所屬行業的流程", locale)} primary={{ label: t(ui.discussScope, locale), to: "/contact?intent=configuration" }} />
     </>
   );
 }

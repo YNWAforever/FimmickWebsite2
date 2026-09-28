@@ -10,7 +10,7 @@ type Input = {
   title: string;
   description: string;
   type?: "website" | "article";
-  /** Locales that have an equivalent of this page. Defaults to en + zh-hant. */
+  /** Locales that have an equivalent of this page. Defaults to all three. */
   alternates?: LegacyLocale[];
   image?: string;
   publishedTime?: string;
@@ -22,7 +22,7 @@ export function localeUrl(locale: LegacyLocale, path: string) {
   return `${canonicalOrigin}/${locale}${suffix}`;
 }
 
-export function pageMetadata({ locale, path, title, description, type = "website", alternates = ["en", "zh-hant"], image = "/og.png", publishedTime, modifiedTime }: Input): Metadata {
+export function pageMetadata({ locale, path, title, description, type = "website", alternates = ["en", "zh-hant", "zh-hans"], image = "/og.png", publishedTime, modifiedTime }: Input): Metadata {
   const languages: Record<string, string> = {};
   for (const alt of alternates) languages[localeMeta[alt].hreflang] = localeUrl(alt, path);
   if (alternates.includes("en")) languages["x-default"] = localeUrl("en", path);

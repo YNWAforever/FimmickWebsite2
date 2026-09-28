@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -37,31 +37,31 @@ export default async function CasePage({ params }: SlugParams) {
   const contact = paths.contact({ intent: c.kind === "internal-application" ? "transformation" : "general", case: c.slug });
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Case studies" : "成功案例", path: "/case-studies" }, { name: t(c.title, locale), path: paths.case(c.slug) }])} />
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Case studies" : zh("成功案例", locale), path: "/case-studies" }, { name: t(c.title, locale), path: paths.case(c.slug) }])} />
       <PageHero
         locale={locale}
-        crumbs={[{ label: en ? "Case studies" : "成功案例", path: "/case-studies" }, { label: t(c.title, locale) }]}
+        crumbs={[{ label: en ? "Case studies" : zh("成功案例", locale), path: "/case-studies" }, { label: t(c.title, locale) }]}
         eyebrow={`${t(caseKindLabel[c.kind], locale)} · ${t(c.sector, locale)} · ${t(c.market, locale)}`}
         title={t(c.title, locale)}
         lead={t(c.context, locale)}
-        actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Discuss similar work" : "討論類似工作"}</LinkButton>}
+        actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Discuss similar work" : zh("討論類似工作", locale)}</LinkButton>}
         aside={
           <dl className="status-panel">
-            <div><dt>{en ? "Publication basis" : "發布依據"}</dt><dd className="small">{t(c.publicationBasis, locale)}</dd></div>
-            <div><dt>{en ? "Period" : "期間"}</dt><dd>{t(c.period, locale)}</dd></div>
+            <div><dt>{en ? "Publication basis" : zh("發布依據", locale)}</dt><dd className="small">{t(c.publicationBasis, locale)}</dd></div>
+            <div><dt>{en ? "Period" : zh("期間", locale)}</dt><dd>{t(c.period, locale)}</dd></div>
           </dl>
         }
       />
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "Problem" : "問題"} title={t(c.problem, locale)} />
+          <SectionHead eyebrow={en ? "Problem" : zh("問題", locale)} title={t(c.problem, locale)} />
           <div className="io-grid">
             <div className="io-card">
-              <h3>{en ? "Scope delivered" : "交付範圍"}</h3>
+              <h3>{en ? "Scope delivered" : zh("交付範圍", locale)}</h3>
               <ul className="check-list">{t(c.scope, locale).map((s) => <li key={s}>{s}</li>)}</ul>
             </div>
             <div className="io-card">
-              <h3>{en ? "Services and products involved" : "涉及的服務及產品"}</h3>
+              <h3>{en ? "Services and products involved" : zh("涉及的服務及產品", locale)}</h3>
               <Chips items={c.services.map((s) => ({ label: t(serviceById(s).name, locale), to: href(locale, paths.service(s)) }))} />
               {c.products.length ? <div style={{ marginTop: 10 }}><Chips tone="magenta" items={c.products.map((p) => ({ label: productById(p).name, to: href(locale, paths.product(p)) }))} /></div> : null}
               {c.industries.length ? <div style={{ marginTop: 10 }}><Chips tone="sky" items={c.industries.map((i) => ({ label: t(industryById(i).name, locale), to: href(locale, paths.industry(i)) }))} /></div> : null}
@@ -71,15 +71,15 @@ export default async function CasePage({ params }: SlugParams) {
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Workflow change" : "流程改變"} title={en ? "Before and after" : "之前與之後"} />
+          <SectionHead eyebrow={en ? "Workflow change" : zh("流程改變", locale)} title={en ? "Before and after" : zh("之前與之後", locale)} />
           <div className="ba">
             <div className="grid grid-2">
               <div>
-                <p className="micro muted" style={{ fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>{en ? "Before" : "之前"}</p>
+                <p className="micro muted" style={{ fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>{en ? "Before" : zh("之前", locale)}</p>
                 <ol className="ba-lane" style={{ gridTemplateColumns: "1fr" }}>{t(c.workflowBefore, locale).map((s) => <li key={s} data-kind="pain" style={{ minHeight: 0 }}><p style={{ color: "var(--ink)" }}>{s}</p></li>)}</ol>
               </div>
               <div>
-                <p className="micro muted" style={{ fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>{en ? "After" : "之後"}</p>
+                <p className="micro muted" style={{ fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>{en ? "After" : zh("之後", locale)}</p>
                 <ol className="ba-lane" style={{ gridTemplateColumns: "1fr" }}>{t(c.workflowAfter, locale).map((s) => <li key={s} data-kind="human" style={{ minHeight: 0 }}><p style={{ color: "var(--ink)" }}>{s}</p></li>)}</ol>
               </div>
             </div>
@@ -88,18 +88,18 @@ export default async function CasePage({ params }: SlugParams) {
             <strong>{t(ui.humanDecision, locale)}</strong>
             <p>{t(c.humanDecisions, locale)}</p>
           </div>
-          <p className="small muted" style={{ marginTop: 16 }}><strong>{en ? "Data foundation: " : "資料基礎："}</strong>{t(c.dataFoundation, locale)}</p>
+          <p className="small muted" style={{ marginTop: 16 }}><strong>{en ? "Data foundation: " : zh("資料基礎：", locale)}</strong>{t(c.dataFoundation, locale)}</p>
         </div>
       </section>
       <section className="section">
         <div className="container split">
           <div className="stack">
-            <p className="eyebrow">{en ? "Outcome" : "成果"}</p>
+            <p className="eyebrow">{en ? "Outcome" : zh("成果", locale)}</p>
             <h2>{t(c.outcome, locale)}</h2>
-            <p className="muted">{en ? "Reusable asset: " : "可重用成果："}{t(c.reusable, locale)}</p>
+            <p className="muted">{en ? "Reusable asset: " : zh("可重用成果：", locale)}{t(c.reusable, locale)}</p>
           </div>
           <div className="archive-banner">
-            <strong>{en ? "Evidence and limitations" : "證據及限制"}</strong>
+            <strong>{en ? "Evidence and limitations" : zh("證據及限制", locale)}</strong>
             <span>{t(c.limitations, locale)}</span>
           </div>
         </div>
@@ -111,10 +111,10 @@ export default async function CasePage({ params }: SlugParams) {
       ) : null}
       <section className="section section--tight">
         <div className="container">
-          <Link className="text-link" href={href(locale, "/case-studies")}>← {en ? "Back to the case library" : "返回案例庫"}</Link>
+          <Link className="text-link" href={href(locale, "/case-studies")}>← {en ? "Back to the case library" : zh("返回案例庫", locale)}</Link>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Discuss a similar piece of work" : "討論類似的工作"} primary={{ label: t(ui.discussScope, locale), to: contact }} />
+      <EnquirySection locale={locale} title={en ? "Discuss a similar piece of work" : zh("討論類似的工作", locale)} primary={{ label: t(ui.discussScope, locale), to: contact }} />
     </>
   );
 }

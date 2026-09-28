@@ -6,10 +6,19 @@ import { articleIndex } from "@/lib/resources";
 import { ArticleView, articleSource } from "@/components/ArticleView";
 import type { LegacyLocale } from "@/lib/i18n";
 
-/** Preserved production article URLs for every article in either locale. */
+/**
+ * Preserved production article URLs. EN and zh-HK cover every article in
+ * either language; zh-Hans covers every article so the language switch never
+ * 404s — native Simplified articles render as themselves, others fall back to
+ * the original language with a canonical to that version.
+ */
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return localeSlugParams(articleIndex.filter((a) => a.locales.en || a.locales["zh-hant"]).map((a) => a.slug));
+  const bilingual = articleIndex.filter((a) => a.locales.en || a.locales["zh-hant"]).map((a) => a.slug);
+  return [
+    ...localeSlugParams(bilingual).filter((p) => p.locale !== "zh-hans"),
+    ...articleIndex.map((a) => ({ locale: "zh-hans", slug: a.slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: SlugParams): Promise<Metadata> {

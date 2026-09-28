@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { locales } from "@/lib/i18n";
+import { locales, t, zh } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { policies } from "@/content/legal";
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { legal } = await params;
   const p = policies.find((x) => x.id === legal);
   if (!p) return {};
-  return pageMetadata({ locale, path: `/${p.id}`, title: locale === "en" ? p.title.en : p.title.zh, description: `FIMMICK ${p.title.en} policy. Last updated ${p.updated}.` });
+  return pageMetadata({ locale, path: `/${p.id}`, title: t(p.title, locale), description: `FIMMICK ${p.title.en} policy. Last updated ${p.updated}.` });
 }
 
 export default async function PolicyPage({ params }: Props) {
@@ -31,10 +31,10 @@ export default async function PolicyPage({ params }: Props) {
   return (
     <article className="section">
       <div className="container">
-        <Crumbs locale={locale} items={[{ label: en ? p.title.en : p.title.zh }]} />
-        <h1>{en ? p.title.en : p.title.zh}</h1>
-        <p className="meta-row">{en ? "Last updated" : "最後更新"}: {p.updated}</p>
-        {!en ? <p className="archive-banner" style={{ marginTop: 20 }}>此政策以英文發布，以下為英文原文。</p> : null}
+        <Crumbs locale={locale} items={[{ label: t(p.title, locale) }]} />
+        <h1>{t(p.title, locale)}</h1>
+        <p className="meta-row">{en ? "Last updated" : zh("最後更新", locale)}: {p.updated}</p>
+        {!en ? <p className="archive-banner" style={{ marginTop: 20 }}>{zh("此政策以英文發布，以下為英文原文。", locale)}</p> : null}
         <div className="prose" lang="en" style={{ marginTop: 28 }}>
           {p.sections.map((s) => (
             <section key={s.heading}>

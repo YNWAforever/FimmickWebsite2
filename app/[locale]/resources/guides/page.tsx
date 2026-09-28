@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t, formatDate } from "@/lib/i18n";
+import { href, t, formatDate, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -24,7 +24,7 @@ export default async function GuidesPage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: en ? "Resources" : "資源中心", path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Resources" : "資源中心"} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Resources" : zh("資源中心", locale)} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container stack" style={{ ["--stack" as string]: "24px" }}>
           {guides.map((g) => {
@@ -38,8 +38,8 @@ export default async function GuidesPage({ params }: LocaleParams) {
                 <p className="muted">{t(g.summary, locale)}</p>
                 <ul className="check-list small">{t(g.contents, locale).map((c) => <li key={c}>{c}</li>)}</ul>
                 <div className="btn-row">
-                  <a className="btn btn--accent" href={g.file.en.href} download hrefLang="en">{en ? "Download (English, PDF)" : "下載（英文 PDF）"}</a>
-                  <a className="btn btn--ghost" href={g.file["zh-hant"].href} download hrefLang="zh-Hant-HK">{en ? "Download (繁體中文, PDF)" : "下載（繁體中文 PDF）"}</a>
+                  <a className="btn btn--accent" href={g.file.en.href} download hrefLang="en">{en ? "Download (English, PDF)" : zh("下載（英文 PDF）", locale)}</a>
+                  <a className="btn btn--ghost" href={g.file["zh-hant"].href} download hrefLang="zh-Hant-HK">{en ? zh("Download (繁體中文, PDF)", locale) : zh("下載（繁體中文 PDF）", locale)}</a>
                   {ws ? <Link className="text-link" href={href(locale, paths.workstream(ws.id))}>{t(ws.name, locale)} →</Link> : null}
                 </div>
               </article>
@@ -47,7 +47,7 @@ export default async function GuidesPage({ params }: LocaleParams) {
           })}
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Want help filling it in?" : "需要協助填寫？"} primary={{ label: en ? "Discuss a transformation scope" : "討論轉型範圍", to: paths.contact({ intent: "transformation", resource: "ai-readiness-checklist" }) }} />
+      <EnquirySection locale={locale} title={en ? "Want help filling it in?" : zh("需要協助填寫？", locale)} primary={{ label: en ? "Discuss a transformation scope" : zh("討論轉型範圍", locale), to: paths.contact({ intent: "transformation", resource: "ai-readiness-checklist" }) }} />
     </>
   );
 }

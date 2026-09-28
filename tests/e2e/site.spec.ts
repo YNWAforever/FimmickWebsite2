@@ -7,6 +7,9 @@ const keyPages = [
   "/en/resources", "/en/knowledge-hub", "/en/knowledge-hub/ai-workforce-vs-ai-tools", "/en/events", "/en/workshop",
   "/en/fimmick-ecosystem", "/en/fimmick-ecosystem/kinnso", "/en/about", "/en/about/team", "/en/how-to-start", "/en/contact",
   "/zh-hant/services/seo-aeo", "/zh-hant/fimmick-ecosystem/eldage", "/zh-hans/knowledge-hub/ai-workforce-vs-ai-tools", "/en/privacy",
+  "/zh-hans", "/zh-hans/services/seo-aeo", "/zh-hans/contact", "/en/functions", "/en/functions/cx", "/zh-hant/functions/finance",
+  "/en/platform/architecture", "/en/platform/agents", "/en/platform/marketplace", "/en/platform/pricing", "/zh-hant/platform/intelligence",
+  "/en/services/digital-experience", "/en/growth", "/en/insights", "/en/about/asia-delivery",
 ];
 
 test.describe("routes, redirects and indexing", () => {
@@ -25,14 +28,13 @@ test.describe("routes, redirects and indexing", () => {
   test("legacy URLs redirect to meaningful destinations without chains", async ({ request }) => {
     const cases: [string, string, number][] = [
       ["/", "/en", 307],
-      ["/en/platform/agents", "/en/platform", 308],
-      ["/en/platform/pricing", "/en/how-to-start", 308],
-      ["/en/workforce/cx", "/en/solutions/customer-engagement", 308],
+      ["/en/workforce", "/en/functions", 308],
+      ["/en/workforce/cx", "/en/functions/cx", 308],
+      ["/zh-hans/workforce/finance", "/zh-hans/functions/finance", 308],
       ["/zh-hant/services/ai-transformation", "/zh-hant/ai-transformation", 308],
-      ["/en/services/digital-experience", "/en/solutions/website-operations", 308],
       ["/en/ai-workshop", "/en/workshop", 308],
       ["/zh-hk/contact", "/zh-hant/contact", 308],
-      ["/zh-hans/services", "/zh-hant/services", 307],
+      ["/zh-cn/services", "/zh-hans/services", 308],
       ["/events/ai-agent-strategy-seminar", "/en/events/ai-agent-strategy-seminar", 308],
     ];
     for (const [from, to, status] of cases) {
@@ -56,6 +58,17 @@ test.describe("routes, redirects and indexing", () => {
     expect(sitemap).toContain("https://www.fimmick.com/en/services/crm-sales");
     expect(sitemap).toContain("https://www.fimmick.com/zh-hant/fimmick-ecosystem/kinnso");
     expect(sitemap).not.toContain("/services/ai-transformation<");
+    expect(sitemap).toContain("https://www.fimmick.com/zh-hans/services/crm-sales");
+    expect(sitemap).toContain("https://www.fimmick.com/en/functions/cx");
+  });
+
+  test("Simplified Chinese pages render converted copy with a zh-Hans hreflang", async ({ request }) => {
+    const html = await (await request.get("/zh-hans")).text();
+    expect(html).toContain("预约产品示范");
+    expect(html).not.toContain("預約產品示範");
+    expect(html).toContain('hrefLang="zh-Hans"');
+    const services = await (await request.get("/zh-hans/services")).text();
+    expect(services).toContain("专业服务");
   });
 });
 

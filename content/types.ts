@@ -20,6 +20,7 @@ export type ServiceId =
   | "social-listening"
   | "koc-community"
   | "ecommerce-growth"
+  | "digital-experience"
   | "business-intelligence"
   | "data-hub"
   | "content-creative"

@@ -1,5 +1,6 @@
 "use client";
 
+import { zh, type Locale } from "@/lib/i18n";
 import { useRef, useState } from "react";
 import type { ExplainerMedia } from "@/content/media";
 import { track } from "@/lib/analytics";
@@ -11,11 +12,13 @@ import { track } from "@/lib/analytics";
  * - Native controls, captions on by default in the page language, no audio.
  * - If playback fails, the poster returns with a message and transcript link.
  */
-export function ExplainerPlayer({ locale, media, title, compact = false, transcriptHref }: { locale: "en" | "zh-hant"; media: ExplainerMedia; title: string; compact?: boolean; transcriptHref?: string }) {
+export function ExplainerPlayer({ locale, media, title, compact = false, transcriptHref }: { locale: Locale; media: ExplainerMedia; title: string; compact?: boolean; transcriptHref?: string }) {
   const [state, setState] = useState<"poster" | "playing" | "error">("poster");
   const started = useRef(false);
   const en = locale === "en";
-  const src = media.sources[locale];
+  // The film and captions exist in English and Traditional Chinese; Simplified pages use the Chinese film.
+  const film = locale === "en" ? "en" : "zh-hant";
+  const src = media.sources[film];
   return (
     <div className={compact ? "player player--compact" : "player"} style={{ aspectRatio: `${media.width} / ${media.height}` }}>
       {state === "playing" ? (
@@ -42,11 +45,11 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
           {/* Errors on the last source mean no playable source was found. */}
           <source src={src.webm} type="video/webm" onError={() => setState("error")} />
           {media.captions.map((c) => (
-            <track key={c.srclang} kind="captions" src={c.src} srcLang={c.srclang} label={c.label} default={c.locale === locale} />
+            <track key={c.srclang} kind="captions" src={c.src} srcLang={c.srclang} label={c.label} default={c.locale === film} />
           ))}
         </video>
       ) : (
-        <button type="button" className="player__poster" onClick={() => setState("playing")} aria-label={`${en ? "Play video" : "播放影片"}: ${title}`}>
+        <button type="button" className="player__poster" onClick={() => setState("playing")} aria-label={`${en ? "Play video" : zh("播放影片", locale)}: ${title}`}>
           {/* eslint-disable-next-line @next/next/no-img-element -- poster must render without the image optimiser */}
           <img src={media.poster} alt="" width={media.width} height={media.height} loading="lazy" decoding="async" />
           <span className="player__play" aria-hidden="true">
@@ -55,14 +58,14 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
             </svg>
           </span>
           <span className="player__meta">
-            {title} · {media.durationSeconds}s · {en ? "captions" : "字幕"}
+            {title} · {media.durationSeconds}s · {en ? "captions" : zh("字幕", locale)}
           </span>
         </button>
       )}
       {state === "error" ? (
         <p className="player__error" role="status">
-          {en ? "The video could not be played in this browser." : "此瀏覽器未能播放影片。"}{" "}
-          {transcriptHref ? <a href={transcriptHref}>{en ? "Read the transcript" : "閱讀文字稿"}</a> : null}
+          {en ? "The video could not be played in this browser." : zh("此瀏覽器未能播放影片。", locale)}{" "}
+          {transcriptHref ? <a href={transcriptHref}>{en ? "Read the transcript" : zh("閱讀文字稿", locale)}</a> : null}
         </p>
       ) : null}
     </div>

@@ -6,6 +6,8 @@ import { industries } from "@/content/industries";
 import { cases } from "@/content/cases";
 import { members } from "@/content/ecosystem";
 import { aboutPages } from "@/content/company";
+import { businessFunctions } from "@/content/functions";
+import { capabilities } from "@/content/platform-pages";
 import { articleIndex, legacyEvents } from "./resources";
 import type { LegacyLocale } from "./i18n";
 
@@ -16,8 +18,8 @@ export type PublicPage = { path: string; lastModified: string; locales: LegacyLo
 
 /** Every canonical public page, locale-neutral. Used by the sitemap and tests. */
 export function publicPages(): PublicPage[] {
-  const both: LegacyLocale[] = ["en", "zh-hant"];
-  const page = (path: string, kind: string, lastModified = REBUILD_DATE, locales = both): PublicPage => ({ path, kind, lastModified, locales });
+  const all: LegacyLocale[] = ["en", "zh-hant", "zh-hans"];
+  const page = (path: string, kind: string, lastModified = REBUILD_DATE, locales = all): PublicPage => ({ path, kind, lastModified, locales });
   const list: PublicPage[] = [
     page("/", "home"),
     page("/solutions", "hub"),
@@ -27,9 +29,17 @@ export function publicPages(): PublicPage[] {
     page("/platform", "platform"),
     page("/platform/integrations", "platform"),
     page("/platform/governance", "platform"),
+    page("/platform/architecture", "platform"),
+    page("/platform/agents", "platform"),
+    page("/platform/marketplace", "platform"),
+    page("/platform/pricing", "platform"),
+    ...capabilities.map((c) => page(`/platform/${c.id}`, "capability")),
+    page("/functions", "hub"),
+    ...businessFunctions.map((f) => page(`/functions/${f.id}`, "function")),
     page("/ai-transformation", "hub"),
     ...workstreams.map((w) => page(`/ai-transformation/${w.id}`, "workstream")),
     page("/services", "hub"),
+    page("/growth", "hub"),
     ...services.filter((s) => !s.canonicalPath).map((s) => page(`/services/${s.id}`, "service")),
     page("/industries", "hub"),
     ...industries.map((i) => page(`/industries/${i.id}`, "industry")),
@@ -37,6 +47,7 @@ export function publicPages(): PublicPage[] {
     ...cases.map((c) => page(`/case-studies/${c.slug}`, "case")),
     page("/cases-and-demos", "hub"),
     page("/resources", "hub"),
+    page("/insights", "resource"),
     page("/resources/guides", "resource"),
     page("/resources/videos", "resource"),
     page("/knowledge-hub", "hub"),

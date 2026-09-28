@@ -12,7 +12,7 @@ import "../styles/pages.css";
 import { Shell } from "@/components/shell/Shell";
 import { Gtm } from "@/components/analytics/Gtm";
 import { JsonLd } from "@/components/JsonLd";
-import { isLocale, localeMeta, locales } from "@/lib/i18n";
+import { isLocale, localeMeta, locales, zh } from "@/lib/i18n";
 import { canonicalOrigin, isProduction } from "@/lib/env";
 import { organizationJsonLd } from "@/lib/seo";
 
@@ -31,10 +31,10 @@ export const viewport: Viewport = {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const zh = locale === "zh-hant";
+  if (!isLocale(locale)) return {};
   return {
     metadataBase: new URL(canonicalOrigin),
-    title: { default: zh ? "FIMMICK — 企業 AI 智能體平台與業務解決方案" : "FIMMICK — Agentic AI Platform & Business Solutions", template: "%s | FIMMICK" },
+    title: { default: locale !== "en" ? zh("FIMMICK — 企業 AI 智能體平台與業務解決方案", locale) : "FIMMICK — Agentic AI Platform & Business Solutions", template: "%s | FIMMICK" },
     applicationName: "FIMMICK",
     icons: { icon: "/favicon.ico" },
     robots: isProduction() ? { index: true, follow: true } : { index: false, follow: false },

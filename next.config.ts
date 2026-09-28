@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     const moves = localeMoves.map((move) => ({
-      source: `/:locale(en|zh-hant)${move.from}`,
+      source: `/:locale(en|zh-hant|zh-hans)${move.from}`,
       destination: `/:locale${move.to}`,
       permanent: true,
     }));
@@ -44,15 +44,9 @@ const nextConfig: NextConfig = {
       // Reference-site Traditional Chinese prefix → production convention.
       { source: "/zh-hk", destination: "/zh-hant", permanent: true },
       { source: "/zh-hk/:path*", destination: "/zh-hant/:path*", permanent: true },
-      { source: "/zh-cn", destination: "/zh-hant", permanent: false },
-      { source: "/zh-cn/knowledge-hub/:path*", destination: "/zh-hans/knowledge-hub/:path*", permanent: true },
-      { source: "/zh-cn/:path*", destination: "/zh-hant/:path*", permanent: false },
-      // Simplified Chinese: only the Knowledge Hub archive is retained natively.
-      // Other pages temporarily resolve to Traditional Chinese pending a
-      // Simplified translation decision (see docs/redesign/route-migration.csv).
-      { source: "/zh-hans", destination: "/zh-hant", permanent: false },
-      { source: "/zh-hans/knowledge-hub/category/:c", destination: "/zh-hant/knowledge-hub/category/:c", permanent: false },
-      { source: "/zh-hans/:path((?!knowledge-hub).*)", destination: "/zh-hant/:path", permanent: false },
+      // Simplified Chinese alias used by some older links.
+      { source: "/zh-cn", destination: "/zh-hans", permanent: true },
+      { source: "/zh-cn/:path*", destination: "/zh-hans/:path*", permanent: true },
       // Pre-locale WordPress URLs still linked from old material.
       { source: "/events/:slug", destination: "/en/events/:slug", permanent: true },
       { source: "/knowledge-hub/:slug", destination: "/en/knowledge-hub/:slug", permanent: true },

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -29,14 +29,14 @@ export default async function EcosystemPage({ params }: LocaleParams) {
       <PageHero
         locale={locale}
         crumbs={[{ label: t(copy.title, locale) }]}
-        eyebrow={en ? "Built by FIMMICK" : "FIMMICK 建立的生態系統"}
-        title={en ? "What FIMMICK has built — and why it matters to your work." : "FIMMICK 建立了甚麼，以及它對你的工作有何意義。"}
+        eyebrow={en ? "Built by FIMMICK" : zh("FIMMICK 建立的生態系統", locale)}
+        title={en ? "What FIMMICK has built — and why it matters to your work." : zh("FIMMICK 建立了甚麼，以及它對你的工作有何意義。", locale)}
         lead={t(copy.lead, locale)}
-        actions={<LinkButton to={href(locale, paths.contact({ intent: "partnership" }))} variant="accent">{en ? "Explore a partnership" : "探討合作"}</LinkButton>}
+        actions={<LinkButton to={href(locale, paths.contact({ intent: "partnership" }))} variant="accent">{en ? "Explore a partnership" : zh("探討合作", locale)}</LinkButton>}
       />
       <section className="section section--eco">
         <div className="container">
-          <SectionHead eyebrow={en ? "Ecosystem map" : "生態系統地圖"} title={en ? "Six members, four kinds of experience" : "六個成員，四類經驗"} lead={en ? "Select a member to see its audience, role and the FIMMICK work it relates to." : "選擇一個成員，查看其受眾、角色及相關的 FIMMICK 工作。"} />
+          <SectionHead eyebrow={en ? "Ecosystem map" : zh("生態系統地圖", locale)} title={en ? "Six members, four kinds of experience" : zh("六個成員，四類經驗", locale)} lead={en ? "Select a member to see its audience, role and the FIMMICK work it relates to." : zh("選擇一個成員，查看其受眾、角色及相關的 FIMMICK 工作。", locale)} />
           <EcosystemMapBlock locale={locale} />
         </div>
       </section>
@@ -52,8 +52,8 @@ export default async function EcosystemPage({ params }: LocaleParams) {
                     <span className="chip chip--lime" style={{ alignSelf: "flex-start" }}>{t(m.role, locale)}</span>
                     <h3>{m.name}</h3>
                     <p className="muted small">{t(m.need, locale)}</p>
-                    <p className="small"><strong>{en ? "Relationship: " : "關係："}</strong>{t(m.relationship, locale)}</p>
-                    <span className="card-foot">{en ? "Explore" : "了解"} {m.name} →</span>
+                    <p className="small"><strong>{en ? "Relationship: " : zh("關係：", locale)}</strong>{t(m.relationship, locale)}</p>
+                    <span className="card-foot">{en ? "Explore" : zh("了解", locale)} {m.name} →</span>
                   </Link>
                 ))}
               </div>
@@ -62,7 +62,7 @@ export default async function EcosystemPage({ params }: LocaleParams) {
           <p className="distinction">{t(ecosystemBoundary, locale)}</p>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Explore a partnership with the ecosystem" : "探討與生態系統的合作"} body={en ? "Brand, community, travel, creator or cultural partnerships are agreed with each member directly." : "品牌、社群、旅遊、創作者或文化合作，均與各成員直接議定。"} primary={{ label: en ? "Explore a partnership" : "探討合作", to: paths.contact({ intent: "partnership" }) }} secondary={{ label: en ? "Our story" : "我們的故事", to: "/about/our-story" }} />
+      <EnquirySection locale={locale} title={en ? "Explore a partnership with the ecosystem" : zh("探討與生態系統的合作", locale)} body={en ? "Brand, community, travel, creator or cultural partnerships are agreed with each member directly." : zh("品牌、社群、旅遊、創作者或文化合作，均與各成員直接議定。", locale)} primary={{ label: en ? "Explore a partnership" : zh("探討合作", locale), to: paths.contact({ intent: "partnership" }) }} secondary={{ label: en ? "Our story" : zh("我們的故事", locale), to: "/about/our-story" }} />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { href, t } from "@/lib/i18n";
+import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
@@ -36,27 +36,27 @@ export default async function WorkshopPage({ params }: LocaleParams) {
     <>
       <PageHero
         locale={locale}
-        crumbs={[{ label: en ? "Resources" : "資源中心", path: "/resources" }, { label: en ? "Workshop" : "工作坊" }]}
-        eyebrow={en ? "Workshops & training" : "工作坊與培訓"}
+        crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: en ? "Workshop" : zh("工作坊", locale) }]}
+        eyebrow={en ? "Workshops & training" : zh("工作坊與培訓", locale)}
         title={t(workshopResource.title, locale)}
         lead={t(workshopResource.summary, locale)}
-        actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Request a workshop" : "申請工作坊"}</LinkButton>}
-        notice={en ? "Status: available on request — dates are agreed with each team." : "狀態：按需安排——日期與各團隊議定。"}
+        actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Request a workshop" : zh("申請工作坊", locale)}</LinkButton>}
+        notice={en ? "Status: available on request — dates are agreed with each team." : zh("狀態：按需安排——日期與各團隊議定。", locale)}
       />
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow={en ? "Agenda" : "議程"} title={en ? "Four decisions in one session" : "一節工作坊，四個決定"} />
+          <SectionHead eyebrow={en ? "Agenda" : zh("議程", locale)} title={en ? "Four decisions in one session" : zh("一節工作坊，四個決定", locale)} />
           <ol className="steps steps--row">{agenda.map((a) => <li key={a.title.en}><h3>{t(a.title, locale)}</h3><p>{t(a.copy, locale)}</p></li>)}</ol>
         </div>
       </section>
       <section className="section section--surface">
         <div className="container grid grid-2">
           <div className="io-card io-card--out">
-            <h2 style={{ fontSize: "1.2rem", marginBottom: 14 }}>{en ? "Learning outcomes" : "學習成果"}</h2>
+            <h2 style={{ fontSize: "1.2rem", marginBottom: 14 }}>{en ? "Learning outcomes" : zh("學習成果", locale)}</h2>
             <ul className="check-list">{t(outcomes, locale).map((o) => <li key={o}>{o}</li>)}</ul>
           </div>
           <div className="io-card">
-            <h2 style={{ fontSize: "1.2rem", marginBottom: 14 }}>{en ? "Who should attend" : "適合參加者"}</h2>
+            <h2 style={{ fontSize: "1.2rem", marginBottom: 14 }}>{en ? "Who should attend" : zh("適合參加者", locale)}</h2>
             <ul className="dot-list">{t(audiences, locale).map((o) => <li key={o}>{o}</li>)}</ul>
           </div>
         </div>
@@ -64,19 +64,19 @@ export default async function WorkshopPage({ params }: LocaleParams) {
       <section className="section">
         <div className="container split">
           <div className="stack">
-            <p className="eyebrow">{en ? "Questions" : "常見問題"}</p>
-            <h2>{en ? "How requests work" : "申請如何運作"}</h2>
+            <p className="eyebrow">{en ? "Questions" : zh("常見問題", locale)}</p>
+            <h2>{en ? "How requests work" : zh("申請如何運作", locale)}</h2>
           </div>
           <Faq items={faqs} locale={locale} />
         </div>
       </section>
       <section className="section section--tight section--surface">
         <div className="container related-block">
-          <h2>{en ? "Related services" : "相關服務"}</h2>
+          <h2>{en ? "Related services" : zh("相關服務", locale)}</h2>
           <ServiceCards locale={locale} ids={["ai-training", "ai-transformation", "workflow-automation"]} />
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Request a workshop for your team" : "為你的團隊申請工作坊"} body={en ? "We reply by email to agree the details." : "我們會以電郵回覆，議定細節。"} primary={{ label: en ? "Request a workshop" : "申請工作坊", to: contact }} />
+      <EnquirySection locale={locale} title={en ? "Request a workshop for your team" : zh("為你的團隊申請工作坊", locale)} body={en ? "We reply by email to agree the details." : zh("我們會以電郵回覆，議定細節。", locale)} primary={{ label: en ? "Request a workshop" : zh("申請工作坊", locale), to: contact }} />
     </>
   );
 }
