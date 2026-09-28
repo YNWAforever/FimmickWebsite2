@@ -1,0 +1,30 @@
+{
+  "base": "http://localhost:3200",
+  "capturedAt": "2026-09-28T20:04:57.716Z",
+  "checks": {
+    "headlineOpacityAtLoad": "1",
+    "ctaAnimationAtLoad": "none",
+    "stageModeWithMotion": true,
+    "autoplayVisitedSteps": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "stopsAfterLastStep": {
+      "active": 3,
+      "playing": "false"
+    },
+    "playingWhenVisible": "true",
+    "pauseHolds": true,
+    "keyboardSelectsStep3": true,
+    "onlyActiveFrameExposed": 1,
+    "showAllExposesFrames": 4,
+    "reducedMotion": {
+      "storyboard": true,
+      "framesVisible": 4,
+      "playing": "false",
+      "heroCardAnimation": "none"
+    }
+  }
+}

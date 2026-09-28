@@ -49,3 +49,12 @@ The identity comes from the **flow motif** — *Source → Prepared work → Hum
 - Hero: HTML/CSS only, with no image.
 - Film: 0.48–0.57 MB per encoding, and nothing is loaded before the visitor plays it.
 - Poster: 37 KB.
+
+## Cinematic redesign (29 Sep 2026)
+
+Supersedes parts of "Direction chosen" and "Motion" above; full report in `docs/redesign/cinematic/README.md`.
+
+- **Show before telling.** The homepage leads with a photograph and a sample output, then four readable output artefacts, before any explanation. The source → preparation → human approval → output story is told once, in the signature sequence; deeper architecture stays on /platform.
+- **Light surfaces, two dark chapters.** The dark hero is gone. Only the signature workflow and the closing call to action are dark.
+- **Photography rules.** Photographs are generated illustrations and always labelled as such. People appear only from behind, at the edge of frame or out of focus. Photographs illustrate context only: product evidence comes from sample artefacts or real captures, and diagrams are HTML/SVG.
+- **Motion.** A card-only hero entrance (the photo is the LCP element and must not animate), one signature sequence with controls and a static storyboard equivalent, and the existing once-only reveal. Nothing loops, scroll-jacks or plays audio.

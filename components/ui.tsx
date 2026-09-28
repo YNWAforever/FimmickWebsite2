@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { href, t, type L, type Locale } from "@/lib/i18n";
 import { ui } from "@/content/ui";
+import type { PhotoId } from "@/content/photography";
+import { Photo } from "@/components/media/Photo";
 
 export function Crumbs({ locale, items }: { locale: Locale; items: { label: string; path?: string }[] }) {
   const all = [{ label: t(ui.home, locale), path: "/" }, ...items];
@@ -33,6 +35,7 @@ export function PageHero({
   actions,
   aside,
   notice,
+  photo,
 }: {
   locale: Locale;
   crumbs: { label: string; path?: string }[];
@@ -42,9 +45,11 @@ export function PageHero({
   actions?: ReactNode;
   aside?: ReactNode;
   notice?: string;
+  /** Optional illustrative photograph shown as a wide cinematic band under the hero. */
+  photo?: PhotoId;
 }) {
   return (
-    <section className="page-hero">
+    <section className={photo ? "page-hero page-hero--photo" : "page-hero"}>
       <div className="container">
         <Crumbs locale={locale} items={crumbs} />
         <div className="page-hero-grid">
@@ -61,6 +66,7 @@ export function PageHero({
           </div>
           {aside ? <div>{aside}</div> : null}
         </div>
+        {photo ? <Photo id={photo} locale={locale} priority sizes="(min-width: 1320px) 1240px, 100vw" className="page-hero__photo" /> : null}
       </div>
     </section>
   );

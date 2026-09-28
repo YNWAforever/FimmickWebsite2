@@ -28,6 +28,7 @@ export default async function EcosystemPage({ params }: LocaleParams) {
     <>
       <PageHero
         locale={locale}
+        photo={"community-event"}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow={en ? "Built by FIMMICK" : zh("FIMMICK 建立的生態系統", locale)}
         title={en ? "What FIMMICK has built — and why it matters to your work." : zh("FIMMICK 建立了甚麼，以及它對你的工作有何意義。", locale)}

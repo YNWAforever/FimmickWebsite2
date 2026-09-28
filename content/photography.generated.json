@@ -1,0 +1,92 @@
+{
+  "review-desk": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#b0abaa"
+  },
+  "workshop-wall": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#847e77"
+  },
+  "specialist-studio": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#7a726b"
+  },
+  "property-gallery": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#a8a6a7"
+  },
+  "retail-counter": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#766350"
+  },
+  "hotel-desk": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#786353"
+  },
+  "proposal-table": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#a09c9b"
+  },
+  "community-event": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#6a574e"
+  },
+  "specialist-desk": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#a49b97"
+  },
+  "night-table": {
+    "width": 1536,
+    "height": 1024,
+    "portrait": {
+      "width": 819,
+      "height": 1024
+    },
+    "color": "#554844"
+  }
+}

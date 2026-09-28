@@ -5,15 +5,22 @@
  * and reviewed. Sample rows are labelled as samples inside each document.
  *
  *   node scripts/build-guides.mjs
+ *   PREVIEWS_ONLY=1 node scripts/build-guides.mjs   # first-page previews only
+ *
+ * Also writes a first-page preview of each guide to public/media/guides.
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "@playwright/test";
+import sharp from "sharp";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const out = path.join(root, "public", "downloads");
+const previewDir = path.join(root, "public", "media", "guides");
+const previewsOnly = process.env.PREVIEWS_ONLY === "1";
 fs.mkdirSync(out, { recursive: true });
+fs.mkdirSync(previewDir, { recursive: true });
 const logo = `data:image/png;base64,${fs.readFileSync(path.join(root, "public", "brand", "fimmick-logo.png")).toString("base64")}`;
 
 const css = `
@@ -132,9 +139,20 @@ try {
       const page = await browser.newPage();
       await page.setContent(`<!doctype html><html lang="${key === "en" ? "en" : "zh-Hant-HK"}"><head><meta charset="utf-8"><title>${d.title}</title><style>${css}</style></head><body>${body}</body></html>`);
       const target = path.join(out, `fimmick-${slug}-${file}.pdf`);
-      await page.pdf({ path: target, format: "A4", printBackground: true, margin: { top: "16mm", bottom: "18mm", left: "16mm", right: "16mm" } });
+      if (!previewsOnly) {
+        await page.pdf({ path: target, format: "A4", printBackground: true, margin: { top: "16mm", bottom: "18mm", left: "16mm", right: "16mm" } });
+        console.log(path.basename(target), fs.statSync(target).size);
+      }
+      // First-page preview for the Resources cards: the same HTML at A4 width with the PDF margins.
+      await page.setViewportSize({ width: 794, height: 1123 });
+      await page.addStyleTag({ content: "body{margin:0;padding:60px 60px 68px;background:#fff}" });
+      // Stop at the second page's header so the preview shows page one only.
+      const pageTwo = await page.evaluate(() => document.querySelectorAll("header")[1]?.getBoundingClientRect().top ?? 1123);
+      const shot = await page.screenshot({ clip: { x: 0, y: 0, width: 794, height: Math.min(1123, Math.floor(pageTwo) - 24) } });
+      const preview = path.join(previewDir, `${slug}-${file}.webp`);
+      await sharp(shot).resize({ width: 480 }).webp({ quality: 80 }).toFile(preview);
+      console.log(path.relative(root, preview), fs.statSync(preview).size);
       await page.close();
-      console.log(path.basename(target), fs.statSync(target).size);
     }
   }
 } finally {

@@ -8,6 +8,7 @@ import { members } from "@/content/ecosystem";
 import { cases } from "@/content/cases";
 import { pillars } from "@/content/nav";
 import { explainerScenes, explainerMedia } from "@/content/media";
+import { cinema, hero, homeFaqs } from "@/content/home";
 import { contextQuery, parseContext } from "@/lib/intent";
 import { safeQueryForLocaleSwitch } from "@/lib/safe-query";
 import { localeMoves, resolveLegacyHref, resolveMove } from "@/lib/redirects";
@@ -60,14 +61,14 @@ describe("catalogue scope (master instruction §4, §8)", () => {
   });
 
   it("has every bilingual string filled in both locales", () => {
-    const all = bilingualPairs([solutions, products, services, industries, workstreams, programme, members, cases, pillars, businessFunctions, capabilities, workflowTemplates, agentAnatomy, taskPatterns]);
+    const all = bilingualPairs([solutions, products, services, industries, workstreams, programme, members, cases, pillars, businessFunctions, capabilities, workflowTemplates, agentAnatomy, taskPatterns, cinema, hero, homeFaqs]);
     expect(all.length).toBeGreaterThan(500);
     const empty = (x: unknown): boolean => (Array.isArray(x) ? x.length === 0 || x.some((i) => (Array.isArray(i) ? i.some((j) => !j) : !i)) : !x);
     for (const pair of all) expect(empty(pair.en) || empty(pair.zh), JSON.stringify(pair).slice(0, 120)).toBe(false);
   });
 
   it("does not reintroduce retired employment metaphors in customer-facing copy", () => {
-    const text = JSON.stringify([solutions, products, services, industries, workstreams, members, pillars, businessFunctions, capabilities, workflowTemplates, agentAnatomy, taskPatterns]).toLowerCase();
+    const text = JSON.stringify([solutions, products, services, industries, workstreams, members, pillars, businessFunctions, capabilities, workflowTemplates, agentAnatomy, taskPatterns, cinema, hero, homeFaqs]).toLowerCase();
     for (const phrase of ["ai workforce", "digital employee", "hire ai", "ai staff", "ai teammate"]) expect(text).not.toContain(phrase);
   });
 
@@ -203,8 +204,33 @@ describe("Simplified Chinese rendering", () => {
   it("covers every Traditional character used in the content (table is not stale)", () => {
     const convert = OpenCC.Converter({ from: "hk", to: "cn" });
     const keys = new Set([...hansPairs].filter((_, i) => i % 2 === 0));
-    const zhText = JSON.stringify(bilingualPairs([solutions, products, services, industries, workstreams, programme, members, cases, pillars, businessFunctions, capabilities, workflowTemplates]).map((p) => p.zh));
+    const zhText = JSON.stringify(bilingualPairs([solutions, products, services, industries, workstreams, programme, members, cases, pillars, businessFunctions, capabilities, workflowTemplates, cinema, hero, homeFaqs]).map((p) => p.zh));
     const missing = [...new Set(zhText.match(/[㐀-鿿]/g) ?? [])].filter((c) => convert(c) !== c && !keys.has(c));
     expect(missing, "run npm run i18n:hans").toEqual([]);
+  });
+});
+
+describe("editorial photography", () => {
+  it("every scene has bilingual alt text, delivery files and a provenance entry", async () => {
+    const fs = await import("node:fs");
+    const { photos, solutionPhotos, industryPhotos, casePhotos } = await import("@/content/photography");
+    const scenes = (await import("@/assets-src/photography/scenes.json")).default.scenes;
+    const provenance = fs.readFileSync("docs/redesign/cinematic/photography-provenance.md", "utf8");
+    for (const scene of scenes) {
+      const photo = photos[scene.id as keyof typeof photos];
+      expect(photo, scene.id).toBeTruthy();
+      expect(scene.alt.en.length, scene.id).toBeGreaterThan(20);
+      expect(scene.alt.zh.length, scene.id).toBeGreaterThan(6);
+      for (const file of [`${scene.id}-1536.avif`, `${scene.id}-640.webp`, `${scene.id}-p-800.avif`, `${scene.id}-p-480.webp`]) {
+        expect(fs.existsSync(`public/media/photography/${file}`), file).toBe(true);
+      }
+      expect(provenance, `provenance for ${scene.id}`).toContain(`\`${scene.id}\``);
+    }
+    for (const id of [...Object.values(solutionPhotos), ...Object.values(industryPhotos), ...Object.values(casePhotos)]) {
+      expect(photos[id], id).toBeTruthy();
+    }
+    expect(Object.keys(solutionPhotos).sort()).toEqual(solutions.map((s) => s.id).sort());
+    expect(Object.keys(industryPhotos).every((id) => industries.some((i) => i.id === id))).toBe(true);
+    expect(Object.keys(casePhotos).every((slug) => cases.some((c) => c.slug === slug))).toBe(true);
   });
 });

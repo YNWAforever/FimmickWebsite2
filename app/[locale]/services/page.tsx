@@ -36,6 +36,7 @@ export default async function ServicesPage({ params, searchParams }: Props) {
     <>
       <PageHero
         locale={locale}
+        photo={"specialist-desk"}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow={en ? "Specialist services" : zh("專業服務", locale)}
         title={en ? "Specialists for a defined job." : zh("為明確的工作引入專家。", locale)}

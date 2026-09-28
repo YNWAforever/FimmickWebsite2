@@ -11,6 +11,7 @@ import { serviceById } from "@/content/services";
 import { productById } from "@/content/products";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton, Chips } from "@/components/ui";
+import { casePhotos } from "@/content/photography";
 import { CaseCards, EnquirySection, RelatedSection } from "@/components/blocks";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -40,6 +41,7 @@ export default async function CasePage({ params }: SlugParams) {
       <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Case studies" : zh("成功案例", locale), path: "/case-studies" }, { name: t(c.title, locale), path: paths.case(c.slug) }])} />
       <PageHero
         locale={locale}
+        photo={casePhotos[c.slug]}
         crumbs={[{ label: en ? "Case studies" : zh("成功案例", locale), path: "/case-studies" }, { label: t(c.title, locale) }]}
         eyebrow={`${t(caseKindLabel[c.kind], locale)} · ${t(c.sector, locale)} · ${t(c.market, locale)}`}
         title={t(c.title, locale)}

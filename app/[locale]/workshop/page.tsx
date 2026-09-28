@@ -36,6 +36,7 @@ export default async function WorkshopPage({ params }: LocaleParams) {
     <>
       <PageHero
         locale={locale}
+        photo={"workshop-wall"}
         crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: en ? "Workshop" : zh("工作坊", locale) }]}
         eyebrow={en ? "Workshops & training" : zh("工作坊與培訓", locale)}
         title={t(workshopResource.title, locale)}
