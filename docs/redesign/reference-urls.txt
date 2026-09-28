@@ -1,0 +1,13 @@
+/en/workshop
+/en/services/ai-transformation
+/en/platform/architecture
+/zh-hk/
+/zh-hk/platform
+/zh-cn/
+/
+/en/
+/en/platform
+/en/insights
+/en/ai-workshop
+/en/launch-plan
+/events/ai-agent-strategy-seminar/

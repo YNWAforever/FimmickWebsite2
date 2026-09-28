@@ -1,0 +1,153 @@
+<!doctype html>
+<!--
+  FIMMICK AIP explainer — editable composition source.
+  Deterministic: window.setTime(seconds) renders the exact frame for that time.
+  Rendered to MP4/WebM by video/render.mjs. Query: ?lang=en | ?lang=zh-hant
+  All data is the illustrative sample used by the website's content example.
+-->
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=block" />
+<style>
+  :root {
+    --ink: #0d1433; --muted: #545d7a; --line: #e1e4ec; --canvas: #f4f5f8;
+    --magenta: #e5007f; --magenta-soft: #fde8f3; --lime: #8dc63f; --lime-soft: #edf6e0; --lime-ink: #3d6112;
+    --night: #0a0f26; --amber-soft: #fff3dc; --amber-ink: #7a4b00; --red-soft: #fde8e8; --red: #a11b3a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 720px; overflow: hidden; background: var(--canvas); }
+  body { font-family: "Manrope", "Segoe UI", "Microsoft JhengHei", "PingFang HK", "Noto Sans TC", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .stage { position: absolute; inset: 0; }
+  .topbar { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: #fff; border-bottom: 1px solid var(--line); }
+  .topbar img { height: 26px; }
+  .tag { padding: 6px 12px; border-radius: 8px; background: var(--amber-soft); color: var(--amber-ink); font-weight: 800; font-size: 15px; }
+  .rail { position: absolute; left: 40px; right: 40px; top: 84px; display: flex; gap: 10px; }
+  .rail .step { flex: 1; padding: 10px 14px; border-radius: 10px; background: #fff; border: 1px solid var(--line); font-weight: 800; font-size: 15px; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+  .rail .step i { width: 12px; height: 12px; border-radius: 50%; background: #c9cedb; }
+  .rail .step.on { border-color: var(--ink); color: var(--ink); }
+  .rail .step.on i { background: var(--magenta); }
+  .rail .step.done i { background: var(--lime); }
+  .scene-title { position: absolute; left: 40px; top: 146px; font-size: 38px; font-weight: 800; letter-spacing: -0.02em; }
+  .panel { position: absolute; background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 20px 40px -20px rgba(13,20,51,.35); padding: 22px 24px; }
+  .label { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #7a8299; margin-bottom: 12px; }
+  .chip { display: inline-block; padding: 8px 12px; margin: 0 8px 10px 0; border-radius: 8px; background: var(--canvas); font-weight: 700; font-size: 18px; }
+  .chip.warn { background: var(--amber-soft); color: var(--amber-ink); }
+  .draft { font-size: 20px; line-height: 1.5; padding: 14px 16px; border-left: 4px solid var(--magenta); background: var(--magenta-soft); border-radius: 0 10px 10px 0; min-height: 130px; }
+  .check { font-size: 17px; font-weight: 700; color: var(--lime-ink); margin-top: 10px; }
+  .btn { display: inline-block; padding: 10px 18px; border-radius: 999px; font-weight: 800; font-size: 17px; border: 2px solid #c9cedb; color: var(--muted); margin-right: 8px; }
+  .btn.on { background: var(--lime-soft); border-color: var(--lime); color: var(--lime-ink); }
+  .btn.ret { background: var(--red-soft); border-color: #f4b6c2; color: var(--red); }
+  .file { display: inline-block; padding: 12px 16px; border-radius: 10px; background: var(--ink); color: #fff; font-weight: 800; font-size: 20px; }
+  .rec li { list-style: none; font-size: 19px; font-weight: 700; margin: 10px 0; }
+  .rec li b { color: var(--lime-ink); margin-right: 8px; }
+  .end { position: absolute; inset: 0; background: var(--night); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; }
+  .end .logo { background: #fff; padding: 18px 28px; border-radius: 16px; }
+  .end .logo img { height: 46px; display: block; }
+  .end h2 { font-size: 40px; letter-spacing: -0.02em; }
+  .end p { font-size: 24px; color: #c9cfe8; }
+  .end .url { color: var(--lime); font-weight: 800; }
+  .strike { text-decoration: line-through; color: var(--red); }
+  .hl { background: var(--lime-soft); border-radius: 4px; }
+  .cursor { position: absolute; width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--ink); background: rgba(255,255,255,.6); }
+</style>
+</head>
+<body>
+<div class="stage" id="stage"></div>
+<script>
+const lang = new URLSearchParams(location.search).get("lang") === "zh-hant" ? "zh" : "en";
+const T = {
+  en: {
+    tag: "Product demonstration · illustrative sample data",
+    steps: ["Business job", "Approved facts", "Prepared work", "People decide", "Export + record"],
+    s1: "One business job", s1b: "Launch content for a new product", brief: "Brief", briefText: "Sample brand · 750 ml reusable bottle · launch posts and store invitation",
+    s2: "Your business context", facts: ["750 ml reusable bottle", "Double-wall stainless steel", "Lid with lock", "Colours: Harbour Blue, Stone, Lime", "No price supplied — do not mention price"], factsLabel: "Approved brand facts",
+    s3: "The work, prepared", enLabel: "Instagram caption · English", zhLabel: "Instagram 文案 · 繁體中文",
+    enDraft: "Meet the 750 ml bottle that stays put in your bag. Double-wall stainless steel, a lid that locks, and three colours. Which one is yours?",
+    zhDraft: "750 毫升，放入袋都安心。雙層不銹鋼、杯蓋有鎖扣，三款顏色：海港藍、石灰、青檸。你揀邊隻？",
+    checks: "✓ Uses only the listed facts   ✓ No price mentioned",
+    s4: "People decide", reviewer: "Brand manager (sample role)", approve: "Approved with edits", ret: "Return", edit: "Tone softened", visual: "Visual variant · colour label", visualBad: "Colour: Grey", visualNote: "Returned — “Grey” is not in the approved colours",
+    s5: "A usable, traceable result", file: "launch-pack_sample.txt", rec: "Record REC-0412", recItems: ["Sources attached", "Review notes attached", "Exception logged: colour name", "Next round: add colour names to facts"],
+    endTitle: "FIMMICK AIP — Agentic AI Platform", endLine: "Choose one workflow. Discuss a starting scope.", url: "fimmick.com",
+  },
+  zh: {
+    tag: "產品示範・示例資料",
+    steps: ["業務工作", "已確認資料", "準備好的工作", "由人決定", "匯出＋記錄"],
+    s1: "一項業務工作", s1b: "為新產品準備推出內容", brief: "簡報", briefText: "示例品牌・750 毫升可重用水樽・新品貼文及門市邀請",
+    s2: "你的業務資料", facts: ["750 毫升可重用水樽", "雙層不銹鋼", "杯蓋附鎖扣", "顏色：海港藍、石灰、青檸", "未提供價格——不得提及價錢"], factsLabel: "已確認品牌資料",
+    s3: "準備好的工作", enLabel: "Instagram caption · 英文", zhLabel: "Instagram 文案・繁體中文",
+    enDraft: "Meet the 750 ml bottle that stays put in your bag. Double-wall stainless steel, a lid that locks, and three colours. Which one is yours?",
+    zhDraft: "750 毫升，放入袋都安心。雙層不銹鋼、杯蓋有鎖扣，三款顏色：海港藍、石灰、青檸。你揀邊隻？",
+    checks: "✓ 只使用所列資料　✓ 沒有提及價錢",
+    s4: "由人決定", reviewer: "品牌經理（示例角色）", approve: "修改後批准", ret: "退回", edit: "語氣調整得更親切", visual: "視覺版本・顏色標示", visualBad: "顏色：灰色", visualNote: "已退回——「灰色」不在已確認顏色之內",
+    s5: "可用、可追溯的成果", file: "launch-pack_sample.txt", rec: "紀錄 REC-0412", recItems: ["已附來源", "已附審閱意見", "已記錄例外：顏色名稱", "下一輪：把顏色名稱加入資料"],
+    endTitle: "FIMMICK AIP — 企業 AI 智能體平台", endLine: "選擇一個流程，討論起步範圍。", url: "fimmick.com",
+  },
+}[lang];
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const fade = (t, start, dur = 0.5) => ease((t - start) / dur);
+const style = (o, dy = 16) => `opacity:${o};transform:translateY(${(1 - o) * dy}px)`;
+const typed = (text, t, start, cps) => text.slice(0, Math.max(0, Math.floor((t - start) * cps)));
+
+function frame(t) {
+  if (t >= 37) {
+    const o = fade(t, 37, 0.6);
+    return `<div class="end" style="opacity:${o}"><div class="logo"><img src="../public/brand/fimmick-logo.png" alt=""></div><h2 style="${style(fade(t, 37.4))}">${T.endTitle}</h2><p style="${style(fade(t, 38))}">${T.endLine}</p><p class="url" style="${style(fade(t, 38.6))}">${T.url}</p></div>`;
+  }
+  const scene = t < 5 ? 0 : t < 12 ? 1 : t < 22 ? 2 : t < 30 ? 3 : 4;
+  const sceneStart = [0, 5, 12, 22, 30][scene];
+  const titles = [T.s1, T.s2, T.s3, T.s4, T.s5];
+  let html = `<div class="topbar"><img src="../public/brand/fimmick-logo.png" alt=""><span class="tag">${T.tag}</span></div>`;
+  html += `<div class="rail">${T.steps.map((s, i) => `<div class="step ${i === scene ? "on" : i < scene ? "done" : ""}"><i></i>${s}</div>`).join("")}</div>`;
+  html += `<div class="scene-title" style="${style(fade(t, sceneStart, 0.45))}">${titles[scene]}</div>`;
+
+  // Facts panel persists from scene 1 onwards (left column).
+  if (scene >= 1) {
+    const shown = scene === 1 ? T.facts.filter((_, i) => t >= 5.6 + i * 1.1) : T.facts;
+    html += `<div class="panel" style="left:40px;top:214px;width:${scene === 1 ? 760 : 400}px;height:${scene === 1 ? 420 : 460}px"><div class="label">${T.factsLabel}</div>${shown
+      .map((f, i) => `<span class="chip ${i === 4 ? "warn" : ""}" style="${scene === 1 ? style(fade(t, 5.6 + i * 1.1, 0.4), 24) : ""}">${f}</span>`)
+      .join(scene === 1 ? "<br>" : "")}</div>`;
+  }
+
+  if (scene === 0) {
+    html += `<div class="panel" style="left:40px;top:230px;width:760px;${style(fade(t, 0.6))}"><div class="label">${T.brief}</div><p style="font-size:26px;font-weight:700;line-height:1.45">${T.s1b}</p><p style="font-size:20px;color:var(--muted);margin-top:12px">${T.briefText}</p></div>`;
+    html += `<div class="panel" style="left:840px;top:230px;width:400px;${style(fade(t, 1.6))}"><div class="label">Workflow</div>${T.steps.map((s, i) => `<p style="font-size:19px;font-weight:700;margin:8px 0;opacity:${fade(t, 2 + i * 0.4)}">${String(i + 1).padStart(2, "0")} · ${s}</p>`).join("")}</div>`;
+  }
+
+  if (scene === 1) {
+    html += `<div class="panel" style="left:840px;top:214px;width:400px;${style(fade(t, 6))}"><div class="label">Workspace</div><p style="font-size:19px;line-height:1.5;color:var(--muted)">${lang === "en" ? "Only approved facts are available to the drafting step. Missing facts are requested, not invented." : "草擬步驟只可使用已確認資料；缺漏資料會要求補交，而不會自行虛構。"}</p></div>`;
+  }
+
+  if (scene === 2) {
+    html += `<div class="panel" style="left:460px;top:214px;width:780px"><div class="label">${T.enLabel}</div><div class="draft">${typed(T.enDraft, t, 12.6, 22)}</div><div class="label" style="margin-top:18px">${T.zhLabel}</div><div class="draft">${typed(T.zhDraft, t, 15.4, 12)}</div><p class="check" style="opacity:${fade(t, 19.5)}">${T.checks}</p></div>`;
+  }
+
+  if (scene === 3) {
+    const approved = t >= 25.8;
+    const edited = t >= 24;
+    html += `<div class="panel" style="left:460px;top:214px;width:470px"><div class="label">${T.reviewer}</div><div class="draft" style="min-height:0;font-size:18px">${T.enDraft.replace("Meet", edited ? '<span class="hl">Say hello to</span>' : "Meet")}</div><p class="check" style="color:var(--muted);opacity:${fade(t, 24)}">✎ ${T.edit}</p><div style="margin-top:14px"><span class="btn ${approved ? "on" : ""}">${T.approve}</span><span class="btn">${T.ret}</span></div></div>`;
+    const returned = t >= 28;
+    html += `<div class="panel" style="left:950px;top:214px;width:290px;${style(fade(t, 26.4))}"><div class="label">${T.visual}</div><div style="height:120px;border-radius:12px;background:linear-gradient(135deg,#8b8a84,#b9b7ad);margin-bottom:12px"></div><p style="font-size:18px;font-weight:800" class="${returned ? "strike" : ""}">${T.visualBad}</p><span class="btn ${returned ? "ret" : ""}" style="margin-top:10px">${T.ret}</span><p style="font-size:15px;color:var(--red);font-weight:700;margin-top:8px;opacity:${fade(t, 28.2)}">${T.visualNote}</p></div>`;
+    const lerp = (a, b, k) => a + (b - a) * ease(k);
+    const k1 = (t - 24) / 1.6, k2 = (t - 26.2) / 1.6;
+    const cx = t < 24 ? 700 : t < 26.2 ? lerp(700, 590, k1) : lerp(590, 1022, k2);
+    const cy = t < 24 ? 330 : t < 26.2 ? lerp(330, 446, k1) : lerp(446, 474, k2);
+    html += `<div class="cursor" style="left:${cx - 11}px;top:${cy - 11}px"></div>`;
+  }
+
+  if (scene === 4) {
+    html += `<div class="panel" style="left:460px;top:214px;width:780px;${style(fade(t, 30.4))}"><div class="label">Export</div><span class="file">${T.file}</span><div class="label" style="margin-top:22px">${T.rec}</div><ul class="rec">${T.recItems.map((r, i) => `<li style="${style(fade(t, 31.4 + i * 0.9))}"><b>✓</b>${r}</li>`).join("")}</ul></div>`;
+  }
+  return html;
+}
+
+window.setTime = (t) => {
+  document.getElementById("stage").innerHTML = frame(t);
+  return document.images.length ? Promise.all([...document.images].map((i) => (i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r))))) : null;
+};
+window.setTime(Number(new URLSearchParams(location.search).get("t") || 0));
+</script>
+</body>
+</html>
