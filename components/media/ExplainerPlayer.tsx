@@ -49,7 +49,7 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
           ))}
         </video>
       ) : (
-        <button type="button" className="player__poster" onClick={() => setState("playing")} aria-label={`${en ? "Play video" : zh("播放影片", locale)}: ${title}`}>
+        <button type="button" className="player__poster" onClick={() => setState("playing")}>
           {/* eslint-disable-next-line @next/next/no-img-element -- poster must render without the image optimiser */}
           <img src={media.poster} alt="" width={media.width} height={media.height} loading="lazy" decoding="async" />
           <span className="player__play" aria-hidden="true">
@@ -58,6 +58,8 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
             </svg>
           </span>
           <span className="player__meta">
+            {/* Accessible name = "Play video: <visible text>", so it contains what sighted users see. */}
+            <span className="sr-only">{en ? "Play video" : zh("播放影片", locale)}: </span>
             {title} · {media.durationSeconds}s · {en ? "captions" : zh("字幕", locale)}
           </span>
         </button>

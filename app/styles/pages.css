@@ -1,25 +1,123 @@
 /* ------------------------------------------------------------------
    Homepage
 ------------------------------------------------------------------- */
+/* Night-stage hero: dark full-bleed band, gradient accent headline, glowing pipeline. */
 .home-hero {
   position: relative;
-  padding-block: clamp(40px, 6vw, 96px) clamp(56px, 7vw, 112px);
-  background:
-    radial-gradient(900px 500px at 100% 0%, rgb(229 0 127 / 9%), transparent 65%),
-    radial-gradient(700px 420px at 0% 100%, rgb(141 198 63 / 12%), transparent 65%),
-    var(--surface);
-  border-bottom: 1px solid var(--line);
+  isolation: isolate;
   overflow: hidden;
+  padding-block: clamp(40px, 5vw, 72px) clamp(44px, 5vw, 80px);
+  background:
+    radial-gradient(900px 560px at 95% -12%, rgb(229 0 127 / 30%), transparent 62%),
+    radial-gradient(720px 480px at 68% 6%, rgb(94 44 170 / 34%), transparent 66%),
+    var(--night);
 }
 
-.home-hero__grid { display: grid; gap: clamp(36px, 5vw, 72px); align-items: center; }
-@media (min-width: 1040px) { .home-hero__grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5.4fr); } }
-.home-hero__title { font-size: var(--fs-hero); max-width: 13ch; letter-spacing: -0.035em; }
-:lang(zh-Hant-HK) .home-hero__title { max-width: 12em; letter-spacing: 0; }
-.home-hero__copy .lead { margin-top: 24px; color: var(--text); }
-.home-hero__support { margin-top: 14px; color: var(--muted); max-width: 56ch; font-weight: 600; }
+.home-hero__copy { max-width: 60rem; }
+.home-hero__title {
+  font-size: clamp(2.75rem, 1.5rem + 4.8vw, 5.6rem);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  max-width: 16ch;
+  color: #fff;
+}
+:lang(zh-Hant-HK) .home-hero__title,
+:lang(zh-Hans) .home-hero__title { max-width: 14em; line-height: 1.15; letter-spacing: 0; }
+.home-hero__accent {
+  background: linear-gradient(90deg, #ff4fa3, var(--magenta) 45%, #ff8cc6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (forced-colors: active) { .home-hero__accent { background: none; color: CanvasText; } }
+.home-hero__copy .lead { margin-top: 24px; max-width: 58ch; }
+.home-hero__support { margin-top: 14px; color: var(--night-text); max-width: 56ch; font-weight: 600; }
 .home-hero__copy .btn-row { margin-top: 32px; }
-.home-hero__line { margin-top: 28px; }
+.home-hero__line { margin-top: 24px; color: var(--night-muted); }
+
+/* Pipeline: vertical list on phones, one row of four from 900px. */
+.hero-pipeline-wrap { position: relative; margin-top: clamp(36px, 4vw, 56px); }
+.hero-pipeline { position: relative; display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.hero-pipeline::before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 22px;
+  bottom: 22px;
+  width: 2px;
+  background: linear-gradient(180deg, #64708f, var(--magenta) 40%, var(--lime) 70%, #fff);
+  box-shadow: 0 0 12px rgb(229 0 127 / 55%);
+}
+.hero-pipeline li { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; align-items: center; }
+.hero-pipeline__node {
+  grid-row: span 2;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--night-line);
+  background: var(--night);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.hero-pipeline__label { font-weight: 800; color: #fff; }
+.hero-pipeline__caption { font-size: var(--fs-small); color: var(--night-muted); }
+.hero-pipeline [data-role="source"] .hero-pipeline__node { border-color: #64708f; }
+.hero-pipeline [data-role="work"] .hero-pipeline__node { border-color: var(--magenta); box-shadow: 0 0 18px rgb(229 0 127 / 55%); }
+.hero-pipeline [data-role="review"] .hero-pipeline__node { border-color: var(--lime); background: var(--lime); color: var(--night); font-size: 1.1rem; box-shadow: 0 0 22px rgb(141 198 63 / 60%); }
+.hero-pipeline [data-role="review"] .hero-pipeline__label { color: var(--lime); }
+.hero-pipeline [data-role="result"] .hero-pipeline__node { border-color: #fff; }
+.hero-pipeline__pulse { display: none; }
+
+@media (min-width: 900px) {
+  .hero-pipeline { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .hero-pipeline::before {
+    left: 12.5%;
+    right: 12.5%;
+    top: 21px;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+    background: linear-gradient(90deg, #64708f, var(--magenta) 40%, var(--lime) 70%, #fff);
+  }
+  .hero-pipeline li { grid-template-columns: minmax(0, 1fr); justify-items: center; row-gap: 6px; text-align: center; }
+  .hero-pipeline__node { grid-row: auto; margin-bottom: 8px; }
+  /* A light pulse travels the line; the nodes sit above it, so it passes behind each step. */
+  .hero-pipeline__pulse {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 12.5%;
+    width: 75%;
+    height: 12px;
+    pointer-events: none;
+  }
+  .hero-pipeline__pulse::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 14px 4px rgb(229 0 127 / 80%);
+  }
+}
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .hero-pipeline__pulse { animation: hero-pulse 6s ease-in-out infinite; }
+}
+@keyframes hero-pulse {
+  0% { transform: translateX(0); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
 
 .job-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 680px) { .job-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -60,7 +158,7 @@
 
 .gateways { display: grid; gap: 20px; }
 @media (min-width: 1000px) { .gateways { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-.gateways > *, .cases-feature > *, .resource-feature > *, .home-hero__grid > *, .detail-grid > *, .contact-grid > * { min-width: 0; }
+.gateways > *, .cases-feature > *, .resource-feature > *, .detail-grid > *, .contact-grid > * { min-width: 0; }
 .gateway { padding: clamp(24px, 3vw, 36px); border-radius: 28px; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
 .gateway h3 { font-size: 1.5rem; }
 .gateway-list { list-style: none; display: grid; gap: 8px; margin-top: 6px; }

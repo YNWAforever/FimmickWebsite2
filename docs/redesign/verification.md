@@ -4,7 +4,7 @@ Environment: Windows 11, Node 24.18, Next.js 16.3.6 production build (`next buil
 
 Results use **Pass / Fail / Blocked / Not run**. Automated evidence: `npm test` (22 unit tests), `npm run test:e2e` (21 browser tests, all passing), `scripts/migration/verify-routes.mjs` (1,268 URLs), `scripts/qa-sweep.mjs` (339 pages × 2 widths, 1,021 internal links), `scripts/i18n/check-hans.mjs` (136 zh-Hans pages), Lighthouse JSON (not committed; figures below).
 
-**Update (28 Sep 2026, missing pages):** the production pages that only redirected are now real pages — `/functions/*` (replacing `/workforce/*`), `/platform/{architecture,agents,marketplace,pricing}`, five `/platform/<capability>` pages, `/services/digital-experience`, `/growth`, `/insights`, `/about/asia-delivery` — and the whole site is available in Simplified Chinese at `/zh-hans/*`. Rows below reflect the rebuilt state; Lighthouse figures were not re-run.
+**Update (28 Sep 2026, missing pages):** the production pages that only redirected are now real pages — `/functions/*` (replacing `/workforce/*`), `/platform/{architecture,agents,marketplace,pricing}`, five `/platform/<capability>` pages, `/services/digital-experience`, `/growth`, `/insights`, `/about/asia-delivery` — and the whole site is available in Simplified Chinese at `/zh-hans/*`. Rows below reflect the rebuilt state; Lighthouse results for the new pages are in the performance section.
 
 ## Acceptance gates
 
@@ -46,6 +46,28 @@ Results use **Pass / Fail / Blocked / Not run**. Automated evidence: `npm test` 
 | Contact | 97 | 97→100 | 100 | 69 | 2.58 s | 0.000 | 63 ms |
 
 \*SEO is capped by the intentional review-build `noindex`. The A11y "→" values are single confirming runs after the contrast and list fixes. Lab LCP (simulated slow 4G) sits slightly above the 2.5 s field target; the LCP element is the hero text, and there are no hero images. Field data is not available pre-launch.
+
+### Pages added 28–29 Sep 2026 (same method; build `4d61314`, including the night-stage homepage hero)
+
+| Page | Perf | A11y | BP | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|
+| Home `/en` (new hero) | 96 | 100 | 100 | 2.57 s | 0.000 | 96 ms |
+| Home `/zh-hant` (new hero) | 96 | 100 | 100 | 2.59 s | 0.000 | 71 ms |
+| `/en/functions` | 96 | 100 | 100 | 2.65 s | 0.000 | 65 ms |
+| `/en/functions/cx` | 96 | 100 | 100 | 2.58 s | 0.000 | 68 ms |
+| `/en/platform/architecture` | 95 | 100 | 100 | 2.72 s | 0.000 | 58 ms |
+| `/en/platform/agents` | 96 | 100 | 100 | 2.66 s | 0.000 | 88 ms |
+| `/en/platform/marketplace` | 96 | 100 | 100 | 2.60 s | 0.000 | 103 ms |
+| `/en/platform/pricing` | 96 | 100 | 100 | 2.60 s | 0.000 | 67 ms |
+| `/en/platform/intelligence` | 97 | 100 | 100 | 2.53 s | 0.000 | 35 ms |
+| `/en/services/digital-experience` | 97 | 100 | 100 | 2.55 s | 0.000 | 41 ms |
+| `/en/growth` | 97 | 100 | 100 | 2.57 s | 0.000 | 57 ms |
+| `/en/insights` | 97 | 100 | 100 | 2.57 s | 0.000 | 53 ms |
+| `/en/about/asia-delivery` | 98 | 100 | 100 | 2.40 s | 0.000 | 44 ms |
+| `/zh-hans` | 93 | 100 | 100 | 2.88 s | 0.000 | 74 ms |
+| `/zh-hans/functions/cx` | 94 | 100 | 100 | 2.65 s | 0.000 | 154 ms |
+
+No accessibility audit fails on any of these pages (the homepage's zero-weight `label-content-name-mismatch` on the video poster button was fixed in `4d61314`). SEO is again capped only by the review-build `noindex`. The two zh-Hans pages score 2–3 points lower on performance than their English equivalents (later lab LCP; the cause has not been investigated).
 
 ## Eight-pillar coverage matrix
 

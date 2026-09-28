@@ -3,6 +3,16 @@ import type { L } from "@/lib/i18n";
 export const hero = {
   eyebrow: { en: "FIMMICK Agentic AI Platform", zh: "FIMMICK 企業 AI 智能體平台" } as L,
   title: { en: "Put AI into real business work.", zh: "把 AI 用在真正的業務工作。" } as L,
+  /** The title split for display: the accent part carries the brand gradient. */
+  titleLead: { en: "Put AI into", zh: "把 AI 用在" } as L,
+  titleAccent: { en: "real business work.", zh: "真正的業務工作。" } as L,
+  /** Hero pipeline: the four stages of every workflow, using the sample launch scenario. */
+  steps: [
+    { role: "source", label: { en: "Source", zh: "來源" }, caption: { en: "Approved brand facts", zh: "已確認品牌資料" } },
+    { role: "work", label: { en: "AI prepares", zh: "AI 準備" }, caption: { en: "Drafts in two languages", zh: "雙語草稿" } },
+    { role: "review", label: { en: "People decide", zh: "由人決定" }, caption: { en: "Edited and approved", zh: "修改後批准" } },
+    { role: "result", label: { en: "Usable result", zh: "可用成果" }, caption: { en: "Export with record", zh: "連記錄匯出" } },
+  ] as { role: "source" | "work" | "review" | "result"; label: L; caption: L }[],
   body: {
     en: "Connect business data, AI tools and human approvals across market intelligence, content creation, customer follow-up and website operations.",
     zh: "串連業務資料、AI 工具與人手審批，支援市場洞察、內容製作、客戶跟進及網站營運。",
