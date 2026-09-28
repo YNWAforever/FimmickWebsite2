@@ -442,3 +442,48 @@ export function workstreamCardsData(locale: Locale) {
 }
 
 export const allServices = services;
+
+/** Four-step workflow strip using the flow-motif roles. The step marked `review` is where people decide. */
+export function FlowStrip({ locale, steps, humanIndex = 2 }: { locale: Locale; steps: { title: L; copy: L }[]; humanIndex?: number }) {
+  const en = locale === "en";
+  const roleFor = (i: number) => (i === humanIndex ? "review" : i === 0 ? "source" : i === steps.length - 1 ? "result" : "work");
+  const roleLabel: Record<string, string> = en
+    ? { source: "Input", work: "AI prepares", review: "People decide", result: "Output" }
+    : { source: "輸入", work: "AI 準備", review: "由人決定", result: "輸出" };
+  return (
+    <ol className="flow-strip">
+      {steps.map((s, i) => (
+        <li key={i} data-role={roleFor(i)}>
+          <span className="role">
+            {String(i + 1).padStart(2, "0")} · {roleLabel[roleFor(i)]}
+          </span>
+          <h3>{tr(s.title, locale)}</h3>
+          <p>{tr(s.copy, locale)}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+export function StatusPanel({ locale, availability, mode, extra }: { locale: Locale; availability: "available" | "configured" | "discuss"; mode: "illustrative-sample" | "recorded-demonstration" | "live-product"; extra?: { label: string; value: string }[] }) {
+  const a = availability === "available" ? ui.availabilityAvailable : availability === "configured" ? ui.availabilityConfigured : ui.availabilityDiscuss;
+  const m = mode === "illustrative-sample" ? ui.modeSample : mode === "recorded-demonstration" ? ui.modeRecorded : ui.modeLive;
+  return (
+    <dl className="status-panel">
+      <div>
+        <dt>{tr(ui.availability, locale)}</dt>
+        <dd>{tr(a, locale)}</dd>
+      </div>
+      <div>
+        <dt>{tr(ui.exampleMode, locale)}</dt>
+        <dd>{tr(m, locale)}</dd>
+      </div>
+      {extra?.map((e) => (
+        <div key={e.label}>
+          <dt>{e.label}</dt>
+          <dd>{e.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}

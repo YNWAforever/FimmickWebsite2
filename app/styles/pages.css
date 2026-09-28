@@ -21,7 +21,9 @@
 .home-hero__copy .btn-row { margin-top: 32px; }
 .home-hero__line { margin-top: 28px; }
 
-.job-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.job-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 680px) { .job-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1240px) { .job-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .job-card {
   display: flex;
   flex-direction: column;
