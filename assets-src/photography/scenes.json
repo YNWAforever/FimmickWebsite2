@@ -1,0 +1,76 @@
+{
+  "$comment": "Photographic scene briefs for the cinematic redesign. Single source for image generation prompts, crops, alt text and the provenance manifest (docs/redesign/cinematic/photography-provenance.md). Every scene is ILLUSTRATIVE: generated people are not FIMMICK staff, generated places are not client premises, and nothing on screen represents a real product interface.",
+  "style": "Editorial business photography for a Hong Kong B2B company website, shot on a 35mm full-frame camera, natural light, shallow depth of field, tactile materials, calm and credible, like a Monocle or Kinfolk business feature. Palette: warm white, pale grey, oak, deep navy, with at most one small magenta or lime accent. Any printed text must be tiny and out of focus (never legible). No logos or brand names, no readable screens or user interfaces (screens, if present, are dark or blurred), no robots, no holograms, no glowing effects, no neon, no identifiable faces (people are seen from behind, at the edge of frame or out of focus). Landscape 3:2, 1536x1024.",
+  "scenes": [
+    {
+      "id": "review-desk",
+      "use": "Homepage hero; content-creation solution hero",
+      "focus": [0.46, 0.62],
+      "prompt": "A light, uncluttered oak desk in a small Hong Kong office by a window. Foreground: a pair of hands (sleeve of a navy blazer, no face visible) holding a pen above two printed A4 proof sheets with layout blocks and a small product photo of a matte steel water bottle; one sheet has a few handwritten pen marks and a small green tick. Beside the papers: the actual steel water bottle, a closed laptop, a ceramic coffee cup. Background: soft-focus window with muted city buildings. A single small magenta sticky tab on one sheet.",
+      "alt": { "en": "Hands reviewing printed launch proofs for a steel water bottle on an office desk, with the bottle beside them.", "zh": "一雙手在辦公桌上審閱不銹鋼水樽的推出稿件，水樽就放在旁邊。" }
+    },
+    {
+      "id": "workshop-wall",
+      "use": "AI Transformation pathway; AI Transformation hub hero; workshop resource",
+      "focus": [0.5, 0.45],
+      "prompt": "A leadership workshop in a bright Hong Kong meeting room. A large wall covered with a workflow map made of white index cards and pale sticky notes arranged in four clear columns, connected by hand-drawn marker arrows; one hand in a navy sleeve is placing a single lime-green sticky note. Two colleagues in business clothes stand to the side, seen from behind and softly out of focus. Foreground: a table with a printed roadmap sheet, a marker and a laptop (lid closed). Daylight from the left.",
+      "alt": { "en": "A workshop wall mapping a workflow in four columns of cards, with a hand adding a green note.", "zh": "工作坊牆上以四欄卡片規劃流程，一隻手正貼上綠色便條。" }
+    },
+    {
+      "id": "specialist-studio",
+      "use": "Homepage content-production output panel; Content & Creative Production solution hero",
+      "focus": [0.27, 0.5],
+      "prompt": "A compact content production studio. A matte steel water bottle stands on a small sweep of pale grey seamless paper, lit by a large softbox; a mirrorless camera on a tripod in the foreground, slightly out of focus. A producer's hands adjust the bottle's angle. To the side: a clipboard with a printed shot list, a colour-checker card, and a dark monitor turned away from camera. Clean, organised, professional.",
+      "alt": { "en": "A small studio set where a producer adjusts a steel water bottle in front of a camera and softbox.", "zh": "小型拍攝場景中，製作人員在相機及柔光箱前調整不銹鋼水樽。" }
+    },
+    {
+      "id": "property-gallery",
+      "use": "Industry: property & real estate; real-estate case study",
+      "focus": [0.5, 0.55],
+      "prompt": "A bright residential show flat in Hong Kong with a floor-to-ceiling window and a harbour view in soft focus. On a low oak coffee table: a printed floor-plan brochure, a set of keys with a paper tag, a tablet lying face-down and a pen. In the background, a couple seen from behind looks out of the window, out of focus. Neutral linen sofa, calm late-morning light.",
+      "alt": { "en": "A show flat with a floor-plan brochure and keys on the coffee table and a couple looking out of the window.", "zh": "示範單位的茶几上放著平面圖冊子及鎖匙，一對夫婦望向窗外。" }
+    },
+    {
+      "id": "retail-counter",
+      "use": "Industry: retail & e-commerce; omni-channel retail case study",
+      "focus": [0.52, 0.6],
+      "prompt": "A small Hong Kong concept store counter. Hands of the shop owner (no face) pack an online order into a kraft box with tissue paper; a printed packing slip and a steel water bottle wait beside it. Behind, softly out of focus: oak shelves of homeware and bottles in three muted colours. A phone lies face-down on the counter. Warm window light.",
+      "alt": { "en": "A shop owner's hands packing an online order at a concept-store counter.", "zh": "店主在概念店櫃檯為網上訂單包裝貨品。" }
+    },
+    {
+      "id": "hotel-desk",
+      "use": "Industry: hospitality & travel; hotel case study",
+      "focus": [0.5, 0.58],
+      "prompt": "The front desk of a boutique hotel in Hong Kong in the morning. On pale marble: a handwritten guest feedback card, a room key card in a small paper sleeve, a brass bell and a sprig of greenery in a small vase. In the background, a receptionist in a navy uniform is seen out of focus, turned slightly away. Soft warm light, quiet and attentive mood.",
+      "alt": { "en": "A hotel front desk with a handwritten guest feedback card and a key card on the marble counter.", "zh": "酒店前台雲石枱面上放著手寫住客意見卡及房卡。" }
+    },
+    {
+      "id": "proposal-table",
+      "use": "Industry: B2B & professional services; market-intelligence solution",
+      "focus": [0.5, 0.55],
+      "prompt": "A meeting table in a Hong Kong professional-services office. A bound proposal document lies open beside printed competitor comparison sheets with simple bar charts and highlighted rows; two consultants' hands (navy and grey sleeves, no faces) point at one sheet. A whiteboard in the background shows a hand-drawn sales pipeline, out of focus. A glass of water and a closed laptop. Overcast daylight, precise and calm.",
+      "alt": { "en": "Two consultants' hands pointing at printed competitor comparison sheets beside a bound proposal.", "zh": "兩位顧問指著印出的競爭對手比較表，旁邊是一份裝訂好的建議書。" }
+    },
+    {
+      "id": "community-event",
+      "use": "Ecosystem chapter; events resource",
+      "focus": [0.5, 0.6],
+      "prompt": "A small creator and community event in a Hong Kong co-working loft. Foreground table, in sharp focus: printed zines, name lanyards, a stack of tote bags (one magenta, one lime, the rest natural canvas), and a small camera on a tabletop tripod. Behind, out of focus: a relaxed audience of about twenty people seen from behind, facing a speaker at the far end. Exposed concrete and warm pendant lights.",
+      "alt": { "en": "Printed zines, lanyards and tote bags on a table at a community event, with an audience beyond.", "zh": "社群活動的桌上放著刊物、掛繩及布袋，後方是觀眾。" }
+    },
+    {
+      "id": "specialist-desk",
+      "use": "Services pathway; Services hub hero",
+      "focus": [0.5, 0.58],
+      "prompt": "A specialist's workspace in a Hong Kong marketing and technology consultancy. Hands (no face, rolled navy shirt sleeves) annotate a large printed customer-journey map with a pencil; small coloured index tabs mark three stages, one lime tab and one magenta tab. Beside it: a printed audit sheet with a few highlighted rows, a notebook, over-ear headphones and a coffee. A monitor at the back edge of the desk is dark and out of focus. Daylight, focused working mood.",
+      "alt": { "en": "A specialist's hands annotating a printed customer-journey map on a desk, beside an audit sheet and headphones.", "zh": "專家在桌上的顧客旅程圖上作註記，旁邊放著審核表及耳機。" }
+    },
+    {
+      "id": "night-table",
+      "use": "Closing call-to-action chapter (dark)",
+      "focus": [0.62, 0.55],
+      "prompt": "A Hong Kong office meeting room at blue hour after the working day. The right half of the frame: an oak meeting table with two notebooks, the day's printed proof sheets neatly stacked, a pen and a closed laptop, lit by one warm table lamp. Through the window, deep navy dusk sky and soft city lights (bokeh). The left third of the frame is calm dark navy wall and window with no detail, leaving space for text. Quiet, finished-day mood.",
+      "alt": { "en": "A meeting table at dusk with notebooks and printed proofs, city lights through the window.", "zh": "黃昏時分的會議桌上放著筆記簿及印刷稿，窗外是城市燈光。" }
+    }
+  ]
+}

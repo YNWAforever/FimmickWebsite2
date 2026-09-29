@@ -1,0 +1,180 @@
+{
+  "base": "http://localhost:3200",
+  "capturedAt": "2026-09-28T19:49:39.385Z",
+  "metrics": {
+    "desktop-home": {
+      "totals": {
+        "all": {
+          "cjk": 55,
+          "latin": 1191
+        },
+        "prose": {
+          "cjk": 55,
+          "latin": 932
+        },
+        "headings": {
+          "cjk": 0,
+          "latin": 147
+        },
+        "artefact": {
+          "cjk": 55,
+          "latin": 364
+        },
+        "explanatory": {
+          "cjk": 0,
+          "latin": 827
+        }
+      },
+      "sections": 11,
+      "photographs": 16,
+      "svgs": 0,
+      "videos": 0,
+      "height": 11933
+    },
+    "desktop-home-zh-hant": {
+      "totals": {
+        "all": {
+          "cjk": 1939,
+          "latin": 198
+        },
+        "prose": {
+          "cjk": 1511,
+          "latin": 171
+        },
+        "headings": {
+          "cjk": 245,
+          "latin": 10
+        },
+        "artefact": {
+          "cjk": 539,
+          "latin": 104
+        },
+        "explanatory": {
+          "cjk": 1400,
+          "latin": 94
+        }
+      },
+      "sections": 11,
+      "photographs": 16,
+      "svgs": 0,
+      "videos": 0,
+      "height": 11503
+    },
+    "desktop-home-zh-hans": {
+      "totals": {
+        "all": {
+          "cjk": 1940,
+          "latin": 198
+        },
+        "prose": {
+          "cjk": 1511,
+          "latin": 171
+        },
+        "headings": {
+          "cjk": 245,
+          "latin": 10
+        },
+        "artefact": {
+          "cjk": 539,
+          "latin": 104
+        },
+        "explanatory": {
+          "cjk": 1401,
+          "latin": 94
+        }
+      },
+      "sections": 11,
+      "photographs": 16,
+      "svgs": 0,
+      "videos": 0,
+      "height": 11503
+    },
+    "mobile-home": {
+      "totals": {
+        "all": {
+          "cjk": 55,
+          "latin": 1191
+        },
+        "prose": {
+          "cjk": 55,
+          "latin": 932
+        },
+        "headings": {
+          "cjk": 0,
+          "latin": 147
+        },
+        "artefact": {
+          "cjk": 55,
+          "latin": 364
+        },
+        "explanatory": {
+          "cjk": 0,
+          "latin": 827
+        }
+      },
+      "sections": 11,
+      "photographs": 16,
+      "svgs": 0,
+      "videos": 0,
+      "height": 20261
+    },
+    "mobile-home-zh-hant": {
+      "totals": {
+        "all": {
+          "cjk": 1939,
+          "latin": 198
+        },
+        "prose": {
+          "cjk": 1511,
+          "latin": 171
+        },
+        "headings": {
+          "cjk": 245,
+          "latin": 10
+        },
+        "artefact": {
+          "cjk": 539,
+          "latin": 104
+        },
+        "explanatory": {
+          "cjk": 1400,
+          "latin": 94
+        }
+      },
+      "sections": 11,
+      "photographs": 16,
+      "svgs": 0,
+      "videos": 0,
+      "height": 19088
+    },
+    "mobile-home-zh-hans": {
+      "totals": {
+        "all": {
+          "cjk": 1940,
+          "latin": 198
+        },
+        "prose": {
+          "cjk": 1511,
+          "latin": 171
+        },
+        "headings": {
+          "cjk": 245,
+          "latin": 10
+        },
+        "artefact": {
+          "cjk": 539,
+          "latin": 104
+        },
+        "explanatory": {
+          "cjk": 1401,
+          "latin": 94
+        }
+      },
+      "sections": 11,
+      "photographs": 16,
+      "svgs": 0,
+      "videos": 0,
+      "height": 19088
+    }
+  }
+}

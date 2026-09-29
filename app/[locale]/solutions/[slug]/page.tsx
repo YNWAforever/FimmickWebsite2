@@ -11,6 +11,7 @@ import { ui } from "@/content/ui";
 import type { SolutionId } from "@/content/types";
 import { casesFor } from "@/content/relations";
 import { PageHero, SectionHead, LinkButton, Faq, Chips } from "@/components/ui";
+import { solutionPhotos } from "@/content/photography";
 import { BeforeAfterBlock, CaseCards, EnquirySection, ExampleBlock, FlowStrip, IndustryCards, RelatedSection, ServiceCards, StatusPanel } from "@/components/blocks";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -40,6 +41,7 @@ export default async function SolutionPage({ params }: SlugParams) {
       <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Solutions" : zh("解決方案", locale), path: "/solutions" }, { name: t(s.name, locale), path: paths.solution(s.id) }])} />
       <PageHero
         locale={locale}
+        photo={solutionPhotos[s.id]}
         crumbs={[{ label: en ? "Solutions" : zh("解決方案", locale), path: "/solutions" }, { label: t(s.name, locale) }]}
         eyebrow={`${en ? "Solution" : zh("解決方案", locale)} ${s.number}`}
         title={t(s.name, locale)}

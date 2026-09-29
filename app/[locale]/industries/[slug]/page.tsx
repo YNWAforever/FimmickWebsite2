@@ -11,6 +11,7 @@ import { memberById } from "@/content/ecosystem";
 import { ui } from "@/content/ui";
 import { casesFor } from "@/content/relations";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
+import { industryPhotos } from "@/content/photography";
 import { CaseCards, EnquirySection, ProductCards, RelatedSection, ServiceCards } from "@/components/blocks";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -40,6 +41,7 @@ export default async function IndustryPage({ params }: SlugParams) {
       <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Industries" : zh("行業應用", locale), path: "/industries" }, { name: t(i.name, locale), path: paths.industry(i.id) }])} />
       <PageHero
         locale={locale}
+        photo={industryPhotos[i.id]}
         crumbs={[{ label: en ? "Industries" : zh("行業應用", locale), path: "/industries" }, { label: t(i.name, locale) }]}
         eyebrow={en ? "Industry application" : zh("行業應用", locale)}
         title={t(i.name, locale)}

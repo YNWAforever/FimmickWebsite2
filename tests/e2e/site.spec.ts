@@ -232,16 +232,55 @@ test.describe("locale continuity and media", () => {
     await page.goto("/en");
     const hidden = await page.evaluate(() => [...document.querySelectorAll(".reveal")].filter((el) => getComputedStyle(el).opacity !== "1").length);
     expect(hidden).toBe(0);
-    expect(await page.locator(".hero-pipeline__pulse").evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
+    expect(await page.locator(".hero-card").evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
+    // The signature sequence stays a static storyboard: all four frames, nothing playing.
+    await expect(page.locator(".sig")).toHaveClass(/sig--all/);
+    await expect(page.locator(".sig__frame:not([hidden])")).toHaveCount(4);
+    await page.waitForTimeout(1500);
+    await expect(page.locator(".sig__btn").first()).toHaveAttribute("aria-pressed", "false");
   });
 
-  test("homepage hero shows the four-step pipeline with people deciding", async ({ page }) => {
-    for (const [path, review] of [["/en", "People decide"], ["/zh-hant", "由人決定"], ["/zh-hans", "由人决定"]]) {
+  test("homepage hero shows a sample output with its four-step record and a person approving", async ({ page }) => {
+    for (const [path, review] of [["/en", "Approved"], ["/zh-hant", "批准"], ["/zh-hans", "批准"]]) {
       await page.goto(path);
-      const steps = page.locator(".home-hero .hero-pipeline li");
+      await expect(page.locator("h1")).toBeVisible();
+      const steps = page.locator(".cine-hero .hero-ledger li");
       await expect(steps).toHaveCount(4);
       await expect(steps.nth(2)).toContainText(review);
       await expect(steps.nth(2)).toHaveAttribute("data-role", "review");
     }
+  });
+
+  test("signature workflow: plays once when visible, pauses, steps by keyboard and shows all four", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/en");
+    await page.waitForLoadState("networkidle");
+    // Only the heading on screen: the stage must not start yet.
+    const play = page.locator(".sig__btn").first();
+    await expect(play).toHaveAttribute("aria-pressed", "false");
+    await page.locator(".sig__frames").scrollIntoViewIfNeeded();
+    await expect(play).toHaveAttribute("aria-pressed", "true");
+    await play.click();
+    await expect(play).toHaveAttribute("aria-pressed", "false");
+    const step = page.locator(".sig__step").nth(3);
+    await step.focus();
+    await page.keyboard.press("Enter");
+    await expect(step).toHaveAttribute("aria-current", "step");
+    await expect(page.locator(".sig__frame:not([hidden])")).toHaveCount(1);
+    await expect(page.locator(".sig__frame:not([hidden])")).toContainText("Exported with its record");
+    await page.getByRole("button", { name: "Show all four" }).click();
+    await expect(page.locator(".sig__frame:not([hidden])")).toHaveCount(4);
+  });
+
+  test("photographs are labelled as illustrative and described", async ({ page }) => {
+    for (const path of ["/en", "/zh-hant", "/en/industries/hospitality-travel"]) {
+      await page.goto(path);
+      const labelled = page.locator("figure.photo:has(.photo__label)");
+      expect(await labelled.count(), path).toBeGreaterThan(0);
+      const missingAlt = await page.locator("figure.photo img").evaluateAll((imgs) => imgs.filter((i) => i.getAttribute("alt") === null).length);
+      expect(missingAlt, path).toBe(0);
+    }
+    const hero = await (await page.request.get("/media/photography/review-desk-1536.avif")).body();
+    expect(hero.length).toBeGreaterThan(10_000);
   });
 });

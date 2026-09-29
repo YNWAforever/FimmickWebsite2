@@ -9,6 +9,7 @@ import "../styles/shell.css";
 import "../styles/diagrams.css";
 import "../styles/examples.css";
 import "../styles/pages.css";
+import "../styles/cinematic.css";
 import { Shell } from "@/components/shell/Shell";
 import { Gtm } from "@/components/analytics/Gtm";
 import { JsonLd } from "@/components/JsonLd";

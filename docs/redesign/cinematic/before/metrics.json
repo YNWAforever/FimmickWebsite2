@@ -1,0 +1,180 @@
+{
+  "base": "https://fimmick-website2.vercel.app",
+  "capturedAt": "2026-09-28T19:40:26.502Z",
+  "metrics": {
+    "desktop-home": {
+      "totals": {
+        "all": {
+          "cjk": 0,
+          "latin": 1742
+        },
+        "prose": {
+          "cjk": 0,
+          "latin": 1196
+        },
+        "headings": {
+          "cjk": 0,
+          "latin": 194
+        },
+        "artefact": {
+          "cjk": 0,
+          "latin": 280
+        },
+        "explanatory": {
+          "cjk": 0,
+          "latin": 1462
+        }
+      },
+      "sections": 11,
+      "photographs": 1,
+      "svgs": 0,
+      "videos": 0,
+      "height": 12336
+    },
+    "desktop-home-zh-hant": {
+      "totals": {
+        "all": {
+          "cjk": 2878,
+          "latin": 202
+        },
+        "prose": {
+          "cjk": 1990,
+          "latin": 148
+        },
+        "headings": {
+          "cjk": 340,
+          "latin": 9
+        },
+        "artefact": {
+          "cjk": 425,
+          "latin": 33
+        },
+        "explanatory": {
+          "cjk": 2453,
+          "latin": 169
+        }
+      },
+      "sections": 11,
+      "photographs": 1,
+      "svgs": 0,
+      "videos": 0,
+      "height": 11683
+    },
+    "desktop-home-zh-hans": {
+      "totals": {
+        "all": {
+          "cjk": 2879,
+          "latin": 202
+        },
+        "prose": {
+          "cjk": 1990,
+          "latin": 148
+        },
+        "headings": {
+          "cjk": 341,
+          "latin": 9
+        },
+        "artefact": {
+          "cjk": 425,
+          "latin": 33
+        },
+        "explanatory": {
+          "cjk": 2454,
+          "latin": 169
+        }
+      },
+      "sections": 11,
+      "photographs": 1,
+      "svgs": 0,
+      "videos": 0,
+      "height": 11683
+    },
+    "mobile-home": {
+      "totals": {
+        "all": {
+          "cjk": 2,
+          "latin": 1930
+        },
+        "prose": {
+          "cjk": 2,
+          "latin": 1375
+        },
+        "headings": {
+          "cjk": 0,
+          "latin": 240
+        },
+        "artefact": {
+          "cjk": 0,
+          "latin": 280
+        },
+        "explanatory": {
+          "cjk": 2,
+          "latin": 1650
+        }
+      },
+      "sections": 11,
+      "photographs": 1,
+      "svgs": 0,
+      "videos": 0,
+      "height": 24143
+    },
+    "mobile-home-zh-hant": {
+      "totals": {
+        "all": {
+          "cjk": 3238,
+          "latin": 202
+        },
+        "prose": {
+          "cjk": 2342,
+          "latin": 153
+        },
+        "headings": {
+          "cjk": 409,
+          "latin": 9
+        },
+        "artefact": {
+          "cjk": 425,
+          "latin": 33
+        },
+        "explanatory": {
+          "cjk": 2813,
+          "latin": 169
+        }
+      },
+      "sections": 11,
+      "photographs": 1,
+      "svgs": 0,
+      "videos": 0,
+      "height": 22532
+    },
+    "mobile-home-zh-hans": {
+      "totals": {
+        "all": {
+          "cjk": 3239,
+          "latin": 202
+        },
+        "prose": {
+          "cjk": 2342,
+          "latin": 153
+        },
+        "headings": {
+          "cjk": 410,
+          "latin": 9
+        },
+        "artefact": {
+          "cjk": 425,
+          "latin": 33
+        },
+        "explanatory": {
+          "cjk": 2814,
+          "latin": 169
+        }
+      },
+      "sections": 11,
+      "photographs": 1,
+      "svgs": 0,
+      "videos": 0,
+      "height": 22532
+    }
+  }
+}

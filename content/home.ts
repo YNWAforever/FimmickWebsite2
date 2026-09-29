@@ -6,13 +6,6 @@ export const hero = {
   /** The title split for display: the accent part carries the brand gradient. */
   titleLead: { en: "Put AI into", zh: "把 AI 用在" } as L,
   titleAccent: { en: "real business work.", zh: "真正的業務工作。" } as L,
-  /** Hero pipeline: the four stages of every workflow, using the sample launch scenario. */
-  steps: [
-    { role: "source", label: { en: "Source", zh: "來源" }, caption: { en: "Approved brand facts", zh: "已確認品牌資料" } },
-    { role: "work", label: { en: "AI prepares", zh: "AI 準備" }, caption: { en: "Drafts in two languages", zh: "雙語草稿" } },
-    { role: "review", label: { en: "People decide", zh: "由人決定" }, caption: { en: "Edited and approved", zh: "修改後批准" } },
-    { role: "result", label: { en: "Usable result", zh: "可用成果" }, caption: { en: "Export with record", zh: "連記錄匯出" } },
-  ] as { role: "source" | "work" | "review" | "result"; label: L; caption: L }[],
   body: {
     en: "Connect business data, AI tools and human approvals across market intelligence, content creation, customer follow-up and website operations.",
     zh: "串連業務資料、AI 工具與人手審批，支援市場洞察、內容製作、客戶跟進及網站營運。",
@@ -22,14 +15,6 @@ export const hero = {
     zh: "先從一項清楚的工作開始，按需要加入產品、系統串接與支援。",
   } as L,
 };
-
-/** Flow motif labels used by the hero scene and infographics. */
-export const flowStages: { id: "source" | "work" | "review" | "result"; label: L; caption: L }[] = [
-  { id: "source", label: { en: "Source", zh: "來源" }, caption: { en: "Approved brand facts", zh: "已確認品牌資料" } },
-  { id: "work", label: { en: "Prepared work", zh: "準備好的工作" }, caption: { en: "Drafts in two languages", zh: "雙語草稿" } },
-  { id: "review", label: { en: "Human decision", zh: "人手決定" }, caption: { en: "Edited and approved", zh: "修改後批准" } },
-  { id: "result", label: { en: "Usable result", zh: "可用成果" }, caption: { en: "Export with record", zh: "連記錄匯出" } },
-];
 
 export const sections = {
   chooseWork: { eyebrow: { en: "Choose the work", zh: "選擇工作" }, title: { en: "Four business jobs. Each ends in something you can use.", zh: "四項業務工作，每一項都有可用的成果。" } },
@@ -43,6 +28,155 @@ export const sections = {
   start: { eyebrow: { en: "How to start", zh: "如何開始" }, title: { en: "Choose how much you want FIMMICK to do.", zh: "選擇由 FIMMICK 承擔多少工作。" } },
   faq: { eyebrow: { en: "Questions", zh: "常見問題" }, title: { en: "What happens next?", zh: "接下來會怎樣？" } },
 } satisfies Record<string, { eyebrow: L; title: L }>;
+
+/**
+ * Cinematic homepage copy. Short by design: the page shows outputs, evidence
+ * and photographs first; detailed explanations live on the destination pages.
+ */
+export const cinema = {
+  heroBody: {
+    en: "AI prepares the work from your approved data. Your people decide. You get output you can use.",
+    zh: "AI 按你已確認的資料準備工作，由你的團隊決定，得到可直接使用的成果。",
+  } as L,
+  heroCard: {
+    label: { en: "Sample output · launch caption", zh: "示例成果・推出文案" } as L,
+    draft: { en: "Meet the 750 ml bottle that stays put in your bag.", zh: "750 毫升，放入袋都安心。" } as L,
+    approved: { en: "Approved by brand manager", zh: "品牌經理已批准" } as L,
+    ledger: [
+      { role: "source", label: { en: "Facts", zh: "資料" } },
+      { role: "work", label: { en: "Drafted", zh: "草擬" } },
+      { role: "review", label: { en: "Approved", zh: "批准" } },
+      { role: "result", label: { en: "Exported", zh: "匯出" } },
+    ] as { role: "source" | "work" | "review" | "result"; label: L }[],
+  },
+  outputs: {
+    eyebrow: { en: "Four business outputs", zh: "四項業務成果" } as L,
+    title: { en: "See what you get before you read how it works.", zh: "先看成果，再了解做法。" } as L,
+    sample: { en: "Sample output", zh: "示例成果" } as L,
+    link: { en: "See the workflow", zh: "查看流程" } as L,
+    names: {
+      "market-intelligence": { en: "Insight brief", zh: "洞察簡報" },
+      "content-production": { en: "Approved launch content", zh: "已批准的推出內容" },
+      "customer-engagement": { en: "Routed enquiry", zh: "已分派的查詢" },
+      "website-operations": { en: "Checked page update", zh: "已檢查的頁面更新" },
+    } as Record<string, L>,
+  },
+  brief: {
+    headline: { en: "Leaking lids are the top complaint", zh: "杯蓋漏水是最多人投訴的問題" } as L,
+    aiso: { en: "AI answer to “Which bottle won’t leak in a bag?”", zh: "AI 回答「邊款水樽放袋唔會漏？」" } as L,
+    notMentioned: { en: "Brand not mentioned", zh: "未有提及品牌" } as L,
+    action: { en: "Priority: add a clear leak-proof statement to the product page", zh: "優先行動：在產品頁加入清晰的防漏說明" } as L,
+  },
+  content: {
+    check: { en: "No price mentioned — none supplied", zh: "沒有提及價錢——未有提供" } as L,
+    reviewer: { en: "Brand manager · edited tone, approved", zh: "品牌經理・調整語氣後批准" } as L,
+  },
+  enquiry: {
+    received: { en: "Website form · 10:12", zh: "網站表格・10:12" } as L,
+    routed: { en: "Routed to", zh: "分派給" } as L,
+    waiting: { en: "Waiting for owner approval — nothing sent", zh: "等待負責人批准——未有發送" } as L,
+  },
+  record: {
+    field: { en: "Care", zh: "保養" } as L,
+    valid: { en: "Required fields complete", zh: "必填欄位齊全" } as L,
+    publish: { en: "Publishes after editor approval", zh: "編輯批准後才發布" } as L,
+  },
+  evidence: {
+    eyebrow: { en: "Case-study evidence", zh: "案例證據" } as L,
+    title: { en: "Work we have delivered — and how we run our own.", zh: "我們交付過的工作，以及我們如何營運自己。" } as L,
+    before: { en: "Before", zh: "以前" } as L,
+    after: { en: "After", zh: "現在" } as L,
+    read: { en: "Read the case", zh: "閱讀案例" } as L,
+    note: {
+      en: "Anonymised summaries; figures are withheld until scope and dates are documented. Photographs are illustrative, not client premises.",
+      zh: "匿名摘要；數字在記錄範圍及日期前暫不引用。相片僅作示意，並非客戶場所。",
+    } as L,
+  },
+  signature: {
+    eyebrow: { en: "How every workflow runs", zh: "每個流程的運作方式" } as L,
+    title: { en: "One workflow. Four moments. People decide.", zh: "一個流程，四個時刻，由人決定。" } as L,
+    lead: { en: "One sample product launch, from approved facts to a recorded export.", zh: "一次示例新品推出，由已確認資料到有紀錄的匯出。" } as L,
+    play: { en: "Play sequence", zh: "播放流程" } as L,
+    pause: { en: "Pause sequence", zh: "暫停流程" } as L,
+    showAll: { en: "Show all four", zh: "同時顯示四步" } as L,
+    showOne: { en: "Step through", zh: "逐步查看" } as L,
+    platformLink: { en: "How the platform coordinates this", zh: "平台如何協調這些工作" } as L,
+    filmLink: { en: "Watch the 42-second film", zh: "觀看 42 秒短片" } as L,
+    steps: [
+      { id: "source", label: { en: "Input", zh: "輸入" }, title: { en: "Approved facts go in", zh: "放入已確認資料" } },
+      { id: "work", label: { en: "Prepared work", zh: "準備好的工作" }, title: { en: "AI drafts in two languages", zh: "AI 草擬雙語內容" } },
+      { id: "review", label: { en: "Human review", zh: "人手審閱" }, title: { en: "A named person decides", zh: "由指定的人決定" } },
+      { id: "result", label: { en: "Usable output", zh: "可用成果" }, title: { en: "Exported with its record", zh: "連紀錄一併匯出" } },
+    ] as { id: "source" | "work" | "review" | "result"; label: L; title: L }[],
+    brief: { en: "Brief: launch post · Instagram · EN + 繁中", zh: "簡報：推出貼文・Instagram・英文＋繁中" } as L,
+    linked: { en: "Uses only the listed facts", zh: "只使用所列資料" } as L,
+    edit: { en: "Tone softened", zh: "語氣調整" } as L,
+    captionOk: { en: "Caption approved", zh: "文案已批准" } as L,
+    visualBack: { en: "Visual returned: colour named “Sky Blue” — should be Harbour Blue", zh: "視覺退回：顏色寫成「天藍」——應為海港藍" } as L,
+    reviewer: { en: "Reviewer: brand manager (sample role)", zh: "審閱人：品牌經理（示例角色）" } as L,
+    files: [
+      { en: "caption-en.txt", zh: "caption-en.txt" },
+      { en: "caption-zh-hant.txt", zh: "caption-zh-hant.txt" },
+      { en: "review-record — sources, edits, decision", zh: "審閱紀錄——來源、修改、決定" },
+    ] as L[],
+    reuse: { en: "Kept for the next launch", zh: "留待下次推出重用" } as L,
+  },
+  pathways: {
+    eyebrow: { en: "AI Transformation & Services", zh: "AI 轉型與專業服務" } as L,
+    title: { en: "Plan the change — or bring in specialists.", zh: "規劃轉變，或引入專家。" } as L,
+    transformation: {
+      label: { en: "AI Transformation", zh: "AI 轉型" } as L,
+      title: { en: "For leaders planning the change", zh: "為規劃轉變的管理層而設" } as L,
+      deliverable: { en: "Example deliverable: readiness heatmap", zh: "成果示例：準備度熱圖" } as L,
+      cta: { en: "Discuss a transformation scope", zh: "討論轉型範圍" } as L,
+    },
+    services: {
+      label: { en: "Services", zh: "專業服務" } as L,
+      title: { en: "For teams that need specialists", zh: "為需要專家的團隊而設" } as L,
+      body: { en: "Sixteen services with defined deliverables. No AIP subscription required.", zh: "十六項服務，各有明確交付成果；無須訂閱 AIP。" } as L,
+      count: { en: "services", zh: "項服務" } as L,
+      deliverable: { en: "Example deliverable: SEO fix list (sample)", zh: "成果示例：SEO 修正清單（示例）" } as L,
+      cta: { en: "Discuss a service", zh: "討論服務" } as L,
+    },
+  },
+  industries: {
+    eyebrow: { en: "Industry application", zh: "行業應用" } as L,
+    title: { en: "The same products, configured for your sector.", zh: "同一套產品，按你的行業配置。" } as L,
+    all: { en: "All eight industries", zh: "全部八個行業" } as L,
+  },
+  ecosystem: {
+    /** Short relationship tags; wording follows production (see design-decisions.md). */
+    tags: {
+      aip: { en: "Built and operated by FIMMICK", zh: "由 FIMMICK 建立及營運" },
+      kocmax: { en: "Workflow layer for Adfocate", zh: "Adfocate 的流程層" },
+      adfocate: { en: "FIMMICK business unit", zh: "FIMMICK 業務單位" },
+      kinnso: { en: "Described by FIMMICK as its platform", zh: "FIMMICK 形容為旗下平台" },
+      "50-add-oil": { en: "Described by FIMMICK as its platform", zh: "FIMMICK 形容為旗下平台" },
+      eldage: { en: "Social enterprise incubated by FIMMICK", zh: "由 FIMMICK 培育的社會企業" },
+    } as Record<string, L>,
+    eyebrow: { en: "Built by FIMMICK", zh: "FIMMICK 建立的生態系統" } as L,
+    title: { en: "Platforms, communities and ventures we build and run.", zh: "我們建立及營運的平台、社群與項目。" } as L,
+  },
+  resources: {
+    eyebrow: { en: "Resources", zh: "資源中心" } as L,
+    title: { en: "Watch, download, read.", zh: "觀看、下載、閱讀。" } as L,
+    guide: { en: "Guide · PDF · 2 pages", zh: "指南・PDF・2 頁" } as L,
+    guidePreview: { en: "First page of the guide", zh: "指南第一頁" } as L,
+    article: { en: "Article", zh: "文章" } as L,
+    workshop: { en: "Workshop · on request", zh: "工作坊・按需安排" } as L,
+  },
+  start: {
+    you: { en: "Your team", zh: "你的團隊" } as L,
+    us: { en: "FIMMICK", zh: "FIMMICK" } as L,
+  },
+  closing: {
+    title: { en: "Tell us which work you want to improve.", zh: "告訴我們你想改善哪項工作。" } as L,
+    body: {
+      en: "We reply by email to arrange a conversation. Sending a request does not book a meeting until we confirm a time with you.",
+      zh: "我們會以電郵回覆安排傾談。在與你確認時間前，提交要求並不代表已預約會面。",
+    } as L,
+  },
+};
 
 export const startOptions: { id: "product" | "deployment" | "managed"; title: L; forWho: L; includes: L<string[]>; youProvide: L; cta: L; intent: string }[] = [
   {

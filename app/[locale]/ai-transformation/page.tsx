@@ -38,6 +38,7 @@ export default async function TransformationPage({ params }: LocaleParams) {
     <>
       <PageHero
         locale={locale}
+        photo={"workshop-wall"}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow={en ? "For leadership teams" : zh("為管理團隊而設", locale)}
         title={en ? "Plan the change before scaling the tools." : zh("先規劃轉變，再擴大工具應用。", locale)}
