@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import "../styles/tokens.css";
@@ -10,6 +9,9 @@ import "../styles/diagrams.css";
 import "../styles/examples.css";
 import "../styles/pages.css";
 import "../styles/cinematic.css";
+import "../styles/editorial.css";
+import "../styles/award.css";
+import { fontVariables } from "../fonts";
 import { Shell } from "@/components/shell/Shell";
 import { Gtm } from "@/components/analytics/Gtm";
 import { JsonLd } from "@/components/JsonLd";
@@ -17,7 +19,6 @@ import { isLocale, localeMeta, locales, zh } from "@/lib/i18n";
 import { canonicalOrigin, isProduction } from "@/lib/env";
 import { organizationJsonLd } from "@/lib/seo";
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap", weight: "variable" });
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -49,7 +50,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   return (
-    <html lang={localeMeta[locale].htmlLang} className={manrope.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang={localeMeta[locale].htmlLang} className={fontVariables} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <JsonLd data={organizationJsonLd()} />

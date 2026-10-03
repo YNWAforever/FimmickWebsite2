@@ -33,7 +33,21 @@ export function RevealObserver() {
       { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
     );
     nodes.forEach((n) => observer.observe(n));
-    return () => observer.disconnect();
+    // Content mounted later (client islands, streamed sections) is observed too, so it can never stay hidden.
+    const added = new MutationObserver((records) => {
+      for (const record of records) {
+        record.addedNodes.forEach((node) => {
+          if (!(node instanceof HTMLElement)) return;
+          const found = node.matches(".reveal:not(.is-visible)") ? [node] : [];
+          found.concat(Array.from(node.querySelectorAll<HTMLElement>(".reveal:not(.is-visible)"))).forEach((n) => observer.observe(n));
+        });
+      }
+    });
+    added.observe(document.body, { childList: true, subtree: true });
+    return () => {
+      observer.disconnect();
+      added.disconnect();
+    };
   }, [pathname]);
   return null;
 }

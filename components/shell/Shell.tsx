@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { SiteHeader, type HeaderPillar } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
 import { RevealObserver } from "@/components/motion/Reveal";
+import { Motion } from "@/components/motion/Motion";
 import type { LanguageOption } from "./LanguageSwitch";
 import { pillars } from "@/content/nav";
 import { ui } from "@/content/ui";
@@ -52,6 +53,7 @@ export function Shell({ locale, children, languages }: { locale: Locale; childre
       </main>
       <SiteFooter locale={locale} />
       <RevealObserver />
+      <Motion viewLabel={locale === "en" ? "View" : zh("查看", locale)} />
     </>
   );
 }

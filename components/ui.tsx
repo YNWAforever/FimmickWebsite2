@@ -75,7 +75,7 @@ export function PageHero({
 export function SectionHead({ eyebrow, title, lead, action, as = "h2" }: { eyebrow?: string; title: ReactNode; lead?: ReactNode; action?: ReactNode; as?: "h2" | "h3" }) {
   const Heading = as;
   return (
-    <div className={action ? "section-head section-head--row" : "section-head"}>
+    <div className={action ? "section-head section-head--row reveal" : "section-head reveal"}>
       <div className="stack" style={{ ["--stack" as string]: "14px" }}>
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
         <Heading>{title}</Heading>

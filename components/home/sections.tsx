@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { href, t, type Locale, zh } from "@/lib/i18n";
+import { href, t, type L, type Locale, zh } from "@/lib/i18n";
 import { paths } from "@/lib/routes";
 import { cinema, hero, startOptions } from "@/content/home";
 import { solutions } from "@/content/solutions";
@@ -21,6 +21,21 @@ import { ExplainerPlayer } from "@/components/media/ExplainerPlayer";
 import { LinkButton, TextLink } from "@/components/ui";
 import { workstreamCardsData } from "@/components/blocks";
 import { SignatureStage } from "./SignatureStage";
+import { Headline } from "@/components/motion/Headline";
+
+/** One accented phrase per display headline (Traditional copy is converted for Simplified). */
+const accents: Record<string, L> = {
+  outputs: { en: "what you get", zh: "先看成果" },
+  cases: { en: "how we run our own.", zh: "如何營運自己" },
+  signature: { en: "People decide.", zh: "由人決定" },
+  change: { en: "specialists.", zh: "引入專家" },
+  industries: { en: "for your sector.", zh: "按你的行業配置" },
+  ecosystem: { en: "we build and run.", zh: "建立及營運" },
+  resources: { en: "read.", zh: "閱讀" },
+  start: { en: "how much", zh: "承擔多少工作" },
+  closing: { en: "improve.", zh: "改善哪項工作" },
+};
+const accent = (key: string, locale: Locale) => t(accents[key], locale);
 
 type P = { locale: Locale };
 
@@ -32,9 +47,7 @@ export function CinematicHero({ locale }: P) {
     <section className="cine-hero" aria-labelledby="home-title">
       <div className="cine-hero__copy">
         <p className="eyebrow">{t(hero.eyebrow, locale)}</p>
-        <h1 id="home-title" className="cine-hero__title">
-          {t(hero.titleLead, locale)} <span className="cine-hero__accent">{t(hero.titleAccent, locale)}</span>
-        </h1>
+        <Headline as="h1" id="home-title" className="cine-hero__title" text={`${t(hero.titleLead, locale)} ${t(hero.titleAccent, locale)}`} accent={t(hero.titleAccent, locale)} split />
         <p className="cine-hero__body">{t(cinema.heroBody, locale)}</p>
         <div className="btn-row">
           <LinkButton to={href(locale, "/solutions")}>{t(ui.exploreSolutions, locale)}</LinkButton>
@@ -42,6 +55,10 @@ export function CinematicHero({ locale }: P) {
             {t(ui.requestDemo, locale)}
           </LinkButton>
         </div>
+        <span className="scroll-cue" aria-hidden="true">
+          <span className="scroll-cue__line" />
+          {locale === "en" ? "Scroll" : zh("向下捲動", locale)}
+        </span>
       </div>
       <div className="cine-hero__media">
         <Photo id="review-desk" locale={locale} priority sizes="(min-width: 1100px) 60vw, 100vw" className="cine-hero__photo" />
@@ -194,9 +211,9 @@ export function BusinessOutputs({ locale }: P) {
   return (
     <section className="section cine-outputs" aria-labelledby="outputs">
       <div className="container">
-        <div className="cine-head">
-          <p className="eyebrow">{t(cinema.outputs.eyebrow, locale)}</p>
-          <h2 id="outputs">{t(cinema.outputs.title, locale)}</h2>
+        <div className="cine-head reveal">
+          <p className="eyebrow" data-chapter="01">{t(cinema.outputs.eyebrow, locale)}</p>
+          <Headline id="outputs" text={t(cinema.outputs.title, locale)} accent={accent("outputs", locale)} />
         </div>
         <div className="output-grid">
           {solutions.map((s) => {
@@ -247,10 +264,10 @@ export function CaseEvidence({ locale }: P) {
   return (
     <section className="section section--surface cine-evidence" aria-labelledby="cases">
       <div className="container">
-        <div className="cine-head cine-head--row">
+        <div className="cine-head cine-head--row reveal">
           <div>
-            <p className="eyebrow">{t(cinema.evidence.eyebrow, locale)}</p>
-            <h2 id="cases">{t(cinema.evidence.title, locale)}</h2>
+            <p className="eyebrow" data-chapter="02">{t(cinema.evidence.eyebrow, locale)}</p>
+            <Headline id="cases" text={t(cinema.evidence.title, locale)} accent={accent("cases", locale)} />
           </div>
           <LinkButton to={href(locale, "/case-studies")} variant="ghost" small>
             {locale === "en" ? "Case library" : zh("案例庫", locale)}
@@ -288,7 +305,7 @@ export function CaseEvidence({ locale }: P) {
         </Link>
         <div className="case-photos">
           {clientCases.map((c, i) => (
-            <Link key={c.slug} className="case-photo reveal" style={{ ["--delay" as string]: `${i * 80}ms` }} href={href(locale, paths.case(c.slug))}>
+            <Link key={c.slug} data-cursor={t(cinema.evidence.read, locale)} className="case-photo reveal" style={{ ["--delay" as string]: `${i * 80}ms` }} href={href(locale, paths.case(c.slug))}>
               <Photo id={casePhotos[c.slug]} locale={locale} sizes="(min-width: 900px) 30vw, 90vw" label={false} className="case-photo__img" />
               <div className="case-photo__body">
                 <p className="card-meta">
@@ -359,10 +376,25 @@ export function SignatureWorkflow({ locale }: P) {
   ];
   return (
     <section className="section chapter-night" aria-labelledby="signature">
+      {/* Decorative: the four moments repeat as a moving band; the stage below carries the content. */}
+      <div className="marquee" aria-hidden="true">
+        <div className="marquee__track">
+          {[0, 1].map((copy) => (
+            <span key={copy} className="marquee__run">
+              {s.steps.map((st) => (
+                <span key={st.id} className="marquee__item" data-role={st.id}>
+                  {t(st.title, locale)}
+                  <span className="marquee__dot" />
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
       <div className="container">
-        <div className="cine-head">
-          <p className="eyebrow">{t(s.eyebrow, locale)}</p>
-          <h2 id="signature">{t(s.title, locale)}</h2>
+        <div className="cine-head reveal">
+          <p className="eyebrow" data-chapter="03">{t(s.eyebrow, locale)}</p>
+          <Headline id="signature" text={t(s.title, locale)} accent={accent("signature", locale)} />
           <p className="lead">{t(s.lead, locale)}</p>
         </div>
         <SignatureStage
@@ -449,9 +481,9 @@ export function Pathways({ locale }: P) {
   return (
     <section className="section cine-paths" aria-labelledby="change">
       <div className="container">
-        <div className="cine-head">
-          <p className="eyebrow">{t(p.eyebrow, locale)}</p>
-          <h2 id="change">{t(p.title, locale)}</h2>
+        <div className="cine-head reveal">
+          <p className="eyebrow" data-chapter="04">{t(p.eyebrow, locale)}</p>
+          <Headline id="change" text={t(p.title, locale)} accent={accent("change", locale)} />
         </div>
         <div className="doors">
           <article className="door reveal">
@@ -513,10 +545,10 @@ export function IndustryPhotos({ locale }: P) {
   return (
     <section className="section section--surface cine-industries" aria-labelledby="industries">
       <div className="container">
-        <div className="cine-head cine-head--row">
+        <div className="cine-head cine-head--row reveal">
           <div>
-            <p className="eyebrow">{t(cinema.industries.eyebrow, locale)}</p>
-            <h2 id="industries">{t(cinema.industries.title, locale)}</h2>
+            <p className="eyebrow" data-chapter="05">{t(cinema.industries.eyebrow, locale)}</p>
+            <Headline id="industries" text={t(cinema.industries.title, locale)} accent={accent("industries", locale)} />
           </div>
           <TextLink to={href(locale, "/industries")}>{t(cinema.industries.all, locale)}</TextLink>
         </div>
@@ -525,7 +557,7 @@ export function IndustryPhotos({ locale }: P) {
             const ind = industryById(id);
             return (
               <li key={id} className="reveal" style={{ ["--delay" as string]: `${i * 70}ms` }}>
-                <Link className="industry-shot" href={href(locale, paths.industry(id))}>
+                <Link className="industry-shot" data-cursor={locale === "en" ? "Explore" : zh("探索", locale)} href={href(locale, paths.industry(id))}>
                   <Photo id={industryPhotos[id]} locale={locale} crop="portrait" sizes="(min-width: 1000px) 24vw, (min-width: 600px) 45vw, 80vw" label={false} className="industry-shot__img" />
                   <span className="industry-shot__text">
                     <strong>{t(ind.name, locale)}</strong>
@@ -552,9 +584,9 @@ export function EcosystemTiles({ locale }: P) {
           <Photo id="community-event" locale={locale} crop="art" sizes="(min-width: 1000px) 40vw, 92vw" className="cine-eco__photo" />
         </div>
         <div>
-          <div className="cine-head">
-            <p className="eyebrow">{t(cinema.ecosystem.eyebrow, locale)}</p>
-            <h2 id="ecosystem">{t(cinema.ecosystem.title, locale)}</h2>
+          <div className="cine-head reveal">
+            <p className="eyebrow" data-chapter="06">{t(cinema.ecosystem.eyebrow, locale)}</p>
+            <Headline id="ecosystem" text={t(cinema.ecosystem.title, locale)} accent={accent("ecosystem", locale)} />
           </div>
           <ul className="brand-tiles">
             {members.map((m) => (
@@ -589,10 +621,10 @@ export function ResourcePreviews({ locale }: P) {
   return (
     <section className="section section--surface cine-resources" aria-labelledby="resources">
       <div className="container">
-        <div className="cine-head cine-head--row">
+        <div className="cine-head cine-head--row reveal">
           <div>
-            <p className="eyebrow">{t(r.eyebrow, locale)}</p>
-            <h2 id="resources">{t(r.title, locale)}</h2>
+            <p className="eyebrow" data-chapter="07">{t(r.eyebrow, locale)}</p>
+            <Headline id="resources" text={t(r.title, locale)} accent={accent("resources", locale)} />
           </div>
           <LinkButton to={href(locale, "/resources")} variant="ghost" small>
             {locale === "en" ? "Resource Centre" : zh("資源中心", locale)}
@@ -645,10 +677,10 @@ export function StartDecision({ locale }: P) {
   return (
     <section className="section cine-start" aria-labelledby="start">
       <div className="container">
-        <div className="cine-head cine-head--row">
+        <div className="cine-head cine-head--row reveal">
           <div>
-            <p className="eyebrow">{en ? "How to start" : zh("如何開始", locale)}</p>
-            <h2 id="start">{en ? "Choose how much you want FIMMICK to do." : zh("選擇由 FIMMICK 承擔多少工作。", locale)}</h2>
+            <p className="eyebrow" data-chapter="08">{en ? "How to start" : zh("如何開始", locale)}</p>
+            <Headline id="start" text={en ? "Choose how much you want FIMMICK to do." : zh("選擇由 FIMMICK 承擔多少工作。", locale)} accent={accent("start", locale)} />
           </div>
           <TextLink to={href(locale, "/how-to-start")}>{en ? "Compare options" : zh("比較選項", locale)}</TextLink>
         </div>
@@ -683,7 +715,7 @@ export function ClosingChapter({ locale }: P) {
     <section className="closing" aria-labelledby="closing">
       <Photo id="night-table" locale={locale} sizes="100vw" label={false} decorative className="closing__photo" />
       <div className="container closing__inner">
-        <h2 id="closing">{t(cinema.closing.title, locale)}</h2>
+        <Headline id="closing" text={t(cinema.closing.title, locale)} accent={accent("closing", locale)} />
         <p>{t(cinema.closing.body, locale)}</p>
         <div className="btn-row">
           <LinkButton to={href(locale, "/contact?intent=demo")} variant="accent">
