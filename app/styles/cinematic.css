@@ -56,7 +56,6 @@
 .cine-hero__copy { grid-column: 2; padding: clamp(40px, 6vw, 88px) clamp(40px, 7.5vw, 116px) clamp(40px, 6vw, 88px) 0; }
 .cine-hero__title { font-size: var(--fs-cine); line-height: 1; letter-spacing: -0.035em; color: var(--ink); max-width: 12ch; text-wrap: balance; }
 :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { letter-spacing: 0; line-height: 1.12; max-width: none; word-break: keep-all; overflow-wrap: anywhere; }
-.cine-hero__accent { color: var(--magenta); }
 .cine-hero__body { margin-top: 26px; font-size: var(--fs-lead); line-height: 1.55; color: var(--ink-2); max-width: 34ch; }
 :lang(zh-Hant-HK) .cine-hero__body, :lang(zh-Hans) .cine-hero__body { max-width: 24em; }
 .cine-hero .btn-row { margin-top: 32px; }

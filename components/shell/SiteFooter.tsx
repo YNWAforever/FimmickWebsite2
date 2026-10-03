@@ -9,12 +9,34 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   return (
     <footer className="site-footer">
       <div className="container">
+        <div className="footer-cta">
+          <p className="footer-cta__title">
+            {locale === "en" ? (
+              <>
+                Have a workflow <em className="accent">in mind?</em>
+              </>
+            ) : (
+              <>
+                {zh("心中已有", locale)}
+                <em className="accent">{zh("想改善的流程？", locale)}</em>
+              </>
+            )}
+          </p>
+          <div className="footer-cta__actions">
+            <a className="footer-cta__mail" href={`mailto:${company.email}`}>
+              {company.email}
+            </a>
+            <Link className="btn btn--accent" href={href(locale, "/contact?intent=demo")}>
+              {t(ui.requestDemo, locale)} <span className="arrow" aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
         <div className="footer-top">
           <div className="footer-brand">
             {/* eslint-disable-next-line @next/next/no-img-element -- fixed-size raster logo */}
-            <img src="/brand/fimmick-logo.webp" width={132} height={33} alt="FIMMICK" loading="lazy" />
+            <img src="/brand/fimmick-logo-light.webp" width={132} height={33} alt="FIMMICK" loading="lazy" />
             <p>{t(ui.footerTagline, locale)}</p>
-            <p className="small" style={{ marginTop: 12 }}>
+            <p className="small footer-contact">
               <a href={`mailto:${company.email}`}>{company.email}</a>
               <br />
               <a href={`tel:${company.phone.replace(/\s/g, "")}`}>{company.phone}</a>

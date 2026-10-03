@@ -272,6 +272,21 @@ test.describe("locale continuity and media", () => {
     await expect(page.locator(".sig__frame:not([hidden])")).toHaveCount(4);
   });
 
+  test("award styles win the cascade in the production bundle", async ({ page }) => {
+    // award.css overrides cinematic.css at equal specificity, so it must load after it. Importing it
+    // from a second root layout hoists it into the shared chunk (loaded first) and silently undoes it.
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/en");
+    const styles = await page.evaluate(() => ({
+      displayScale: getComputedStyle(document.documentElement).getPropertyValue("--fs-cine"),
+      photoOverflow: getComputedStyle(document.querySelector(".photo")!).overflow,
+      heroOverflow: getComputedStyle(document.querySelector(".cine-hero")!).overflow,
+    }));
+    expect(styles.displayScale).toContain("5.9rem");
+    expect(styles.photoOverflow).toBe("clip");
+    expect(styles.heroOverflow).toBe("clip");
+  });
+
   test("photographs are labelled as illustrative and described", async ({ page }) => {
     for (const path of ["/en", "/zh-hant", "/en/industries/hospitality-travel"]) {
       await page.goto(path);

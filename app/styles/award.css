@@ -1,0 +1,440 @@
+/* ------------------------------------------------------------------
+   Award pass: editorial type, choreographed motion, texture, finish.
+
+   Principles
+   - One accent face (Instrument Serif italic) for one phrase per display
+     headline; CJK keeps the sans and carries the accent in colour only.
+   - Motion is transform/opacity/clip only. Time-based entrances run once;
+     everything continuous is scroll-linked (CSS scroll-driven animations),
+     so nothing moves unless the visitor scrolls. All of it is off with
+     prefers-reduced-motion.
+   - Texture (grain) only on the dark chapters, never behind body copy on
+     light surfaces.
+------------------------------------------------------------------- */
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --fs-cine: clamp(2.9rem, 1.1rem + 4.4vw, 5.9rem);
+  --fs-cine-h2: clamp(2.2rem, 1.2rem + 3.1vw, 4.4rem);
+  --utility-h: 37px;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection { background: var(--magenta); color: #fff; }
+
+/* The accent face itself lives in editorial.css (shared with the global 404).
+   This file must stay layout-only so it loads after cinematic.css; see the e2e cascade test. */
+
+/* Display sizes */
+.cine-head h2 { letter-spacing: -0.035em; line-height: 1.02; max-width: 17ch; }
+.closing h2 { letter-spacing: -0.035em; line-height: 1.02; }
+:lang(zh-Hant-HK) .cine-head h2, :lang(zh-Hans) .cine-head h2, :lang(zh-Hant-HK) .closing h2, :lang(zh-Hans) .closing h2 { letter-spacing: 0; line-height: 1.2; }
+
+/* ================================================================
+   Header: glass bar that sheds the utility row while reading and
+   steps away on downward scroll. The glass lives on a pseudo-element
+   so the fixed-position drawer is not trapped in a containing block.
+================================================================ */
+.site-header {
+  background: transparent;
+  border-bottom-color: transparent;
+  transition: transform 520ms var(--ease-out), border-color 300ms ease;
+}
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(255 255 255 / 90%);
+  -webkit-backdrop-filter: saturate(1.6) blur(16px);
+  backdrop-filter: saturate(1.6) blur(16px);
+  box-shadow: 0 1px 0 var(--line);
+}
+.utility-bar { height: var(--utility-h); background: transparent; }
+.utility-inner { min-height: calc(var(--utility-h) - 1px); }
+html[data-scroll="up"] .site-header, html[data-scroll="down"] .site-header { transform: translateY(calc(-1 * var(--utility-h))); }
+html[data-scroll="down"] .site-header:not(:has(.pillar-trigger[aria-expanded="true"]), :focus-within) { transform: translateY(-100%); }
+body[data-menu-open="true"] .site-header { transform: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .site-header { transition: none; }
+  html[data-scroll="down"] .site-header:not(:has(.pillar-trigger[aria-expanded="true"]), :focus-within) { transform: translateY(calc(-1 * var(--utility-h))); }
+}
+/* Nav labels: quiet underline that grows from the left. */
+.pillar-trigger { position: relative; }
+.pillar-trigger:not([data-active="true"])::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 18px;
+  bottom: 6px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 360ms var(--ease-out);
+}
+.pillar-trigger:hover::before, .pillar-trigger[aria-expanded="true"]::before { transform: scaleX(1); }
+
+/* ================================================================
+   Hero
+================================================================ */
+.cine-hero { position: relative; isolation: isolate; }
+@media (min-width: 1000px) {
+  .cine-hero { grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, 600px) minmax(0, 680px) minmax(0, 1fr); }
+  .cine-hero__copy { padding-right: clamp(32px, 4.5vw, 72px); }
+}
+.cine-hero__title { font-size: var(--fs-cine); line-height: 0.98; letter-spacing: -0.045em; max-width: 11ch; }
+.cine-hero__title .accent { color: var(--magenta); display: inline; }
+/* CJK: the accent line is one unbroken phrase (keep-all), so size it to fit the copy column. */
+:lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: clamp(2.1rem, 0.4rem + 3.6vw, 4rem); }
+@media (max-width: 999px) { :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: min(11vw, 3.4rem); } }
+.cine-hero__photo { border-radius: 32px 0 0 32px; }
+@media (max-width: 999px) {
+  .cine-hero__photo { border-radius: 0; }
+}
+
+/* Word masks */
+.w { display: inline-block; vertical-align: top; overflow: clip; overflow-clip-margin: 0.12em; padding-block: 0.06em 0.1em; margin-block: -0.06em -0.1em; }
+.w > span { display: inline-block; }
+.accent .w { padding-inline-end: 0.08em; margin-inline-end: -0.08em; }
+@media (prefers-reduced-motion: no-preference) {
+  .cine-hero__title .w > span { animation: word-up 1000ms var(--ease-out) both; animation-delay: calc(100ms + var(--i) * 65ms); }
+  .cine-hero .eyebrow { animation: fade-up 900ms var(--ease-out) 60ms both; }
+  .cine-hero__body { animation: fade-up 900ms var(--ease-out) 420ms both; }
+  .cine-hero .btn-row { animation: fade-up 900ms var(--ease-out) 520ms both; }
+  .scroll-cue { animation: fade-up 900ms var(--ease-out) 1300ms both; }
+  .scroll-cue__line::after { animation: cue-drop 1800ms var(--ease-in-out) 1800ms 3 both; }
+  .hero-card { animation-duration: 1000ms; animation-timing-function: var(--ease-out); animation-delay: 640ms; }
+  .hero-ledger [data-role="review"] .hero-ledger__node { animation-delay: 1350ms; }
+}
+@keyframes word-up { from { transform: translateY(108%) rotate(4deg); } to { transform: none; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+/* Hero card: paper with depth and a living status. */
+.hero-card { border: 1px solid rgb(13 20 51 / 6%); box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 40px 80px -32px rgb(13 20 51 / 50%), 0 12px 24px -16px rgb(13 20 51 / 20%); }
+
+/* ================================================================
+   Section heads: eyebrow index and a wipe-up headline
+================================================================ */
+/* Chapter index is server-rendered (data-chapter): CSS counters would restart in every band,
+   because content-visibility implies style containment. */
+.eyebrow[data-chapter]::before {
+  content: attr(data-chapter);
+  width: auto;
+  height: auto;
+  padding-right: 12px;
+  border-radius: 0;
+  background: none;
+  border-right: 1.5px solid currentColor;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js :is(.cine-head, .section-head).reveal { opacity: 1; transform: none; transition: none; }
+  .js :is(.cine-head, .section-head).reveal .eyebrow { opacity: 0; transform: translateX(-14px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out); }
+  .js :is(.cine-head, .section-head).reveal :is(h2, h3) {
+    clip-path: polygon(-6% 100%, 106% 100%, 106% 130%, -6% 130%);
+    transform: translateY(0.32em);
+    transition: clip-path 1100ms var(--ease-out) 80ms, transform 1100ms var(--ease-out) 80ms;
+  }
+  .js :is(.cine-head, .section-head).reveal .lead { opacity: 0; transform: translateY(16px); transition: opacity 800ms var(--ease-out) 260ms, transform 800ms var(--ease-out) 260ms; }
+  .js :is(.cine-head, .section-head).reveal.is-visible :is(.eyebrow, .lead) { opacity: 1; transform: none; }
+  .js :is(.cine-head, .section-head).reveal.is-visible :is(h2, h3) { clip-path: polygon(-6% -30%, 106% -30%, 106% 130%, -6% 130%); transform: none; }
+}
+
+/* Generic reveal: a longer, softer curve than the original. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal:not(.cine-head, .section-head) { transform: translateY(34px); transition: opacity 900ms var(--ease-out), transform 1100ms var(--ease-out); transition-delay: var(--delay, 0ms); }
+  .js .reveal.is-visible:not(.cine-head, .section-head) { transform: none; }
+}
+
+/* ================================================================
+   Photographs: scroll-linked depth on the large editorial images only
+   (no motion unless the page scrolls). The hero photograph is the LCP
+   element and stays completely static; only its copy eases away.
+================================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .door__photo picture,
+    .cine-eco__photo picture,
+    .closing__photo picture,
+    .page-hero__photo picture {
+      animation: photo-drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+    .cine-hero__copy {
+      animation: copy-exit linear both;
+      animation-timeline: view();
+      /* Starts at exit 0%: view timelines inset by scroll-padding-top, so any earlier start would dim the copy at rest. */
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+@keyframes photo-drift { from { transform: translateY(-5%) scale(1.12); } to { transform: translateY(5%) scale(1.12); } }
+/* view() resolves against the nearest scroll container, and `overflow: hidden` creates one, which
+   froze every timeline inside these boxes. `clip` crops the same way without becoming a scroller. */
+.photo, .door, .marquee, .cine-hero { overflow: clip; }
+@keyframes copy-exit { from { opacity: 1; transform: none; } to { opacity: 0.2; transform: translateY(-40px); } }
+
+/* Hover zoom lives on the <img>, independent of any drift on <picture>. */
+.door__photo img, .output-tile__photo img { transition: transform 1200ms var(--ease-out); }
+.door:hover .door__photo img, .output-tile:hover .output-tile__photo img { transform: scale(1.04); }
+.case-photo__img img, .industry-shot__img img { transition-duration: 1200ms; transition-timing-function: var(--ease-out); }
+.case-photo:hover .case-photo__img img, .industry-shot:hover .industry-shot__img img { transform: scale(1.06); }
+
+/* ================================================================
+   Cards: fewer borders, more depth; consistent lift language
+================================================================ */
+.output-tile, .case-photo, .door, .decision__opt, .shelf__item { border-color: transparent; box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 0 0 1px rgb(13 20 51 / 6%); transition: transform 600ms var(--ease-out), box-shadow 600ms var(--ease-out); }
+.output-tile:hover, .case-photo:hover, .shelf__item:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgb(13 20 51 / 6%), 0 34px 60px -30px rgb(13 20 51 / 38%); }
+.output-tile__paper { transition: transform 800ms var(--ease-out), box-shadow 800ms var(--ease-out); }
+.output-tile:hover .output-tile__paper { transform: translateY(-6px) rotate(-0.6deg); box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 36px 60px -30px rgb(13 20 51 / 55%); }
+.output-tile__go, .case-photo h3 { transition: transform 500ms var(--ease-out), color 300ms ease; }
+.output-tile:hover .output-tile__go { transform: translateX(6px); color: var(--magenta-ink); }
+.case-photo:hover h3 { color: var(--magenta-ink); }
+.industry-shot__text { transition: transform 700ms var(--ease-out); }
+.industry-shot__text > span { transition: opacity 600ms var(--ease-out); }
+@media (hover: hover) and (min-width: 1000px) {
+  .industry-shot__text { transform: translateY(calc(100% - 3.6rem)); }
+  .industry-shot__text > span { opacity: 0; }
+  .industry-shot:hover .industry-shot__text, .industry-shot:focus-visible .industry-shot__text { transform: none; }
+  .industry-shot:hover .industry-shot__text > span, .industry-shot:focus-visible .industry-shot__text > span { opacity: 1; }
+}
+.industry-shot::after { background: linear-gradient(180deg, rgb(7 11 31 / 0%) 40%, rgb(7 11 31 / 82%) 100%); }
+.brand-tiles a { box-shadow: 0 0 0 1px rgb(13 20 51 / 6%); border-color: transparent; transition: transform 600ms var(--ease-out), box-shadow 600ms var(--ease-out); }
+.brand-tiles a:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px rgb(13 20 51 / 6%), 0 26px 50px -28px rgb(13 20 51 / 40%); }
+.brand-tiles a::before { transition: width 600ms var(--ease-out); }
+.brand-tiles a:hover::before { width: 10px; }
+
+/* Buttons: tactile press, arrow travel */
+.btn { transition: transform 450ms var(--ease-out), background-color 300ms ease, box-shadow 450ms var(--ease-out), color 300ms ease; }
+.btn:active { transform: translateY(1px) scale(0.98); transition-duration: 120ms; }
+.btn .arrow { display: inline-block; transition: transform 450ms var(--ease-out); }
+.btn:hover .arrow { transform: translateX(4px); }
+
+/* Text links: underline draws in from the left */
+.text-link { background: linear-gradient(currentColor, currentColor) 0 calc(100% - 10px) / 0 1.5px no-repeat; transition: background-size 500ms var(--ease-out); }
+.text-link:hover { text-decoration: none; background-size: calc(100% - 26px) 1.5px; }
+.text-link span.arrow { transition: transform 450ms var(--ease-out); }
+.text-link:hover span.arrow { transform: translateX(5px); }
+
+/* ================================================================
+   Dark chapters: grain and a scroll-linked marquee
+================================================================ */
+.chapter-night, .closing { position: relative; isolation: isolate; overflow: clip; }
+.chapter-night::after, .closing::after, .site-footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--grain);
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+.chapter-night > *, .closing > :not(.closing__photo), .site-footer > * { position: relative; z-index: 1; }
+
+.marquee {
+  margin: calc(var(--section) * -0.35) 0 calc(var(--section) * 0.55);
+  overflow: clip;
+  border-block: 1px solid rgb(255 255 255 / 8%);
+  padding-block: clamp(14px, 2vw, 26px);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track { display: flex; width: max-content; }
+.marquee__run { display: flex; flex: none; }
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 44px);
+  padding-right: clamp(20px, 3vw, 44px);
+  font-size: clamp(2.2rem, 1rem + 4.6vw, 6rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(255 255 255 / 34%);
+}
+.marquee__item:nth-child(even) { color: #fff; -webkit-text-stroke: 0; }
+:lang(zh-Hant-HK) .marquee__item, :lang(zh-Hans) .marquee__item { letter-spacing: 0; }
+.marquee__dot { width: 0.22em; height: 0.22em; border-radius: 50%; background: var(--role-source); flex: none; }
+[data-role="work"] > .marquee__dot { background: var(--magenta); }
+[data-role="review"] > .marquee__dot { background: var(--lime); }
+[data-role="result"] > .marquee__dot { background: #fff; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .marquee__track { animation: marquee-slide linear both; animation-timeline: view(); animation-range: cover; }
+  }
+}
+@keyframes marquee-slide { from { transform: translateX(0); } to { transform: translateX(-38%); } }
+@media (forced-colors: active) {
+  .marquee__item { color: CanvasText; -webkit-text-stroke: 0; }
+}
+
+/* ================================================================
+   Closing chapter flows straight into a dark footer
+================================================================ */
+.closing { min-height: clamp(520px, 82vh, 820px); }
+.closing h2 { max-width: 13ch; font-size: clamp(2.6rem, 1.2rem + 4.2vw, 5.8rem); }
+:lang(zh-Hant-HK) .closing h2, :lang(zh-Hans) .closing h2 { font-size: clamp(2.2rem, 1.2rem + 3vw, 4.2rem); }
+
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--night-deep);
+  border-top: 0;
+  color: var(--night-muted);
+  padding-block: clamp(64px, 8vw, 112px) 32px;
+}
+main:has(.closing) + .site-footer { border-top: 1px solid rgb(255 255 255 / 8%); }
+main:has(.closing) + .site-footer .footer-cta { display: none; }
+.footer-cta {
+  display: grid;
+  gap: 28px;
+  align-items: end;
+  padding-bottom: clamp(48px, 6vw, 88px);
+  margin-bottom: clamp(48px, 6vw, 72px);
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+}
+@media (min-width: 1000px) { .footer-cta { grid-template-columns: minmax(0, 1fr) auto; } }
+.footer-cta__title { margin: 0; color: #fff; font-size: clamp(2.6rem, 1.2rem + 4.6vw, 6.2rem); font-weight: 750; letter-spacing: -0.045em; line-height: 0.98; max-width: 12ch; }
+:lang(zh-Hant-HK) .footer-cta__title, :lang(zh-Hans) .footer-cta__title { letter-spacing: 0; line-height: 1.15; font-size: clamp(2.2rem, 1.2rem + 3vw, 4.2rem); }
+.footer-cta__actions { display: grid; gap: 18px; justify-items: start; }
+@media (min-width: 1000px) { .footer-cta__actions { justify-items: end; } }
+.footer-cta__mail { color: #fff; font-size: clamp(1.2rem, 1rem + 0.8vw, 1.7rem); font-weight: 650; letter-spacing: -0.01em; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1.5px no-repeat; padding-bottom: 4px; transition: background-size 600ms var(--ease-out), color 300ms ease; }
+.footer-cta__mail:hover { color: #ff7dbd; background-size: 0 1.5px; background-position: 100% 100%; }
+
+.site-footer .footer-brand p { color: var(--night-muted); }
+.site-footer .footer-contact { margin-top: 14px; line-height: 1.9; }
+.site-footer .footer-contact a { color: #fff; }
+.site-footer .footer-social a { color: var(--night-muted); }
+.site-footer .footer-social a:hover { color: #fff; }
+.site-footer .footer-cols h2 { color: rgb(255 255 255 / 58%); }
+.site-footer .footer-cols a { color: var(--night-text); }
+.site-footer .footer-cols a:hover { color: #fff; }
+.site-footer .footer-bottom { border-top-color: rgb(255 255 255 / 10%); color: var(--night-muted); }
+.site-footer .footer-bottom a { color: var(--night-muted); }
+.site-footer .footer-bottom a:hover { color: #fff; }
+.site-footer :focus-visible { box-shadow: 0 0 0 3px var(--night-deep), 0 0 0 5px #fff; }
+
+/* ================================================================
+   Pointer bubble over media (fine pointers only; see Motion.tsx)
+================================================================ */
+.cursor-bubble {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  margin: -46px 0 0 -46px;
+  border-radius: 50%;
+  background: var(--magenta);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.2;
+  translate: -200px -200px;
+  transition: translate 240ms var(--ease-out), opacity 260ms ease, scale 500ms var(--ease-out);
+}
+.cursor-bubble.is-jump { transition: none; }
+.cursor-bubble.is-on { opacity: 1; scale: 1; }
+html.has-bubble [data-cursor] { cursor: none; }
+
+
+/* Route change: content rises in under the (unchanged) header. */
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter { animation: page-in 760ms var(--ease-out) backwards; }
+}
+@keyframes page-in { from { opacity: 0; transform: translateY(28px); } }
+
+/* Hero scroll cue (decorative; the line drops three times, then rests) */
+.scroll-cue { display: none; }
+@media (min-width: 1000px) and (min-height: 760px) {
+  .scroll-cue { display: inline-flex; align-items: center; gap: 14px; margin-top: clamp(40px, 6vh, 72px); color: var(--subtle); font-size: var(--fs-micro); font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
+  :lang(zh-Hant-HK) .scroll-cue, :lang(zh-Hans) .scroll-cue { letter-spacing: 0.08em; }
+  .scroll-cue__line { position: relative; width: 1.5px; height: 44px; overflow: hidden; background: var(--line-strong); }
+  .scroll-cue__line::after { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: var(--magenta); transform: translateY(-100%); }
+}
+@keyframes cue-drop { 0% { transform: translateY(-100%); } 50% { transform: none; } 100% { transform: translateY(100%); } }
+
+/* Editorial numerals */
+.output-tile__meta .number-tag, .decision__n { font-family: var(--font-display-accent); font-style: italic; font-weight: 400; font-size: 1.7rem; line-height: 0.9; letter-spacing: 0; color: var(--magenta-ink); }
+.decision__n { font-size: 1.5rem; margin-right: 6px; }
+
+/* Inner pages: same display language, scaled for denser templates */
+.page-hero h1 { font-size: clamp(2.4rem, 1.3rem + 3vw, 4.1rem); letter-spacing: -0.04em; line-height: 1.02; }
+.section-head h2 { font-size: clamp(1.9rem, 1.25rem + 2vw, 3.1rem); letter-spacing: -0.032em; line-height: 1.05; }
+:lang(zh-Hant-HK) .page-hero h1, :lang(zh-Hans) .page-hero h1 { font-size: clamp(2.1rem, 1.3rem + 2.2vw, 3.4rem); letter-spacing: 0; line-height: 1.2; }
+:lang(zh-Hant-HK) .section-head h2, :lang(zh-Hans) .section-head h2 { letter-spacing: 0; line-height: 1.25; }
+
+/* Reading progress: a hairline under the header, driven by the page scroll (no JS). */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--magenta), #ff6fb5);
+      transform-origin: left;
+      transform: scaleX(0);
+      animation: read-progress linear both;
+      animation-timeline: scroll(root block);
+      pointer-events: none;
+    }
+  }
+}
+@keyframes read-progress { to { transform: scaleX(1); } }
+
+/* Menus: panels and drawer rows arrive in sequence. */
+@media (prefers-reduced-motion: no-preference) {
+  .mega:not([hidden]) .mega-overview,
+  .mega:not([hidden]) .mega-group,
+  .mega:not([hidden]) .mega-featured { animation: fade-up 520ms var(--ease-out) both; }
+  .mega:not([hidden]) .mega-group:nth-child(1) { animation-delay: 40ms; }
+  .mega:not([hidden]) .mega-group:nth-child(2) { animation-delay: 80ms; }
+  .mega:not([hidden]) .mega-group:nth-child(3) { animation-delay: 120ms; }
+  .mega:not([hidden]) .mega-group:nth-child(4), .mega:not([hidden]) .mega-featured { animation-delay: 160ms; }
+  .drawer:not([hidden]) { animation: drawer-in 420ms var(--ease-out) both; }
+  .drawer:not([hidden]) .drawer-body > * { animation: fade-up 560ms var(--ease-out) both; }
+  .drawer:not([hidden]) .drawer-body > :nth-child(2) { animation-delay: 30ms; }
+  .drawer:not([hidden]) .drawer-body > :nth-child(3) { animation-delay: 60ms; }
+  .drawer:not([hidden]) .drawer-body > :nth-child(4) { animation-delay: 90ms; }
+  .drawer:not([hidden]) .drawer-body > :nth-child(5) { animation-delay: 120ms; }
+  .drawer:not([hidden]) .drawer-body > :nth-child(6) { animation-delay: 150ms; }
+  .drawer:not([hidden]) .drawer-body > :nth-child(7) { animation-delay: 180ms; }
+  .drawer:not([hidden]) .drawer-body > :nth-child(n + 8) { animation-delay: 210ms; }
+}
+@keyframes drawer-in { from { opacity: 0; } }
+
+/* Closing chapter rises as a sheet over the light page: rounded top edge, and a
+   composited scale tied to its entry (transform only, so no repaint while scrolling). */
+.closing { border-radius: clamp(24px, 3vw, 44px) clamp(24px, 3vw, 44px) 0 0; }
+/* What shows past the rounded corners (and beside the sheet while it scales) is the white of
+   the questions section above, not the grey page canvas. */
+main:has(.closing) { background: linear-gradient(180deg, transparent calc(100% - 1400px), var(--surface) calc(100% - 1400px)); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .closing { transform-origin: 50% 0; animation: sheet-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 85%; }
+  }
+}
+@keyframes sheet-rise { from { transform: scale(0.94); } to { transform: none; } }
+
+/* Rendering: page bands below the fold skip layout and paint until they come near the viewport,
+   so the first frame only lays out the header and hero. Content stays in the DOM, the
+   accessibility tree, anchors and find-in-page; `auto` remembers each band's real height once
+   it has rendered, so scrolling back up does not jump. Heroes (the LCP areas) are not bands. */
+@supports (content-visibility: auto) {
+  main section.section, main section.closing, .site-footer { content-visibility: auto; contain-intrinsic-size: auto 800px; }
+}

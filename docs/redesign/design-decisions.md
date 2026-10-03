@@ -58,3 +58,16 @@ Supersedes parts of "Direction chosen" and "Motion" above; full report in `docs/
 - **Light surfaces, two dark chapters.** The dark hero is gone. Only the signature workflow and the closing call to action are dark.
 - **Photography rules.** Photographs are generated illustrations and always labelled as such. People appear only from behind, at the edge of frame or out of focus. Photographs illustrate context only: product evidence comes from sample artefacts or real captures, and diagrams are HTML/SVG.
 - **Motion.** A card-only hero entrance (the photo is the LCP element and must not animate), one signature sequence with controls and a static storyboard equivalent, and the existing once-only reveal. Nothing loops, scroll-jacks or plays audio.
+
+## Award pass (4 Oct 2026)
+
+Extends the cinematic redesign; full report in `docs/redesign/award/README.md`.
+
+- **One accent face.** Instrument Serif italic sets one phrase per display headline (`components/motion/Headline.tsx`). Chinese pages keep the sans and mark the phrase with colour only. Manrope remains the UI and body face. Both fonts are defined once in `app/fonts.ts` and applied by every root layout.
+- **Motion stays CSS-driven, with no library and no scroll-jacking.** JavaScript only sets state: reveal classes, `<html data-scroll>` for the header, and the media bubble's position. Continuous effects are scroll-linked (`animation-timeline`), so nothing moves unless the visitor scrolls, and nothing loops. An inertial smooth-scroll library was evaluated and rejected under this rule.
+- **The hero photograph is never animated.** Only the hero copy eases away as it scrolls out. The headline words animate (transform only); the photo is the LCP element, not the text. Scroll-linked drift is limited to a handful of large editorial photographs, and nothing carries `will-change`, so first paint does not pay for layers.
+- **Dark ending.** The closing chapter flows into a dark footer with grain. The footer CTA is hidden where the page already ends with one (the homepage).
+- **Below-the-fold bands are lazily rendered.** `content-visibility: auto` (with a remembered intrinsic size) applies to `main section.section`, the closing chapter and the footer, never to heroes. New full-width bands should use the `.section` class to get this for free. Small components that happen to be `<section>` elements are deliberately excluded.
+- **Stylesheet order is part of the design.** `award.css` overrides `cinematic.css` at equal specificity, so it is imported only by the locale layout, after `cinematic.css`. CSS imported by both root layouts is hoisted into the shared chunk and loads first, which would silently undo those overrides. Shared rules go in `editorial.css`, which overrides nothing. An e2e test checks the order in the production bundle.
+- **Scroll-driven effects need non-scrolling ancestors.** Use `overflow: clip`, not `hidden`, on any box that contains a `view()` timeline subject; `hidden` creates a scroll container and freezes the timeline.
+- **Runtime dependencies unchanged:** `next`, `react`, `react-dom`.
