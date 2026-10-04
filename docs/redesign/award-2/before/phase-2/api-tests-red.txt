@@ -1,0 +1,23 @@
+   ✓ /api/enquiries > accepts when the forwarder answers 2xx 43ms
+   × /api/enquiries > does not report acceptance when the forwarder redirects (302 → 200) 58ms
+   ✓ /api/enquiries > reports failure when the forwarder answers 500 11ms
+   ✓ /api/enquiries > times out after 8 s with 504  8012ms
+   × /api/enquiries > answers 400, not 500, to a JSON body that is not an object 1ms
+   × /api/enquiries > forwards three concurrent requests with one key once 2ms
+   × /api/enquiries > refuses a reused key with a different body (409) 1ms
+   × /api/enquiries > lets a retry with the same key through after a failed attempt 1ms
+   × /api/enquiries > answers a filled honeypot like a success and never forwards it 1ms
+   × /api/enquiries > rate-limits by the platform's client IP, not a spoofable X-Forwarded-For 1ms
+   × /api/enquiries > requires a JSON content type and a same-site origin (403) 1ms
+   × /api/enquiries > answers 503 without a forwarder and logs no field values 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected 200 to be 502 // Object.is equality
+TypeError: Cannot read properties of null (reading 'idempotencyKey')
+AssertionError: expected [ 429, 429, 429 ] to deeply equal [ 200, 200, 200 ]
+AssertionError: expected 429 to be 200 // Object.is equality
+AssertionError: expected 429 to be 502 // Object.is equality
+AssertionError: expected { status: 429, …(1) } to deeply equal { status: 200, …(1) }
+AssertionError: expected 0 to be greater than or equal to 3
+AssertionError: expected 429 to be 403 // Object.is equality
+AssertionError: expected { status: 429, …(1) } to deeply equal { status: 503, …(1) }
+      Tests  9 failed | 3 passed (12)

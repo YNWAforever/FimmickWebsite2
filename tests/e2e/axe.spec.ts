@@ -11,7 +11,7 @@ import { expect, test, type Page } from "@playwright/test";
 const pages = [
   "/en", "/zh-hant", "/zh-hans", "/en/platform", "/en/services", "/en/solutions/content-production", "/en/industries",
   "/en/case-studies/real-estate-sales-follow-up", "/en/contact", "/en/knowledge-hub/4-types-of-crm-system", "/en/about/team",
-  "/en/nonexistent", "/zh-hant/platform/nope", "/en/resources/videos",
+  "/en/nonexistent", "/zh-hant/platform/nope", "/en/resources/videos", "/zh-hant/contact",
 ];
 const tags = ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa", "best-practice"];
 

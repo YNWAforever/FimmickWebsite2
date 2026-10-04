@@ -1,0 +1,22 @@
+Production build check FAILED (1534):
+- robots.txt has no `Allow: /` (is SITE_ENV=production set for this build?)
+- robots.txt disallows everything
+- robots.txt has no `Sitemap:` line for the production origin
+- a header rule sends X-Robots-Tag
+- noindex in en\about\asia-delivery.html
+- noindex in en\about\how-we-work.html
+- noindex in en\about\our-story.html
+- noindex in en\about\team.html
+- noindex in en\about\why-fimmick.html
+- noindex in en\about.html
+- noindex in en\ai-transformation\ai-readiness-maturity.html
+- noindex in en\ai-transformation\governance-adoption.html
+- noindex in en\ai-transformation\strategy-roadmap.html
+- noindex in en\ai-transformation\workflow-agent-design.html
+- noindex in en\ai-transformation.html
+- noindex in en\case-studies\ai-assisted-lead-generation.html
+- noindex in en\case-studies\automotive-lead-test-drive.html
+- noindex in en\case-studies\b2b-trading-supplier-intelligence.html
+- noindex in en\case-studies\crm-loyalty-workflow-revamp.html
+- noindex in en\case-studies\cross-border-market-expansion-desk.html
+- … 1514 more

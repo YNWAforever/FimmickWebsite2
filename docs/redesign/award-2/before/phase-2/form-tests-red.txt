@@ -1,0 +1,42 @@
+  1) [chromium] › tests\e2e\enquiry.spec.ts:65:3 › 2.2 validation and status › success moves focus to the confirmation and is announced by a region that was already there 
+    Error: expect(locator).toHaveCount(expected) failed
+    Expected: 1
+    Received: 0
+    Error Context: test-results\enquiry-2-2-validation-and-ec188-gion-that-was-already-there-chromium\error-context.md
+  2) [chromium] › tests\e2e\enquiry.spec.ts:40:3 › 2.2 validation and status › an invalid field inside the collapsed details opens them and takes focus 
+    Error: expect(locator).toHaveAttribute(expected) failed
+    Expected: ""
+    Received: serializes to the same string
+    Error Context: test-results\enquiry-2-2-validation-and-a832a--opens-them-and-takes-focus-chromium\error-context.md
+  3) [chromium] › tests\e2e\enquiry.spec.ts:53:3 › 2.2 validation and status › a work description over the limit is reported on that field 
+    Error: expect(locator).toBeFocused() failed
+    Expected: focused
+    Received: inactive
+    Error Context: test-results\enquiry-2-2-validation-and-e0bc4-t-is-reported-on-that-field-chromium\error-context.md
+  4) [chromium] › tests\e2e\enquiry.spec.ts:107:3 › 2.2 context and email handoff › the context chip's remove button is a 44 px target 
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+    Expected: >= 44
+    Received:    12.671875
+    Error Context: test-results\enquiry-2-2-context-and-em-638c5-ve-button-is-a-44-px-target-chromium\error-context.md
+  5) [chromium] › tests\e2e\enquiry.spec.ts:76:3 › 2.2 validation and status › a retry reuses the request key; an edit after a timeout makes a new one 
+    Error: expect(received).not.toBe(expected) // Object.is equality
+    Expected: not "12167bdb-b0e4-49d1-b3da-3e5846ecc572"
+    Error Context: test-results\enquiry-2-2-validation-and-24868-r-a-timeout-makes-a-new-one-chromium\error-context.md
+  6) [chromium] › tests\e2e\enquiry.spec.ts:125:3 › 2.2 context and email handoff › Copy confirms, then resets; a refused clipboard selects the text instead 
+    Error: expect(locator).toHaveText(expected) failed
+    Expected: "Copy text"
+    Received: "Copied"
+    Error Context: test-results\enquiry-2-2-context-and-em-9698f-rd-selects-the-text-instead-chromium\error-context.md
+  7) [chromium] › tests\e2e\enquiry.spec.ts:95:3 › 2.2 validation and status › offline is reported as a failed send, not as a timeout 
+    Error: expect(locator).toBeVisible() failed
+    Expected: visible
+    Error: element(s) not found
+    Error Context: test-results\enquiry-2-2-validation-and-a48ee-ailed-send-not-as-a-timeout-chromium\error-context.md
+  8) [chromium] › tests\e2e\enquiry.spec.ts:115:3 › 2.2 context and email handoff › a long prepared email offers Copy before the email-app link 
+    Error: expect(locator).toHaveText(expected) failed
+    Expected pattern: /Copy text/
+    Received string:  "Open email app (business@fimmick.com)"
+    Error Context: test-results\enquiry-2-2-context-and-em-99da6-y-before-the-email-app-link-chromium\error-context.md
+  9) [chromium] › tests\e2e\enquiry.spec.ts:20:3 › 2.2 without JavaScript › details never reach the URL, and the email route is offered 
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Error Context: test-results\enquiry-2-2-without-JavaSc-399f2--the-email-route-is-offered-chromium\error-context.md

@@ -20,14 +20,16 @@
 | `SITE_ENV` | unset → `review` (noindex, robots disallow, no GTM) | `production` |
 | `NEXT_PUBLIC_GTM_ID` | unset | `GTM-55RBW4F` |
 | `NEXT_PUBLIC_CANONICAL_ORIGIN` | default `https://www.fimmick.com` | same |
-| `ENQUIRY_FORWARD_URL` | unset on Vercel Preview (removed 28 Sep 2026 so shared previews cannot send real enquiries) and locally/CI → 503 and email handoff | `https://www.fimmick.com/api/contact` (set) |
+| `ENQUIRY_FORWARD_URL` | unset on Vercel Preview (removed 28 Sep 2026 so shared previews cannot send real enquiries) and locally/CI → 503 and email handoff | `https://www.fimmick.com/api/contact` (set). Must be `https:` in production (otherwise the endpoint answers 503 and logs a config error). Since award pass 2 the forwarder's redirects are not followed: only a direct 2xx counts as delivered, so the URL must be the endpoint's final address (re-run B2's test enquiry after any change). |
 
 ## Release procedure (after separate launch authorisation)
 
-1. Merge the reviewed PR into `main` of `YNWAforever/FimmickWebsite2`, or deploy the reviewed commit directly.
-2. In the production host project, set the environment variables above and a build command of `npm ci && npm run build` (Node ≥ 22.13). Record the current production deployment as the rollback target.
-3. Deploy to a preview URL first. Run `BASE_URL=<preview> node scripts/migration/verify-routes.mjs` and the Playwright suite (`E2E_PORT`/`baseURL` pointed at the preview).
-4. Promote to production and attach `www.fimmick.com`.
+**Indexability is baked in at build time.** `SITE_ENV` decides robots.txt, the robots meta on every prerendered page and the `X-Robots-Tag` header rule when the site is *built*, not when it is served. A preview deployment is built without `SITE_ENV=production`, so **promoting a preview deployment to production is forbidden**: it would ship `noindex` and `Disallow: /` to www.fimmick.com. Production is always a fresh build in the production scope (a production-branch deployment, or `vercel --prod`), with `SITE_ENV=production` set for that scope.
+
+1. Merge the reviewed PR into `main` of `YNWAforever/FimmickWebsite2`, or deploy the reviewed commit directly. CI (`.github/workflows/ci.yml`) must be green: it builds with `SITE_ENV=production` and runs `scripts/award-2/assert-production-build.mjs` on that output.
+2. In the production host project, set the environment variables above (production scope) and a build command of `npm ci && npm run build` (Node ≥ 22.13). Record the current production deployment as the rollback target.
+3. Check the reviewed commit on its preview URL: `BASE_URL=<preview> node scripts/migration/verify-routes.mjs` and the Playwright suite (`E2E_PORT`/`baseURL` pointed at the preview). The preview is for review only; do not promote it.
+4. Deploy the same commit as a **production build** (production branch or `vercel --prod`), then attach `www.fimmick.com`. Locally, the same check is `SITE_ENV=production npx next build && node scripts/award-2/assert-production-build.mjs`.
 5. Smoke test immediately:
    - `/`, `/en`, `/zh-hant`, a service, an industry, an article, `/zh-hans/knowledge-hub/<slug>` and `/en/contact` all return 200.
    - Legacy redirects work (`/en/workforce/cx`, `/zh-hk/`).

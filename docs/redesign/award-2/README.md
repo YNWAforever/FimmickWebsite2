@@ -94,9 +94,29 @@ Phase 1 deviations from the brief (reasons in the PR): nav spacing at 1024–127
 
 Open: Next 16 renders a request-time `notFound()` as a 404 recovery shell that the browser fills in, so a visitor without JavaScript sees an empty page with the 404 title (question for Willy in the Phase 1 PR).
 
+## Phase 2 — enquiry correctness and the release gate (fix plan 8–9)
+
+Evidence: `before/phase-2/` (the red test runs on main, and the production-build check failing on a review build) and `after/phase-2/` (green runs, form screenshots, the check passing on a production build).
+
+| Item | Before | After |
+| --- | --- | --- |
+| 2.1 Forwarder redirect | a 302 → 200 from the forwarder reported "accepted" (nothing delivered) | redirects are not followed; only a direct 2xx is accepted (502 otherwise, 504 on timeout) |
+| 2.1 Bad JSON | `null` body → 500 | 400 `invalid_json` for any non-object |
+| 2.1 Idempotency | three concurrent posts with one key reached the forwarder 3 times; key reuse with a new body returned the old result | key bound to a body fingerprint and stored with its in-flight promise: one delivery; reuse with a new body → 409 |
+| 2.1 Abuse guards | rate limit keyed on the spoofable first `X-Forwarded-For`; maps never evicted; honeypot answered 400; no content-type/origin check | platform IP (`x-vercel-forwarded-for`, then `x-real-ip`); swept on write, capped at 5,000; honeypot answers like a success and is dropped; JSON + same-site required (403) |
+| 2.1 Logs | none | one line per request `{requestId, status, durationMs, keyPrefix}`, no field values |
+| 2.2 Form without JavaScript | native GET put name, email and company in the URL | `method="post"`, controls disabled until hydrated, `<noscript>` email link |
+| 2.2 Validation | an error in the collapsed "more detail" was invisible; a too-long work description was reported on "Anything else" | the disclosure opens and the first invalid field (DOM order) takes focus; errors land on their own field; hints and errors sit outside the label |
+| 2.2 Status | the live region mounted with its message; success unmounted the focused button | one persistent `role="status"` region; success focuses its heading |
+| 2.2 Keys and handoff | an edit after a timeout kept the old key; offline shown as a timeout; "Copied" never reset; 12 px chip remove button | key derived from the payload; offline → "failed"; Copied resets after 2 s and a refused clipboard selects the text; 44 px remove target; long emails offer Copy first |
+| 2.3 Release gate | runbook said "deploy to a preview, then promote" (ships noindex); no CI | runbook forbids promoting a preview; `.github/workflows/ci.yml` (typecheck, lint, vitest, hans check, production build + `assert-production-build.mjs`, review build + Playwright); the check fails a review build with 1,534 problems and passes a production build (1,530 pages) |
+
+Tests: `tests/unit/enquiries.test.ts` (12; 9 red on main), `tests/e2e/enquiry.spec.ts` (9; all red on main), the production-build check; Playwright 104/104, vitest 38/38. Also found by the new CI step: `lib/hans-table.ts` had been stale since the scroll cue's 「向下捲動」 (zh-Hans showed a Traditional 捲); regenerated.
+
 ## Phase log
 
 | Phase | PR | What changed | Before → after |
 | --- | --- | --- | --- |
 | 0 | — (first commit of the Phase 1 branch) | Baseline, scripts, axe gate (`tests/e2e/axe.spec.ts`), `@axe-core/playwright` devDependency | see above |
 | 1 | feat/award-pass-2-craft | Locale 404, nav from 1024 px + sheet drawer, per-band intrinsic sizes, focus/contrast/targets, drawer and route-change coordination, badge/marquee/cue/video/poster, icons/titles/banner/leadership | drift /en 390 4,766 → 8 px; axe 0 → 0 (2 pages added); 40 new regression tests |
+| 2 | feat/award-pass-2-enquiry | Enquiry API hardening (redirects, idempotency, guards, logs), contact form (no-JS safe, validation focus, status region, keys), CI with a production-build indexability check | forwarder 302 no longer reads as delivered; 21 new regression tests; release check catches a promoted preview |

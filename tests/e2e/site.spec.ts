@@ -181,10 +181,12 @@ test.describe("enquiry journey", () => {
     expect(page.url()).not.toContain("Test");
   });
 
-  test("API rejects invalid input and never reports acceptance without a delivery backend", async ({ request }) => {
-    const bad = await request.post("/api/enquiries", { data: { idempotencyKey: "test-key-0001", name: "", email: "nope" } });
+  test("API rejects invalid input and never reports acceptance without a delivery backend", async ({ request, baseURL }) => {
+    // The endpoint only answers same-site JSON requests, as a browser on the site sends them.
+    const headers = { origin: baseURL! };
+    const bad = await request.post("/api/enquiries", { headers, data: { idempotencyKey: "test-key-0001", name: "", email: "nope" } });
     expect(bad.status()).toBe(422);
-    const ok = await request.post("/api/enquiries", { data: { idempotencyKey: "test-key-0002", name: "A", email: "a@example.com", company: "B", work: "C", context: { intent: "demo" } } });
+    const ok = await request.post("/api/enquiries", { headers, data: { idempotencyKey: "test-key-0002", name: "A", email: "a@example.com", company: "B", work: "C", context: { intent: "demo" } } });
     expect(ok.status()).toBe(503);
     expect((await ok.json()).status).toBe("unavailable");
   });

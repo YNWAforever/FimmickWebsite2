@@ -1,0 +1,4 @@
+ ✓ tests/unit/enquiries.test.ts (12 tests) 8547ms
+   ✓ /api/enquiries > times out after 8 s with 504  8016ms
+   ✓ /api/enquiries > forwards three concurrent requests with one key once  315ms
+      Tests  12 passed (12)
