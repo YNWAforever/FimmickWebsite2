@@ -39,6 +39,8 @@ export default async function EventsPage({ params }: LocaleParams) {
       <section className="section">
         <div className="container">
           <h2 style={{ fontSize: "1.5rem", marginBottom: 20 }}>{en ? "Past events" : zh("過往活動", locale)} <span className="muted small">({sorted.length})</span></h2>
+          {/* The event records exist in English only, so the Chinese hubs link to that archive (8.1.6). */}
+          {en ? (
           <div className="related-grid">
             {sorted.map((e) => (
               <Link key={e.id} className="card card--link" href={href(locale, `/events/${e.id}`)} lang="en">
@@ -53,6 +55,14 @@ export default async function EventsPage({ params }: LocaleParams) {
               </Link>
             ))}
           </div>
+          ) : (
+            <p className="notice">
+              {zh("過往活動的紀錄只有英文版本。", locale)}{" "}
+              <Link href={href("en", "/events")} lang="en" hrefLang="en">
+                Events archive <span aria-hidden="true">→</span>
+              </Link>
+            </p>
+          )}
         </div>
       </section>
       <EnquirySection locale={locale} title={en ? "Bring a session to your team" : zh("為你的團隊安排一節", locale)} body={en ? "Requests are confirmed by our team; submitting one is not a booking." : zh("申請會由我們的團隊確認；提交申請並不等於已預約。", locale)} primary={{ label: en ? "Request a workshop" : zh("申請工作坊", locale), to: "/contact?intent=workshop" }} />

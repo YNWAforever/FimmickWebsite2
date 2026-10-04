@@ -112,7 +112,10 @@ for (const [url, page] of Object.entries(pages)) {
   const [, locale, slug] = m;
   const { lead, readTime, blocks } = toBlocks(page.body);
   const text = blocks.map((b) => (b.t === "ul" ? b.items.join(" ") : b.x)).join(" ");
-  const contentLanguage = locale === "en" ? "en" : cjk(text) > text.length * 0.1 ? locale : "en";
+  // An "en" page whose title, summary and body are more than 30 % CJK is Chinese (award pass 2, 8.1.1);
+  // after a run, scripts/migration/fix-article-languages.mjs gives such articles a zh-hant record.
+  const compact = `${page.title || ""} ${page.description || ""} ${text}`.replace(/\s/g, "");
+  const contentLanguage = locale === "en" ? (cjk(compact) > compact.length * 0.3 ? "zh-hant" : "en") : cjk(text) > text.length * 0.1 ? locale : "en";
   const title = decode((page.title || "").replace(/\s*\|\s*FIMMICK\s*$/i, ""));
   const section = page.section ? decode(page.section) : null;
   const topic = section ? (TOPIC_BY_SECTION.find(([re]) => re.test(section)) || [, "marketing-channels"])[1] : "marketing-channels";

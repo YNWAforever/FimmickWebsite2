@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import type { Intent } from "@/lib/intent";
 import { pricingFactors, proposalContents } from "@/content/platform-pages";
@@ -10,7 +10,6 @@ import { startOptions } from "@/content/home";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton, Faq } from "@/components/ui";
 import { EnquirySection } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 const copy = {
   title: { en: "Pricing & engagement", zh: "收費及合作模式" },
@@ -37,7 +36,6 @@ export default async function PricingPage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Platform" : zh("平台", locale), path: "/platform" }, { name: t(copy.title, locale), path: "/platform/pricing" }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}

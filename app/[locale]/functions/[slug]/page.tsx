@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import type { EnquiryContext } from "@/lib/intent";
 import { businessFunctions, type BusinessFunction } from "@/content/functions";
@@ -11,7 +11,6 @@ import { workstreamById } from "@/content/transformation";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { EnquirySection, IndustryCards, ProductCards, RelatedSection, SampleRecord, ServiceCards, SolutionCards } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -44,7 +43,6 @@ export default async function FunctionPage({ params }: SlugParams) {
   const ws = f.workstream ? workstreamById(f.workstream) : undefined;
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: hubLabel, path: "/functions" }, { name: t(f.name, locale), path: paths.function(f.id) }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: hubLabel, path: "/functions" }, { label: t(f.name, locale) }]}

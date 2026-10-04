@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { href, t, type Locale, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { solutions } from "@/content/solutions";
 import { productById } from "@/content/products";
@@ -13,7 +13,6 @@ import { casesFor } from "@/content/relations";
 import { PageHero, SectionHead, LinkButton, Faq, Chips } from "@/components/ui";
 import { solutionPhotos } from "@/content/photography";
 import { BeforeAfterBlock, CaseCards, EnquirySection, ExampleBlock, FlowStrip, IndustryCards, RelatedSection, ServiceCards, StatusPanel } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -26,7 +25,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const locale = await resolveLocale(params);
   const s = find((await params).slug);
   if (!s) return {};
-  return pageMetadata({ locale, path: paths.solution(s.id), title: t(s.name, locale), description: `${t(s.job, locale)} ${t(s.deliverable, locale)}`, generatedImage: true });
+  return pageMetadata({ locale, path: paths.solution(s.id), title: t(s.seoTitle ?? s.name, locale), description: s.seoDescription ? t(s.seoDescription, locale) : `${t(s.job, locale)} ${t(s.deliverable, locale)}`, generatedImage: true });
 }
 
 export default async function SolutionPage({ params }: SlugParams) {
@@ -38,7 +37,6 @@ export default async function SolutionPage({ params }: SlugParams) {
   const related = casesFor({ service: s.services[0], product: s.products[0] }, 3);
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Solutions" : zh("解決方案", locale), path: "/solutions" }, { name: t(s.name, locale), path: paths.solution(s.id) }])} />
       <PageHero
         locale={locale}
         photo={solutionPhotos[s.id]}

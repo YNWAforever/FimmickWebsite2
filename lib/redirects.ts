@@ -13,6 +13,11 @@ export type LegacyMove = {
   reason: string;
   /** Where the old path was observed. */
   evidence: "production-sitemap" | "production-nav" | "reference-repo" | "production-probe";
+  /**
+   * Retired rather than moved: the URL answers 410 Gone (award pass 2, 8.1.5). `to` still serves
+   * the legacy-article link rewriter, which points old in-body links somewhere useful.
+   */
+  gone?: true;
 };
 
 export const localeMoves: LegacyMove[] = [
@@ -26,8 +31,8 @@ export const localeMoves: LegacyMove[] = [
   { from: "/workforce/executive", to: "/functions/executive", reason: "Workforce-team page rebuilt as a function workflow page (same function, no employment metaphor)", evidence: "production-sitemap" },
   { from: "/services/ai-transformation", to: "/ai-transformation", reason: "One canonical transformation overview; service entry redirects to the hub", evidence: "production-sitemap" },
   { from: "/ai-workshop", to: "/workshop", reason: "Reference alias for the production workshop page", evidence: "reference-repo" },
-  { from: "/case-studies/regional-beauty-loyalty-orchestration", to: "/case-studies", reason: "Reference-only case with unverified metrics; case library", evidence: "reference-repo" },
-  { from: "/case-studies/asia-operating-footprint", to: "/case-studies", reason: "Reference-only portfolio claim with unverified figures; case library", evidence: "reference-repo" },
+  { from: "/case-studies/regional-beauty-loyalty-orchestration", to: "/case-studies", reason: "Reference-only case with unverified metrics; case library", evidence: "reference-repo", gone: true },
+  { from: "/case-studies/asia-operating-footprint", to: "/case-studies", reason: "Reference-only portfolio claim with unverified figures; case library", evidence: "reference-repo", gone: true },
 ];
 
 /** Resolve a locale-neutral path through the move table (single hop, no chains). */

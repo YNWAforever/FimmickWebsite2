@@ -24,25 +24,27 @@ const kind = (p) =>
   /\/knowledge-hub\/category\//.test(p) ? "knowledge-hub category" : /\/knowledge-hub\/.+/.test(p) ? "article" : /\/events\/.+/.test(p) ? "event" : /\/services\/.+/.test(p) ? "service" : /\/workforce/.test(p) ? "workforce (retired metaphor)" : /\/platform/.test(p) ? "platform" : /\/fimmick-ecosystem/.test(p) ? "ecosystem" : /(privacy|terms|cookies)$/.test(p) ? "legal" : "page";
 const localeOf = (p) => (p.match(/^\/(en|zh-hant|zh-hans|zh-hk|zh-cn)(?=\/|$)/) || [, "none"])[1];
 
+const slashless = (p) => p.replace(/\/+$/, "") || "/";
+
+/**
+ * Follow redirects by hand. A trailing-slash normalisation is not a content redirect; every other
+ * hop is counted, and more than one is a chain (award pass 2, 8.1.5: old links reach their page in
+ * one hop).
+ */
 async function check(p) {
-  const url = base + p; // paths are already URL-encoded as published
-  const first = await fetch(url, { redirect: "manual" });
-  let status = first.status;
+  let current = p; // paths are already URL-encoded as published
+  let res = await fetch(base + current, { redirect: "manual" });
+  const status = res.status;
   let target = "";
-  let finalStatus = status;
-  if (status >= 300 && status < 400) {
-    target = new URL(first.headers.get("location"), base).pathname;
-    let hop = await fetch(base + target, { redirect: "manual" });
-    finalStatus = hop.status;
-    // A trailing-slash normalisation is not counted as a content redirect.
-    if (finalStatus >= 300 && finalStatus < 400) {
-      const second = new URL(hop.headers.get("location"), base).pathname;
-      hop = await fetch(base + second, { redirect: "manual" });
-      target = second;
-      finalStatus = hop.status;
-    }
+  let hops = 0;
+  for (let n = 0; n < 5 && res.status >= 300 && res.status < 400; n++) {
+    const next = new URL(res.headers.get("location"), base).pathname;
+    if (slashless(next) !== slashless(current)) hops++;
+    current = next;
+    target = next;
+    res = await fetch(base + current, { redirect: "manual" });
   }
-  return { status, target, finalStatus };
+  return { status, target, finalStatus: res.status, hops };
 }
 
 const results = [];
@@ -60,12 +62,14 @@ async function worker() {
 await Promise.all(Array.from({ length: 8 }, worker));
 results.sort((a, b) => a.path.localeCompare(b.path));
 
+/** Reaches a page (or is deliberately gone) in at most one content hop. */
+const passes = (r) => r.hops <= 1 && (r.finalStatus === 200 || r.finalStatus === 410 || (r.path.includes("launch-plan") && r.status === 404));
 const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
 const header = ["old_host", "old_path", "locale", "content_type", "current_status_new_build", "target_path", "action", "http_status", "query_intent_treatment", "evidence", "verification_result"];
 const lines = [header.join(",")];
 for (const r of results) {
-  const action = r.status === 200 ? "keep" : r.status >= 300 && r.status < 400 ? (r.target.replace(/\/$/, "") === r.path.replace(/\/$/, "") ? "normalise trailing slash" : "redirect") : r.status === 404 ? "retire (404)" : "check";
-  const verdict = (r.status === 200 || ((r.status >= 300 && r.status < 400) && r.finalStatus === 200) || (r.path.includes("launch-plan") && r.status === 404)) ? "pass" : "review";
+  const action = r.status === 410 ? "retire (410)" : r.status === 200 ? "keep" : r.status >= 300 && r.status < 400 ? (r.target.replace(/\/$/, "") === r.path.replace(/\/$/, "") ? "normalise trailing slash" : "redirect") : r.status === 404 ? "retire (404)" : "check";
+  const verdict = passes(r) ? "pass" : "review";
   lines.push([
     "www.fimmick.com", r.path, localeOf(r.path), kind(r.path), r.status, r.target, action, r.status, "intent/context query keys parsed against known IDs; unknown values dropped", r.source, verdict,
   ].map(esc).join(","));
@@ -73,4 +77,7 @@ for (const r of results) {
 fs.writeFileSync(path.join(root, "docs", "redesign", "route-migration.csv"), lines.join("\n") + "\n");
 const summary = results.reduce((acc, r) => ((acc[`${r.status}->${r.finalStatus}`] = (acc[`${r.status}->${r.finalStatus}`] || 0) + 1), acc), {});
 console.log(results.length, "urls", summary);
-console.log("needs review:", results.filter((r) => !(r.status === 200 || (r.status >= 300 && r.status < 400 && r.finalStatus === 200) || r.path.includes("launch-plan"))).map((r) => `${r.path} ${r.status}->${r.finalStatus}`).join("\n"));
+console.log("needs review:", results.filter((r) => !passes(r)).map((r) => `${r.path} ${r.status}->${r.finalStatus} (${r.hops} hops)`).join("\n"));
+const chains = results.filter((r) => r.hops > 1);
+console.log("redirect chains:", chains.length);
+if (chains.length) process.exit(1);

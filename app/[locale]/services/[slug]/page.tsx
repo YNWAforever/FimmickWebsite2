@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { objectives, services } from "@/content/services";
 import { memberById } from "@/content/ecosystem";
@@ -12,7 +12,6 @@ import { ui } from "@/content/ui";
 import { casesFor } from "@/content/relations";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { CaseCards, EnquirySection, FlowStrip, IndustryCards, ProductCards, RelatedSection } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 /** /services/ai-transformation permanently redirects to the transformation hub (next.config.ts). */
 const detailServices = services.filter((s) => !s.canonicalPath);
@@ -28,7 +27,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const locale = await resolveLocale(params);
   const s = find((await params).slug);
   if (!s) return {};
-  return pageMetadata({ locale, path: paths.service(s.id), title: t(s.name, locale), description: t(s.summary, locale), generatedImage: true });
+  return pageMetadata({ locale, path: paths.service(s.id), title: t(s.seoTitle ?? s.name, locale), description: s.seoDescription ? t(s.seoDescription, locale) : `${t(s.summary, locale)} ${t(s.problem, locale)}`, generatedImage: true });
 }
 
 export default async function ServicePage({ params }: SlugParams) {
@@ -42,7 +41,6 @@ export default async function ServicePage({ params }: SlugParams) {
   const ws = s.workstream ? workstreamById(s.workstream) : undefined;
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Services" : zh("專業服務", locale), path: "/services" }, { name: t(s.name, locale), path: paths.service(s.id) }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Services" : zh("專業服務", locale), path: "/services" }, { label: t(s.name, locale) }]}

@@ -1,0 +1,622 @@
+
+ RUN  v3.2.7 C:/Users/laich/Documents/FimmickWebsite2
+
+ ❯ tests/unit/seo.test.ts (7 tests | 6 failed) 77ms
+   × JSON-LD output > cannot be closed early by a value containing </script> or broken by U+2028 18ms
+     → expected '{"name":"</script><script>alert(1)</s…' not to contain '<'
+   × Chinese articles live under zh-hant, not /en > content language follows the text (CJK > 30 % → zh-hant) 32ms
+     → expected [ …(214) ] to deeply equal []
+   ✓ Chinese articles live under zh-hant, not /en > every Chinese article has a zh-hant record with its text, and no /en page in the sitemap 2ms
+   × sitemap and hreflang > lists the knowledge-hub categories 2ms
+     → expected +0 to be 66 // Object.is equality
+   × sitemap and hreflang > names x-default beside the English alternate, and zh-hant as zh-Hant 1ms
+     → expected 'zh-Hant-HK' to be 'zh-Hant' // Object.is equality
+   × events > past-event summaries do not say 'Register now' 1ms
+     → expected [ …(7) ] to deeply equal []
+   × events > the Chinese resource listings do not list the English-only events 20ms
+     → expected [ { …(9) }, { …(9) }, { …(9) }, …(21) ] to deeply equal []
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/seo.test.ts > JSON-LD output > cannot be closed early by a value containing </script> or broken by U+2028
+AssertionError: expected '{"name":"</script><script>alert(1)</s…' not to contain '<'
+
+Expected: "<"
+Received: "{"name":"</script><script>alert(1)</script>","note":"a b c"}"
+
+ ❯ tests/unit/seo.test.ts:26:23
+     24|     const html = renderToStaticMarkup(createElement(JsonLd, { data }));
+     25|     const inner = html.slice(html.indexOf(">") + 1, html.lastIndexOf("…
+     26|     expect(inner).not.toContain("<");
+       |                       ^
+     27|     expect(inner).not.toMatch(/[\u2028\u2029]/);
+     28|     expect(JSON.parse(inner)).toEqual(data);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/unit/seo.test.ts > Chinese articles live under zh-hant, not /en > content language follows the text (CJK > 30 % → zh-hant)
+AssertionError: expected [ …(214) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "fimmick-cross-border-seminar",
++   "ai-how-to-use-ai-to-improve-ads-design-blog",
++   "ai-4-common-mistakes-in-ads-design-blog",
++   "ai-free-poe-ai-chatbot-compare-article",
++   "influencer-marketing-challenges-in-finding-kols-blog",
++   "ai-market-insights-linkedin-ai-trend-blog",
++   "fimmick-ikala-seminar",
++   "ecommerce-pop-up-window",
++   "online-ads-what-is-predictive-eye-tracking",
++   "crm-customer-relationship-interaction-communication-management",
++   "online-ads-google-fb-ig-ads-platform-design-skill-blog",
++   "data-what-is-heatmap-blog",
++   "online-ads-five-advertising-design-trends-in-2024-blog",
++   "fimmick-april-ai-marketing-seminars",
++   "crm-5-membership-pitfalls-you-need-to-avoid-blog",
++   "ecommerce-what-is-ecommerce-integration-blog",
++   "technology-3-use-cases-in-aigc-blog",
++   "seo-why-is-my-site-not-ranking-blog",
++   "fimmick-shopline-ai-marketing-seminar",
++   "learning-culture-4-listening-styles-blog",
++   "content-marketing_what-is-trigger-and-drip-marketing_blog",
++   "ecommerce-what-is-omo-3-strategies-to-increase-traffic_blog",
++   "data-what-is-dark-data-blog",
++   "ecommerce-formal-vs-informal-tone-of-voice-in-chatbot-blog",
++   "ecommrece-aigc-vs-human-social-media-advertising-designed-test-blog",
++   "ecommerce-3-common-ways-to-use-ai-in-ecommerce-personalisation-blog",
++   "fimmick-shopline-sme-digital-transformation-seminar",
++   "data-what-is-data-activation-customer-data-blog",
++   "market-insights-2024-digital-marketing-trends-blog",
++   "market-insights-hong-kong-customer-data-collection-and-usage-marketing-survey-2023-report-blog",
++   "fimmick-booster-martech-ai-digital-marketing-strategies-case-studies-seminar",
++   "online-ads-types-of-tracking-cookie-pixel-utm-blog",
++   "learning-time-management-style-personality-quiz-blog",
++   "data-identity-stitching-for-personalised-marketing-blog",
++   "data-4-signs-brands-need-customer-data-unification-blog",
++   "market-insights-hong-kong-customer-data-collection-and-usage-marketing-survey-2023",
++   "data-pipeline-what-is-component-marketing-uses",
++   "data-customer-data-platform-cdp-guide",
++   "market-insights-generative-ai-hong-kong-survey-2023-report",
++   "market-insights-generative-ai-hong-kong-survey-2023",
++   "fimmick-booster-webinar-2023-ai-chatgpt-data-marketing-webinar",
++   "google-analytics-4-ga4-2023-trend",
++   "digital-marketing-career-job-interview-first-impression-tips",
++   "market-insights-tik-tok-marketing-trend-2023",
++   "data-driven-marketing-customer-data-strategy-2023-marketing-trend",
++   "market-insights-social-media-usage-hong-kong-survey-2023-report",
++   "influencer-marketing-creator-economy-2023-trend",
++   "fimmick-booster-webinar-2023-digital-marketing-trends",
++   "ecommerce-website-ab-testing-ideas-best-practices",
++   "learning-culture-six-thinking-hats-decision-making-skills",
++   "market-insights-hong-konger-opinion-on-instagram-2022-updates",
++   "instagram-reels-vs-feed-post",
++   "fimmick-adfocate-webinar-2022-reels-performance-ad-strategies",
++   "seo-what-is-multilingual-seo",
++   "online-ads-what-is-digital-optimisation",
++   "web3-market-insights-nft-marketing-hong-kong-survey-report-2022",
++   "market-insights-nft-marketing-hong-kong-survey",
++   "fimmick-booster-webinar-2022-nft-crm-loyalty-programme-strategies",
++   "web3-what-is-web3-nft-metaverse-marketing",
++   "instagram-shopping-best-practices-2022",
++   "crm-personally-identifiable-information-non-pii-and-personal-data",
++   "seo-strategies-four-pillars",
++   "fimmick-booster-webinar-2022-metaverse-marketing-strategies",
++   "content-marketing-what-is-ugc-pug-ogc-pugc-egc",
++   "instagram-chronological-feed-expected-early-2022",
++   "learning-culture-vark-learning-styles",
++   "facebook-ad-cpc-cost-benchmark-2021",
++   "online-ads-google-advertisement-best-practices-2021",
++   "seo-why-website-not-indexed-google-authoritative-site",
++   "digital-marketing-career-top-in-demand-marketing-jobs-skills-2021",
++   "seo-page-experience-algorithm-update",
++   "market-insights-2021-hong-kong-holiday-shopping-behaviour",
++   "crm-what-is-first-second-third-party-data",
++   "google-can-contextual-targeting-replace-cookies",
++   "fimmick-booster-webinar-2021-data-driven-marketing-strategies",
++   "online-ads-banner-ads-instagram-ads-which-is-better",
++   "influencer-marketing-what-is-affiliate-marketing",
++   "seo-what-is-lsi-keyword-and-how-to-chose",
++   "online-ads-fashion-facebook-ad-design-tips",
++   "instagram-algorithm-rumours-tips",
++   "market-insights-how-to-market-to-50-seniors",
++   "creative-video-google-youtube-shorts-explained",
++   "fimmick-booster-webinar-2021-short-form-video-marketing-trends",
++   "career-tips-fresh-graduate-resume-cv-tips-for-marketing-jobs",
++   "online-ads-what-is-attribution-model",
++   "online-ad-ios14-privacy-updates-impact",
++   "market-insights-what-are-crm-dmp-cdp",
++   "fimmick-booster-webinar-2021-digital-marketing-cdp-dmp",
++   "google-product-monthly-updates",
++   "facebook-features-monthly-updates",
++   "fimmick-booster-webinar-2021-digital-marketing-transformation",
++   "instagram-carousel-ad-best-practices",
++   "google-youtube-seo-best-practices",
++   "2021-digital-marketing-trends-hong-kong",
++   "instagram-guides-marketing",
++   "learning-culture-how-to-learn-while-you-sleep",
++   "influencer-marketing-how-to-calculate-kol-marketing-roi",
++   "google-best-youtube-ad-formats",
++   "fimmick-dday-webinar-2020",
++   "adfocate-influencer-marketing-webinar-2021",
++   "ecommerce-user-interface-ai-audit-and-optimisation",
++   "online-ad-why-b2b-companies-need-digital-marketing-tool",
++   "online-ad-how-to-measure-the-effectiveness-of-online-ads-instead-of-cpm",
++   "ecommerce-importance-of-user-experience-ux-audit",
++   "fimmick-booster-webinar-2020",
++   "online-ad-common-problems-and-solutions",
++   "crm-five-moments-of-truth-to-win-customers",
++   "instagram-2020-best-practices",
++   "facebook-hashtags-improve-organic-reach",
++   "market-insights-covid-19-customer-behaviour-changes-hong-kong",
++   "crm-marketing-automation",
++   "career-tips-online-courses-for-digital-marketers",
++   "ecommerce-bopis-buy-online-pickup-in-store",
++   "digital-marketing-career-google-ads-certification",
++   "ecommerce-best-practices-2020",
++   "d-biz-how-to-select-agency",
++   "d-biz-promotion",
++   "digital-marketing-career-facebook-blueprint",
++   "ecommerce-google-shopping-ad",
++   "smb-why-facebook-like-follow-different",
++   "learning-culture-more-efficient-meetings",
++   "seo-visibility-tips",
++   "online-long-term-ad-strategies",
++   "fimmick-booster-smb",
++   "recruitment-marketing-career-page-tips",
++   "ecommerce-ropo-effect",
++   "wifi-qrcode-generator",
++   "online-ad-facebook-google-ad-campaign",
++   "instagram-ig-post-link",
++   "dark-mode",
++   "recruitment-marketing-employer-branding-content-strategy",
++   "facebook-ad-campaign-budget-optimization",
++   "recruitment-marketing-facebook-job-ads",
++   "learning-culture-deliberate-practice",
++   "instagram-like-hidden",
++   "recruitment-marketing-persona-recruitment",
++   "recruitment-marketing-why-build-talent-pool",
++   "crm-coupon-marketing",
++   "be-a-better-presenter-forget-powerpoint",
++   "what-is-recruitment-marketing",
++   "what-is-facebook-catalogues",
++   "instagram-stories-and-stories-ad",
++   "what-is-conversational-commerce",
++   "creative-video-facebook-youtube-algorithms",
++   "instagram-link-in-bio",
++   "influencer-marketing-campaign-ideas",
++   "facebook-ad-troubleshooting",
++   "instagram-stories-highlights",
++   "creative-video-questions",
++   "facebook-ad-relevance-score",
++   "digital-marketing-common-interview-questions",
++   "instagram-2019-trends-2",
++   "facebook-ad-creative-carousel-ad",
++   "instagram-2019-trends-1",
++   "seo-search-keywords",
++   "learning-culture-training",
++   "crm-data-cleansing",
++   "influencer-marketing-holiday-tactics",
++   "content-marketing-strategies",
++   "online-ad-cro-conversion-rate-optimization",
++   "instagram-ban",
++   "facebook-ad-placements",
++   "learning-culture-focused-diffused-modes",
++   "2019-digital-marketing-outlook-survey",
++   "influencer-marketing-instagram-real-followers",
++   "fb-industry-trends",
++   "facebook-ad-boost-post",
++   "fashion-industry-trends",
++   "facebook-ad-holiday",
++   "finance-industry-trends",
++   "beauty-industry-trend",
++   "influencer-marketing-beauty",
++   "content-marketing-youtube-promotion-strategies",
++   "content-marketing-youtube-strategies",
++   "trend-2018-digital-marketing",
++   "facebook-ad-retargeting-strategies",
++   "instagram-how-to-get-followers",
++   "content-marketing-branding",
++   "seo-off-site-seo",
++   "content-marketing-facebook-algorithm",
++   "influencer-marketing-kol-cost",
++   "facebook-ad-microtargeting",
++   "content-marketing-emoji",
++   "content-marketing-neuromarketing",
++   "facebook-ads-20-percent-rule",
++   "instagram-likes-tips",
++   "influencer-marketing-micro-influencers",
++   "facebook-ad-carpet-bombing",
++   "how-many-instagram-hashtags",
++   "facebook-collection-ad-vs-carousel-ad",
++   "generate-instagram-lead",
++   "instagram-story-ads",
++   "instagram-algorithm-tips",
++   "instagram-marketing",
++   "what-does-fimmickers-do",
++   "digital-marketing-agency-vs-in-house",
++   "influencer-marketing-considerations",
++   "facebook-seo-tips",
++   "influencer-marketing-misconception",
++   "ecommerce-website-platforms-ig-shop",
++   "evergreen-content",
++   "seo-tips",
++   "facebook-marketing-experiment",
++   "o2o",
++   "instagram-shadowban",
++   "digital-marketing-course",
++   "creative-video-budget",
++   "content-marketing-content-curation",
++   "crm-marketing-solution",
++   "creative-video-directions",
++   "content-marketing-inbound-marketing",
++   "facebook-remove-20-rule-text-limit",
++   "influencer-marketing-kol",
++   "digital-marketing-career",
++ ]
+
+ ❯ tests/unit/seo.test.ts:39:38
+     37|       return (cjk(t) > t.length * 0.3) !== (a.locales.en!.contentLangu…
+     38|     });
+     39|     expect(wrong.map((a) => a.slug)).toEqual([]);
+       |                                      ^
+     40|   });
+     41| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/unit/seo.test.ts > sitemap and hreflang > lists the knowledge-hub categories
+AssertionError: expected +0 to be 66 // Object.is equality
+
+- Expected
++ Received
+
+- 66
++ 0
+
+ ❯ tests/unit/seo.test.ts:54:95
+     52| describe("sitemap and hreflang", () => {
+     53|   it("lists the knowledge-hub categories", () => {
+     54|     expect(publicPages().filter((p) => p.path.startsWith("/knowledge-h…
+       |                                                                                               ^
+     55|   });
+     56|   it("names x-default beside the English alternate, and zh-hant as zh-…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/unit/seo.test.ts > sitemap and hreflang > names x-default beside the English alternate, and zh-hant as zh-Hant
+AssertionError: expected 'zh-Hant-HK' to be 'zh-Hant' // Object.is equality
+
+Expected: "zh-Hant"
+Received: "zh-Hant-HK"
+
+ ❯ tests/unit/seo.test.ts:57:44
+     55|   });
+     56|   it("names x-default beside the English alternate, and zh-hant as zh-…
+     57|     expect(localeMeta["zh-hant"].hreflang).toBe("zh-Hant");
+       |                                            ^
+     58|     const entries = sitemap();
+     59|     const withEnglish = entries.filter((e) => e.alternates?.languages …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/unit/seo.test.ts > events > past-event summaries do not say 'Register now'
+AssertionError: expected [ …(7) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "fimmick-shopline-ai-marketing-seminar",
++   "fimmick-booster-webinar-2023-ai-chatgpt-data-marketing-webinar",
++   "fimmick-booster-webinar-2023-digital-marketing-trends",
++   "fimmick-booster-webinar-2022-nft-crm-loyalty-programme-strategies",
++   "fimmick-booster-webinar-2022-metaverse-marketing-strategies",
++   "fimmick-booster-webinar-2021-data-driven-marketing-strategies",
++   "fimmick-booster-smb",
++ ]
+
+ ❯ tests/unit/seo.test.ts:67:90
+     65| describe("events", () => {
+     66|   it("past-event summaries do not say 'Register now'", () => {
+     67|     expect(legacyEvents.filter((e) => /register now/i.test(e.summary))…
+       |                                                                                          ^
+     68|   });
+     69|   it("the Chinese resource listings do not list the English-only event…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/unit/seo.test.ts > events > the Chinese resource listings do not list the English-only events
+AssertionError: expected [ { …(9) }, { …(9) }, { …(9) }, …(21) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "contentLanguage": "en",
++     "date": "2025-09-03",
++     "format": "event",
++     "href": "/events/ai-agent-strategy-seminar",
++     "id": "event:ai-agent-strategy-seminar",
++     "status": "past",
++     "summary": "Wondering how to build an AI Agent team that uncovers business opportunities ahead of competitors? Join FIMMICK's seminar to find out!",
++     "title": "Unlocking Market Opportunities: Your Complete AI Agent Strategy Seminar",
++     "topic": "ai-transformation",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2024-11-07",
++     "format": "event",
++     "href": "/events/fimmick-shoptoplus-ecommerce-webinar",
++     "id": "event:fimmick-shoptoplus-ecommerce-webinar",
++     "status": "past",
++     "summary": "Wondering how to transform your digital commerce business into a sales powerhouse? Join our FIMMICK X Shoptoplus webinar to find out!",
++     "title": "FIMMICK X Shoptoplus AI Digital Retail Webinar: Comprehensive Breakthroughs in E-commerce Sales Opportunities",
++     "topic": "ai-transformation",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2024-10-23",
++     "format": "event",
++     "href": "/events/fimmick-50-plus-target-audience-segmenting-webinar",
++     "id": "event:fimmick-50-plus-target-audience-segmenting-webinar",
++     "status": "past",
++     "summary": "Wondering how to be first in unlocking silver market's underestimated consumer potential? Join FIMMICK X 50ADDOIL webinar to find out!",
++     "title": "FIMMICK X 50ADDOIL Webinar: Tapping into the Silver Hair Market – Modern's Digital Marketing Goldmine",
++     "topic": "marketing-channels",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2024-09-24",
++     "format": "event",
++     "href": "/events/fimmick-social-media-marketing-webinar",
++     "id": "event:fimmick-social-media-marketing-webinar",
++     "status": "past",
++     "summary": "Wondering how to strategise viral content marketing using social matrix? Join FIMMICK X KOL Radar webinar and boost your traffic and revenue!",
++     "title": "FIMMICK Webinar: Navigating Social Media Marketing's New Era",
++     "topic": "creators-community",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2024-07-25",
++     "format": "event",
++     "href": "/events/fimmick-cross-border-seminar",
++     "id": "event:fimmick-cross-border-seminar",
++     "status": "past",
++     "summary": "Learn how to maintain competitiveness and stand out in cross-border e-commerce. Join FIMMICK X GLINTS X ASPIRE X GS1 HK seminar to let technology empower your operations!",
++     "title": "FIMMICK X GLINTS X ASPIRE X GS1 HK: Cross-Border Trade Comprehensive Operations & Sales Decoded",
++     "topic": "commerce",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2024-06-13",
++     "format": "event",
++     "href": "/events/fimmick-ikala-seminar",
++     "id": "event:fimmick-ikala-seminar",
++     "status": "past",
++     "summary": "Master cost-saving tips for KOL marketing. Discover how AI tools help you gain data insights. Join FIMMICK X IKALA seminar for revolutionary breakthroughs in your marketing strategy!",
++     "title": "FIMMICK X IKALA: Local & Overseas AI Marketing Products Comprehensive Analysis Seminar",
++     "topic": "ai-transformation",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2024-04-25",
++     "format": "event",
++     "href": "/events/fimmick-april-ai-marketing-seminars",
++     "id": "event:fimmick-april-ai-marketing-seminars",
++     "status": "past",
++     "summary": "FIMMICK hosts three seminars themed on AI data marketing in April. Industry-leading experts will share AI data-driven marketing strategies.",
++     "title": "FIMMICK April Digital Marketing Seminars: AI Data-Driven Marketing Strategies",
++     "topic": "ai-transformation",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2024-03-21",
++     "format": "event",
++     "href": "/events/fimmick-shopline-ai-marketing-seminar",
++     "id": "event:fimmick-shopline-ai-marketing-seminar",
++     "status": "past",
++     "summary": "Join this seminar tailored for AI transformation companies. Learn hands-on AI marketing experience and winning strategies. Register now!",
++     "title": "FIMMICK X SHOPLINE: Seizing Market Opportunities – AI Marketing Practical Strategy Revealed",
++     "topic": "ai-transformation",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2024-01-18",
++     "format": "event",
++     "href": "/events/fimmick-shopline-sme-digital-transformation-seminar",
++     "id": "event:fimmick-shopline-sme-digital-transformation-seminar",
++     "status": "past",
++     "summary": "Discover practical solutions to accelerate digital transformation and break through business bottlenecks!",
++     "title": "FIMMICK X SHOPLINE: Retailers' Comprehensive Operations Upgrade – Digital Transformation Seminar",
++     "topic": "commerce",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2023-10-30",
++     "format": "event",
++     "href": "/events/fimmick-booster-martech-ai-digital-marketing-strategies-case-studies-seminar",
++     "id": "event:fimmick-booster-martech-ai-digital-marketing-strategies-case-studies-seminar",
++     "status": "past",
++     "summary": "AI is rewriting the rules of digital marketing. Are you ready to face the new challenges of 2024?",
++     "title": "FIMMICK Booster: MarTech & AI Power Unleashed – Efficient Digital Marketing Strategies & Case Studies",
++     "topic": "ai-transformation",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2023-03-16",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2023-ai-chatgpt-data-marketing-webinar",
++     "id": "event:fimmick-booster-webinar-2023-ai-chatgpt-data-marketing-webinar",
++     "status": "past",
++     "summary": "Register now for the FIMMICK Booster webinar on how AI & ChatGPT combined with data are disrupting the marketing landscape in 2023!",
++     "title": "FIMMICK Booster: How AI & ChatGPT Combined with Data Are Disrupting the Marketing Landscape",
++     "topic": "ai-transformation",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2022-11-17",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2023-digital-marketing-trends",
++     "id": "event:fimmick-booster-webinar-2023-digital-marketing-trends",
++     "status": "past",
++     "summary": "Register now for the FIMMICK Booster webinar to explore the latest digital marketing trends for 2023!",
++     "title": "FIMMICK Booster: 2023 Digital Marketing Trends Outlook",
++     "topic": "marketing-channels",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2022-07-27",
++     "format": "event",
++     "href": "/events/fimmick-adfocate-webinar-2022-reels-performance-ad-strategies",
++     "id": "event:fimmick-adfocate-webinar-2022-reels-performance-ad-strategies",
++     "status": "past",
++     "summary": "Join two sessions of FIMMICK X Adfocate online seminars exploring the latest trends, creative strategies, and promotional techniques for Instagram Reels and Performance Ads to boost your exposure and attract more customers!",
++     "title": "FIMMICK X Adfocate: Reels & Performance Ad Marketing Secrets",
++     "topic": "creators-community",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2022-05-19",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2022-nft-crm-loyalty-programme-strategies",
++     "id": "event:fimmick-booster-webinar-2022-nft-crm-loyalty-programme-strategies",
++     "status": "past",
++     "summary": "Is your brand suitable for an NFT loyalty programme? What should you consider? What creative examples exist? Register now!",
++     "title": "FIMMICK Booster: NFT X CRM – A New Era of Customer Loyalty Marketing",
++     "topic": "data-intelligence",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2022-02-24",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2022-metaverse-marketing-strategies",
++     "id": "event:fimmick-booster-webinar-2022-metaverse-marketing-strategies",
++     "status": "past",
++     "summary": "What exactly is metaverse marketing? Register now for the FIMMICK Booster webinar on entering the Metaverse marketing era!",
++     "title": "FIMMICK Booster: Entering the Metaverse Marketing Era – Are You Ready?",
++     "topic": "marketing-channels",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2021-09-09",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2021-data-driven-marketing-strategies",
++     "id": "event:fimmick-booster-webinar-2021-data-driven-marketing-strategies",
++     "status": "past",
++     "summary": "Since iOS 14, advertising CPC has skyrocketed and conversion rates have plummeted, all related to customer data loss. Register now to recover lost data!",
++     "title": "FIMMICK Booster: Data-driven Marketing Practical Guide – Turning Data into Returns",
++     "topic": "data-intelligence",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2021-05-06",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2021-short-form-video-marketing-trends",
++     "id": "event:fimmick-booster-webinar-2021-short-form-video-marketing-trends",
++     "status": "past",
++     "summary": "Short-form and vertical videos have rapidly gained popularity, making traditional video ads unable to capture customer attention. How should brands deploy their video marketing strategy in this video-first era?",
++     "title": "FIMMICK Booster: Video Marketing Revolution – Short Videos, Stories & Cross-Platform Video Ad Strategies",
++     "topic": "marketing-channels",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2021-03-16",
++     "format": "event",
++     "href": "/events/fimmick-graduate-trainee-programme-2021-webinar",
++     "id": "event:fimmick-graduate-trainee-programme-2021-webinar",
++     "status": "past",
++     "summary": "Join us at our Virtual Recruitment Talk to learn more about our Graduate Trainee Programme and chat with our past GTs.",
++     "title": "FIMMICK Graduate Trainee Programme 2021 Virtual Recruitment Talk",
++     "topic": "company-news",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2021-03-04",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2021-digital-marketing-cdp-dmp",
++     "id": "event:fimmick-booster-webinar-2021-digital-marketing-cdp-dmp",
++     "status": "past",
++     "summary": "The battle for customer data has begun! iOS 14 and GDPR significantly limit third-party data used in advertising, causing ad costs to soar. How can companies integrate and leverage first-party data for real value?",
++     "title": "FIMMICK Booster: Post-Cookies Era Revolution – CDP, DMP & Unified ID Digital Marketing Strategy",
++     "topic": "data-intelligence",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2021-01-28",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2021-digital-marketing-transformation",
++     "id": "event:fimmick-booster-webinar-2021-digital-marketing-transformation",
++     "status": "past",
++     "summary": "Digital marketing faces massive changes. Facebook's migration wave and Apple's iOS 14 update limit ad data. How do these new trends affect your marketing plans? How can brands turn crisis into opportunity?",
++     "title": "FIMMICK Booster: 2021 Digital Marketing Revolution – MeWe, Signal & iOS 14",
++     "topic": "data-intelligence",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2020-12-04",
++     "format": "event",
++     "href": "/events/fimmick-dday-webinar-2020",
++     "id": "event:fimmick-dday-webinar-2020",
++     "status": "past",
++     "summary": "The pandemic has impacted the economy. Looking to switch careers but don't know where to start? Register for D-Day now to learn more!",
++     "title": "FIMMICK D-Day 2020 Webinar",
++     "topic": "company-news",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2020-12-03",
++     "format": "event",
++     "href": "/events/adfocate-influencer-marketing-webinar-2021",
++     "id": "event:adfocate-influencer-marketing-webinar-2021",
++     "status": "past",
++     "summary": "One word from influencers beats a thousand words from brands. Join the Influencer Marketing 2021 Trends webinar to learn the latest strategies!",
++     "title": "Influencer Marketing: 2021 Marketing Trends",
++     "topic": "creators-community",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2020-11-05",
++     "format": "event",
++     "href": "/events/fimmick-booster-webinar-2020",
++     "id": "event:fimmick-booster-webinar-2020",
++     "status": "past",
++     "summary": "FIMMICK stands together with you during challenging times. Join three consecutive weekly webinars sharing the best strategies for digital commerce across different industries.",
++     "title": "FIMMICK Booster Webinar Series 2020",
++     "topic": "marketing-channels",
++   },
++   {
++     "contentLanguage": "en",
++     "date": "2019-12-12",
++     "format": "event",
++     "href": "/events/fimmick-booster-smb",
++     "id": "event:fimmick-booster-smb",
++     "status": "past",
++     "summary": "Hong Kong foreign trade enterprises face a tough situation. Ongoing trade wars, fluctuating exchange rates, rising costs, and demanding customers make business harder. How can companies break through and get more overseas orders? Register now!",
++     "title": "FIMMICK Booster SMB: How Digital Marketing Helps You Get Overseas Orders",
++     "topic": "marketing-channels",
++   },
++ ]
+
+ ❯ tests/unit/seo.test.ts:70:73
+     68|   });
+     69|   it("the Chinese resource listings do not list the English-only event…
+     70|     expect(allResources("zh-hant").filter((r) => r.format === "event")…
+       |                                                                         ^
+     71|     expect(allResources("en").filter((r) => r.format === "event").leng…
+     72|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 1 passed (7)
+   Start at  04:26:34
+   Duration  1.78s (transform 537ms, setup 0ms, collect 1.08s, tests 77ms, environment 0ms, prepare 256ms)
+

@@ -3,14 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { members, memberGroups, ecosystemBoundary } from "@/content/ecosystem";
 import { ui } from "@/content/ui";
 import { casesFor } from "@/content/relations";
 import { PageHero, LinkButton } from "@/components/ui";
 import { CaseCards, EnquirySection, IndustryCards, RelatedSection, ServiceCards } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -36,7 +35,6 @@ export default async function MemberPage({ params }: SlugParams) {
   const related = casesFor({ service: m.services[0], industry: m.industries[0] }, 3).filter((c) => c.kind === "client-work");
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Ecosystem" : zh("生態系統", locale), path: "/fimmick-ecosystem" }, { name: m.name, path: paths.member(m.id) }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Ecosystem" : zh("生態系統", locale), path: "/fimmick-ecosystem" }, { label: m.name }]}

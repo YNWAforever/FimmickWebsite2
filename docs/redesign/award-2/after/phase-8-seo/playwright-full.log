@@ -1,0 +1,178 @@
+
+Running 173 tests using 4 workers
+
+[1/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en has no violations
+[2/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hans has no violations
+[3/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/platform has no violations
+[4/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant has no violations
+[5/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/services has no violations
+[6/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/solutions/content-production has no violations
+[7/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/industries has no violations
+[8/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/case-studies/real-estate-sales-follow-up has no violations
+[9/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/contact has no violations
+[10/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/knowledge-hub/4-types-of-crm-system has no violations
+[11/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/about/team has no violations
+[12/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/nonexistent has no violations
+[13/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/platform/nope has no violations
+[14/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/resources/videos has no violations
+[15/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/contact has no violations
+[16/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/case-studies has no violations
+[17/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/resources has no violations
+[18/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/fimmick-ecosystem has no violations
+[19/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/services/digitalmarketing has no violations
+[20/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/products has no violations
+[21/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /en/functions has no violations
+[22/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/services has no violations
+[23/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/knowledge-hub/category/Content%20Marketing has no violations
+[24/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/knowledge-hub/creative-video-questions has no violations
+[25/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en has no violations
+[26/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant has no violations
+[27/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hans has no violations
+[28/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/platform has no violations
+[29/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/services has no violations
+[30/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/solutions/content-production has no violations
+[31/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/industries has no violations
+[32/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/case-studies/real-estate-sales-follow-up has no violations
+[33/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/contact has no violations
+[34/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/knowledge-hub/4-types-of-crm-system has no violations
+[35/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/about/team has no violations
+[36/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/nonexistent has no violations
+[37/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/platform/nope has no violations
+[38/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/resources/videos has no violations
+[39/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/contact has no violations
+[40/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/case-studies has no violations
+[41/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/resources has no violations
+[42/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/fimmick-ecosystem has no violations
+[43/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/services/digitalmarketing has no violations
+[44/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/products has no violations
+[45/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /en/functions has no violations
+[46/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/services has no violations
+[47/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/knowledge-hub/category/Content%20Marketing has no violations
+[48/173] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/knowledge-hub/creative-video-questions has no violations
+[49/173] [chromium] › tests\e2e\copy.spec.ts:5:1 › inner-page headlines carry the editorial accent
+[50/173] [chromium] › tests\e2e\copy.spec.ts:15:1 › the hero states the idea, and its Chinese accent uses emphasis marks
+[51/173] [chromium] › tests\e2e\copy.spec.ts:45:1 › Chinese hero text never breaks inside a word at 390 px (決定, 批准)
+[52/173] [chromium] › tests\e2e\copy.spec.ts:53:1 › the homepage carries one sample notice; 'Illustrative' and 'people decide' stay rare
+[53/173] [chromium] › tests\e2e\copy.spec.ts:74:1 › case pages read job, what changed, who decided, now offered as
+[54/173] [chromium] › tests\e2e\copy.spec.ts:90:1 › detail-page heroes say each thing once (headline and lead appear once in main)
+[55/173] [chromium] › tests\e2e\craft.spec.ts:34:5 › 1.1 locale 404 › /zh-hant/platform/nope renders the localised 404 inside the site shell
+[56/173] [chromium] › tests\e2e\craft.spec.ts:34:5 › 1.1 locale 404 › /zh-hant/knowledge-hub/nope renders the localised 404 inside the site shell
+[57/173] [chromium] › tests\e2e\craft.spec.ts:34:5 › 1.1 locale 404 › /zh-hans/nope renders the localised 404 inside the site shell
+[58/173] [chromium] › tests\e2e\craft.spec.ts:34:5 › 1.1 locale 404 › /en/nope renders the localised 404 inside the site shell
+[59/173] [chromium] › tests\e2e\craft.spec.ts:34:5 › 1.1 locale 404 › /en/services/not-a-service renders the localised 404 inside the site shell
+[60/173] [chromium] › tests\e2e\craft.spec.ts:47:3 › 1.1 locale 404 › the 404 title is localised
+[61/173] [chromium] › tests\e2e\craft.spec.ts:54:3 › 1.1 locale 404 › a URL outside every locale still gets the global 404
+[62/173] [chromium] › tests\e2e\craft.spec.ts:64:3 › 1.2 navigation from 1024 px; drawer as a sheet › primary navigation shows from 1024 px and fits on one line with the CTA
+[63/173] [chromium] › tests\e2e\craft.spec.ts:93:3 › 1.2 navigation from 1024 px; drawer as a sheet › below 1024 px the menu button shows
+[64/173] [chromium] › tests\e2e\craft.spec.ts:100:3 › 1.2 navigation from 1024 px; drawer as a sheet › on tablets the drawer is a right-hand sheet over a scrim that closes it
+[65/173] [chromium] › tests\e2e\craft.spec.ts:118:3 › 1.2 navigation from 1024 px; drawer as a sheet › on phones the drawer stays full-screen
+[66/173] [chromium] › tests\e2e\craft.spec.ts:151:5 › 1.3 lazily rendered bands keep a stable document height › /en at 390px drifts at most 400px on the first scroll
+[67/173] [chromium] › tests\e2e\craft.spec.ts:151:5 › 1.3 lazily rendered bands keep a stable document height › /zh-hant at 390px drifts at most 400px on the first scroll
+[68/173] [chromium] › tests\e2e\craft.spec.ts:151:5 › 1.3 lazily rendered bands keep a stable document height › /en at 1440px drifts at most 150px on the first scroll
+[69/173] [chromium] › tests\e2e\craft.spec.ts:151:5 › 1.3 lazily rendered bands keep a stable document height › /zh-hant at 1440px drifts at most 150px on the first scroll
+[70/173] [chromium] › tests\e2e\craft.spec.ts:151:5 › 1.3 lazily rendered bands keep a stable document height › /en/platform at 390px drifts at most 0px on the first scroll
+[71/173] [chromium] › tests\e2e\craft.spec.ts:151:5 › 1.3 lazily rendered bands keep a stable document height › /en/platform at 1440px drifts at most 0px on the first scroll
+[72/173] [chromium] › tests\e2e\craft.spec.ts:151:5 › 1.3 lazily rendered bands keep a stable document height › /en/services at 390px drifts at most 0px on the first scroll
+[73/173] [chromium] › tests\e2e\craft.spec.ts:151:5 › 1.3 lazily rendered bands keep a stable document height › /en/services at 1440px drifts at most 0px on the first scroll
+[74/173] [chromium] › tests\e2e\craft.spec.ts:159:3 › 1.4 focus and contrast › the utility row comes back into view when it takes keyboard focus
+[75/173] [chromium] › tests\e2e\craft.spec.ts:174:3 › 1.4 focus and contrast › keyboard focus stays visible in forced-colours mode
+[76/173] [chromium] › tests\e2e\craft.spec.ts:191:3 › 1.4 focus and contrast › hovering an output tile keeps its keyboard focus ring
+[77/173] [chromium] › tests\e2e\craft.spec.ts:203:3 › 1.4 focus and contrast › form-field borders and the industry-matrix dash reach 3:1
+[78/173] [chromium] › tests\e2e\craft.spec.ts:221:3 › 1.4 touch targets › footer legal links and the small ghost button are 44 px tall on touch
+[79/173] [chromium] › tests\e2e\craft.spec.ts:232:3 › 1.5 drawer and route-change coordination › the drawer opens at full height after the header has moved
+[80/173] [chromium] › tests\e2e\craft.spec.ts:252:3 › 1.5 drawer and route-change coordination › resizing past the breakpoint closes the drawer and unlocks the page
+[81/173] [chromium] › tests\e2e\craft.spec.ts:263:3 › 1.5 drawer and route-change coordination › the in-drawer close button is never hidden by the desktop rule
+[82/173] [chromium] › tests\e2e\craft.spec.ts:269:3 › 1.5 drawer and route-change coordination › after a route change the header is in place from the first frame
+[83/173] [chromium] › tests\e2e\craft.spec.ts:293:5 › 1.6 small visible breaks › hero photo badge is not covered by the sample card at 390px
+[84/173] [chromium] › tests\e2e\craft.spec.ts:293:5 › 1.6 small visible breaks › hero photo badge is not covered by the sample card at 320px
+[85/173] [chromium] › tests\e2e\craft.spec.ts:312:5 › 1.6 small visible breaks › the dark-chapter marquee rests on a whole, centred phrase (/en at 1440px)
+[86/173] [chromium] › tests\e2e\craft.spec.ts:312:5 › 1.6 small visible breaks › the dark-chapter marquee rests on a whole, centred phrase (/en at 390px)
+[87/173] [chromium] › tests\e2e\craft.spec.ts:312:5 › 1.6 small visible breaks › the dark-chapter marquee rests on a whole, centred phrase (/zh-hant at 1440px)
+[88/173] [chromium] › tests\e2e\craft.spec.ts:348:3 › 1.6 small visible breaks › the scroll cue drops twice, then rests
+[89/173] [chromium] › tests\e2e\craft.spec.ts:355:3 › 1.6 small visible breaks › the explainer falls back to WebM when the MP4 source fails
+[90/173] [chromium] › tests\e2e\craft.spec.ts:370:3 › 1.6 small visible breaks › the poster offers a 640 w candidate
+[91/173] [chromium] › tests\e2e\craft.spec.ts:377:3 › 1.7 icons, titles, archive banner, leadership › the full icon set and a manifest are served
+[92/173] [chromium] › tests\e2e\craft.spec.ts:392:3 › 1.7 icons, titles, archive banner, leadership › article titles show a decoded ampersand
+[93/173] [chromium] › tests\e2e\craft.spec.ts:400:3 › 1.7 icons, titles, archive banner, leadership › the archive banner marks only pre-relaunch articles
+[94/173] [chromium] › tests\e2e\craft.spec.ts:407:3 › 1.7 icons, titles, archive banner, leadership › the leadership page has no pending-approval note and shows a context photograph
+[95/173] [chromium] › tests\e2e\enquiry.spec.ts:20:3 › 2.2 without JavaScript › details never reach the URL, and the email route is offered
+[96/173] [chromium] › tests\e2e\enquiry.spec.ts:40:3 › 2.2 validation and status › an invalid field inside the collapsed details opens them and takes focus
+[97/173] [chromium] › tests\e2e\enquiry.spec.ts:53:3 › 2.2 validation and status › a work description over the limit is reported on that field
+[98/173] [chromium] › tests\e2e\enquiry.spec.ts:65:3 › 2.2 validation and status › success moves focus to the confirmation and is announced by a region that was already there
+[99/173] [chromium] › tests\e2e\enquiry.spec.ts:76:3 › 2.2 validation and status › a retry reuses the request key; an edit after a timeout makes a new one
+[100/173] [chromium] › tests\e2e\enquiry.spec.ts:95:3 › 2.2 validation and status › offline is reported as a failed send, not as a timeout
+[101/173] [chromium] › tests\e2e\enquiry.spec.ts:107:3 › 2.2 context and email handoff › the context chip's remove button is a 44 px target
+[102/173] [chromium] › tests\e2e\enquiry.spec.ts:115:3 › 2.2 context and email handoff › a long prepared email offers Copy before the email-app link
+[103/173] [chromium] › tests\e2e\enquiry.spec.ts:125:3 › 2.2 context and email handoff › Copy confirms, then resets; a refused clipboard selects the text instead
+[104/173] [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/services: editorial rows, no card grid, the row link is named by its headline
+[105/173] [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/products: editorial rows, no card grid, the row link is named by its headline
+[106/173] [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/functions: editorial rows, no card grid, the row link is named by its headline
+[107/173] [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/platform: editorial rows, no card grid, the row link is named by its headline
+[108/173] [chromium] › tests\e2e\hubs.spec.ts:31:1 › products and functions name what the link opens
+[109/173] [chromium] › tests\e2e\hubs.spec.ts:38:1 › the services filter works in place: no server round trip, URL kept in step
+[110/173] [chromium] › tests\e2e\photo.spec.ts:5:1 › the homepage keeps the pill for the hero only and says 'Illustrative' at most three times
+[111/173] [chromium] › tests\e2e\photo.spec.ts:15:1 › every photograph keeps its provenance in the title
+[112/173] [chromium] › tests\e2e\photo.spec.ts:21:1 › page heroes use the wide crop from 800 px; the closing photo uses the portrait crop on phones
+[113/173] [chromium] › tests\e2e\photo.spec.ts:33:1 › at 1440 and DPR 2 the page hero is sharp when a 2560 master exists
+[114/173] [chromium] › tests\e2e\photo.spec.ts:49:1 › brand files are cached for a day, photographs for a year
+[115/173] [chromium] › tests\e2e\seo.spec.ts:15:3 › 8.1.1 Chinese articles › an article written in Chinese moves from /en to /zh-hant with a 308, in one hop from the old prefix-less URL
+[116/173] [chromium] › tests\e2e\seo.spec.ts:24:3 › 8.1.1 Chinese articles › its zh-hant page is a real page: Chinese lang, its own canonical, no 'shown in English' note
+[117/173] [chromium] › tests\e2e\seo.spec.ts:34:1 › English listings link no Chinese article
+[118/173] [chromium] › tests\e2e\seo.spec.ts:42:3 › 8.1.3 structured data › the site graph has a WebSite node and an Organization with an @id
+[119/173] [chromium] › tests\e2e\seo.spec.ts:48:3 › 8.1.3 structured data › pages with breadcrumbs carry a BreadcrumbList that matches them
+[120/173] [chromium] › tests\e2e\seo.spec.ts:56:3 › 8.1.3 structured data › articles: image, ISO dates in Hong Kong time, canonical mainEntityOfPage
+[121/173] [chromium] › tests\e2e\seo.spec.ts:63:3 › 8.1.3 structured data › events: status, end date, and a virtual location for webinars
+[122/173] [chromium] › tests\e2e\seo.spec.ts:75:3 › 8.1.3 structured data › the explainer has a server-rendered <video> for its VideoObject
+[123/173] [chromium] › tests\e2e\seo.spec.ts:83:3 › 8.1.4–5 routes › old links reach their page in one hop
+[124/173] [chromium] › tests\e2e\seo.spec.ts:97:3 › 8.1.4–5 routes › the two retired case studies are gone (410)
+[125/173] [chromium] › tests\e2e\seo.spec.ts:111:3 › 8.1.6 events in Chinese › the Chinese events hub does not list the English-only events
+[126/173] [chromium] › tests\e2e\seo.spec.ts:103:3 › 8.1.4–5 routes › an unknown knowledge-hub category is a 404; a known one has a localised title
+[127/173] [chromium] › tests\e2e\seo.spec.ts:118:3 › 8.1.2 titles and descriptions › English titles fit in 65 characters and are unique; descriptions are 70–160
+[128/173] [chromium] › tests\e2e\shell.spec.ts:21:3 › 4.1 footer › four columns of two groups at 1440, lists aligned
+[129/173] [chromium] › tests\e2e\shell.spec.ts:30:3 › 4.1 footer › one column of groups at 390
+[130/173] [chromium] › tests\e2e\shell.spec.ts:37:3 › 4.1 footer › social links are labelled 44 px icons
+[131/173] [chromium] › tests\e2e\shell.spec.ts:49:3 › 4.1 footer › footer links do not prefetch
+[132/173] [chromium] › tests\e2e\shell.spec.ts:80:3 › 4.2 mega menu › opens on hover intent and closes after the pointer leaves
+[133/173] [chromium] › tests\e2e\shell.spec.ts:91:3 › 4.2 mega menu › an open panel has a scrim and its featured card uses the right-hand column
+[134/173] [chromium] › tests\e2e\shell.spec.ts:105:3 › 4.2 mega menu › Tab out of the nav closes the panel
+[135/173] [chromium] › tests\e2e\shell.spec.ts:117:3 › 4.2 mega menu › a link to the current page closes the panel
+[136/173] [chromium] › tests\e2e\shell.spec.ts:128:3 › 4.3 contact › the disclosure has the FAQ indicator and the prepared email is a card in the body face
+[137/173] [chromium] › tests\e2e\shell.spec.ts:144:3 › 4.3 contact › an office without an address has no empty line
+[138/173] [chromium] › tests\e2e\shell.spec.ts:164:5 › 4.4 share images › /en/opengraph-image is a 1200×630 PNG
+[139/173] [chromium] › tests\e2e\shell.spec.ts:164:5 › 4.4 share images › /zh-hant/case-studies/omni-channel-retail-intelligence/opengraph-image is a 1200×630 PNG
+[140/173] [chromium] › tests\e2e\shell.spec.ts:172:3 › 4.4 share images › an article shares its own image; other pages keep the fallback
+[141/173] [chromium] › tests\e2e\shell.spec.ts:179:3 › 4.4 share images › Open Graph names the alternate locales
+[142/173] [chromium] › tests\e2e\shell.spec.ts:186:3 › 4.5 hero at 1920 › the headline sits on at most two lines in a copy column at least 640 px wide
+[143/173] [chromium] › tests\e2e\signature.spec.ts:20:1 › keyboard: a fact chip lights the words it supplied; Approve toggles the stamp and the export step
+[144/173] [chromium] › tests\e2e\signature.spec.ts:45:1 › arrow keys move between fact chips; hover lights the words too
+[145/173] [chromium] › tests\e2e\signature.spec.ts:59:1 › without JavaScript the card shows the finished state
+[146/173] [chromium] › tests\e2e\signature.spec.ts:67:1 › reduced motion: the underline and the stamp appear without animation
+[147/173] [chromium] › tests\e2e\signature.spec.ts:74:1 › the card's island is at most 6 KB gzipped
+[148/173] [chromium] › tests\e2e\signature.spec.ts:86:1 › on phones the whole card shows: nothing is clipped by the hero
+[149/173] [chromium] › tests\e2e\site.spec.ts:16:3 › routes, redirects and indexing › key pages render with the right language and canonical
+[150/173] [chromium] › tests\e2e\site.spec.ts:28:3 › routes, redirects and indexing › legacy URLs redirect to meaningful destinations without chains
+[151/173] [chromium] › tests\e2e\site.spec.ts:49:3 › routes, redirects and indexing › unknown URLs are genuine 404s
+[152/173] [chromium] › tests\e2e\site.spec.ts:55:3 › routes, redirects and indexing › review build blocks crawlers; sitemap lists canonical pages
+[153/173] [chromium] › tests\e2e\site.spec.ts:65:3 › routes, redirects and indexing › Simplified Chinese pages render converted copy with a zh-Hans hreflang
+[154/173] [chromium] › tests\e2e\site.spec.ts:82:3 › no horizontal overflow at 360px
+[155/173] [chromium] › tests\e2e\site.spec.ts:82:3 › no horizontal overflow at 390px
+[156/173] [chromium] › tests\e2e\site.spec.ts:82:3 › no horizontal overflow at 768px
+[157/173] [chromium] › tests\e2e\site.spec.ts:82:3 › no horizontal overflow at 1024px
+[158/173] [chromium] › tests\e2e\site.spec.ts:82:3 › no horizontal overflow at 1440px
+[159/173] [chromium] › tests\e2e\site.spec.ts:91:3 › navigation › desktop menu opens by keyboard, Escape closes and returns focus
+[160/173] [chromium] › tests\e2e\site.spec.ts:104:3 › navigation › all eight pillars are reachable in the mobile drawer
+[161/173] [chromium] › tests\e2e\site.spec.ts:120:3 › interactive examples › content example: edits invalidate review, export needs review, reset restores
+[162/173] [chromium] › tests\e2e\site.spec.ts:148:3 › interactive examples › follow-up example keeps human-only enquiries away from drafts
+[163/173] [chromium] › tests\e2e\site.spec.ts:156:3 › interactive examples › website example holds records with missing required fields
+[164/173] [chromium] › tests\e2e\site.spec.ts:166:3 › enquiry journey › context is preserved, validation works, and no false success without a backend
+[165/173] [chromium] › tests\e2e\site.spec.ts:184:3 › enquiry journey › API rejects invalid input and never reports acceptance without a delivery backend
+[166/173] [chromium] › tests\e2e\site.spec.ts:196:3 › locale continuity and media › language switch keeps the equivalent page and safe context only
+[167/173] [chromium] › tests\e2e\site.spec.ts:205:3 › locale continuity and media › no video bytes before intent; captions attached after play
+[168/173] [chromium] › tests\e2e\site.spec.ts:219:3 › locale continuity and media › key pages produce no console errors
+[169/173] [chromium] › tests\e2e\site.spec.ts:232:3 › locale continuity and media › reduced motion keeps all content visible
+[170/173] [chromium] › tests\e2e\site.spec.ts:245:3 › locale continuity and media › homepage hero shows a sample output with its four-step record and a person approving
+[171/173] [chromium] › tests\e2e\site.spec.ts:256:3 › locale continuity and media › signature workflow: plays once when visible, pauses, steps by keyboard and shows all four
+[172/173] [chromium] › tests\e2e\site.spec.ts:277:3 › locale continuity and media › award styles win the cascade in the production bundle
+[173/173] [chromium] › tests\e2e\site.spec.ts:292:3 › locale continuity and media › photographs are labelled as illustrative and described
+  1 skipped
+  172 passed (3.3m)

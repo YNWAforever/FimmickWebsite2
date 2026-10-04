@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { formatDate, href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { allResources } from "@/lib/resources";
 import { resourceTopics } from "@/content/resources";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { EnquirySection } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 const copy = {
   title: { en: "Insights", zh: "洞察" },
@@ -33,7 +32,6 @@ export default async function InsightsPage({ params }: LocaleParams) {
     .filter((g) => g.list.length);
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { name: t(copy.title, locale), path: "/insights" }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]}

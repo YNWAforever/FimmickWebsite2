@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { buildingBlocks, runSteps } from "@/content/platform-pages";
 import { governanceBoundary, integrationNotes } from "@/content/platform";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { EnquirySection, PlatformLayersBlock } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 const copy = {
   title: { en: "Platform architecture", zh: "平台架構" },
@@ -29,7 +28,6 @@ export default async function ArchitecturePage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Platform" : zh("平台", locale), path: "/platform" }, { name: t(copy.title, locale), path: "/platform/architecture" }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { businessFunctions } from "@/content/functions";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { EditorialList, EnquirySection } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 const copy = {
   title: { en: "Workflows by business function", zh: "按業務職能劃分的流程" },
@@ -27,7 +26,6 @@ export default async function FunctionsHub({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: t(copy.title, locale), path: "/functions" }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}

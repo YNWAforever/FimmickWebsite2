@@ -21,7 +21,8 @@ export const defaultLocale: Locale = "en";
 
 export const localeMeta: Record<LegacyLocale, { identity: string; htmlLang: string; hreflang: string; ogLocale: string; label: string; short: string }> = {
   en: { identity: "en", htmlLang: "en", hreflang: "en", ogLocale: "en_HK", label: "English", short: "EN" },
-  "zh-hant": { identity: "zh-HK", htmlLang: "zh-Hant-HK", hreflang: "zh-Hant-HK", ogLocale: "zh_HK", label: "繁體中文", short: "繁" },
+  // hreflang uses the script subtag search engines match on; the page itself stays zh-Hant-HK.
+  "zh-hant": { identity: "zh-HK", htmlLang: "zh-Hant-HK", hreflang: "zh-Hant", ogLocale: "zh_HK", label: "繁體中文", short: "繁" },
   "zh-hans": { identity: "zh-CN", htmlLang: "zh-Hans", hreflang: "zh-Hans", ogLocale: "zh_CN", label: "简体中文", short: "简" },
 };
 

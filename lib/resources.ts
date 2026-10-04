@@ -42,6 +42,16 @@ export const RELAUNCH_DATE = "2026-01-01";
 export const isArchiveArticle = (published: string) => published < RELAUNCH_DATE;
 
 /** Parse the legacy display date ("3 September 2025 (WED)") to ISO for sorting. */
+/**
+ * Whether an article has a genuine English version. Some "en" records hold Chinese text
+ * (contentLanguage "zh-hant"); those articles live under zh-hant only (award pass 2, 8.1.1).
+ */
+export const hasEnglish = (a: ArticleIndexEntry) => a.locales.en?.contentLanguage === "en";
+
+/** The locales an article has its own page in. */
+export const articleLocales = (a: ArticleIndexEntry): LegacyLocale[] =>
+  (["en", "zh-hant", "zh-hans"] as LegacyLocale[]).filter((l) => (l === "en" ? hasEnglish(a) : Boolean(a.locales[l])));
+
 export function eventIsoDate(display: string): string {
   const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
   const match = display.toLowerCase().match(/(\d{1,2})\s+([a-z]+)\s+(\d{4})/);
@@ -51,6 +61,19 @@ export function eventIsoDate(display: string): string {
   }
   const month = months.indexOf(match[2]) + 1;
   return `${match[3]}-${String(month).padStart(2, "0")}-${match[1].padStart(2, "0")}`;
+}
+
+/** Start and end in Hong Kong time (+08:00) from the display date and a time such as "3:00 – 4:30PM". */
+export function eventTimes(e: LegacyEvent): { start: string; end: string } {
+  const date = eventIsoDate(e.date);
+  const [from, to] = (e.time ?? "").split(/[–-]/).map((part) => part.trim().match(/^(\d{1,2})(?::(\d{2}))?\s*([ap]m)?$/i));
+  if (!from || !to) return { start: `${date}T00:00:00+08:00`, end: `${date}T23:59:00+08:00` };
+  // "3:00 – 4:30PM": the start takes the end's AM/PM when it has none.
+  const clock = (m: RegExpMatchArray, meridiem?: string) => {
+    const pm = (m[3] ?? meridiem ?? "").toLowerCase() === "pm";
+    return `${String((Number(m[1]) % 12) + (pm ? 12 : 0)).padStart(2, "0")}:${m[2] ?? "00"}:00`;
+  };
+  return { start: `${date}T${clock(from, to[3])}+08:00`, end: `${date}T${clock(to)}+08:00` };
 }
 
 const eventTopic = (e: LegacyEvent): ResourceTopic => {
@@ -86,10 +109,12 @@ export function allResources(locale: Locale): ResourceItem[] {
   }
   items.push({ id: `video:${explainerVideo.slug}`, format: "video", topic: explainerVideo.topic, title: t(explainerVideo.title, locale), summary: t(explainerVideo.summary, locale), date: explainerVideo.published, contentLanguage: "bilingual", href: "/resources/videos" });
   items.push({ id: "workshop", format: "workshop", topic: workshopResource.topic, title: t(workshopResource.title, locale), summary: t(workshopResource.summary, locale), date: "", contentLanguage: "bilingual", href: "/workshop", status: "on-request" });
-  for (const event of legacyEvents) {
+  // The legacy events exist in English only, so the Chinese listings leave them out (8.1.6).
+  for (const event of locale === "en" ? legacyEvents : []) {
     items.push({ id: `event:${event.id}`, format: "event", topic: eventTopic(event), title: event.title, summary: event.summary, date: eventIsoDate(event.date), contentLanguage: "en", href: `/events/${event.id}`, status: "past" });
   }
   for (const article of articleIndex) {
+    if (locale === "en" && !hasEnglish(article)) continue;
     const meta = article.locales[locale] ?? article.locales.en;
     if (!meta) continue;
     const lang = (article.locales[locale] ? meta.contentLanguage : "en") as ResourceItem["contentLanguage"];

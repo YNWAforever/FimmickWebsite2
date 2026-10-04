@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { objectives, services } from "@/content/services";
 import { casesFor } from "@/content/relations";
@@ -10,7 +10,6 @@ import { ui } from "@/content/ui";
 import type { ServiceObjective } from "@/content/types";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { CaseCards, EnquirySection, FunctionCards, RelatedSection, SolutionCards } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 const copy = {
   title: { en: "Growth solutions", zh: "增長方案" },
@@ -33,7 +32,6 @@ export default async function GrowthPage({ params }: LocaleParams) {
   const related = [...casesFor({ service: "digitalmarketing" }, 2), ...casesFor({ service: "crm-sales" }, 2)].filter((c, i, all) => all.findIndex((x) => x.slug === c.slug) === i).slice(0, 3);
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: t(copy.title, locale), path: "/growth" }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Services" : zh("專業服務", locale), path: "/services" }, { label: t(copy.title, locale) }]}

@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { href, formatDate, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { pageMetadata } from "@/lib/seo";
-import { eventById, eventIsoDate, legacyEvents } from "@/lib/resources";
+import { localeUrl, organizationId, pageMetadata } from "@/lib/seo";
+import { eventById, eventIsoDate, eventTimes, legacyEvents } from "@/lib/resources";
 import { Crumbs } from "@/components/ui";
 import { EnquirySection } from "@/components/blocks";
 import { JsonLd } from "@/components/JsonLd";
@@ -16,10 +16,11 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: SlugParams): Promise<Metadata> {
-  const locale = await resolveLocale(params);
+  await resolveLocale(params); // validates the segment; the record is English only
   const e = eventById((await params).slug);
   if (!e) return {};
-  return pageMetadata({ locale, path: `/events/${e.id}`, title: e.title, description: e.summary, generatedImage: true });
+  // The record is English only: every locale’s page names the English one as canonical (8.1.6).
+  return { ...pageMetadata({ locale: "en", path: `/events/${e.id}`, title: `Event: ${e.title}`, description: e.summary, alternates: ["en"], generatedImage: true }) };
 }
 
 const strip = (s: string) => s.replace(/\*\*/g, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
@@ -64,9 +65,14 @@ export default async function EventPage({ params }: SlugParams) {
           "@type": "Event",
           name: e.title,
           description: e.summary,
-          startDate: iso,
-          organizer: { "@type": "Organization", name: "FIMMICK" },
-          ...(e.venue ? { location: { "@type": "Place", name: e.venue, address: e.venue } } : { eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode" }),
+          startDate: eventTimes(e).start,
+          endDate: eventTimes(e).end,
+          // Past events took place as scheduled; schema.org has no "completed" status.
+          eventStatus: "https://schema.org/EventScheduled",
+          organizer: { "@type": "Organization", "@id": organizationId, name: "FIMMICK" },
+          ...(e.venue && e.format !== "Webinar"
+            ? { eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode", location: { "@type": "Place", name: e.venue, address: e.venue } }
+            : { eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode", location: { "@type": "VirtualLocation", url: localeUrl("en", `/events/${e.id}`) } }),
         }}
       />
       <article className="section">

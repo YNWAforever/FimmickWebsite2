@@ -14,6 +14,7 @@ const pages = [
   "/en/nonexistent", "/zh-hant/platform/nope", "/en/resources/videos", "/zh-hant/contact",
   "/en/case-studies", "/en/resources", "/en/fimmick-ecosystem", "/zh-hant/services/digitalmarketing",
   "/en/products", "/en/functions", "/zh-hant/services",
+  "/zh-hant/knowledge-hub/category/Content%20Marketing", "/zh-hant/knowledge-hub/creative-video-questions",
 ];
 const tags = ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa", "best-practice"];
 
