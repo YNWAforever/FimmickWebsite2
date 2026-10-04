@@ -102,7 +102,7 @@ export function Motion({ viewLabel }: { viewLabel: string }) {
     const measure = () => {
       const phrase = text.getBoundingClientRect();
       if (!phrase.width) return;
-      // Phrase and track share the track's translateX, so their difference is the untransformed offset.
+      // Phrase and track share the track’s translateX, so their difference is the untransformed offset.
       const centre = phrase.left - track.getBoundingClientRect().left + phrase.width / 2;
       track.style.setProperty("--marquee-rest", `${Math.round(marquee.clientWidth / 2 - centre)}px`);
     };

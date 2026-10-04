@@ -8,6 +8,7 @@ import type { Product, ProductId } from "./types";
 export const products: Product[] = [
   {
     id: "social-listening",
+    headlineAccent: { en: "conversation insight", zh: "社交討論洞察" },
     name: "AI Social Listening",
     descriptor: { en: "Source-linked conversation insight", zh: "附來源連結的社交討論洞察" },
     solution: "market-intelligence",
@@ -50,6 +51,7 @@ export const products: Product[] = [
   },
   {
     id: "aiso",
+    headlineAccent: { en: "and improvements", zh: "檢視與改善" },
     name: "AISO — AI Search Operations",
     descriptor: { en: "Defined AI-search review and improvements", zh: "具明確範圍的 AI 搜尋檢視與改善" },
     solution: "market-intelligence",
@@ -91,6 +93,7 @@ export const products: Product[] = [
   },
   {
     id: "creativemax",
+    headlineAccent: { en: "and visual variants", zh: "文案及視覺版本" },
     name: "CreativeMax",
     descriptor: { en: "Editable copy and visual variants", zh: "可編輯的文案及視覺版本" },
     solution: "content-production",
@@ -127,12 +130,13 @@ export const products: Product[] = [
     example: "content",
     faqs: [
       { q: { en: "Can we edit the drafts?", zh: "可以修改草稿嗎？" }, a: { en: "Yes — every draft is editable. Editing an approved draft returns it to review so the record stays accurate.", zh: "可以，每份草稿都能修改；已批准的草稿一經修改便會退回審閱，確保記錄準確。" } },
-      { q: { en: "What does the export contain?", zh: "匯出檔包含甚麼？" }, a: { en: "The selected copy, the source facts used, the review status and the reviewer's notes.", zh: "選定的文案、所用的來源資料、審閱狀態及審閱人備註。" } },
+      { q: { en: "What does the export contain?", zh: "匯出檔包含甚麼？" }, a: { en: "The selected copy, the source facts used, the review status and the reviewer’s notes.", zh: "選定的文案、所用的來源資料、審閱狀態及審閱人備註。" } },
     ],
     services: ["content-creative", "digitalmarketing"],
   },
   {
     id: "whatsapp-aigc",
+    headlineAccent: { en: "content workflow", zh: "內容流程" },
     name: "WhatsApp AIGC",
     descriptor: { en: "Material-submission content workflow", zh: "素材提交內容流程" },
     solution: "content-production",
@@ -174,6 +178,7 @@ export const products: Product[] = [
   },
   {
     id: "customer-ops",
+    headlineAccent: { en: "and next tasks", zh: "下一步工作" },
     name: "Customer Ops",
     descriptor: { en: "Enquiry records, owners and next tasks", zh: "查詢紀錄、負責人及下一步工作" },
     solution: "customer-engagement",
@@ -215,6 +220,7 @@ export const products: Product[] = [
   },
   {
     id: "website-cms",
+    headlineAccent: { en: "to reviewed page updates", zh: "經審閱的頁面更新" },
     name: "Website / CMS",
     descriptor: { en: "Structured records to reviewed page updates", zh: "由結構化紀錄到經審閱的頁面更新" },
     solution: "website-operations",
@@ -237,15 +243,15 @@ export const products: Product[] = [
       en: ["A structured data source", "Page templates", "CMS access if publishing is in scope"],
       zh: ["結構化資料來源", "頁面範本", "如包括發布，需可存取 CMS"],
     },
-    output: { en: "Validated record, reviewed page update, preview/export and change history.", zh: "已驗證紀錄、經審閱的頁面更新、預覽／匯出檔及變更記錄。" },
+    output: { en: "Validated record, reviewed page update, preview/export and change history.", zh: "已驗證紀錄、經審閱的頁面更新、預覽／匯出檔及變更紀錄。" },
     workflow: [
       { title: { en: "Record", zh: "紀錄" }, copy: { en: "Change the source record.", zh: "更新來源紀錄。" } },
       { title: { en: "Validate", zh: "驗證" }, copy: { en: "Rules checked, gaps flagged.", zh: "檢查規則，標示缺漏。" } },
       { title: { en: "Review", zh: "審閱" }, copy: { en: "Before/after and preview approved.", zh: "批核更新前後對照及預覽。" } },
-      { title: { en: "Export", zh: "匯出" }, copy: { en: "Export or publish with history.", zh: "匯出或發布並保留記錄。" } },
+      { title: { en: "Export", zh: "匯出" }, copy: { en: "Export or publish with history.", zh: "匯出或發布並保留紀錄。" } },
     ],
     distinction: {
-      en: "Website / CMS manages content accuracy. It does not run your shop's transactions.",
+      en: "Website / CMS manages content accuracy. It does not run your shop’s transactions.",
       zh: "Website / CMS 負責內容準確性，不處理網店交易。",
     },
     example: "website-ops",

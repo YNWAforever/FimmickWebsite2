@@ -43,9 +43,9 @@ export default async function SolutionPage({ params }: SlugParams) {
         locale={locale}
         photo={solutionPhotos[s.id]}
         crumbs={[{ label: en ? "Solutions" : zh("解決方案", locale), path: "/solutions" }, { label: t(s.name, locale) }]}
-        eyebrow={`${en ? "Solution" : zh("解決方案", locale)} ${s.number}`}
-        title={t(s.name, locale)}
-        lead={t(s.job, locale)}
+        eyebrow={`${en ? "Solution" : zh("解決方案", locale)} ${s.number} · ${t(s.name, locale)}`}
+        title={t(s.job, locale)}
+        accent={s.headlineAccent ? t(s.headlineAccent, locale) : undefined}
         actions={
           <>
             <LinkButton to={href(locale, contact)} variant="accent">{t(ui.discussConfiguration, locale)}</LinkButton>

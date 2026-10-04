@@ -76,7 +76,7 @@ function Artifact({ id, locale }: { id: WorkstreamId; locale: Locale }) {
         <Table locale={locale} caption={x("Illustrative sequence. Timing is agreed per engagement; no durations are implied.", "示例次序。時間按項目議定，此處不代表任何時長。")} head={[x("Stage", "階段"), x("Workflows", "流程"), x("Reusable capability", "可重用能力"), x("Owner", "負責人"), x("Decision gate", "決策關卡")]} rows={[
           [x("Prove", "驗證"), x("Content production", "內容製作"), x("Approved facts library; review step", "已確認資料庫；審閱步驟"), x("CMO", "市場總監"), x("Quality of reviewed outputs", "已審閱輸出的質素")],
           [x("Extend", "擴展"), x("Enquiry follow-up", "查詢跟進"), x("Answer library; routing rules", "答案庫；分派規則"), x("Head of Sales", "銷售主管"), x("Response ownership visible", "回應責任清晰可見")],
-          [x("Connect", "連接"), x("Listing updates", "資料更新"), x("Structured records; CMS connection", "結構化紀錄；CMS 串接"), x("Digital lead", "數碼主管"), x("Change history complete", "變更記錄完整")],
+          [x("Connect", "連接"), x("Listing updates", "資料更新"), x("Structured records; CMS connection", "結構化紀錄；CMS 串接"), x("Digital lead", "數碼主管"), x("Change history complete", "變更紀錄完整")],
         ]} />
         <h3>{en ? "Target operating model (sample)" : zh("目標營運模式（示例）", locale)}</h3>
         <Table locale={locale} caption={sampleCaption} head={[x("Layer", "層面"), x("Leaders", "管理層"), x("Teams", "團隊"), x("AI tasks", "AI 任務"), x("Systems", "系統")]} rows={[

@@ -203,7 +203,7 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
     </header>
 
       {/* The drawer is a sibling of <header>, not a child: the header moves with a transform while
-          reading, which would make it the drawer's containing block and squash the opening frames. */}
+          reading, which would make it the drawer’s containing block and squash the opening frames. */}
       <div
         className="drawer-scrim"
         hidden={!drawer}

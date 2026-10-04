@@ -1,0 +1,61 @@
+
+Running 1 test using 1 worker
+
+[1/1] [chromium] › tests\e2e\copy.spec.ts:90:1 › detail-page heroes say each thing once (headline and lead appear once in main)
+  1) [chromium] › tests\e2e\copy.spec.ts:90:1 › detail-page heroes say each thing once (headline and lead appear once in main) 
+
+    Error: /en/solutions/market-intelligence
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Conversation data sits in screenshots and exports, and nobody can say with confidence how the brand appears when people ask AI assistants for a recommendation.",
+    + ]
+
+       98 |       return phrases.filter((phrase) => blocks.filter((b) => b === phrase).length > 1);
+       99 |     });
+    > 100 |     expect.soft(repeats, path).toEqual([]);
+          |                                ^
+      101 |   }
+      102 | });
+      103 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\copy.spec.ts:100:32
+
+    Error: /en/industries/retail-ecommerce
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Consistent product pages and a reviewed launch content pack from one set of facts.",
+    + ]
+
+       98 |       return phrases.filter((phrase) => blocks.filter((b) => b === phrase).length > 1);
+       99 |     });
+    > 100 |     expect.soft(repeats, path).toEqual([]);
+          |                                ^
+      101 |   }
+      102 | });
+      103 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\copy.spec.ts:100:32
+
+    Error Context: test-results\copy-detail-page-heroes-sa-babd0-d-lead-appear-once-in-main--chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\copy-detail-page-heroes-sa-babd0-d-lead-appear-once-in-main--chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\copy-detail-page-heroes-sa-babd0-d-lead-appear-once-in-main--chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [chromium] › tests\e2e\copy.spec.ts:90:1 › detail-page heroes say each thing once (headline and lead appear once in main) 

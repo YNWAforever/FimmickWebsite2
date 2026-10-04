@@ -76,7 +76,7 @@ export const capabilities: Capability[] = [
     title: { en: "Every metric should lead to a decision.", zh: "每個指標都應指向一個決定。" },
     intro: {
       en: "Connect campaign, CRM, commerce and operational exports so teams receive explanations, anomalies and next questions — not another reporting queue.",
-      zh: "連繫宣傳、CRM、電子商貿及營運資料，讓團隊得到解釋、異常提示及下一步要問的問題，而不是另一條報告輪候隊伍。",
+      zh: "連繫宣傳、CRM、電商及營運資料，讓團隊得到解釋、異常提示及下一步要問的問題，而不是另一條報告輪候隊伍。",
     },
     principle: {
       en: "Analysis follows agreed definitions, shows its method and sources, and leaves material interpretation to your analysts and owners.",
@@ -225,7 +225,7 @@ export const taskPatterns: TaskPattern[] = [
   { name: { en: "Monitor", zh: "監察" }, does: { en: "Watches approved sources on a schedule.", zh: "按時間表監察已確認的來源。" }, example: { en: "Competitor price pages, listening feeds", zh: "競爭對手價格頁、聆聽資料" }, never: { en: "Scrape sources you are not permitted to use", zh: "擷取未獲准使用的來源" } },
   { name: { en: "Classify", zh: "分類" }, does: { en: "Sorts items by topic, urgency or owner.", zh: "按話題、緊急程度或負責人分類。" }, example: { en: "Enquiries, mentions, requests", zh: "查詢、提及、要求" }, never: { en: "Decide a complaint or sensitive case", zh: "決定投訴或敏感個案" } },
   { name: { en: "Draft", zh: "草擬" }, does: { en: "Prepares text or visual directions from approved facts.", zh: "根據已確認資料準備文字或視覺方向。" }, example: { en: "Captions, replies, briefs, listings", zh: "文案、回覆、簡報、資料頁" }, never: { en: "Publish or send without approval", zh: "未經批准發布或發送" } },
-  { name: { en: "Compare", zh: "比較" }, does: { en: "Checks one version against another or against a rule.", zh: "把一個版本與另一版本或規則比較。" }, example: { en: "Draft vs brand rules; this month vs last", zh: "草稿與品牌規範；本月與上月" }, never: { en: "Overrule the reviewer's judgement", zh: "推翻審閱人的判斷" } },
+  { name: { en: "Compare", zh: "比較" }, does: { en: "Checks one version against another or against a rule.", zh: "把一個版本與另一版本或規則比較。" }, example: { en: "Draft vs brand rules; this month vs last", zh: "草稿與品牌規範；本月與上月" }, never: { en: "Overrule the reviewer’s judgement", zh: "推翻審閱人的判斷" } },
   { name: { en: "Validate", zh: "驗證" }, does: { en: "Confirms required fields, formats and facts are present.", zh: "確認必填欄位、格式及資料齊全。" }, example: { en: "Listing records, product data, forms", zh: "物業資料、產品資料、表格" }, never: { en: "Invent missing data", zh: "自行編造缺漏資料" } },
   { name: { en: "Summarise", zh: "摘要" }, does: { en: "Condenses long material with references.", zh: "附參考來源濃縮長篇資料。" }, example: { en: "Reports, meeting notes, feedback", zh: "報告、會議紀錄、意見" }, never: { en: "Drop the source reference", zh: "省略來源參考" } },
   { name: { en: "Route", zh: "轉交" }, does: { en: "Hands work to the right queue or person.", zh: "把工作交給合適的隊列或人員。" }, example: { en: "Sales, service, legal review queues", zh: "銷售、服務、法律審閱隊列" }, never: { en: "Close a case on its own", zh: "自行結束個案" } },
@@ -234,7 +234,7 @@ export const taskPatterns: TaskPattern[] = [
 
 export const autonomyLevels: { level: string; name: L; copy: L; examples: L }[] = [
   { level: "1", name: { en: "Suggest", zh: "建議" }, copy: { en: "Prepares drafts and analysis. A person does everything else.", zh: "只準備草稿及分析，其餘由人處理。" }, examples: { en: "Most new workflows start here.", zh: "大部分新流程由此開始。" } },
-  { level: "2", name: { en: "Prepare and route", zh: "準備及轉交" }, copy: { en: "Prepares the work and places it in a named reviewer's queue with checks attached.", zh: "準備工作並附上檢查結果，放入指定審閱人的隊列。" }, examples: { en: "Reply drafts, listing updates, report packs.", zh: "回覆草稿、資料頁更新、報告。" } },
+  { level: "2", name: { en: "Prepare and route", zh: "準備及轉交" }, copy: { en: "Prepares the work and places it in a named reviewer’s queue with checks attached.", zh: "準備工作並附上檢查結果，放入指定審閱人的隊列。" }, examples: { en: "Reply drafts, listing updates, report packs.", zh: "回覆草稿、資料頁更新、報告。" } },
   { level: "3", name: { en: "Act within rules", zh: "在規則內執行" }, copy: { en: "Performs pre-approved, low-risk actions (for example tagging or filing) and escalates everything else.", zh: "執行已預先批准的低風險行動（例如標籤或歸檔），其他一律轉交。" }, examples: { en: "Agreed in writing, per workflow, after a review period.", zh: "須在檢討期後，按流程以書面議定。" } },
 ];
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { isLocale, t, type Locale, zh } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
-import { hero, homeFaqs, sections } from "@/content/home";
+import { cinema, homeFaqs, sections } from "@/content/home";
 import { Faq, SectionHead } from "@/components/ui";
 import { BusinessOutputs, CaseEvidence, CinematicHero, ClosingChapter, EcosystemTiles, IndustryPhotos, Pathways, ResourcePreviews, SignatureWorkflow, StartDecision } from "@/components/home/sections";
 import { notFound } from "next/navigation";
@@ -16,7 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale,
       path: "/",
       title: locale === "en" ? "FIMMICK — Agentic AI Platform & Business Solutions" : zh("FIMMICK — 企業 AI 智能體平台與業務解決方案", locale),
-      description: t(hero.body, locale),
+      // The meta description is the visible hero body, so search results match the page.
+      description: t(cinema.heroBody, locale),
     }),
     title: { absolute: locale === "en" ? "FIMMICK — Agentic AI Platform & Business Solutions" : zh("FIMMICK — 企業 AI 智能體平台與業務解決方案", locale) },
   };

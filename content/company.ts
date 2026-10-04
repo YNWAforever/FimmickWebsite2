@@ -4,8 +4,6 @@ import type { L } from "@/lib/i18n";
 export const company = {
   name: "FIMMICK",
   founded: 2008,
-  brandLine: { en: "AI for Real Business Impact.", zh: "AI for Real Business Impact." } as L,
-  identity: { en: "FIMMICK — Agentic AI Platform & Business Solutions", zh: "FIMMICK — 企業 AI 智能體平台與業務解決方案" } as L,
   phone: "+852 3622 5388",
   email: "business@fimmick.com",
   generalEmail: "info@fimmick.com",
@@ -30,7 +28,7 @@ export const timeline: { year: string; title: L; copy: L }[] = [
   { year: "2008", title: { en: "Founded in Hong Kong", zh: "於香港成立" }, copy: { en: "Began as a digital agency: campaigns, social, content and local market execution.", zh: "以數碼代理起步：宣傳、社交、內容及本地市場執行。" } },
   { year: "2012", title: { en: "Expanded to Taiwan", zh: "拓展至台灣" }, copy: { en: "Built cross-border operating experience.", zh: "累積跨境營運經驗。" } },
   { year: "2019", title: { en: "MarTech and automation", zh: "營銷科技與自動化" }, copy: { en: "Moved beyond campaigns into CRM, analytics, data and automation.", zh: "由宣傳延伸至 CRM、分析、數據及自動化。" } },
-  { year: "2024", title: { en: "AI platform work begins", zh: "展開 AI 平台工作" }, copy: { en: "Started turning FIMMICK's own recurring workflows into configured AI workflows.", zh: "開始把 FIMMICK 自身的經常性工作轉化為已配置的 AI 流程。" } },
+  { year: "2024", title: { en: "AI platform work begins", zh: "展開 AI 平台工作" }, copy: { en: "Started turning FIMMICK’s own recurring workflows into configured AI workflows.", zh: "開始把 FIMMICK 自身的經常性工作轉化為已配置的 AI 流程。" } },
   { year: "2026", title: { en: "Agentic AI Platform & Business Solutions", zh: "企業 AI 智能體平台與業務解決方案" }, copy: { en: "FIMMICK AIP, six products, transformation practice, specialist services and a built ecosystem, presented as one business.", zh: "FIMMICK AIP、六個產品、轉型實務、專業服務及自建生態系統，以一個完整業務呈現。" } },
 ];
 
@@ -70,7 +68,7 @@ export const leaders: { name: string; role: L; bio: L; linkedin?: string }[] = [
     name: "Willy Lai",
     role: { en: "Co-Founder & CEO", zh: "聯合創辦人及行政總裁" },
     bio: {
-      en: "Willy Lai is FIMMICK's Co-Founder and CEO, with a background in information technology and digital marketing. He leads FIMMICK's shift to an AI-native platform and solutions company, leads Kinnso, and serves as Vice Chairman of the Innovation & Creative Industries Council at the Federation of Hong Kong Industries.",
+      en: "Willy Lai is FIMMICK’s Co-Founder and CEO, with a background in information technology and digital marketing. He leads FIMMICK’s shift to an AI-native platform and solutions company, leads Kinnso, and serves as Vice Chairman of the Innovation & Creative Industries Council at the Federation of Hong Kong Industries.",
       zh: "Willy Lai 為 FIMMICK 聯合創辦人及行政總裁，具資訊科技及數碼營銷背景。他帶領 FIMMICK 轉型為以 AI 為本的平台及解決方案公司，同時領導 Kinnso，並出任香港工業總會創新及創意產業委員會副主席。",
     },
     linkedin: "https://www.linkedin.com/in/laichiwilly/",

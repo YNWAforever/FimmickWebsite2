@@ -55,7 +55,7 @@ export default async function IndustriesPage({ params }: LocaleParams) {
           <IndustryMatrix locale={locale} />
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "Discuss your sector's workflow" : zh("討論你所屬行業的流程", locale)} primary={{ label: t(ui.discussScope, locale), to: "/contact?intent=configuration" }} />
+      <EnquirySection locale={locale} title={en ? "Discuss your sector’s workflow" : zh("討論你所屬行業的流程", locale)} primary={{ label: t(ui.discussScope, locale), to: "/contact?intent=configuration" }} />
     </>
   );
 }

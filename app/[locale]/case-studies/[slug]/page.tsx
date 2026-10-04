@@ -29,6 +29,8 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   return pageMetadata({ locale, path: paths.case(c.slug), title: t(c.title, locale), description: t(c.problem, locale) });
 }
 
+/** The case reads in four blocks: the job (problem), what changed (the outcome over the before and
+ * after lanes), who decided, and what the work is now offered as. */
 export default async function CasePage({ params }: SlugParams) {
   const locale = await resolveLocale(params);
   const c = find((await params).slug);
@@ -38,11 +40,11 @@ export default async function CasePage({ params }: SlugParams) {
   const contact = paths.contact({ intent: c.kind === "internal-application" ? "transformation" : "general", case: c.slug });
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Case studies" : zh("成功案例", locale), path: "/case-studies" }, { name: t(c.title, locale), path: paths.case(c.slug) }])} />
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Case studies" : zh("客戶案例", locale), path: "/case-studies" }, { name: t(c.title, locale), path: paths.case(c.slug) }])} />
       <PageHero
         locale={locale}
         photo={casePhotos[c.slug]}
-        crumbs={[{ label: en ? "Case studies" : zh("成功案例", locale), path: "/case-studies" }, { label: t(c.title, locale) }]}
+        crumbs={[{ label: en ? "Case studies" : zh("客戶案例", locale), path: "/case-studies" }, { label: t(c.title, locale) }]}
         eyebrow={`${t(caseKindLabel[c.kind], locale)} · ${t(c.sector, locale)} · ${t(c.market, locale)}`}
         title={t(c.title, locale)}
         lead={t(c.context, locale)}
@@ -50,7 +52,7 @@ export default async function CasePage({ params }: SlugParams) {
         aside={
           <dl className="status-panel">
             <div><dt>{en ? "Publication basis" : zh("發布依據", locale)}</dt><dd className="small">{t(c.publicationBasis, locale)}</dd></div>
-            <div><dt>{en ? "Period" : zh("期間", locale)}</dt><dd>{t(c.period, locale)}</dd></div>
+            {c.period ? <div><dt>{en ? "Period" : zh("期間", locale)}</dt><dd>{t(c.period, locale)}</dd></div> : null}
           </dl>
         }
       />
@@ -73,7 +75,7 @@ export default async function CasePage({ params }: SlugParams) {
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Workflow change" : zh("流程改變", locale)} title={en ? "Before and after" : zh("之前與之後", locale)} />
+          <SectionHead eyebrow={en ? "Workflow change" : zh("流程改變", locale)} title={en ? "Before and after" : zh("之前與之後", locale)} lead={t(c.outcome, locale)} />
           <div className="ba">
             <div className="grid grid-2">
               <div>
@@ -96,14 +98,16 @@ export default async function CasePage({ params }: SlugParams) {
       <section className="section">
         <div className="container split">
           <div className="stack">
-            <p className="eyebrow">{en ? "Outcome" : zh("成果", locale)}</p>
-            <h2>{t(c.outcome, locale)}</h2>
-            <p className="muted">{en ? "Reusable asset: " : zh("可重用成果：", locale)}{t(c.reusable, locale)}</p>
+            <p className="eyebrow">{en ? "Now offered as" : zh("現已提供", locale)}</p>
+            <h2>{t(c.reusable, locale)}</h2>
+            {c.products.length ? <Chips tone="magenta" items={c.products.map((p) => ({ label: productById(p).name, to: href(locale, paths.product(p)) }))} /> : null}
           </div>
-          <div className="archive-banner">
-            <strong>{en ? "Evidence and limitations" : zh("證據及限制", locale)}</strong>
-            <span>{t(c.limitations, locale)}</span>
-          </div>
+          {c.limitations ? (
+            <div className="archive-banner">
+              <strong>{en ? "Evidence and limitations" : zh("證據及限制", locale)}</strong>
+              <span>{t(c.limitations, locale)}</span>
+            </div>
+          ) : null}
         </div>
       </section>
       {more.length ? (

@@ -43,15 +43,14 @@ export default async function IndustryPage({ params }: SlugParams) {
         locale={locale}
         photo={industryPhotos[i.id]}
         crumbs={[{ label: en ? "Industries" : zh("行業應用", locale), path: "/industries" }, { label: t(i.name, locale) }]}
-        eyebrow={en ? "Industry application" : zh("行業應用", locale)}
-        title={t(i.name, locale)}
+        eyebrow={`${en ? "Industry application" : zh("行業應用", locale)} · ${t(i.name, locale)}`}
+        title={t(i.output, locale)}
+        accent={i.headlineAccent ? t(i.headlineAccent, locale) : undefined}
         lead={t(i.problem, locale)}
         actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Discuss your workflow" : zh("討論你的流程", locale)}</LinkButton>}
         aside={
           <div className="io-card io-card--out">
-            <h2 style={{ fontSize: "1rem", marginBottom: 8 }}>{t(ui.outputs, locale)}</h2>
-            <p className="small" style={{ fontWeight: 650, color: "var(--ink)" }}>{t(i.output, locale)}</p>
-            <h2 style={{ fontSize: "1rem", margin: "16px 0 8px" }}>{t(ui.startingScope, locale)}</h2>
+            <h2 style={{ fontSize: "1rem", marginBottom: 8 }}>{t(ui.startingScope, locale)}</h2>
             <p className="small">{t(i.startingScope, locale)}</p>
           </div>
         }

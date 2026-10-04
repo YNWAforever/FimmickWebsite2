@@ -113,6 +113,27 @@ Evidence: `before/phase-2/` (the red test runs on main, and the production-build
 
 Tests: `tests/unit/enquiries.test.ts` (12; 9 red on main), `tests/e2e/enquiry.spec.ts` (9; all red on main), the production-build check; Playwright 104/104, vitest 38/38. Also found by the new CI step: `lib/hans-table.ts` had been stale since the scroll cue's 「向下捲動」 (zh-Hans showed a Traditional 捲); regenerated.
 
+## Phase 3 — headlines, hero and content (fix plan 10–12)
+
+Evidence: `before/phase-3/` (red runs on `main`: `copy-spec-red.log` 6/6 failing, `unit-award-2-red.log` 6/9 failing, `axe-heading-order-red.log`, `zh-hero-body-break-red.log`, `hero-repeat-red.log`; screenshots of `main` from `scripts/award-2/capture-copy.mjs`) and `after/phase-3/` (the same screenshots on the branch, `axe.json`, `heights.json`, the Lighthouse A/B, `playwright-full.log`, `zh-term-replacements.md`).
+
+| Item | Before | After |
+| --- | --- | --- |
+| 3.1 inner-page headlines | `PageHero` and `SectionHead` titles were plain sans; detail pages used the record name as the h1 | `accent` routes the title through `Headline`; 34 records carry `headlineAccent` (solutions → `job`, products → `descriptor`, services → `eyebrow`, industries → `output`) with the name in the eyebrow; `/platform`, `/case-studies`, `/resources` and `/fimmick-ecosystem` use the audit's headlines |
+| 3.1 Chinese accent | magenta sans phrase | emphasis dots (着重號) under the phrase, `--magenta-ink`, `#ff7dbd` on dark chapters, a colour fallback where `text-emphasis` is unsupported |
+| 3.1 Chinese line breaks | the zh hero body split 批准 across lines at 390 px | `word-break: keep-all` on zh h1, h2, `.lead` and the hero body; `<wbr>` after 與/及 (`zhBreaks()` in `Headline`); 決定 and 批准 each on one line |
+| 3.2 hero | "Put AI into real business work." | "AI prepares the work. *Your people decide.*" / 「AI 準備工作，＊由你的人決定＊。」; the new hero body is the meta description; dead keys removed (`hero.body`, `hero.support`, `sections.*` except `faq`, `company.brandLine`, `company.identity`) |
+| 3.2 microcopy | 31 zh strings with U+30FB; 「預約產品示範」; "Request a Demo", "Explore Solutions"; 75 straight apostrophes | U+00B7; 「申請產品示範」; sentence case on buttons and nav; typographic apostrophes (`scripts/award-2/curly.mjs`, with a `--check` mode) |
+| 3.2 zh terms | 審批, noun 記錄, 電子商貿, 成功案例 | 批核, 紀錄, 電商, 客戶案例; every replacement in `after/phase-3/zh-term-replacements.md` (the verb 記錄 is kept) |
+| 3.3 disclaimers | "Illustrative" 6 times on `/en` outside photo pills (11 with them): a chapter notice, a heatmap caption, "Illustrative photographs." | one page-level notice under the hero card, a `Sample` tag on artefacts, "Sample scores"; 2 outside photo pills (7 with the 5 pills that Phase 6's badge policy reduces) |
+| 3.3 case evidence | 10 of 21 outcomes used deny-listed words ("a clearer performance view"); legacy basis, period and limitations on the 20 client cases | outcomes restate each record's after-state (who now does what, from which record); one provenance line, no period row when unknown; the page reads job → what changed (the outcome over the before/after lanes) → who decided → now offered as (with links to the products the case reuses) |
+| Detail-page heroes | moving the job, output and descriptor into the h1 left the solution lead repeating the "The problem" heading and the industry aside repeating the h1 (caught by a new test before commit) | solution heroes have no lead (the problem heads the next section); the industry aside keeps only the starting scope |
+| Accessibility | `/en/case-studies` and `/en/resources` jumped from the h1 to h3 card titles (heading-order; neither page was in the Phase 0 list) | card titles are h2 on those listing pages; the axe spec now covers them |
+
+Checks: typecheck, lint, vitest 44/44, Playwright 118/118 (axe on 19 pages × 2 widths), hans table current (427 characters), `curly.mjs --check` 0, `content/legal.ts` untouched. `scripts/award-2/axe.mjs` over 20 touched pages × 2 widths: 0 violations. Drift (1440 / 390) with re-measured bands: /en 6 / 7 · /zh-hant 12 / 20. Lighthouse mobile `/en`, 5 interleaved pairs: `main` 87 / branch 89 (Phase 0 baseline 89).
+
+Phase 3 deviations from the brief (reasons in the PR): the "Illustrative at most 3" test counts words outside photo pills until Phase 6 lands the badge policy; the case-outcome deny-list is the brief's four words; listing-page card titles moved to h2 for the axe gate.
+
 ## Phase log
 
 | Phase | PR | What changed | Before → after |
@@ -120,3 +141,4 @@ Tests: `tests/unit/enquiries.test.ts` (12; 9 red on main), `tests/e2e/enquiry.sp
 | 0 | — (first commit of the Phase 1 branch) | Baseline, scripts, axe gate (`tests/e2e/axe.spec.ts`), `@axe-core/playwright` devDependency | see above |
 | 1 | feat/award-pass-2-craft | Locale 404, nav from 1024 px + sheet drawer, per-band intrinsic sizes, focus/contrast/targets, drawer and route-change coordination, badge/marquee/cue/video/poster, icons/titles/banner/leadership | drift /en 390 4,766 → 8 px; axe 0 → 0 (2 pages added); 40 new regression tests |
 | 2 | feat/award-pass-2-enquiry | Enquiry API hardening (redirects, idempotency, guards, logs), contact form (no-JS safe, validation focus, status region, keys), CI with a production-build indexability check | forwarder 302 no longer reads as delivered; 21 new regression tests; release check catches a promoted preview |
+| 3 | feat/award-pass-2-copy | Headline accents on inner pages (EN serif, zh emphasis dots, keep-all), the new hero line, microcopy and zh terms, one sample notice, case outcomes as observable states and the four-block case page | "Illustrative" outside photo pills 6 → 2; deny-listed outcomes 10 → 0; 12 new regression tests, all red on main, and 4 pages added to the axe spec |

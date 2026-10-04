@@ -4,7 +4,7 @@ import { isLocale, zh } from "@/lib/i18n";
 
 /**
  * Locale-aware 404 for unknown paths and missing records inside /en, /zh-hant and /zh-hans.
- * Next passes the segment params to a not-found's generateMetadata, so the title is localised.
+ * Next passes the segment params to a not-found’s generateMetadata, so the title is localised.
  */
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

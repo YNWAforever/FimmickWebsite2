@@ -31,7 +31,8 @@ export default async function EcosystemPage({ params }: LocaleParams) {
         photo={"community-event"}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow={en ? "Built by FIMMICK" : zh("FIMMICK 建立的生態系統", locale)}
-        title={en ? "What FIMMICK has built — and why it matters to your work." : zh("FIMMICK 建立了甚麼，以及它對你的工作有何意義。", locale)}
+        title={en ? "Built by FIMMICK. Run by FIMMICK." : zh("由 FIMMICK 建立，由 FIMMICK 營運。", locale)}
+        accent={en ? "Run by FIMMICK." : zh("由 FIMMICK 營運", locale)}
         lead={t(copy.lead, locale)}
         actions={<LinkButton to={href(locale, paths.contact({ intent: "partnership" }))} variant="accent">{en ? "Explore a partnership" : zh("探討合作", locale)}</LinkButton>}
       />

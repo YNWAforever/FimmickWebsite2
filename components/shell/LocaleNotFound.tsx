@@ -8,11 +8,11 @@ import { stripLocale, zh, type Locale } from "@/lib/i18n";
 
 /**
  * Body of the locale 404. `not-found.tsx` receives no params, so the locale comes from the URL;
- * the page around it (header, footer, language switch) is the locale layout's.
+ * the page around it (header, footer, language switch) is the locale layout’s.
  *
  * A notFound() during a request is served by Next as a 404 recovery shell (status, noindex and the
- * localised <title> from not-found's generateMetadata) that the client then renders into this page;
- * the client render takes the layout's default title, so the 404 title is restored here.
+ * localised <title> from not-found’s generateMetadata) that the client then renders into this page;
+ * the client render takes the layout’s default title, so the 404 title is restored here.
  */
 export function LocaleNotFound() {
   const pathname = usePathname() || "/en";

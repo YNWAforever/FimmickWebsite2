@@ -6,7 +6,7 @@ export const objectives: { id: ServiceObjective; name: L; question: L }[] = [
   { id: "convert", name: { en: "Convert", zh: "轉化" }, question: { en: "Turn interest into sales conversations", zh: "把興趣轉化為銷售機會" } },
   { id: "retain", name: { en: "Retain", zh: "留客" }, question: { en: "Serve and keep customers", zh: "服務及留住顧客" } },
   { id: "understand", name: { en: "Understand", zh: "洞察" }, question: { en: "See what is happening and why", zh: "了解發生了甚麼及原因" } },
-  { id: "automate", name: { en: "Automate", zh: "自動化" }, question: { en: "Take repeated work off people's plates", zh: "減少重複性的人手工作" } },
+  { id: "automate", name: { en: "Automate", zh: "自動化" }, question: { en: "Take repeated work off people’s plates", zh: "減少重複性的人手工作" } },
   { id: "scale", name: { en: "Scale", zh: "擴展" }, question: { en: "Build lasting capability", zh: "建立長遠能力" } },
 ];
 
@@ -15,6 +15,7 @@ const p = (en: string, zh: string) => ({ title: { en, zh } });
 export const services: Service[] = [
   {
     id: "ai-transformation",
+    headlineAccent: { en: "lead the change", zh: "帶領轉變" },
     objective: "scale",
     name: { en: "AI Transformation", zh: "AI 轉型" },
     eyebrow: { en: "Plan and lead the change", zh: "規劃及帶領轉變" },
@@ -44,6 +45,7 @@ export const services: Service[] = [
   },
   {
     id: "digitalmarketing",
+    headlineAccent: { en: "as one system", zh: "一體化運作" },
     objective: "acquire",
     name: { en: "Digital Marketing", zh: "數碼營銷" },
     eyebrow: { en: "Campaigns that run as one system", zh: "一體化運作的宣傳" },
@@ -71,6 +73,7 @@ export const services: Service[] = [
   },
   {
     id: "marketing-automation",
+    headlineAccent: { en: "that keep running", zh: "持續運作" },
     objective: "automate",
     name: { en: "Marketing Automation", zh: "營銷自動化" },
     eyebrow: { en: "Lifecycle journeys that keep running", zh: "持續運作的顧客旅程" },
@@ -89,7 +92,7 @@ export const services: Service[] = [
     reviewResponsibility: { en: "You approve every message and consent rule before activation.", zh: "啟動前，由你批准每則訊息及同意規則。" },
     included: { en: ["Agreed journeys", "Configuration in supported platforms"], zh: ["議定的旅程", "在支援平台上的設定"] },
     excluded: { en: ["Platform licences", "Messaging to contacts without valid consent"], zh: ["平台授權費", "向未有有效同意的聯絡人發送訊息"] },
-    thirdParty: { en: "Depends on your email, messaging or CRM platform's capabilities.", zh: "視乎你的電郵、訊息或 CRM 平台功能。" },
+    thirdParty: { en: "Depends on your email, messaging or CRM platform’s capabilities.", zh: "視乎你的電郵、訊息或 CRM 平台功能。" },
     sample: { label: { en: "Sample journey step", zh: "旅程步驟示例" }, rows: { en: [["Trigger", "No purchase 60 days after first order"], ["Channel", "Email (consented)"], ["Content", "Care tips + new colour launch"], ["Exit", "Purchase or unsubscribe"]], zh: [["觸發條件", "首次購買後 60 日未再購買"], ["渠道", "電郵（已同意）"], ["內容", "保養小貼士＋新顏色推出"], ["退出條件", "購買或取消訂閱"]] } },
     startingScope: { en: "Two lifecycle journeys on one channel.", zh: "一個渠道上的兩條生命周期旅程。" },
     products: ["creativemax", "customer-ops"],
@@ -98,6 +101,7 @@ export const services: Service[] = [
   },
   {
     id: "crm-sales",
+    headlineAccent: { en: "has an owner", zh: "都有負責人" },
     objective: "convert",
     name: { en: "CRM & Sales Automation", zh: "CRM 與銷售自動化" },
     eyebrow: { en: "Every lead has an owner", zh: "每個商機都有負責人" },
@@ -116,7 +120,7 @@ export const services: Service[] = [
     reviewResponsibility: { en: "Sales owners approve outreach and stage changes.", zh: "由銷售負責人批准外展及階段變更。" },
     included: { en: ["Configuration in a supported CRM", "Team training"], zh: ["在支援的 CRM 中設定", "團隊培訓"] },
     excluded: { en: ["CRM licences", "Unconsented outreach"], zh: ["CRM 授權費", "未經同意的外展"] },
-    thirdParty: { en: "Integration depth depends on your CRM's APIs and plan.", zh: "串接深度視乎你的 CRM 介面及方案。" },
+    thirdParty: { en: "Integration depth depends on your CRM’s APIs and plan.", zh: "串接深度視乎你的 CRM 介面及方案。" },
     sample: { label: { en: "Sample routing rule", zh: "分派規則示例" }, rows: { en: [["Source", "Website enquiry — property viewing"], ["Owner", "District sales team"], ["Response target", "Same business day"], ["Escalation", "Team lead if untouched by 5pm"]], zh: [["來源", "網站查詢——睇樓預約"], ["負責人", "所屬地區銷售團隊"], ["回應目標", "同一個工作天"], ["上報", "下午五時前未處理則轉交組長"]] } },
     startingScope: { en: "One lead source, one team, one pipeline.", zh: "一個商機來源、一個團隊、一條銷售管道。" },
     products: ["customer-ops"],
@@ -126,6 +130,7 @@ export const services: Service[] = [
   },
   {
     id: "seo-aeo",
+    headlineAccent: { en: "and AI answers", zh: "AI 答案" },
     objective: "acquire",
     name: { en: "SEO, GEO & AEO", zh: "SEO、GEO 與 AEO" },
     eyebrow: { en: "Found in search and AI answers", zh: "在搜尋及 AI 答案中被發現" },
@@ -153,6 +158,7 @@ export const services: Service[] = [
   },
   {
     id: "social-listening",
+    headlineAccent: { en: "public conversation", zh: "公開討論" },
     objective: "understand",
     name: { en: "Social Listening", zh: "社交聆聽" },
     eyebrow: { en: "Evidence from public conversation", zh: "來自公開討論的證據" },
@@ -180,6 +186,7 @@ export const services: Service[] = [
   },
   {
     id: "koc-community",
+    headlineAccent: { en: "as a workflow", zh: "以流程方式運作" },
     objective: "acquire",
     name: { en: "Influencer, KOL & KOC", zh: "網紅、KOL 與 KOC" },
     eyebrow: { en: "Creator programmes run as a workflow", zh: "以流程方式運作的創作者計劃" },
@@ -207,6 +214,7 @@ export const services: Service[] = [
   },
   {
     id: "ecommerce-growth",
+    headlineAccent: { en: "to checkout", zh: "到結帳" },
     objective: "convert",
     name: { en: "E-commerce Growth", zh: "電商增長" },
     eyebrow: { en: "Catalogue to checkout", zh: "由產品目錄到結帳" },
@@ -225,7 +233,7 @@ export const services: Service[] = [
     reviewResponsibility: { en: "Merchandising owners approve product content.", zh: "由商品負責人批准產品內容。" },
     included: { en: ["Agreed catalogue scope", "Reporting"], zh: ["議定的產品範圍", "報告"] },
     excluded: { en: ["Inventory, payment, refund and order operations", "Platform fees"], zh: ["庫存、付款、退款及訂單運作", "平台費用"] },
-    thirdParty: { en: "Depends on your commerce platform's capabilities.", zh: "視乎你的電商平台功能。" },
+    thirdParty: { en: "Depends on your commerce platform’s capabilities.", zh: "視乎你的電商平台功能。" },
     sample: { label: { en: "Sample product record check", zh: "產品紀錄檢查示例" }, rows: { en: [["SKU", "BTL-750-HB (sample)"], ["Missing", "Care instructions"], ["Action", "Request from product team"], ["Page status", "Held until complete"]], zh: [["SKU", "BTL-750-HB（示例）"], ["缺漏", "保養說明"], ["行動", "向產品團隊索取"], ["頁面狀態", "資料齊全前暫緩上架"]] } },
     startingScope: { en: "One store, one category of up to 200 products.", zh: "一間網店、一個類別，最多 200 件產品。" },
     products: ["website-cms", "creativemax"],
@@ -234,6 +242,7 @@ export const services: Service[] = [
   },
   {
     id: "digital-experience",
+    headlineAccent: { en: "that convert", zh: "有助轉化" },
     objective: "convert",
     name: { en: "Digital Experience", zh: "數碼體驗" },
     eyebrow: { en: "Websites and journeys that convert", zh: "有助轉化的網站及顧客旅程" },
@@ -261,6 +270,7 @@ export const services: Service[] = [
   },
   {
     id: "business-intelligence",
+    headlineAccent: { en: "act on", zh: "據此行動" },
     objective: "understand",
     name: { en: "Business Intelligence", zh: "商業智能" },
     eyebrow: { en: "Reports people act on", zh: "團隊會據此行動的報告" },
@@ -289,6 +299,7 @@ export const services: Service[] = [
   },
   {
     id: "data-hub",
+    headlineAccent: { en: "every workflow", zh: "可依賴的資料" },
     objective: "scale",
     name: { en: "Data Hub & Integration", zh: "數據中樞與系統串接" },
     eyebrow: { en: "Trusted data for every workflow", zh: "每個流程都可依賴的資料" },
@@ -307,7 +318,7 @@ export const services: Service[] = [
     reviewResponsibility: { en: "Data owners approve access and identity rules.", zh: "由資料負責人批准存取及身份規則。" },
     included: { en: ["Agreed sources and flows", "Documentation"], zh: ["議定的來源及流程", "文件"] },
     excluded: { en: ["Processing without a lawful basis", "Hosting fees"], zh: ["沒有合法依據的處理", "託管費用"] },
-    thirdParty: { en: "Depends on each system's API limits and terms.", zh: "視乎各系統的介面限制及條款。" },
+    thirdParty: { en: "Depends on each system’s API limits and terms.", zh: "視乎各系統的介面限制及條款。" },
     sample: { label: { en: "Sample source map row", zh: "來源地圖示例" }, rows: { en: [["Source", "Online store orders"], ["Owner", "E-commerce manager"], ["Key", "Order ID + email (hashed)"], ["Consent", "Marketing opt-in field"]], zh: [["來源", "網店訂單"], ["負責人", "電商經理"], ["識別鍵", "訂單編號＋電郵（雜湊）"], ["同意", "推廣同意欄位"]] } },
     startingScope: { en: "Map and connect two sources for one workflow.", zh: "為一個流程對照並連接兩個來源。" },
     products: ["website-cms", "customer-ops"],
@@ -316,6 +327,7 @@ export const services: Service[] = [
   },
   {
     id: "content-creative",
+    headlineAccent: { en: "brand control", zh: "品牌可掌控" },
     objective: "acquire",
     name: { en: "Content & Creative", zh: "內容與創意" },
     eyebrow: { en: "Creative with brand control", zh: "品牌可掌控的創意" },
@@ -336,13 +348,14 @@ export const services: Service[] = [
     excluded: { en: ["Stock or talent licences unless agreed", "Publishing"], zh: ["圖庫或演員授權（另有協議除外）", "發布"] },
     thirdParty: { en: "Licensed assets follow their licence terms.", zh: "授權素材須按其授權條款使用。" },
     sample: { label: { en: "Sample asset record", zh: "素材紀錄示例" }, rows: { en: [["Asset", "Launch caption — 繁中"], ["Source facts", "4 of 4 used"], ["Review", "Approved with edits"], ["Export", "Campaign pack v2 (sample)"]], zh: [["素材", "推出文案——繁中"], ["來源資料", "已使用 4 項中的 4 項"], ["審閱", "修改後批准"], ["匯出", "宣傳套件 v2（示例）"]] } },
-    startingScope: { en: "One campaign's content pack in two languages.", zh: "一次宣傳的雙語內容套件。" },
+    startingScope: { en: "One campaign’s content pack in two languages.", zh: "一次宣傳的雙語內容套件。" },
     products: ["creativemax", "whatsapp-aigc"],
     industries: ["beauty-luxury", "retail-ecommerce", "food-beverage"],
     members: ["adfocate", "eldage"],
   },
   {
     id: "customer-experience",
+    headlineAccent: { en: "route well", zh: "分流得宜" },
     objective: "retain",
     name: { en: "Customer Experience", zh: "顧客體驗" },
     eyebrow: { en: "Service journeys that route well", zh: "分流得宜的服務旅程" },
@@ -371,6 +384,7 @@ export const services: Service[] = [
   },
   {
     id: "workflow-automation",
+    headlineAccent: { en: "redesigned", zh: "重新設計" },
     objective: "automate",
     name: { en: "Workflow Automation", zh: "工作流程自動化" },
     eyebrow: { en: "Repeated work, redesigned", zh: "重新設計重複工作" },
@@ -399,6 +413,7 @@ export const services: Service[] = [
   },
   {
     id: "whatsapp-automation",
+    headlineAccent: { en: "with control", zh: "可控" },
     objective: "retain",
     name: { en: "WhatsApp Automation", zh: "WhatsApp 自動化" },
     eyebrow: { en: "Messaging journeys with control", zh: "可控的訊息旅程" },
@@ -417,7 +432,7 @@ export const services: Service[] = [
     reviewResponsibility: { en: "You approve templates, consent rules and human-only categories.", zh: "由你批准範本、同意規則及只限專人處理的類別。" },
     included: { en: ["Agreed flows", "Configuration and testing"], zh: ["議定的流程", "設定及測試"] },
     excluded: { en: ["Messaging fees", "Messages to contacts without opt-in"], zh: ["訊息費用", "向未同意的聯絡人發訊息"] },
-    thirdParty: { en: "Meta's WhatsApp Business policies and provider terms apply.", zh: "須遵守 Meta 的 WhatsApp Business 政策及供應商條款。" },
+    thirdParty: { en: "Meta’s WhatsApp Business policies and provider terms apply.", zh: "須遵守 Meta 的 WhatsApp Business 政策及供應商條款。" },
     sample: { label: { en: "Sample flow step", zh: "流程步驟示例" }, rows: { en: [["Message", "Is the Causeway Bay store open Sunday?"], ["Intent", "Store hours"], ["Draft", "From approved store-hours answer"], ["Send", "Only after agent approval (configured)"]], zh: [["訊息", "銅鑼灣門市星期日有開嗎？"], ["意圖", "門市營業時間"], ["草稿", "取自已確認的營業時間答案"], ["發送", "只在客服批准後（已設定）"]] } },
     startingScope: { en: "One enquiry flow and one notification type.", zh: "一條查詢流程及一種通知。" },
     products: ["customer-ops"],
@@ -426,6 +441,7 @@ export const services: Service[] = [
   },
   {
     id: "ai-training",
+    headlineAccent: { en: "run AI work", zh: "駕馭 AI 工作" },
     objective: "scale",
     name: { en: "AI Training & Enablement", zh: "AI 培訓與能力建立" },
     eyebrow: { en: "Teams ready to run AI work", zh: "讓團隊能駕馭 AI 工作" },

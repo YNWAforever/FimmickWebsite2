@@ -16,6 +16,7 @@ const suggested: L = {
 export const industries: Industry[] = [
   {
     id: "retail-ecommerce",
+    headlineAccent: { en: "a reviewed launch content pack", zh: "經審閱的新品內容套件" },
     name: { en: "Retail & E-commerce", zh: "零售及電商" },
     group: "consumer",
     featured: true,
@@ -28,12 +29,12 @@ export const industries: Industry[] = [
       { step: { en: "Product record updated", zh: "更新產品紀錄" }, product: "website-cms", copy: { en: "Fields validated; gaps flagged.", zh: "驗證欄位並標示缺漏。" } },
       { step: { en: "Launch content drafted", zh: "草擬新品內容" }, product: "creativemax", copy: { en: "Copy and visuals from the same facts.", zh: "文案及視覺均根據同一套資料。" } },
       { step: { en: "Brand and merchandising review", zh: "品牌及商品團隊審閱" }, human: true, copy: { en: "Approve, edit or return.", zh: "批准、修改或退回。" } },
-      { step: { en: "Pages and campaign pack exported", zh: "匯出頁面及宣傳套件" }, product: "website-cms", copy: { en: "Change history kept.", zh: "保留變更記錄。" } },
+      { step: { en: "Pages and campaign pack exported", zh: "匯出頁面及宣傳套件" }, product: "website-cms", copy: { en: "Change history kept.", zh: "保留變更紀錄。" } },
     ],
     reviewPoints: { en: ["Merchandiser approves product facts", "Brand manager approves campaign copy"], zh: ["商品主管批准產品資料", "品牌經理批准宣傳文案"] },
     output: { en: "Consistent product pages and a reviewed launch content pack from one set of facts.", zh: "以同一套資料製作的一致產品頁，以及經審閱的新品內容套件。" },
     transformationNeed: { en: "Agree who owns product facts and how changes flow from record to page to campaign.", zh: "確認由誰負責產品資料，以及變更如何由紀錄流向頁面再到宣傳。" },
-    startingScope: { en: "One category's product pages and its launch content.", zh: "一個類別的產品頁及其新品內容。" },
+    startingScope: { en: "One category’s product pages and its launch content.", zh: "一個類別的產品頁及其新品內容。" },
     products: ["website-cms", "creativemax", "social-listening"],
     services: ["ecommerce-growth", "content-creative", "marketing-automation"],
     members: ["kinnso", "kocmax"],
@@ -41,6 +42,7 @@ export const industries: Industry[] = [
   },
   {
     id: "financial-services",
+    headlineAccent: { en: "only from approved wording", zh: "只採用已批准措辭" },
     name: { en: "Financial Services", zh: "金融服務" },
     group: "regulated",
     problem: {
@@ -57,7 +59,7 @@ export const industries: Industry[] = [
     reviewPoints: { en: ["Licensed adviser owns any advice", "Compliance approves templates and new wording"], zh: ["任何建議由持牌顧問負責", "合規部批准範本及新措辭"] },
     output: { en: "Traceable enquiry records with responses drawn only from approved wording.", zh: "可追溯的查詢紀錄，回覆只採用已批准措辭。" },
     transformationNeed: { en: "Governance first: define human-only categories, review duties and records before any drafting starts.", zh: "先處理管治：在草擬前界定只限專人處理的類別、審閱責任及記錄方式。" },
-    startingScope: { en: "One product line's enquiries with a compliance-approved answer library.", zh: "一條產品線的查詢，配合經合規批准的答案庫。" },
+    startingScope: { en: "One product line’s enquiries with a compliance-approved answer library.", zh: "一條產品線的查詢，配合經合規批准的答案庫。" },
     products: ["customer-ops", "creativemax"],
     services: ["crm-sales", "ai-training", "business-intelligence"],
     members: [],
@@ -65,6 +67,7 @@ export const industries: Industry[] = [
   },
   {
     id: "hospitality-travel",
+    headlineAccent: { en: "reviewed destination content", zh: "目的地內容" },
     name: { en: "Hospitality & Travel", zh: "酒店及旅遊" },
     group: "experience",
     problem: {
@@ -81,7 +84,7 @@ export const industries: Industry[] = [
     reviewPoints: { en: ["Property manager confirms service fixes", "Marketing approves multilingual content"], zh: ["酒店經理確認服務改善", "市場部批准多語言內容"] },
     output: { en: "A monthly guest-feedback brief and refreshed, reviewed destination content.", zh: "每月住客意見簡報，以及經審閱更新的目的地內容。" },
     transformationNeed: { en: "Connect feedback owners across front office and marketing so insight becomes action.", zh: "連繫前堂與市場部的意見負責人，令洞察化為行動。" },
-    startingScope: { en: "One property's reviews and its top ten guest questions.", zh: "一間酒店的評論及其十大住客問題。" },
+    startingScope: { en: "One property’s reviews and its top ten guest questions.", zh: "一間酒店的評論及其十大住客問題。" },
     products: ["social-listening", "aiso", "creativemax"],
     services: ["seo-aeo", "social-listening", "customer-experience"],
     members: ["kinnso", "eldage"],
@@ -89,6 +92,7 @@ export const industries: Industry[] = [
   },
   {
     id: "beauty-luxury",
+    headlineAccent: { en: "behind each launch decision", zh: "每個新品決定背後的證據" },
     name: { en: "Beauty & Luxury", zh: "美容及奢侈品" },
     group: "consumer",
     problem: {
@@ -113,6 +117,7 @@ export const industries: Industry[] = [
   },
   {
     id: "food-beverage",
+    headlineAccent: { en: "owned enquiries", zh: "有人負責的查詢" },
     name: { en: "Food & Beverage", zh: "餐飲" },
     group: "consumer",
     problem: {
@@ -137,6 +142,7 @@ export const industries: Industry[] = [
   },
   {
     id: "property-real-estate",
+    headlineAccent: { en: "feeds the page and the follow-up", zh: "同時支援頁面及跟進" },
     name: { en: "Property & Real Estate", zh: "地產及物業" },
     group: "b2b",
     featured: true,
@@ -162,6 +168,7 @@ export const industries: Industry[] = [
   },
   {
     id: "healthcare-wellness",
+    headlineAccent: { en: "clearly routed clinical enquiries", zh: "分流清晰的臨床查詢" },
     name: { en: "Healthcare & Wellness", zh: "醫療及健康" },
     group: "regulated",
     problem: {
@@ -186,11 +193,12 @@ export const industries: Industry[] = [
   },
   {
     id: "b2b-professional-services",
+    headlineAccent: { en: "reviewed insight content", zh: "經審閱的觀點內容" },
     name: { en: "B2B & Professional Services", zh: "企業及專業服務" },
     group: "b2b",
     featured: true,
     problem: {
-      en: "Expertise sits in people's heads and past proposals. Enquiries wait while partners are busy, and thought leadership is published irregularly.",
+      en: "Expertise sits in people’s heads and past proposals. Enquiries wait while partners are busy, and thought leadership is published irregularly.",
       zh: "專業知識存在於同事腦海及過往建議書之中；合夥人忙碌時查詢便要等待，專業觀點文章亦未能定期發布。",
     },
     sources: { en: ["Service descriptions and credentials", "Past proposals (approved for reuse)", "Enquiry records", "Expert interviews"], zh: ["服務說明及資歷", "過往建議書（已批准重用）", "查詢紀錄", "專家訪談"] },
@@ -203,7 +211,7 @@ export const industries: Industry[] = [
     reviewPoints: { en: ["Partner approves client communication", "Expert approves published opinions"], zh: ["合夥人批准客戶通訊", "專家批准發布的觀點"] },
     output: { en: "Owned enquiries with timely first responses, and a steady cadence of reviewed insight content.", zh: "有人負責、及時回覆的查詢，以及穩定發布、經審閱的觀點內容。" },
     transformationNeed: { en: "Capture reusable knowledge with clear permission for reuse.", zh: "在清晰的重用許可下，整理可重用的專業知識。" },
-    startingScope: { en: "One practice area's enquiries and a monthly insight article.", zh: "一個業務範疇的查詢及每月一篇觀點文章。" },
+    startingScope: { en: "One practice area’s enquiries and a monthly insight article.", zh: "一個業務範疇的查詢及每月一篇觀點文章。" },
     products: ["customer-ops", "creativemax", "aiso"],
     services: ["crm-sales", "seo-aeo", "ai-training"],
     members: ["aip"],

@@ -1,15 +1,30 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 type Props = {
   text: string;
   /** Phrase inside `text` set in the editorial accent face. Ignored when not found. */
   accent?: string;
-  as?: "h1" | "h2";
+  as?: "h1" | "h2" | "h3";
   id?: string;
   className?: string;
   /** Wrap words in masks for the staggered line entrance (hero only). */
   split?: boolean;
 };
+
+const CJK = /[㐀-鿿]/;
+/**
+ * Chinese headings use word-break: keep-all (editorial.css), which only breaks at punctuation and
+ * spaces; a <wbr> after 與 / 及 gives long compound names a natural break between their parts.
+ */
+export function zhBreaks(text: string): ReactNode {
+  if (!CJK.test(text) || !/[與与及]/.test(text)) return text;
+  return text.split(/(?<=[與与及])/).map((part, i, all) => (
+    <Fragment key={i}>
+      {part}
+      {i < all.length - 1 ? <wbr /> : null}
+    </Fragment>
+  ));
+}
 
 /**
  * Display headline with one accented phrase.
@@ -29,7 +44,7 @@ export function Headline({ text, accent, as: Tag = "h2", id, className, split = 
 
   let index = 0;
   const render = (chunk: string): ReactNode => {
-    if (!split) return chunk;
+    if (!split) return zhBreaks(chunk);
     // Latin text splits on spaces; CJK text (no spaces) stays one mask per part.
     return chunk.split(/(\s+)/).map((word, i) => {
       if (!word) return null;

@@ -48,6 +48,8 @@ export type Solution = {
   name: L;
   short: L;
   job: L;
+  /** Phrase inside `job` set as the H1 accent (detail-page headline = `job`). */
+  headlineAccent?: L;
   problem: L;
   deliverable: L;
   inputs: L<string[]>;
@@ -67,6 +69,8 @@ export type Product = {
   id: ProductId;
   name: string;
   descriptor: L;
+  /** Phrase inside `descriptor` set as the H1 accent (detail-page headline = `descriptor`). */
+  headlineAccent?: L;
   solution: SolutionId;
   availability: Availability;
   exampleMode: ExampleMode;
@@ -119,6 +123,8 @@ export type Service = {
   objective: ServiceObjective;
   name: L;
   eyebrow: L;
+  /** Phrase inside `eyebrow` set as the H1 accent (detail-page headline = `eyebrow`). */
+  headlineAccent?: L;
   summary: L;
   problem: L;
   deliverables: L<string[]>;
@@ -149,6 +155,8 @@ export type Industry = {
   journey: { step: L; product?: ProductId; human?: boolean; copy: L }[];
   reviewPoints: L<string[]>;
   output: L;
+  /** Phrase inside `output` set as the H1 accent (detail-page headline = `output`). */
+  headlineAccent?: L;
   transformationNeed: L;
   startingScope: L;
   products: ProductId[];
@@ -168,7 +176,8 @@ export type CaseStudy = {
   services: ServiceId[];
   products: ProductId[];
   publicationBasis: L;
-  period: L;
+  /** Omitted when the source record states no period. */
+  period?: L;
   context: L;
   problem: L;
   scope: L<string[]>;
@@ -177,7 +186,7 @@ export type CaseStudy = {
   humanDecisions: L;
   dataFoundation: L;
   outcome: L;
-  limitations: L;
+  limitations?: L;
   reusable: L;
   legacyId?: number;
 };

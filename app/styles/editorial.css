@@ -22,7 +22,9 @@
   padding-inline-end: 0.04em;
 }
 .chapter-night .accent, .closing .accent, .site-footer .accent { color: #ff7dbd; }
-/* The serif has no CJK glyphs: Chinese keeps the sans and marks the phrase with colour only. */
+/* The serif has no CJK glyphs: Chinese keeps the sans and marks the phrase with emphasis dots
+   (着重號) under the characters, the editorial emphasis of Chinese typesetting, rather than a
+   louder coloured line. em.accent outranks the hero's colour rule in award.css. */
 :lang(zh-Hant-HK) .accent, :lang(zh-Hans) .accent {
   font-family: inherit;
   font-style: normal;
@@ -32,6 +34,21 @@
   letter-spacing: inherit;
   padding: 0;
 }
+:lang(zh-Hant-HK) em.accent, :lang(zh-Hans) em.accent {
+  color: inherit;
+  -webkit-text-emphasis: filled circle var(--magenta-ink);
+  text-emphasis: filled circle var(--magenta-ink);
+  -webkit-text-emphasis-position: under;
+  text-emphasis-position: under left;
+}
+:lang(zh-Hant-HK) :is(.chapter-night, .closing, .site-footer) em.accent, :lang(zh-Hans) :is(.chapter-night, .closing, .site-footer) em.accent { -webkit-text-emphasis-color: #ff7dbd; text-emphasis-color: #ff7dbd; }
+@supports not ((text-emphasis: filled circle) or (-webkit-text-emphasis: filled circle)) {
+  :lang(zh-Hant-HK) em.accent, :lang(zh-Hans) em.accent { color: var(--magenta-ink); }
+}
+/* Chinese headings, leads and the homepage hero body break only at punctuation and spaces (never
+   inside a word such as 決定 or 批准); Headline adds <wbr> after 與 / 及, and overflow-wrap rescues
+   anything still too long. */
+:lang(zh-Hant-HK) :is(h1, h2, .lead, .cine-hero__body), :lang(zh-Hans) :is(h1, h2, .lead, .cine-hero__body) { word-break: keep-all; overflow-wrap: anywhere; }
 
 /* 404 display headline (both 404 pages). */
 .nf h1 { font-size: clamp(2.2rem, 1.2rem + 3.1vw, 4.4rem); letter-spacing: -0.04em; line-height: 1.02; max-width: 16ch; }

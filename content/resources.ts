@@ -92,10 +92,10 @@ export const explainerVideo = {
   slug: "fimmick-aip-explainer",
   title: { en: "From brief to reviewed output: a FIMMICK AIP workflow", zh: "由簡報到經審閱的成果：FIMMICK AIP 流程示範" } as L,
   summary: {
-    en: "A 42-second product demonstration using the same sample data as the interactive examples: brand facts, a prepared draft, a reviewer's decision, an export and its record.",
+    en: "A 42-second product demonstration using the same sample data as the interactive examples: brand facts, a prepared draft, a reviewer’s decision, an export and its record.",
     zh: "一段 42 秒的產品示範，使用與互動示例相同的示例資料：品牌資料、準備好的草稿、審閱人的決定、匯出及其記錄。",
   } as L,
-  mode: { en: "Illustrative workflow — sample data. Rendered from the website's sample interface; no live AI run, message or system update is shown.", zh: "流程示範・示例資料。由網站示例介面製作，片中並無實際 AI 運行、訊息發送或系統更新。" } as L,
+  mode: { en: "Illustrative workflow — sample data. Rendered from the website’s sample interface; no live AI run, message or system update is shown.", zh: "流程示範·示例資料。由網站示例介面製作，片中並無實際 AI 運行、訊息發送或系統更新。" } as L,
   published: "2026-09-28",
   durationSeconds: 42,
   topic: "ai-transformation" as ResourceTopic,

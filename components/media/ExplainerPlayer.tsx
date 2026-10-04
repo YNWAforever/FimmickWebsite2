@@ -39,7 +39,7 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
             }
           }}
           onEnded={() => track("video_completed", { video: "explainer", locale })}
-          // A failing <source> fires its own error, which bubbles here; only the element's own error
+          // A failing <source> fires its own error, which bubbles here; only the element’s own error
           // means playback failed. Otherwise a browser without H.264 never reaches the WebM.
           onError={(e) => {
             if (e.target !== e.currentTarget) return;

@@ -41,8 +41,9 @@ export default async function ProductPage({ params }: SlugParams) {
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Products" : zh("產品", locale), path: "/products" }, { label: p.name }]}
-        eyebrow={t(p.descriptor, locale)}
-        title={p.name}
+        eyebrow={p.name}
+        title={t(p.descriptor, locale)}
+        accent={p.headlineAccent ? t(p.headlineAccent, locale) : undefined}
         lead={t(p.summary, locale)}
         actions={
           <>

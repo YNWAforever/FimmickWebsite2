@@ -1,0 +1,140 @@
+
+Running 4 tests using 4 workers
+
+[1/4] [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at desktop › /en/case-studies has no violations
+[2/4] [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at mobile › /en/case-studies has no violations
+[3/4] [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at mobile › /en/resources has no violations
+[4/4] [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at desktop › /en/resources has no violations
+  1) [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at desktop › /en/resources has no violations ────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "heading-order: .card.card--link[href$=\"workshop\"] > h3 — Heading order invalid",
+    + ]
+
+      66 |         await page.waitForTimeout(1500);
+      67 |         const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+    > 68 |         expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+         |                                                           ^
+      69 |       });
+      70 |     }
+      71 |   });
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\axe.spec.ts:68:59
+
+    Error Context: test-results\axe-axe-at-desktop-en-resources-has-no-violations-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\axe-axe-at-desktop-en-resources-has-no-violations-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\axe-axe-at-desktop-en-resources-has-no-violations-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2) [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at mobile › /en/case-studies has no violations ──
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "heading-order: .card.card--link:nth-child(1) > h3 — Heading order invalid",
+    + ]
+
+      66 |         await page.waitForTimeout(1500);
+      67 |         const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+    > 68 |         expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+         |                                                           ^
+      69 |       });
+      70 |     }
+      71 |   });
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\axe.spec.ts:68:59
+
+    Error Context: test-results\axe-axe-at-mobile-en-case-studies-has-no-violations-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\axe-axe-at-mobile-en-case-studies-has-no-violations-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\axe-axe-at-mobile-en-case-studies-has-no-violations-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  3) [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at mobile › /en/resources has no violations ─────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "heading-order: .card.card--link[href$=\"workshop\"] > h3 — Heading order invalid",
+    + ]
+
+      66 |         await page.waitForTimeout(1500);
+      67 |         const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+    > 68 |         expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+         |                                                           ^
+      69 |       });
+      70 |     }
+      71 |   });
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\axe.spec.ts:68:59
+
+    Error Context: test-results\axe-axe-at-mobile-en-resources-has-no-violations-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\axe-axe-at-mobile-en-resources-has-no-violations-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\axe-axe-at-mobile-en-resources-has-no-violations-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4) [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at desktop › /en/case-studies has no violations ─
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "heading-order: .card.card--link:nth-child(1) > h3 — Heading order invalid",
+    + ]
+
+      66 |         await page.waitForTimeout(1500);
+      67 |         const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+    > 68 |         expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+         |                                                           ^
+      69 |       });
+      70 |     }
+      71 |   });
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\axe.spec.ts:68:59
+
+    Error Context: test-results\axe-axe-at-desktop-en-case-studies-has-no-violations-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\axe-axe-at-desktop-en-case-studies-has-no-violations-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\axe-axe-at-desktop-en-case-studies-has-no-violations-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4 failed
+    [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at desktop › /en/case-studies has no violations ──
+    [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at desktop › /en/resources has no violations ─────
+    [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at mobile › /en/case-studies has no violations ───
+    [chromium] › tests\e2e\axe.spec.ts:60:7 › axe at mobile › /en/resources has no violations ──────

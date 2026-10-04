@@ -91,7 +91,7 @@ export default async function EventPage({ params }: SlugParams) {
                 <div><dt>{en ? "Format" : zh("形式", locale)}</dt><dd>{e.format ?? "—"}</dd></div>
                 <div><dt>{en ? "Language" : zh("語言", locale)}</dt><dd>{e.language ?? "—"}</dd></div>
                 {e.venue ? <div><dt>{en ? "Venue" : zh("地點", locale)}</dt><dd className="small">{e.venue}</dd></div> : null}
-                <div><dt>{en ? "Status" : zh("狀態", locale)}</dt><dd>{en ? `Past · ${formatDate(iso, "en")}` : zh(`已舉行・${formatDate(iso, "zh-hant")}`, locale)}</dd></div>
+                <div><dt>{en ? "Status" : zh("狀態", locale)}</dt><dd>{en ? `Past · ${formatDate(iso, "en")}` : zh(`已舉行·${formatDate(iso, "zh-hant")}`, locale)}</dd></div>
               </dl>
               <Link className="text-link" href={href(locale, "/events")}>← {en ? "All events" : zh("全部活動", locale)}</Link>
             </aside>

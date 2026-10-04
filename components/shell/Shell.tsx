@@ -15,7 +15,7 @@ const pillarDescriptions: Record<string, L> = {
   transformation: { en: "Readiness, roadmap, workflow design and governance for leadership teams.", zh: "為管理團隊提供準備度、路線圖、流程設計及管治支援。" },
   services: { en: "Sixteen specialist services, grouped by the business objective they serve.", zh: "十六項專業服務，按業務目標分類。" },
   industries: { en: "How the same products and services apply to eight sectors.", zh: "同一套產品及服務如何應用於八個行業。" },
-  cases: { en: "Client work, FIMMICK's own transformation and clearly labelled examples.", zh: "客戶項目、FIMMICK 自身轉型及清楚標示的示例。" },
+  cases: { en: "Client work, FIMMICK’s own transformation and clearly labelled examples.", zh: "客戶項目、FIMMICK 自身轉型及清楚標示的示例。" },
   resources: { en: "Articles, guides, the product explainer, events and workshops.", zh: "文章、指南、產品示範影片、活動及工作坊。" },
   ecosystem: { en: "Platforms, communities and ventures FIMMICK has built.", zh: "FIMMICK 建立的平台、社群及項目。" },
   about: { en: "Our story, how we work and the people who lead FIMMICK.", zh: "我們的故事、工作方式及領導團隊。" },

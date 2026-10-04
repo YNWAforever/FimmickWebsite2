@@ -31,8 +31,8 @@ export default async function DemosPage({ params }: LocaleParams) {
     <>
       <PageHero
         locale={locale}
-        crumbs={[{ label: en ? "Case studies" : zh("成功案例", locale), path: "/case-studies" }, { label: t(copy.title, locale) }]}
-        eyebrow={en ? "Illustrative examples — sample data" : zh("流程示範・示例資料", locale)}
+        crumbs={[{ label: en ? "Case studies" : zh("客戶案例", locale), path: "/case-studies" }, { label: t(copy.title, locale) }]}
+        eyebrow={en ? "Illustrative examples — sample data" : zh("流程示範·示例資料", locale)}
         title={t(copy.title, locale)}
         lead={t(copy.lead, locale)}
         notice={en ? "Nothing on this page is a customer result." : zh("本頁內容均非客戶成果。", locale)}
@@ -66,7 +66,7 @@ export default async function DemosPage({ params }: LocaleParams) {
           </div>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "See it with your own workflow" : zh("以你的流程了解", locale)} primary={{ label: en ? "Request a Demo" : zh("預約產品示範", locale), to: "/contact?intent=demo" }} secondary={{ label: en ? "Case library" : zh("案例庫", locale), to: "/case-studies" }} />
+      <EnquirySection locale={locale} title={en ? "See it with your own workflow" : zh("以你的流程了解", locale)} primary={{ label: en ? "Request a demo" : zh("申請產品示範", locale), to: "/contact?intent=demo" }} secondary={{ label: en ? "Case library" : zh("案例庫", locale), to: "/case-studies" }} />
     </>
   );
 }

@@ -1,0 +1,195 @@
+
+ RUN  v3.2.7 C:/Users/laich/AppData/Local/Temp/claude/C--Users-laich-Documents-FimmickWebsite2/1e8738c2-4128-4a63-bc7e-a01ee08dfae7/scratchpad/main-wt
+
+ ❯ tests/unit/award-2.test.ts (9 tests | 6 failed) 180ms
+   ✓ award pass 2 — Knowledge Hub records > article titles and summaries carry no HTML entities 4ms
+   ✓ award pass 2 — Knowledge Hub records > decoding repeats until the double-escaped capture is plain text 1ms
+   ✓ award pass 2 — Knowledge Hub records > only articles published before the relaunch are marked as archive 0ms
+   × award pass 2 — headlines (3.1) > every detail record has an accent phrase that occurs in its headline, in all three locales 12ms
+     → expected [ …(34) ] to deeply equal []
+   × award pass 2 — microcopy (3.2) > no Chinese string uses the Japanese middle dot (U+30FB) 153ms
+     → expected [ 'content\cases.ts', …(14) ] to deeply equal []
+   × award pass 2 — microcopy (3.2) > the demo call to action asks for a request, not a booking (申請, not 預約) 2ms
+     → expected '預約產品示範' not to contain '預約'
+   × award pass 2 — microcopy (3.2) > buttons are in sentence case 1ms
+     → expected 'Request a Demo' to be 'Request a demo' // Object.is equality
+   × award pass 2 — case evidence (3.3) > every case outcome is an observable state: present, under 220 characters, no evaluative adjectives 1ms
+     → expected [ …(10) ] to deeply equal []
+   × award pass 2 — case evidence (3.3) > client cases carry one provenance line and no unknown period 3ms
+     → omni-channel-retail-intelligence: expected 'Anonymised engagement summary previou…' to be 'Anonymised client engagement. Describ…' // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/award-2.test.ts > award pass 2 — headlines (3.1) > every detail record has an accent phrase that occurs in its headline, in all three locales
+AssertionError: expected [ …(34) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "solution market-intelligence: no headlineAccent",
++   "solution content-production: no headlineAccent",
++   "solution customer-engagement: no headlineAccent",
++   "solution website-operations: no headlineAccent",
++   "product social-listening: no headlineAccent",
++   "product aiso: no headlineAccent",
++   "product creativemax: no headlineAccent",
++   "product whatsapp-aigc: no headlineAccent",
++   "product customer-ops: no headlineAccent",
++   "product website-cms: no headlineAccent",
++   "service ai-transformation: no headlineAccent",
++   "service digitalmarketing: no headlineAccent",
++   "service marketing-automation: no headlineAccent",
++   "service crm-sales: no headlineAccent",
++   "service seo-aeo: no headlineAccent",
++   "service social-listening: no headlineAccent",
++   "service koc-community: no headlineAccent",
++   "service ecommerce-growth: no headlineAccent",
++   "service digital-experience: no headlineAccent",
++   "service business-intelligence: no headlineAccent",
++   "service data-hub: no headlineAccent",
++   "service content-creative: no headlineAccent",
++   "service customer-experience: no headlineAccent",
++   "service workflow-automation: no headlineAccent",
++   "service whatsapp-automation: no headlineAccent",
++   "service ai-training: no headlineAccent",
++   "industry retail-ecommerce: no headlineAccent",
++   "industry financial-services: no headlineAccent",
++   "industry hospitality-travel: no headlineAccent",
++   "industry beauty-luxury: no headlineAccent",
++   "industry food-beverage: no headlineAccent",
++   "industry property-real-estate: no headlineAccent",
++   "industry healthcare-wellness: no headlineAccent",
++   "industry b2b-professional-services: no headlineAccent",
++ ]
+
+ ❯ tests/unit/award-2.test.ts:59:22
+     57|       }
+     58|     }
+     59|     expect(problems).toEqual([]);
+       |                      ^
+     60|   });
+     61| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/unit/award-2.test.ts > award pass 2 — microcopy (3.2) > no Chinese string uses the Japanese middle dot (U+30FB)
+AssertionError: expected [ 'content\cases.ts', …(14) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "content\\cases.ts",
++   "content\\examples.ts",
++   "content\\functions.ts",
++   "content\\home.ts",
++   "content\\platform.ts",
++   "content\\resources.ts",
++   "content\\ui.ts",
++   "components\\blocks.tsx",
++   "components\\diagrams\\FlowScene.tsx",
++   "components\\home\\sections.tsx",
++   "app\\[locale]\\cases-and-demos\\page.tsx",
++   "app\\[locale]\\events\\[slug]\\page.tsx",
++   "app\\[locale]\\growth\\page.tsx",
++   "app\\[locale]\\platform\\page.tsx",
++   "app\\[locale]\\resources\\page.tsx",
++ ]
+
+ ❯ tests/unit/award-2.test.ts:75:23
+     73|     };
+     74|     for (const dir of ["content", "components", "app", "lib"]) walk(di…
+     75|     expect(offenders).toEqual([]);
+       |                       ^
+     76|   });
+     77| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  tests/unit/award-2.test.ts > award pass 2 — microcopy (3.2) > the demo call to action asks for a request, not a booking (申請, not 預約)
+AssertionError: expected '預約產品示範' not to contain '預約'
+
+Expected: "預約"
+Received: "預約產品示範"
+
+ ❯ tests/unit/award-2.test.ts:79:35
+     77| 
+     78|   it("the demo call to action asks for a request, not a booking (申請, n…
+     79|     expect(ui.requestDemo.zh).not.toContain("預約");
+       |                                   ^
+     80|     expect(intentLabels.demo.zh).not.toContain("預約");
+     81|     expect(ui.requestDemo.zh).toBe("申請產品示範");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  tests/unit/award-2.test.ts > award pass 2 — microcopy (3.2) > buttons are in sentence case
+AssertionError: expected 'Request a Demo' to be 'Request a demo' // Object.is equality
+
+Expected: "Request a demo"
+Received: "Request a Demo"
+
+ ❯ tests/unit/award-2.test.ts:85:31
+     83| 
+     84|   it("buttons are in sentence case", () => {
+     85|     expect(ui.requestDemo.en).toBe("Request a demo");
+       |                               ^
+     86|     expect(ui.exploreSolutions.en).toBe("Explore solutions");
+     87|     expect(ui.discussConfiguration.en).toBe("Scope this product");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  tests/unit/award-2.test.ts > award pass 2 — case evidence (3.3) > every case outcome is an observable state: present, under 220 characters, no evaluative adjectives
+AssertionError: expected [ …(10) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "omni-channel-retail-intelligence: evaluative \"clearer\"",
++   "ai-assisted-lead-generation: evaluative \"Clearer\"",
++   "real-estate-sales-follow-up: evaluative \"More consistent\"",
++   "education-course-enquiry-automation: evaluative \"more consistent\"",
++   "b2b-trading-supplier-intelligence: evaluative \"clearer\"",
++   "professional-services-proposal-drafting: evaluative \"more consistent\"",
++   "finance-management-reporting: evaluative \"Clearer\"",
++   "restaurant-group-local-growth: evaluative \"More consistent\"",
++   "automotive-lead-test-drive: evaluative \"Better\"",
++   "property-management-resident-support: evaluative \"clearer\"",
++ ]
+
+ ❯ tests/unit/award-2.test.ts:105:22
+    103|       return out;
+    104|     });
+    105|     expect(problems).toEqual([]);
+       |                      ^
+    106|   });
+    107| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  tests/unit/award-2.test.ts > award pass 2 — case evidence (3.3) > client cases carry one provenance line and no unknown period
+AssertionError: omni-channel-retail-intelligence: expected 'Anonymised engagement summary previou…' to be 'Anonymised client engagement. Describ…' // Object.is equality
+
+Expected: "Anonymised client engagement. Described, not quantified until the client approves figures."
+Received: "Anonymised engagement summary previously published on fimmick.com. Client identity withheld. Outcome figures shown on the previous site are not repeated because their scope, dates and definitions were not documented."
+
+ ❯ tests/unit/award-2.test.ts:110:45
+    108|   it("client cases carry one provenance line and no unknown period", (…
+    109|     for (const c of cases.filter((x) => x.kind === "client-work")) {
+    110|       expect(c.publicationBasis.en, c.slug).toBe("Anonymised client en…
+       |                                             ^
+    111|       expect(c.period, c.slug).toBeUndefined();
+    112|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 3 passed (9)
+   Start at  22:32:33
+   Duration  1.66s (transform 307ms, setup 0ms, collect 443ms, tests 180ms, environment 0ms, prepare 574ms)
+

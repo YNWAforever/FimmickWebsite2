@@ -41,7 +41,7 @@ export default async function GovernancePage({ params }: LocaleParams) {
       </section>
       <section className="section section--surface">
         <div className="container">
-          <SectionHead eyebrow={en ? "Where governance sits" : zh("管治所在", locale)} title={en ? "The approvals and records layers in practice" : zh("審批及記錄層的實際運作", locale)} />
+          <SectionHead eyebrow={en ? "Where governance sits" : zh("管治所在", locale)} title={en ? "The approvals and records layers in practice" : zh("批核及記錄層的實際運作", locale)} />
           <PlatformLayersBlock locale={locale} variant="light" />
           <p style={{ marginTop: 24 }}>
             <TextLink to={href(locale, "/ai-transformation/governance-adoption")}>{en ? "Governance & Adoption for leadership teams" : zh("為管理團隊而設的管治與推行", locale)}</TextLink>

@@ -1,0 +1,202 @@
+[
+  {
+    "page": "/en",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/platform",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/case-studies",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/case-studies",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/case-studies/omni-channel-retail-intelligence",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/case-studies/omni-channel-retail-intelligence",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans/case-studies/fimmick-ai-native-operating-model",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/resources",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/resources",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/fimmick-ecosystem",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/solutions/market-intelligence",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/solutions/market-intelligence",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/products/social-listening",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/services/digitalmarketing",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/services/digitalmarketing",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/industries/retail-ecommerce",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans/industries/retail-ecommerce",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/platform",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/case-studies",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/case-studies",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/case-studies/omni-channel-retail-intelligence",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/case-studies/omni-channel-retail-intelligence",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans/case-studies/fimmick-ai-native-operating-model",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/resources",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/resources",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/fimmick-ecosystem",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/solutions/market-intelligence",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/solutions/market-intelligence",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/products/social-listening",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/services/digitalmarketing",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/services/digitalmarketing",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/industries/retail-ecommerce",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans/industries/retail-ecommerce",
+    "viewport": "390x844",
+    "violations": []
+  }
+]

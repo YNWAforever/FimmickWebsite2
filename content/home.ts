@@ -2,30 +2,13 @@ import type { L } from "@/lib/i18n";
 
 export const hero = {
   eyebrow: { en: "FIMMICK Agentic AI Platform", zh: "FIMMICK 企業 AI 智能體平台" } as L,
-  title: { en: "Put AI into real business work.", zh: "把 AI 用在真正的業務工作。" } as L,
-  /** The title split for display: the accent part carries the brand gradient. */
-  titleLead: { en: "Put AI into", zh: "把 AI 用在" } as L,
-  titleAccent: { en: "real business work.", zh: "真正的業務工作。" } as L,
-  body: {
-    en: "Connect business data, AI tools and human approvals across market intelligence, content creation, customer follow-up and website operations.",
-    zh: "串連業務資料、AI 工具與人手審批，支援市場洞察、內容製作、客戶跟進及網站營運。",
-  } as L,
-  support: {
-    en: "Start with one defined workflow. Add the products, connections and support it needs.",
-    zh: "先從一項清楚的工作開始，按需要加入產品、系統串接與支援。",
-  } as L,
+  title: { en: "AI prepares the work. Your people decide.", zh: "AI 準備工作，由你的人決定。" } as L,
+  /** The title split for display: the accent part is set in the editorial face (zh: emphasis marks). */
+  titleLead: { en: "AI prepares the work.", zh: "AI 準備工作，" } as L,
+  titleAccent: { en: "Your people decide.", zh: "由你的人決定。" } as L,
 };
 
 export const sections = {
-  chooseWork: { eyebrow: { en: "Choose the work", zh: "選擇工作" }, title: { en: "Four business jobs. Each ends in something you can use.", zh: "四項業務工作，每一項都有可用的成果。" } },
-  inspect: { eyebrow: { en: "Inspect an example", zh: "查看示例" }, title: { en: "See the input, the prepared work, the review and the output.", zh: "看清輸入、準備好的工作、審閱及輸出。" } },
-  cases: { eyebrow: { en: "Case studies", zh: "成功案例" }, title: { en: "Work we have delivered — and how we run our own.", zh: "我們交付過的工作，以及我們如何營運自己。" } },
-  platform: { eyebrow: { en: "The platform", zh: "平台" }, title: { en: "Four layers coordinate repeatable work.", zh: "以四個層面協調可重複的工作。" } },
-  change: { eyebrow: { en: "AI Transformation & Services", zh: "AI 轉型與專業服務" }, title: { en: "Plan the change. Or bring in specialists for a defined job.", zh: "規劃轉變，或為明確的工作引入專家。" } },
-  industries: { eyebrow: { en: "Industry application", zh: "行業應用" }, title: { en: "The same products, configured for your sector.", zh: "同一套產品，按你的行業配置。" } },
-  ecosystem: { eyebrow: { en: "Built by FIMMICK", zh: "FIMMICK 建立的生態系統" }, title: { en: "Platforms, communities and ventures we build and run.", zh: "我們建立及營運的平台、社群與項目。" } },
-  resources: { eyebrow: { en: "Resources", zh: "資源中心" }, title: { en: "Learn, inspect and download.", zh: "學習、查看及下載。" } },
-  start: { eyebrow: { en: "How to start", zh: "如何開始" }, title: { en: "Choose how much you want FIMMICK to do.", zh: "選擇由 FIMMICK 承擔多少工作。" } },
   faq: { eyebrow: { en: "Questions", zh: "常見問題" }, title: { en: "What happens next?", zh: "接下來會怎樣？" } },
 } satisfies Record<string, { eyebrow: L; title: L }>;
 
@@ -35,13 +18,15 @@ export const sections = {
  */
 export const cinema = {
   heroBody: {
-    en: "AI prepares the work from your approved data. Your people decide. You get output you can use.",
-    zh: "AI 按你已確認的資料準備工作，由你的團隊決定，得到可直接使用的成果。",
+    en: "Insight briefs, launch content, enquiry replies and page updates — drafted from your approved facts, reviewed by a named person, exported with a record.",
+    zh: "AI 根據已確認的資料草擬，由指定的人審閱批准，匯出時連同紀錄。",
   } as L,
   heroCard: {
-    label: { en: "Sample output · launch caption", zh: "示例成果・推出文案" } as L,
+    label: { en: "Sample output · launch caption", zh: "示例成果·推出文案" } as L,
     draft: { en: "Meet the 750 ml bottle that stays put in your bag.", zh: "750 毫升，放入袋都安心。" } as L,
     approved: { en: "Approved by brand manager", zh: "品牌經理已批准" } as L,
+    /** The one sample-data notice on the homepage; artefacts below carry a one-word "Sample" tag. */
+    notice: { en: "Everything on this page runs on sample data — a made-up bottle brand, so you can see the workflow, not our clients.", zh: "本頁所有示例都用示例資料——一個虛構的水樽品牌，讓你看清流程，而不是我們客戶的資料。" } as L,
     ledger: [
       { role: "source", label: { en: "Facts", zh: "資料" } },
       { role: "work", label: { en: "Drafted", zh: "草擬" } },
@@ -51,8 +36,8 @@ export const cinema = {
   },
   outputs: {
     eyebrow: { en: "Four business outputs", zh: "四項業務成果" } as L,
-    title: { en: "See what you get before you read how it works.", zh: "先看成果，再了解做法。" } as L,
-    sample: { en: "Sample output", zh: "示例成果" } as L,
+    title: { en: "See what you get before you read how it works.", zh: "先看成果，再講做法。" } as L,
+    sample: { en: "Sample", zh: "示例" } as L,
     link: { en: "See the workflow", zh: "查看流程" } as L,
     names: {
       "market-intelligence": { en: "Insight brief", zh: "洞察簡報" },
@@ -69,10 +54,10 @@ export const cinema = {
   },
   content: {
     check: { en: "No price mentioned — none supplied", zh: "沒有提及價錢——未有提供" } as L,
-    reviewer: { en: "Brand manager · edited tone, approved", zh: "品牌經理・調整語氣後批准" } as L,
+    reviewer: { en: "Brand manager · edited tone, approved", zh: "品牌經理·調整語氣後批准" } as L,
   },
   enquiry: {
-    received: { en: "Website form · 10:12", zh: "網站表格・10:12" } as L,
+    received: { en: "Website form · 10:12", zh: "網站表格·10:12" } as L,
     routed: { en: "Routed to", zh: "分派給" } as L,
     waiting: { en: "Waiting for owner approval — nothing sent", zh: "等待負責人批准——未有發送" } as L,
   },
@@ -83,13 +68,13 @@ export const cinema = {
   },
   evidence: {
     eyebrow: { en: "Case-study evidence", zh: "案例證據" } as L,
-    title: { en: "Work we have delivered — and how we run our own.", zh: "我們交付過的工作，以及我們如何營運自己。" } as L,
+    title: { en: "Work we have delivered — and how we run our own.", zh: "為客戶做過的工作，我們自己也在用。" } as L,
     before: { en: "Before", zh: "以前" } as L,
     after: { en: "After", zh: "現在" } as L,
     read: { en: "Read the case", zh: "閱讀案例" } as L,
     note: {
-      en: "Anonymised summaries; figures are withheld until scope and dates are documented. Photographs are illustrative, not client premises.",
-      zh: "匿名摘要；數字在記錄範圍及日期前暫不引用。相片僅作示意，並非客戶場所。",
+      en: "We publish what we can stand behind: the work, who decided, and what changed. Numbers follow when a client signs them off.",
+      zh: "我們只公開站得住腳的內容：做了甚麼、由誰決定、有甚麼改變。數字待客戶確認後才會公布。",
     } as L,
   },
   signature: {
@@ -108,7 +93,7 @@ export const cinema = {
       { id: "review", label: { en: "Human review", zh: "人手審閱" }, title: { en: "A named person decides", zh: "由指定的人決定" } },
       { id: "result", label: { en: "Usable output", zh: "可用成果" }, title: { en: "Exported with its record", zh: "連紀錄一併匯出" } },
     ] as { id: "source" | "work" | "review" | "result"; label: L; title: L }[],
-    brief: { en: "Brief: launch post · Instagram · EN + 繁中", zh: "簡報：推出貼文・Instagram・英文＋繁中" } as L,
+    brief: { en: "Brief: launch post · Instagram · EN + 繁中", zh: "簡報：推出貼文·Instagram·英文＋繁中" } as L,
     linked: { en: "Uses only the listed facts", zh: "只使用所列資料" } as L,
     edit: { en: "Tone softened", zh: "語氣調整" } as L,
     captionOk: { en: "Caption approved", zh: "文案已批准" } as L,
@@ -123,7 +108,7 @@ export const cinema = {
   },
   pathways: {
     eyebrow: { en: "AI Transformation & Services", zh: "AI 轉型與專業服務" } as L,
-    title: { en: "Plan the change — or bring in specialists.", zh: "規劃轉變，或引入專家。" } as L,
+    title: { en: "Plan the change — or bring in specialists.", zh: "規劃轉變，或直接找專家。" } as L,
     transformation: {
       label: { en: "AI Transformation", zh: "AI 轉型" } as L,
       title: { en: "For leaders planning the change", zh: "為規劃轉變的管理層而設" } as L,
@@ -141,7 +126,7 @@ export const cinema = {
   },
   industries: {
     eyebrow: { en: "Industry application", zh: "行業應用" } as L,
-    title: { en: "The same products, configured for your sector.", zh: "同一套產品，按你的行業配置。" } as L,
+    title: { en: "Same four jobs. Your sector’s rules.", zh: "同樣四項工作，按你行業的規矩。" } as L,
     all: { en: "All eight industries", zh: "全部八個行業" } as L,
   },
   ecosystem: {
@@ -155,25 +140,25 @@ export const cinema = {
       eldage: { en: "Social enterprise incubated by FIMMICK", zh: "由 FIMMICK 培育的社會企業" },
     } as Record<string, L>,
     eyebrow: { en: "Built by FIMMICK", zh: "FIMMICK 建立的生態系統" } as L,
-    title: { en: "Platforms, communities and ventures we build and run.", zh: "我們建立及營運的平台、社群與項目。" } as L,
+    title: { en: "What we build, we also run.", zh: "我們建立的，我們也在營運。" } as L,
   },
   resources: {
     eyebrow: { en: "Resources", zh: "資源中心" } as L,
-    title: { en: "Watch, download, read.", zh: "觀看、下載、閱讀。" } as L,
-    guide: { en: "Guide · PDF · 2 pages", zh: "指南・PDF・2 頁" } as L,
+    title: { en: "Take something you can use today.", zh: "挑一份資源，今天就用得上。" } as L,
+    guide: { en: "Guide · PDF · 2 pages", zh: "指南·PDF·2 頁" } as L,
     guidePreview: { en: "First page of the guide", zh: "指南第一頁" } as L,
     article: { en: "Article", zh: "文章" } as L,
-    workshop: { en: "Workshop · on request", zh: "工作坊・按需安排" } as L,
+    workshop: { en: "Workshop · on request", zh: "工作坊·按需安排" } as L,
   },
   start: {
     you: { en: "Your team", zh: "你的團隊" } as L,
     us: { en: "FIMMICK", zh: "FIMMICK" } as L,
   },
   closing: {
-    title: { en: "Tell us which work you want to improve.", zh: "告訴我們你想改善哪項工作。" } as L,
+    title: { en: "Tell us which work you want to improve.", zh: "想改善哪項工作？告訴我們。" } as L,
     body: {
-      en: "We reply by email to arrange a conversation. Sending a request does not book a meeting until we confirm a time with you.",
-      zh: "我們會以電郵回覆安排傾談。在與你確認時間前，提交要求並不代表已預約會面。",
+      en: "We read every request and reply by email to set up a conversation. A time is fixed once we’ve both agreed it.",
+      zh: "我們會細閱每一個要求，並以電郵回覆安排傾談；雙方確認後才會定下時間。",
     } as L,
   },
 };

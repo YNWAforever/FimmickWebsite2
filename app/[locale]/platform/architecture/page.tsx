@@ -45,7 +45,7 @@ export default async function ArchitecturePage({ params }: LocaleParams) {
       />
       <section className="section section--night">
         <div className="container">
-          <SectionHead eyebrow={en ? "Four layers" : zh("四個層面", locale)} title={en ? "Data → tasks → approvals → records" : zh("資料 → 任務 → 審批 → 記錄", locale)} lead={en ? "Each layer answers one business question. Select a layer to see its role in the sample scenario." : zh("每個層面回答一個業務問題。選擇一個層面，查看它在示例情境中的作用。", locale)} />
+          <SectionHead eyebrow={en ? "Four layers" : zh("四個層面", locale)} title={en ? "Data → tasks → approvals → records" : zh("資料 → 任務 → 批核 → 記錄", locale)} lead={en ? "Each layer answers one business question. Select a layer to see its role in the sample scenario." : zh("每個層面回答一個業務問題。選擇一個層面，查看它在示例情境中的作用。", locale)} />
           <PlatformLayersBlock locale={locale} />
         </div>
       </section>

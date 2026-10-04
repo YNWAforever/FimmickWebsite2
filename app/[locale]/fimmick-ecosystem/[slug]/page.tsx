@@ -68,7 +68,7 @@ export default async function MemberPage({ params }: SlugParams) {
             <div className="io-card">
               <h2 style={{ fontSize: "1.1rem", marginBottom: 12 }}>{en ? "Audience" : zh("受眾", locale)}</h2>
               <p>{t(m.audience, locale)}</p>
-              <h2 style={{ fontSize: "1.1rem", margin: "20px 0 12px" }}>{en ? "FIMMICK's relationship" : zh("與 FIMMICK 的關係", locale)}</h2>
+              <h2 style={{ fontSize: "1.1rem", margin: "20px 0 12px" }}>{en ? "FIMMICK’s relationship" : zh("與 FIMMICK 的關係", locale)}</h2>
               <p>{t(m.relationship, locale)}</p>
             </div>
             <div className="io-card io-card--out">

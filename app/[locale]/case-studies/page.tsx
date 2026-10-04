@@ -14,8 +14,8 @@ import { CaseCards, EnquirySection } from "@/components/blocks";
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ industry?: string; capability?: string; kind?: string }> };
 
 const copy = {
-  title: { en: "Case studies", zh: "成功案例" },
-  lead: { en: "Client engagements, FIMMICK's own transformation and — kept separate — labelled product examples. Each case states its publication basis and limitations.", zh: "客戶項目、FIMMICK 自身轉型，以及另行標示的產品示例。每個案例都列明發布依據及限制。" },
+  title: { en: "Case studies", zh: "客戶案例" },
+  lead: { en: "Client engagements, FIMMICK’s own transformation and — kept separate — labelled product examples. Each case states its publication basis and limitations.", zh: "客戶項目、FIMMICK 自身轉型，以及另行標示的產品示例。每個案例都列明發布依據及限制。" },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -46,7 +46,7 @@ export default async function CaseStudiesPage({ params, searchParams }: Props) {
   const usedServices = services.filter((s) => cases.some((c) => c.services.includes(s.id)));
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Real work, described honestly." : zh("真實工作，如實描述。", locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Work we did. Decisions people made." : zh("我們做過的工作，由人作出的決定。", locale)} accent={en ? "Decisions people made." : zh("由人作出的決定", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
           <nav className="filter-bar" aria-label={en ? "Filter case studies" : zh("篩選案例", locale)}>
@@ -85,7 +85,7 @@ export default async function CaseStudiesPage({ params, searchParams }: Props) {
             <span>{shown.length} {t(ui.results, locale)}</span>
             {industry || capability || kind ? <Link href={base} scroll={false}>{t(ui.clearFilters, locale)}</Link> : null}
           </div>
-          {shown.length ? <CaseCards locale={locale} items={shown} /> : <p className="empty-state">{t(ui.noResults, locale)}</p>}
+          {shown.length ? <CaseCards locale={locale} items={shown} heading="h2" /> : <p className="empty-state">{t(ui.noResults, locale)}</p>}
           <div className="distinction" style={{ marginTop: 32 }}>
             {en ? "Looking for product demonstrations? They are labelled samples, collected separately in " : zh("想查看產品示範？它們屬已標示的示例，另行收錄於", locale)}
             <Link href={href(locale, "/cases-and-demos")}>{en ? "Examples & demos" : zh("示例與示範", locale)}</Link>

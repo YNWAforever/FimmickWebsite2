@@ -1,0 +1,268 @@
+
+Running 6 tests using 4 workers
+
+[1/6] [chromium] › tests\e2e\copy.spec.ts:5:1 › inner-page headlines carry the editorial accent
+[2/6] [chromium] › tests\e2e\copy.spec.ts:15:1 › the hero states the idea, and its Chinese accent uses emphasis marks
+[3/6] [chromium] › tests\e2e\copy.spec.ts:53:1 › the homepage carries one sample notice; 'Illustrative' and 'people decide' stay rare
+[4/6] [chromium] › tests\e2e\copy.spec.ts:45:1 › Chinese hero text never breaks inside a word at 390 px (決定, 批准)
+  1) [chromium] › tests\e2e\copy.spec.ts:15:1 › the hero states the idea, and its Chinese accent uses emphasis marks 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('h1')
+    Expected: "AI prepares the work. Your people decide."
+    Received: "Put AI into real business work."
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('h1') with timeout 5000ms
+      - waiting for locator('h1')
+        13 × locator resolved to <h1 id="home-title" class="cine-hero__title">…</h1>
+           - unexpected value "Put AI into real business work."
+
+
+      15 | test("the hero states the idea, and its Chinese accent uses emphasis marks", async ({ page }) => {
+      16 |   await page.goto("/en");
+    > 17 |   await expect(page.locator("h1")).toHaveText("AI prepares the work. Your people decide.");
+         |                                    ^
+      18 |   await page.goto("/zh-hant");
+      19 |   const emphasis = await page.locator("h1 em.accent").evaluate((el) => getComputedStyle(el).getPropertyValue("text-emphasis-style") || getComputedStyle(el).getPropertyValue("-webkit-text-emphasis-style"));
+      20 |   expect(emphasis).toContain("circle");
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:17:36
+
+    Error Context: test-results\copy-the-hero-states-the-i-a3a75--accent-uses-emphasis-marks-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\copy-the-hero-states-the-i-a3a75--accent-uses-emphasis-marks-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\copy-the-hero-states-the-i-a3a75--accent-uses-emphasis-marks-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[5/6] [chromium] › tests\e2e\copy.spec.ts:74:1 › case pages read job, what changed, who decided, now offered as
+  2) [chromium] › tests\e2e\copy.spec.ts:53:1 › the homepage carries one sample notice; 'Illustrative' and 'people decide' stay rare 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 3
+    Received:    6
+
+      67 |     return { illustrative, decide };
+      68 |   });
+    > 69 |   expect(counts.illustrative).toBeLessThanOrEqual(3);
+         |                               ^
+      70 |   expect(counts.decide).toBeLessThanOrEqual(2);
+      71 |   await expect(page.getByText("Everything on this page runs on sample data")).toHaveCount(1);
+      72 | });
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:69:31
+
+    Error Context: test-results\copy-the-homepage-carries--3c037-and-people-decide-stay-rare-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\copy-the-homepage-carries--3c037-and-people-decide-stay-rare-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\copy-the-homepage-carries--3c037-and-people-decide-stay-rare-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  3) [chromium] › tests\e2e\copy.spec.ts:45:1 › Chinese hero text never breaks inside a word at 390 px (決定, 批准) 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 0
+    Received array:  []
+
+      47 |   await page.goto("/zh-hant");
+      48 |   await page.waitForTimeout(1500);
+    > 49 |   expect(await lineTops(page, "h1", "決定")).toHaveLength(1);
+         |                                            ^
+      50 |   expect(await lineTops(page, ".cine-hero__body", "批准")).toHaveLength(1);
+      51 | });
+      52 |
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:49:44
+
+    Error Context: test-results\copy-Chinese-hero-text-nev-54c21-ide-a-word-at-390-px-決定-批准--chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\copy-Chinese-hero-text-nev-54c21-ide-a-word-at-390-px-決定-批准--chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\copy-Chinese-hero-text-nev-54c21-ide-a-word-at-390-px-決定-批准--chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4) [chromium] › tests\e2e\copy.spec.ts:5:1 › inner-page headlines carry the editorial accent ─────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('h1 em.accent')
+    Expected: "One workflow you can run."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('h1 em.accent') with timeout 5000ms
+      - waiting for locator('h1 em.accent')
+
+
+       5 | test("inner-page headlines carry the editorial accent", async ({ page }) => {
+       6 |   await page.goto("/en/platform");
+    >  7 |   await expect(page.locator("h1 em.accent")).toHaveText("One workflow you can run.");
+         |                                              ^
+       8 |   await page.goto("/en/services/digitalmarketing");
+       9 |   await expect(page.locator("h1")).toHaveText("Campaigns that run as one system");
+      10 |   await expect(page.locator("h1 em.accent")).toHaveText("as one system");
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:7:46
+
+    Error Context: test-results\copy-inner-page-headlines-carry-the-editorial-accent-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\copy-inner-page-headlines-carry-the-editorial-accent-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\copy-inner-page-headlines-carry-the-editorial-accent-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[6/6] [chromium] › tests\e2e\copy.spec.ts:90:1 › detail-page heroes say each thing once (headline and lead appear once in main)
+  5) [chromium] › tests\e2e\copy.spec.ts:90:1 › detail-page heroes say each thing once (headline and lead appear once in main) 
+
+    Error: /en/solutions/market-intelligence
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Market Intelligence & AI Visibility",
+    + ]
+
+       98 |       return phrases.filter((phrase) => blocks.filter((b) => b === phrase).length > 1);
+       99 |     });
+    > 100 |     expect.soft(repeats, path).toEqual([]);
+          |                                ^
+      101 |   }
+      102 | });
+      103 |
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:100:32
+
+    Error: /en/products/social-listening
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "AI Social Listening",
+    + ]
+
+       98 |       return phrases.filter((phrase) => blocks.filter((b) => b === phrase).length > 1);
+       99 |     });
+    > 100 |     expect.soft(repeats, path).toEqual([]);
+          |                                ^
+      101 |   }
+      102 | });
+      103 |
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:100:32
+
+    Error: /en/services/digitalmarketing
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Digital Marketing",
+    + ]
+
+       98 |       return phrases.filter((phrase) => blocks.filter((b) => b === phrase).length > 1);
+       99 |     });
+    > 100 |     expect.soft(repeats, path).toEqual([]);
+          |                                ^
+      101 |   }
+      102 | });
+      103 |
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:100:32
+
+    Error: /en/industries/retail-ecommerce
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Retail & E-commerce",
+    + ]
+
+       98 |       return phrases.filter((phrase) => blocks.filter((b) => b === phrase).length > 1);
+       99 |     });
+    > 100 |     expect.soft(repeats, path).toEqual([]);
+          |                                ^
+      101 |   }
+      102 | });
+      103 |
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:100:32
+
+    Error Context: test-results\copy-detail-page-heroes-sa-babd0-d-lead-appear-once-in-main--chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\copy-detail-page-heroes-sa-babd0-d-lead-appear-once-in-main--chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\copy-detail-page-heroes-sa-babd0-d-lead-appear-once-in-main--chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  6) [chromium] › tests\e2e\copy.spec.ts:74:1 › case pages read job, what changed, who decided, now offered as 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.evaluate: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for locator('main .eyebrow').filter({ hasText: /^Now offered as$/ }).first()
+
+
+      75 |   await page.goto("/en/case-studies/omni-channel-retail-intelligence");
+      76 |   const top = (selector: string, text?: RegExp) =>
+    > 77 |     (text ? page.locator(selector, { hasText: text }) : page.locator(selector)).first().evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+         |                                                                                         ^
+      78 |   const job = await top("main .eyebrow", /^Problem$/);
+      79 |   const changed = await top("main .section-head", /Before and after/);
+      80 |   const decided = await top("main .decision-callout");
+        at top (C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:77:89)
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\copy.spec.ts:81:25
+
+    Error Context: test-results\copy-case-pages-read-job-w-93e58--who-decided-now-offered-as-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\copy-case-pages-read-job-w-93e58--who-decided-now-offered-as-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\copy-case-pages-read-job-w-93e58--who-decided-now-offered-as-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  6 failed
+    [chromium] › tests\e2e\copy.spec.ts:5:1 › inner-page headlines carry the editorial accent ──────
+    [chromium] › tests\e2e\copy.spec.ts:15:1 › the hero states the idea, and its Chinese accent uses emphasis marks 
+    [chromium] › tests\e2e\copy.spec.ts:45:1 › Chinese hero text never breaks inside a word at 390 px (決定, 批准) 
+    [chromium] › tests\e2e\copy.spec.ts:53:1 › the homepage carries one sample notice; 'Illustrative' and 'people decide' stay rare 
+    [chromium] › tests\e2e\copy.spec.ts:74:1 › case pages read job, what changed, who decided, now offered as 
+    [chromium] › tests\e2e\copy.spec.ts:90:1 › detail-page heroes say each thing once (headline and lead appear once in main) 
