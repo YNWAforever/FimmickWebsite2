@@ -3,11 +3,11 @@
 | Asset | Path | Details | Source / rights |
 |---|---|---|---|
 | Logo (raster, trimmed) | `public/brand/fimmick-logo.{png,webp}` | 467×117 | Extracted from the fimmick.com production bundle (the only logo asset found; no vector master located). |
-| Favicon | `public/favicon.ico` | 686 B | Copied from fimmick.com. |
+| Icons | `app/icon.svg`, `app/apple-icon.png`, `public/favicon.ico`, `app/manifest.ts` | SVG mark; 180×180 PNG; ICO with 16/32/48 layers | The wordmark's lime "I" on white (award pass 2), rendered by `scripts/build-icons.mjs` from `app/icon.svg`. Replaces the 28×28 favicon copied from fimmick.com. |
 | Share image | `public/og.png` | 1200×630, 103 KB | New, rendered by `scripts/build-og.mjs`. Contains no unsupported claims. |
 | Explainer film (EN) | `public/media/explainer/fimmick-aip-explainer-en.{mp4,webm}` | 42 s, 1280×720, 25 fps, no audio; H.264 544 KB / VP9 569 KB | Original work rendered from `video/composition.html` (sample data). Font: Manrope (SIL OFL 1.1). |
 | Explainer film (繁中) | `public/media/explainer/fimmick-aip-explainer-zh-hant.{mp4,webm}` | 42 s; 480 KB / 493 KB | As above. |
-| Poster | `public/media/explainer/poster.webp` | 37 KB (frame at 25 s) | As above. |
+| Poster | `public/media/explainer/poster-title{,-640}.webp` | 1280 w 23 KB, 640 w 8 KB (title card at 1 s) | As above. Replaced the 25 s frame, which carried a cursor ring (award pass 2). |
 | Captions | `public/media/explainer/captions-{en,zh-hant}.vtt` | 6 cues each | Generated from `content/media.ts` (`explainerScenes`), which also drives the on-page transcript. |
 | Film source | `video/composition.html`, `video/render.mjs` | Editable composition; `npm run video:render` | — |
 | AI readiness checklist | `public/downloads/fimmick-ai-readiness-checklist-{en,zh-hant}.pdf` | 2 pages each; sample row labelled | New; source text in `scripts/build-guides.mjs`. |

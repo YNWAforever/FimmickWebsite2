@@ -1,0 +1,160 @@
+{
+  "utilityFocus": {
+    "focused": "简 简体中文",
+    "top": 2,
+    "dataScroll": "up",
+    "headerTransform": "none"
+  },
+  "heroBadge": {
+    "320": {
+      "rect": [
+        10,
+        619,
+        149,
+        25
+      ],
+      "topmost": "span.photo__label",
+      "visible": true
+    },
+    "390": {
+      "rect": [
+        10,
+        574,
+        149,
+        25
+      ],
+      "topmost": "span.photo__label",
+      "visible": true
+    }
+  },
+  "nav": {
+    "1023": {
+      "primaryNav": "none",
+      "menuToggle": "flex",
+      "overflow": 0
+    },
+    "1024": {
+      "primaryNav": "block",
+      "menuToggle": "none",
+      "overflow": 0
+    },
+    "1200": {
+      "primaryNav": "block",
+      "menuToggle": "none",
+      "overflow": 0
+    },
+    "1280": {
+      "primaryNav": "block",
+      "menuToggle": "none",
+      "overflow": 0
+    }
+  },
+  "drawer": {
+    "390": {
+      "left": 0,
+      "width": 390,
+      "height": 844,
+      "vh": 844
+    },
+    "820": {
+      "left": 400,
+      "width": 420,
+      "height": 1180,
+      "vh": 1180
+    },
+    "1200": {
+      "toggleVisible": false
+    }
+  },
+  "drawerOpening": {
+    "vh": 844,
+    "at": [
+      {
+        "ms": 60,
+        "height": 844,
+        "top": 0
+      },
+      {
+        "ms": 200,
+        "height": 844,
+        "top": 0
+      },
+      {
+        "ms": 450,
+        "height": 844,
+        "top": 0
+      },
+      {
+        "ms": 700,
+        "height": 844,
+        "top": 0
+      }
+    ]
+  },
+  "drawerResize": {
+    "menuOpen": "false",
+    "bodyOverflow": "clip visible",
+    "drawerVisible": false,
+    "closeButtonDisplay": "flex"
+  },
+  "routeChange": {
+    "before": "matrix(1, 0, 0, 1, 0, -37)",
+    "firstFrameOnNewPage": {
+      "ms": 81,
+      "path": "/en/platform",
+      "transform": "none"
+    },
+    "samples": [
+      {
+        "ms": 81,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 136,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 202,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 264,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 332,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 399,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 465,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 531,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 599,
+        "path": "/en/platform",
+        "transform": "none"
+      },
+      {
+        "ms": 666,
+        "path": "/en/platform",
+        "transform": "none"
+      }
+    ]
+  }
+}

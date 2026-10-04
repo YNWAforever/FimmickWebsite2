@@ -30,6 +30,9 @@
 .btn--ghost:hover { --btn-bg: var(--surface); }
 .btn--light { --btn-bg: #fff; --btn-fg: var(--ink); }
 .btn--small { min-height: 40px; padding: 8px 16px; font-size: 0.9rem; }
+@media (pointer: coarse) {
+  .btn--ghost.btn--small { min-height: 44px; }
+}
 .section--night .btn--ghost { --btn-fg: #fff; --btn-border: var(--night-line); }
 .section--night .btn--ghost:hover { --btn-bg: var(--night-2); }
 
@@ -307,7 +310,7 @@ table.data tr:last-child td { border-bottom: 0; }
 .filter-pill .count { font-weight: 600; opacity: 0.7; font-size: var(--fs-micro); }
 .filter-pill:hover { border-color: var(--ink); }
 .search-form { display: flex; gap: 8px; flex-wrap: wrap; }
-.search-form input { flex: 1 1 260px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); }
+.search-form input { flex: 1 1 260px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--subtle); border-radius: 999px; background: var(--surface); }
 .result-meta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 20px; color: var(--muted); font-size: var(--fs-small); }
 
 .pagination { display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 36px; flex-wrap: wrap; }

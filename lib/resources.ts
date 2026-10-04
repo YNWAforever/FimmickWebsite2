@@ -37,6 +37,10 @@ export type LegacyEvent = {
 export const articleIndex = articleIndexJson as ArticleIndexEntry[];
 export const legacyEvents = eventsJson as LegacyEvent[];
 
+/** The site relaunch: Knowledge Hub articles published before it carry the "Archive article" note. */
+export const RELAUNCH_DATE = "2026-01-01";
+export const isArchiveArticle = (published: string) => published < RELAUNCH_DATE;
+
 /** Parse the legacy display date ("3 September 2025 (WED)") to ISO for sorting. */
 export function eventIsoDate(display: string): string {
   const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];

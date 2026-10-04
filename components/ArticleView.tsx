@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { href, formatDate, localeMeta, t, zh, type LegacyLocale, type Locale } from "@/lib/i18n";
-import { articleBySlug, articleIndex, getArticleBlocks } from "@/lib/resources";
+import { articleBySlug, articleIndex, getArticleBlocks, isArchiveArticle } from "@/lib/resources";
 import { resolveLegacyHref } from "@/lib/redirects";
 import { canonicalOrigin } from "@/lib/env";
 import { localeUrl } from "@/lib/seo";
@@ -83,6 +83,7 @@ export async function ArticleView({ slug, locale, shellLocale }: { slug: string;
   const blocks = (await getArticleBlocks(source, slug)) ?? [];
   const en = locale === "en";
   const hans = locale === "zh-hans";
+  const archived = isArchiveArticle(entry.published);
   const resolve = (raw: string) => resolveLegacyHref(raw, locale);
   const topic = resourceTopics.find((tp) => tp.id === entry.topic);
   const rel = topicRelations[entry.topic];
@@ -109,17 +110,25 @@ export async function ArticleView({ slug, locale, shellLocale }: { slug: string;
           <Crumbs locale={shellLocale} items={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: en ? "Knowledge Hub" : hans ? zh("知识库", locale) : zh("知識庫", locale), path: "/knowledge-hub" }, { label: meta.title }]} />
           <div className="detail-grid">
             <div>
-              <div className="archive-banner" role="note">
-                <strong>{en ? "Archive article" : hans ? zh("文章存档", locale) : zh("文章存檔", locale)}</strong>
-                <span>
-                  {en
-                    ? `Originally published ${formatDate(entry.published, "en")}. It reflects FIMMICK's positioning at that time and has not been rewritten; some terms, figures and links may be out of date.`
-                    : hans
-                      ? zh(`原于 ${formatDate(entry.published, "zh-hans")} 发布，反映 FIMMICK 当时的定位，内容未经改写；部分用语、数字及链接可能已过时。`, locale)
-                      : zh(`原於 ${formatDate(entry.published, "zh-hant")} 發布，反映 FIMMICK 當時的定位，內容未經改寫；部分用語、數字及連結可能已過時。`, locale)}
-                </span>
-                {fallback ? <span>{en ? "" : hans ? zh("此文章没有简体中文版本，以下以原文显示。", locale) : zh("此文章沒有繁體中文版本，以下以原文（英文）顯示。", locale)}</span> : null}
-              </div>
+              {/* The archive note is for articles from before the relaunch; a recent article only
+                  gets the banner when it is shown in another language. */}
+              {archived || (fallback && !en) ? (
+                <div className="archive-banner" role="note">
+                  {archived ? (
+                    <>
+                      <strong>{en ? "Archive article" : hans ? zh("文章存档", locale) : zh("文章存檔", locale)}</strong>
+                      <span>
+                        {en
+                          ? `Originally published ${formatDate(entry.published, "en")}. It reflects FIMMICK's positioning at that time and has not been rewritten; some terms, figures and links may be out of date.`
+                          : hans
+                            ? zh(`原于 ${formatDate(entry.published, "zh-hans")} 发布，反映 FIMMICK 当时的定位，内容未经改写；部分用语、数字及链接可能已过时。`, locale)
+                            : zh(`原於 ${formatDate(entry.published, "zh-hant")} 發布，反映 FIMMICK 當時的定位，內容未經改寫；部分用語、數字及連結可能已過時。`, locale)}
+                      </span>
+                    </>
+                  ) : null}
+                  {fallback && !en ? <span>{hans ? zh("此文章没有简体中文版本，以下以原文显示。", locale) : zh("此文章沒有繁體中文版本，以下以原文（英文）顯示。", locale)}</span> : null}
+                </div>
+              ) : null}
               <h1 lang={contentLang} style={{ fontSize: "clamp(1.9rem, 1.4rem + 2vw, 3rem)", maxWidth: "24ch" }}>{meta.title}</h1>
               {meta.summary ? <p className="lead" lang={contentLang} style={{ marginTop: 16 }}>{meta.summary}</p> : null}
               <p className="meta-row">

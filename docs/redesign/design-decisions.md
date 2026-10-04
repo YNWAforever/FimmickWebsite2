@@ -17,7 +17,8 @@ The identity comes from the **flow motif** — *Source → Prepared work → Hum
 - **Navigation:**
   - At 1520 px and wider, all eight pillars are shown inline.
   - From 1280 to 1519 px, the seven commercial pillars stay inline and About moves to the visible utility row.
-  - Below 1280 px, a menu opens a full-screen drawer listing all eight pillars as accordions.
+  - From 1024 to 1279 px, the same seven stay inline with short English labels (Platform, Transformation, Cases) and tighter spacing (award pass 2).
+  - Below 1024 px, a menu opens a drawer listing all eight pillars as accordions: a 420 px sheet from the right over a scrim from 700 px, full screen below. It is rendered beside the header, not inside it, and closes when the window widens past 1024 px.
   - Menus are click- and keyboard-driven (no hover-only access), close on Escape with focus restored, and the drawer traps focus.
 - **Motion:** CSS only; no animation library.
   - Staged hero arrival, once-only section reveal and short feedback transitions.
@@ -67,7 +68,7 @@ Extends the cinematic redesign; full report in `docs/redesign/award/README.md`.
 - **Motion stays CSS-driven, with no library and no scroll-jacking.** JavaScript only sets state: reveal classes, `<html data-scroll>` for the header, and the media bubble's position. Continuous effects are scroll-linked (`animation-timeline`), so nothing moves unless the visitor scrolls, and nothing loops. An inertial smooth-scroll library was evaluated and rejected under this rule.
 - **The hero photograph is never animated.** Only the hero copy eases away as it scrolls out. The headline words animate (transform only); the photo is the LCP element, not the text. Scroll-linked drift is limited to a handful of large editorial photographs, and nothing carries `will-change`, so first paint does not pay for layers.
 - **Dark ending.** The closing chapter flows into a dark footer with grain. The footer CTA is hidden where the page already ends with one (the homepage).
-- **Below-the-fold bands are lazily rendered.** `content-visibility: auto` (with a remembered intrinsic size) applies to `main section.section`, the closing chapter and the footer, never to heroes. New full-width bands should use the `.section` class to get this for free. Small components that happen to be `<section>` elements are deliberately excluded.
+- **Below-the-fold bands are lazily rendered.** `content-visibility: auto` (with a remembered intrinsic size) applies to `main section.section`, the closing chapter and the footer, never to heroes. New full-width bands should use the `.section` class to get this for free. Small components that happen to be `<section>` elements are deliberately excluded. *Superseded by award pass 2:* only the homepage's named bands are lazily rendered, each with its measured height per locale at three widths (`scripts/award-2/bands.mjs`), because a flat 800 px placeholder made the document height drift by up to 5,300 px on the first scroll; inner pages render normally.
 - **Stylesheet order is part of the design.** `award.css` overrides `cinematic.css` at equal specificity, so it is imported only by the locale layout, after `cinematic.css`. CSS imported by both root layouts is hoisted into the shared chunk and loads first, which would silently undo those overrides. Shared rules go in `editorial.css`, which overrides nothing. An e2e test checks the order in the production bundle.
 - **Scroll-driven effects need non-scrolling ancestors.** Use `overflow: clip`, not `hidden`, on any box that contains a `view()` timeline subject; `hidden` creates a scroll container and freezes the timeline.
 - **Runtime dependencies unchanged:** `next`, `react`, `react-dom`.

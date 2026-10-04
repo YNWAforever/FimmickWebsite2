@@ -1,0 +1,112 @@
+[
+  {
+    "page": "/en",
+    "viewport": "1440x900",
+    "load": 12401,
+    "end": 12398,
+    "min": 12395,
+    "max": 12403,
+    "drift": 6,
+    "budget": 150,
+    "ok": true
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "1440x900",
+    "load": 12006,
+    "end": 12020,
+    "min": 12006,
+    "max": 12023,
+    "drift": 17,
+    "budget": 150,
+    "ok": true
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "1440x900",
+    "load": 7515,
+    "end": 7515,
+    "min": 7515,
+    "max": 7515,
+    "drift": 0,
+    "budget": 0,
+    "ok": true
+  },
+  {
+    "page": "/en/services",
+    "viewport": "1440x900",
+    "load": 5552,
+    "end": 5552,
+    "min": 5552,
+    "max": 5552,
+    "drift": 0,
+    "budget": 0,
+    "ok": true
+  },
+  {
+    "page": "/en/solutions/content-production",
+    "viewport": "1440x900",
+    "load": 8891,
+    "end": 8891,
+    "min": 8891,
+    "max": 8891,
+    "drift": 0,
+    "budget": null,
+    "ok": true
+  },
+  {
+    "page": "/en",
+    "viewport": "390x844",
+    "load": 19549,
+    "end": 19542,
+    "min": 19541,
+    "max": 19549,
+    "drift": 8,
+    "budget": 400,
+    "ok": true
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "390x844",
+    "load": 18426,
+    "end": 18426,
+    "min": 18421,
+    "max": 18428,
+    "drift": 5,
+    "budget": 400,
+    "ok": true
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "390x844",
+    "load": 15402,
+    "end": 15402,
+    "min": 15402,
+    "max": 15402,
+    "drift": 0,
+    "budget": 0,
+    "ok": true
+  },
+  {
+    "page": "/en/services",
+    "viewport": "390x844",
+    "load": 9386,
+    "end": 9386,
+    "min": 9386,
+    "max": 9386,
+    "drift": 0,
+    "budget": 0,
+    "ok": true
+  },
+  {
+    "page": "/en/solutions/content-production",
+    "viewport": "390x844",
+    "load": 14075,
+    "end": 14075,
+    "min": 14075,
+    "max": 14075,
+    "drift": 0,
+    "budget": null,
+    "ok": true
+  }
+]

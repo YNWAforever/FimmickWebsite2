@@ -1,0 +1,142 @@
+[
+  {
+    "page": "/en",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/services",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/solutions/content-production",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/industries",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/case-studies/real-estate-sales-follow-up",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/contact",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/knowledge-hub/4-types-of-crm-system",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/about/team",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/nonexistent",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/platform/nope",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/resources/videos",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/services",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/solutions/content-production",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/industries",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/case-studies/real-estate-sales-follow-up",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/contact",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/knowledge-hub/4-types-of-crm-system",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/about/team",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/nonexistent",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/platform/nope",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/resources/videos",
+    "viewport": "390x844",
+    "violations": []
+  }
+]

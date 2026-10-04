@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 
 /**
  * Site-wide motion state, mounted once in the shell.
@@ -86,9 +86,65 @@ export function Motion({ viewLabel }: { viewLabel: string }) {
     };
   }, [viewLabel]);
 
+  // Dark-chapter marquee: the scroll-linked slide ends with the [data-rest] phrase centred, so the
+  // band never rests mid-word. Only the offset is measured here (on resize and font load); the
+  // movement and the static reduced-motion position are CSS (award.css, --marquee-rest).
+  // Measuring starts when the chapter comes within a viewport of the screen: the chapter is
+  // content-visibility: auto, and measuring it at load would force its layout into the first task.
+  useEffect(() => {
+    const item = document.querySelector<HTMLElement>(".marquee__item[data-rest]");
+    const marquee = item?.closest<HTMLElement>(".marquee");
+    const track = item?.closest<HTMLElement>(".marquee__track");
+    const chapter = item?.closest<HTMLElement>("section");
+    if (!item || !marquee || !track || !chapter || !item.firstChild) return;
+    const text = document.createRange();
+    text.selectNodeContents(item.firstChild);
+    const measure = () => {
+      const phrase = text.getBoundingClientRect();
+      if (!phrase.width) return;
+      // Phrase and track share the track's translateX, so their difference is the untransformed offset.
+      const centre = phrase.left - track.getBoundingClientRect().left + phrase.width / 2;
+      track.style.setProperty("--marquee-rest", `${Math.round(marquee.clientWidth / 2 - centre)}px`);
+    };
+    const resize = new ResizeObserver(measure);
+    const near = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        near.disconnect();
+        resize.observe(marquee);
+        resize.observe(track);
+      },
+      { rootMargin: "100% 0px" },
+    );
+    near.observe(chapter);
+    return () => {
+      near.disconnect();
+      resize.disconnect();
+    };
+  }, [pathname]);
+
   // Route change hides any bubble left over from the clicked card.
   useEffect(() => {
     document.querySelector(".cursor-bubble")?.classList.remove("is-on");
+  }, [pathname]);
+
+  // Route change: the new page starts at the top, so the header must already be in its top state
+  // on the first frame instead of sliding back in over 520 ms against the page entrance. Before
+  // paint, set the state and suspend the header transition for one frame.
+  useLayoutEffect(() => {
+    const header = document.querySelector<HTMLElement>(".site-header");
+    if (!header) return;
+    header.classList.add("no-transition");
+    document.documentElement.dataset.scroll = "top";
+    let second = 0;
+    const first = requestAnimationFrame(() => {
+      second = requestAnimationFrame(() => header.classList.remove("no-transition"));
+    });
+    return () => {
+      cancelAnimationFrame(first);
+      cancelAnimationFrame(second);
+      header.classList.remove("no-transition");
+    };
   }, [pathname]);
 
   return null;

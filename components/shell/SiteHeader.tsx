@@ -9,6 +9,8 @@ export type HeaderLink = { label: string; href: string; note?: string };
 export type HeaderPillar = {
   id: string;
   label: string;
+  /** Shown instead of `label` on the 1024–1279 px desktop bar (CSS swaps them; only one is ever rendered). */
+  short?: string;
   utility?: boolean;
   overview: HeaderLink & { description: string };
   groups: { heading: string; links: HeaderLink[] }[];
@@ -93,9 +95,17 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
         }
       }
     };
+    // Rotating a tablet or widening a window past the desktop breakpoint leaves the drawer with no
+    // visible way back: close it and release the scroll lock.
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onBreakpoint = (e: MediaQueryListEvent) => {
+      if (e.matches) setDrawer(false);
+    };
     document.addEventListener("keydown", onKey);
+    desktop.addEventListener("change", onBreakpoint);
     return () => {
       document.removeEventListener("keydown", onKey);
+      desktop.removeEventListener("change", onBreakpoint);
       document.body.dataset.menuOpen = "false";
     };
   }, [drawer]);
@@ -106,6 +116,7 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
   }))?.id;
 
   return (
+    <>
     <header className="site-header">
       <div className="utility-bar">
         <div className="container utility-inner">
@@ -137,7 +148,8 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
                     data-active={activePillar === pillar.id}
                     onClick={() => setOpen(expanded ? null : pillar.id)}
                   >
-                    {pillar.label}
+                    <span className="pillar-label">{pillar.label}</span>
+                    {pillar.short ? <span className="pillar-label pillar-label--short">{pillar.short}</span> : null}
                   </button>
                   <div className="mega" id={panelId} hidden={!expanded}>
                     <div className="container mega-inner">
@@ -188,7 +200,19 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
           </button>
         </div>
       </div>
+    </header>
 
+      {/* The drawer is a sibling of <header>, not a child: the header moves with a transform while
+          reading, which would make it the drawer's containing block and squash the opening frames. */}
+      <div
+        className="drawer-scrim"
+        hidden={!drawer}
+        aria-hidden="true"
+        onClick={() => {
+          setDrawer(false);
+          toggleRef.current?.focus();
+        }}
+      />
       <div className="drawer" id={`${uid}-drawer`} hidden={!drawer} ref={drawerRef} role="dialog" aria-modal="true" aria-label={labels.menu}>
         <div className="container drawer-head">
           <Link className="brand" href={home} aria-label={labels.logoAlt}>
@@ -238,6 +262,6 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
           </div>
         </nav>
       </div>
-    </header>
+    </>
   );
 }

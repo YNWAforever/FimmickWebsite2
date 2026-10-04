@@ -2,7 +2,9 @@
    Header: utility row + eight-pillar navigation
    ≥1520px  all eight pillars inline
    1280–1519 seven commercial pillars inline, About in the utility row
-   <1280    menu button opens a drawer with all eight as accordions
+   1024–1279 the same seven with short labels
+   <1024    menu button opens a drawer with all eight as accordions:
+            a right-hand sheet over a scrim from 700px, full screen below
 ------------------------------------------------------------------- */
 .site-header {
   position: sticky;
@@ -112,11 +114,25 @@
   .header-cta { display: inline-flex; }
 }
 
-@media (min-width: 1280px) {
+.pillar-label--short { display: none; }
+
+@media (min-width: 1024px) {
   .primary-nav { display: block; }
-  .menu-toggle { display: none; }
+  /* Only the header's toggle: the drawer's own close button must never disappear. */
+  .header-actions .menu-toggle { display: none; }
   .pillar--utility { display: none; }
   .utility-about { display: inline; }
+}
+
+/* Measured at 1024: these settings leave 16 px (EN, short labels) and 30 px (zh, full labels)
+   between the last pillar and the CTA; the brief's 14 px gap and 0.92 rem overlapped it by 87 px. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .header-main { gap: 14px; }
+  .pillar-list { gap: 10px; }
+  .pillar-trigger { gap: 4px; padding-inline: 2px; font-size: 0.86rem; }
+  /* One label is rendered at a time, so the accessible name is always the visible text. */
+  .pillar-trigger:has(.pillar-label--short) .pillar-label:not(.pillar-label--short) { display: none; }
+  .pillar-label--short { display: inline; }
 }
 
 @media (min-width: 1520px) {
@@ -183,7 +199,15 @@
   overscroll-behavior: contain;
 }
 
-.drawer[hidden] { display: none; }
+.drawer[hidden], .drawer-scrim[hidden] { display: none; }
+.drawer-scrim { position: fixed; inset: 0; z-index: 59; background: rgb(7 11 31 / 40%); }
+/* Tablets and narrow desktop windows: a sheet from the right, not a phone screen stretched wide. */
+@media (min-width: 700px) {
+  .drawer { inset: 0 0 0 auto; width: min(420px, 100%); box-shadow: -24px 0 60px -30px rgb(7 11 31 / 45%); }
+}
+@media (max-width: 699px) {
+  .drawer-scrim { display: none; }
+}
 .drawer-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: var(--header-h); border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); z-index: 1; }
 .drawer-body { padding-block: 12px 32px; display: grid; gap: 8px; }
 .drawer details { border-bottom: 1px solid var(--line); }
@@ -220,5 +244,8 @@ body[data-menu-open="true"] { overflow: hidden; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: var(--fs-micro); }
 .footer-bottom nav { display: flex; flex-wrap: wrap; gap: 16px; }
 .footer-bottom a { color: var(--muted); }
+@media (pointer: coarse) {
+  .footer-bottom nav a { display: inline-flex; align-items: center; min-height: 44px; }
+}
 .footer-social { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
 .footer-social a { font-size: var(--fs-micro); font-weight: 700; color: var(--muted); }
