@@ -70,7 +70,7 @@ export function PageHero({
           </div>
           {aside ? <div>{aside}</div> : null}
         </div>
-        {photo ? <Photo id={photo} locale={locale} priority sizes="(min-width: 1320px) 1240px, 100vw" className="page-hero__photo" /> : null}
+        {photo ? <Photo id={photo} locale={locale} crop="wide" priority sizes="(min-width: 1320px) 1240px, 100vw" className="page-hero__photo" /> : null}
       </div>
     </section>
   );

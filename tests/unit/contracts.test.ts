@@ -221,7 +221,10 @@ describe("editorial photography", () => {
       expect(photo, scene.id).toBeTruthy();
       expect(scene.alt.en.length, scene.id).toBeGreaterThan(20);
       expect(scene.alt.zh.length, scene.id).toBeGreaterThan(6);
-      for (const file of [`${scene.id}-1536.avif`, `${scene.id}-640.webp`, `${scene.id}-p-800.avif`, `${scene.id}-p-480.webp`]) {
+      // File names are content-hashed (award pass 2, 6.6): the same deliveries, looked up in the manifest.
+      const { files } = photo!;
+      for (const file of [files.landscape["1536"]?.avif, files.landscape["640"]?.webp, files.portrait["800"]?.avif, files.portrait["480"]?.webp]) {
+        expect(file, scene.id).toBeTruthy();
         expect(fs.existsSync(`public/media/photography/${file}`), file).toBe(true);
       }
       expect(provenance, `provenance for ${scene.id}`).toContain(`\`${scene.id}\``);

@@ -500,15 +500,15 @@ html.has-bubble [data-cursor] { cursor: none; }
    contain-intrinsic-block-size excludes padding). English and Chinese differ by up to 220 px a
    band on phones, so each locale has its own set. Re-measure after any change to the homepage's
    copy or layout. */
-html { --band-outputs: 2700px; --band-evidence: 2540px; --band-night: 1060px; --band-paths: 2370px; --band-industries: 1370px; --band-eco: 1710px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 2480px; }
-html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2500px; --band-evidence: 2270px; --band-night: 1060px; --band-paths: 2160px; --band-industries: 1400px; --band-eco: 1680px; --band-resources: 1170px; --band-start: 1140px; --band-faq: 550px; --band-closing: 650px; --band-footer: 2550px; }
+html { --band-outputs: 2730px; --band-evidence: 2580px; --band-night: 1060px; --band-paths: 2410px; --band-industries: 1410px; --band-eco: 1750px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 2500px; }
+html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2540px; --band-evidence: 2310px; --band-night: 1060px; --band-paths: 2200px; --band-industries: 1440px; --band-eco: 1720px; --band-resources: 1170px; --band-start: 1140px; --band-faq: 550px; --band-closing: 650px; --band-footer: 2570px; }
 @media (min-width: 700px) {
-  html { --band-outputs: 2060px; --band-evidence: 1650px; --band-night: 920px; --band-paths: 2470px; --band-industries: 1110px; --band-eco: 1320px; --band-resources: 1040px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 1470px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2070px; --band-evidence: 1630px; --band-night: 870px; --band-paths: 2510px; --band-industries: 1150px; --band-eco: 1260px; --band-resources: 1000px; --band-start: 830px; --band-faq: 570px; --band-closing: 770px; --band-footer: 1520px; }
+  html { --band-outputs: 2100px; --band-evidence: 1690px; --band-night: 920px; --band-paths: 2510px; --band-industries: 1140px; --band-eco: 1360px; --band-resources: 1040px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 1500px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2110px; --band-evidence: 1670px; --band-night: 870px; --band-paths: 2550px; --band-industries: 1190px; --band-eco: 1300px; --band-resources: 1000px; --band-start: 830px; --band-faq: 570px; --band-closing: 770px; --band-footer: 1540px; }
 }
 @media (min-width: 1000px) {
-  html { --band-outputs: 1300px; --band-evidence: 1110px; --band-night: 980px; --band-paths: 1350px; --band-industries: 610px; --band-eco: 830px; --band-resources: 640px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 700px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1290px; --band-evidence: 1060px; --band-night: 1000px; --band-paths: 1330px; --band-industries: 660px; --band-eco: 850px; --band-resources: 620px; --band-start: 560px; --band-faq: 390px; --band-closing: 690px; --band-footer: 670px; }
+  html { --band-outputs: 1330px; --band-evidence: 1150px; --band-night: 980px; --band-paths: 1380px; --band-industries: 650px; --band-eco: 870px; --band-resources: 640px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 720px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1330px; --band-evidence: 1100px; --band-night: 1000px; --band-paths: 1370px; --band-industries: 700px; --band-eco: 890px; --band-resources: 620px; --band-start: 560px; --band-faq: 390px; --band-closing: 690px; --band-footer: 700px; }
 }
 
 /* ================================================================
@@ -548,3 +548,16 @@ html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2500px; --band-evide
 .editorial-row__output { margin: 0; display: grid; gap: 6px; }
 .editorial-row__output strong { font-size: var(--fs-micro); letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); }
 .editorial-next { margin-top: 72px; }
+
+/* ================================================================
+   Photographs (award pass 2, 6.2 and 6.5): the scene's focus within whichever crop is showing is the
+   object-position (Photo.tsx sets --pos-l / -p / -w), and provenance is one caption line per chapter
+   plus the footer's site-wide note.
+================================================================ */
+.photo { --pos: var(--pos-l, 50% 50%); }
+.photo--portrait { --pos: var(--pos-p, 50% 50%); }
+@media (max-width: 699px) { .photo--art { --pos: var(--pos-p, 50% 50%); } }
+@media (min-width: 800px) { .photo--wide { --pos: var(--pos-w, 50% 50%); } }
+.photo img { object-position: var(--pos); }
+.photo-caption { margin-top: 16px; }
+.site-footer .photo-note { margin-top: 4px; color: var(--night-muted); }

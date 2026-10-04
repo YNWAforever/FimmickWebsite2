@@ -1,0 +1,125 @@
+
+Running 5 tests using 4 workers
+
+[1/5] [chromium] › tests\e2e\photo.spec.ts:15:1 › every photograph keeps its provenance in the title
+[2/5] [chromium] › tests\e2e\photo.spec.ts:5:1 › the homepage keeps the pill for the hero only and says 'Illustrative' at most three times
+[3/5] [chromium] › tests\e2e\photo.spec.ts:33:1 › at 1440 and DPR 2 the page hero is sharp when a 2560 master exists
+[4/5] [chromium] › tests\e2e\photo.spec.ts:21:1 › page heroes use the wide crop from 800 px; the closing photo uses the portrait crop on phones
+[5/5] [chromium] › tests\e2e\photo.spec.ts:49:1 › brand files are cached for a day, photographs for a year
+  1) [chromium] › tests\e2e\photo.spec.ts:5:1 › the homepage keeps the pill for the hero only and says 'Illustrative' at most three times 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 4
+    Received:    5
+
+       5 | test("the homepage keeps the pill for the hero only and says 'Illustrative' at most three times", async ({ page }) => {
+       6 |   await page.goto("/en");
+    >  7 |   expect(await page.locator("main .photo__label").count()).toBeLessThanOrEqual(4);
+         |                                                            ^
+       8 |   const illustrative = await page.locator("main").evaluate((main) => (main.textContent!.match(/illustrative/gi) ?? []).length);
+       9 |   expect(illustrative).toBeLessThanOrEqual(3);
+      10 |   // Photo chapters carry one caption line each; the footer carries the site-wide note.
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\photo.spec.ts:7:60
+
+    Error Context: test-results\photo-the-homepage-keeps-t-cfb82-trative-at-most-three-times-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\photo-the-homepage-keeps-t-cfb82-trative-at-most-three-times-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\photo-the-homepage-keeps-t-cfb82-trative-at-most-three-times-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2) [chromium] › tests\e2e\photo.spec.ts:15:1 › every photograph keeps its provenance in the title 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 12
+
+      16 |   await page.goto("/en");
+      17 |   const missing = await page.locator(".photo img:not([alt=''])").evaluateAll((imgs) => imgs.filter((img) => !img.getAttribute("title")).length);
+    > 18 |   expect(missing).toBe(0);
+         |                   ^
+      19 | });
+      20 |
+      21 | test("page heroes use the wide crop from 800 px; the closing photo uses the portrait crop on phones", async ({ page }) => {
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\photo.spec.ts:18:19
+
+    Error Context: test-results\photo-every-photograph-keeps-its-provenance-in-the-title-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\photo-every-photograph-keeps-its-provenance-in-the-title-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\photo-every-photograph-keeps-its-provenance-in-the-title-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  3) [chromium] › tests\e2e\photo.spec.ts:21:1 › page heroes use the wide crop from 800 px; the closing photo uses the portrait crop on phones 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /-w-\d+\.[0-9a-f]{8}\.(avif|webp)$/
+    Received string:  "http://localhost:3100/media/photography/specialist-desk-1536.avif"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      23 |   await page.goto("/en/services");
+      24 |   const hero = page.locator(".page-hero__photo img");
+    > 25 |   await expect.poll(() => hero.evaluate((img: HTMLImageElement) => img.currentSrc)).toMatch(/-w-\d+\.[0-9a-f]{8}\.(avif|webp)$/);
+         |                                                                                     ^
+      26 |   await page.setViewportSize({ width: 390, height: 844 });
+      27 |   await page.goto("/en");
+      28 |   const closing = page.locator(".closing__photo img");
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\photo.spec.ts:25:85
+
+    Error Context: test-results\photo-page-heroes-use-the--60cbd-the-portrait-crop-on-phones-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\photo-page-heroes-use-the--60cbd-the-portrait-crop-on-phones-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\photo-page-heroes-use-the--60cbd-the-portrait-crop-on-phones-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4) [chromium] › tests\e2e\photo.spec.ts:49:1 › brand files are cached for a day, photographs for a year 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "public, max-age=86400, stale-while-revalidate=604800"
+    Received: "public, max-age=0"
+
+      49 | test("brand files are cached for a day, photographs for a year", async ({ request }) => {
+      50 |   const brand = await request.get("/brand/fimmick-logo.webp");
+    > 51 |   expect(brand.headers()["cache-control"]).toBe("public, max-age=86400, stale-while-revalidate=604800");
+         |                                            ^
+      52 |   const html = await (await request.get("/en")).text();
+      53 |   const photo = html.match(/\/media\/photography\/[^"\s,]+\.(?:avif|webp)/)![0];
+      54 |   expect((await request.get(photo)).headers()["cache-control"]).toBe("public, max-age=31536000, immutable");
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\photo.spec.ts:51:44
+
+    Error Context: test-results\photo-brand-files-are-cach-b91bc--day-photographs-for-a-year-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\photo-brand-files-are-cach-b91bc--day-photographs-for-a-year-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\photo-brand-files-are-cach-b91bc--day-photographs-for-a-year-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4 failed
+    [chromium] › tests\e2e\photo.spec.ts:5:1 › the homepage keeps the pill for the hero only and says 'Illustrative' at most three times 
+    [chromium] › tests\e2e\photo.spec.ts:15:1 › every photograph keeps its provenance in the title ─
+    [chromium] › tests\e2e\photo.spec.ts:21:1 › page heroes use the wide crop from 800 px; the closing photo uses the portrait crop on phones 
+    [chromium] › tests\e2e\photo.spec.ts:49:1 › brand files are cached for a day, photographs for a year 
+  1 skipped

@@ -297,7 +297,11 @@ test.describe("locale continuity and media", () => {
       const missingAlt = await page.locator("figure.photo img").evaluateAll((imgs) => imgs.filter((i) => i.getAttribute("alt") === null).length);
       expect(missingAlt, path).toBe(0);
     }
-    const hero = await (await page.request.get("/media/photography/review-desk-1536.avif")).body();
+    // File names are content-hashed (award pass 2, 6.6): take the homepage hero's 1536 AVIF from its srcset.
+    await page.goto("/en");
+    const srcset = await page.locator(".cine-hero__photo source[type='image/avif']").first().getAttribute("srcset");
+    const file = srcset!.split(",").map((s) => s.trim().split(" ")).find(([, w]) => w === "1536w")![0];
+    const hero = await (await page.request.get(file)).body();
     expect(hero.length).toBeGreaterThan(10_000);
   });
 });

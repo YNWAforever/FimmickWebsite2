@@ -1,0 +1,82 @@
+[
+  {
+    "page": "/en",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/services",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/case-studies/omni-channel-retail-intelligence",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/industries/retail-ecommerce",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/about/team",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/services",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/case-studies/omni-channel-retail-intelligence",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/industries/retail-ecommerce",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/about/team",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "390x844",
+    "violations": []
+  }
+]

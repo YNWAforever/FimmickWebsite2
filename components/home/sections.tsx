@@ -14,7 +14,7 @@ import { explainerMedia } from "@/content/media";
 import * as ex from "@/content/examples";
 import { ui } from "@/content/ui";
 import type { IndustryId, SolutionId } from "@/content/types";
-import { casePhotos, industryPhotos } from "@/content/photography";
+import { casePhotos, industryPhotos, photoCaption } from "@/content/photography";
 import { articleIndex } from "@/lib/resources";
 import { Photo } from "@/components/media/Photo";
 import { ExplainerPlayer } from "@/components/media/ExplainerPlayer";
@@ -223,7 +223,7 @@ export function BusinessOutputs({ locale }: P) {
             return (
               <article key={s.id} className={`output-tile reveal${featured ? " output-tile--featured" : ""}`} data-solution={s.id}>
                 <div className="output-tile__stage">
-                  {featured ? <Photo id="specialist-studio" locale={locale} crop="portrait" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 40vw, 90vw" className="output-tile__photo" /> : null}
+                  {featured ? <Photo id="specialist-studio" locale={locale} crop="portrait" sizes="(min-width: 1100px) 22vw, (min-width: 700px) 40vw, 90vw" label="caption" className="output-tile__photo" /> : null}
                   <div className="output-tile__paper">
                     <span className="sample-tag">{t(cinema.outputs.sample, locale)}</span>
                     <Artifact locale={locale} />
@@ -250,6 +250,7 @@ export function BusinessOutputs({ locale }: P) {
           <TextLink to={href(locale, "/solutions")}>{locale === "en" ? "Compare all four solutions" : zh("比較四項解決方案", locale)}</TextLink>
           <TextLink to={href(locale, "/cases-and-demos")}>{locale === "en" ? "Try the working examples" : zh("試用互動示例", locale)}</TextLink>
         </p>
+        <p className="micro muted photo-caption">{t(photoCaption, locale)}</p>
       </div>
     </section>
   );
@@ -307,7 +308,7 @@ export function CaseEvidence({ locale }: P) {
         <div className="case-photos">
           {clientCases.map((c, i) => (
             <Link key={c.slug} data-cursor={t(cinema.evidence.read, locale)} className="case-photo reveal" style={{ ["--delay" as string]: `${i * 80}ms` }} href={href(locale, paths.case(c.slug))}>
-              <Photo id={casePhotos[c.slug]} locale={locale} sizes="(min-width: 900px) 30vw, 90vw" label={false} className="case-photo__img" />
+              <Photo id={casePhotos[c.slug]} locale={locale} sizes="(min-width: 900px) 30vw, 90vw" label="caption" className="case-photo__img" />
               <div className="case-photo__body">
                 <p className="card-meta">
                   <span className="chip chip--sky">{t(caseKindLabel[c.kind], locale)}</span>
@@ -320,6 +321,7 @@ export function CaseEvidence({ locale }: P) {
           ))}
         </div>
         <p className="micro muted cine-note">{t(cinema.evidence.note, locale)}</p>
+        <p className="micro muted photo-caption">{t(photoCaption, locale)}</p>
       </div>
     </section>
   );
@@ -491,7 +493,7 @@ export function Pathways({ locale }: P) {
         </div>
         <div className="doors">
           <article className="door reveal">
-            <Photo id="workshop-wall" locale={locale} sizes="(min-width: 900px) 45vw, 92vw" className="door__photo" />
+            <Photo id="workshop-wall" locale={locale} sizes="(min-width: 900px) 45vw, 92vw" label="caption" className="door__photo" />
             <div className="door__body">
               <p className="door__label">{t(p.transformation.label, locale)}</p>
               <h3>{t(p.transformation.title, locale)}</h3>
@@ -512,7 +514,7 @@ export function Pathways({ locale }: P) {
             </div>
           </article>
           <article className="door door--services reveal" style={{ ["--delay" as string]: "100ms" }}>
-            <Photo id="specialist-desk" locale={locale} sizes="(min-width: 900px) 45vw, 92vw" className="door__photo" />
+            <Photo id="specialist-desk" locale={locale} sizes="(min-width: 900px) 45vw, 92vw" label="caption" className="door__photo" />
             <div className="door__body">
               <p className="door__label">{t(p.services.label, locale)}</p>
               <h3>{t(p.services.title, locale)}</h3>
@@ -537,6 +539,7 @@ export function Pathways({ locale }: P) {
             </div>
           </article>
         </div>
+        <p className="micro muted photo-caption">{t(photoCaption, locale)}</p>
       </div>
     </section>
   );
@@ -562,7 +565,7 @@ export function IndustryPhotos({ locale }: P) {
             return (
               <li key={id} className="reveal" style={{ ["--delay" as string]: `${i * 70}ms` }}>
                 <Link className="industry-shot" data-cursor={locale === "en" ? "Explore" : zh("探索", locale)} href={href(locale, paths.industry(id))}>
-                  <Photo id={industryPhotos[id]} locale={locale} crop="portrait" sizes="(min-width: 1000px) 24vw, (min-width: 600px) 45vw, 80vw" label={false} className="industry-shot__img" />
+                  <Photo id={industryPhotos[id]} locale={locale} crop="portrait" sizes="(min-width: 1000px) 24vw, (min-width: 600px) 45vw, 80vw" label="caption" className="industry-shot__img" />
                   <span className="industry-shot__text">
                     <strong>{t(ind.name, locale)}</strong>
                     <span>{t(ind.output, locale)}</span>
@@ -572,6 +575,7 @@ export function IndustryPhotos({ locale }: P) {
             );
           })}
         </ul>
+        <p className="micro muted photo-caption">{t(photoCaption, locale)}</p>
       </div>
     </section>
   );
@@ -584,7 +588,7 @@ export function EcosystemTiles({ locale }: P) {
     <section className="section cine-eco" aria-labelledby="ecosystem">
       <div className="container cine-eco__grid">
         <div className="cine-eco__visual">
-          <Photo id="community-event" locale={locale} crop="art" sizes="(min-width: 1000px) 40vw, 92vw" className="cine-eco__photo" />
+          <Photo id="community-event" locale={locale} crop="art" sizes="(min-width: 1000px) 40vw, 92vw" label="caption" className="cine-eco__photo" />
         </div>
         <div>
           <div className="cine-head reveal">
@@ -603,6 +607,7 @@ export function EcosystemTiles({ locale }: P) {
             ))}
           </ul>
           <p className="micro muted cine-note">{t(ecosystemBoundary, locale)}</p>
+          <p className="micro muted photo-caption">{t(photoCaption, locale)}</p>
           <p className="cine-foot">
             <TextLink to={href(locale, "/fimmick-ecosystem")}>{locale === "en" ? "Ecosystem overview" : zh("生態系統概覽", locale)}</TextLink>
             <TextLink to={href(locale, "/about/our-story")}>{locale === "en" ? "Our story" : zh("我們的故事", locale)}</TextLink>
@@ -657,7 +662,7 @@ export function ResourcePreviews({ locale }: P) {
               <strong>{meta.title}</strong>
             </Link>
             <Link className="shelf__item shelf__item--workshop" href={href(locale, "/workshop")}>
-              <Photo id="workshop-wall" locale={locale} sizes="320px" label={false} decorative className="shelf__thumb" />
+              <Photo id="workshop-wall" locale={locale} sizes="320px" label="none" decorative className="shelf__thumb" />
               <span>
                 <span className="chip chip--magenta">{t(r.workshop, locale)}</span>
                 <strong>{t(workshopResource.title, locale)}</strong>
@@ -718,7 +723,7 @@ export function ClosingChapter({ locale }: P) {
   return (
     <div className="closing-stage">
       <section className="closing" aria-labelledby="closing">
-        <Photo id="night-table" locale={locale} sizes="100vw" label={false} decorative className="closing__photo" />
+        <Photo id="night-table" locale={locale} crop="art" sizes="100vw" label="none" decorative className="closing__photo" />
         <div className="container closing__inner">
           <Headline id="closing" text={t(cinema.closing.title, locale)} accent={accent("closing", locale)} />
           <p>{t(cinema.closing.body, locale)}</p>

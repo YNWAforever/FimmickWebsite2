@@ -4,6 +4,7 @@ import { href, t, type Locale, zh } from "@/lib/i18n";
 import { ui } from "@/content/ui";
 import { pillars } from "@/content/nav";
 import { company } from "@/content/company";
+import { photoCaption } from "@/content/photography";
 import { aipLoginUrl } from "@/lib/env";
 
 /** Monochrome marks for the social row (currentColor, 20 px in a 44 px target). */
@@ -104,9 +105,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </nav>
         </div>
         <div className="footer-bottom">
-          <p>
-            © 2026 FIMMICK. {t(ui.rights, locale)}
-          </p>
+          <div>
+            <p>
+              © 2026 FIMMICK. {t(ui.rights, locale)}
+            </p>
+            {/* The site-wide photography note (award pass 2, 6.5). */}
+            <p className="photo-note">{t(photoCaption, locale)}</p>
+          </div>
           <nav aria-label={locale === "en" ? "Legal and utility" : zh("法律及實用連結", locale)}>
             <Link href={href(locale, "/how-to-start")} prefetch={false}>{locale === "en" ? "How to start" : zh("如何開始", locale)}</Link>
             <Link href={href(locale, "/contact")} prefetch={false}>{locale === "en" ? "Contact" : zh("聯絡我們", locale)}</Link>

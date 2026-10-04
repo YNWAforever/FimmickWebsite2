@@ -166,6 +166,22 @@ Checks: typecheck, lint, vitest 48/48, Playwright 145/145 (new `tests/e2e/hubs.s
 
 Phase 5 deviations from the brief (reasons in the PR): the audit has no "Content §7" and none of the four before/after examples the brief cites, so the cut is limited to the 14 summaries over the word limit, made by deletion; `whoFor`, `distinction` and `output` are unchanged; the test checks `.hub-card` (the grid's real class) as well as `.card-grid`.
 
+## Phase 6 — photography pipeline (fix plan 15)
+
+Evidence: `before/phase-6/` (`unit-photography-red.log` 12/12 failing, `photo-spec-red.log` 4 failing + 1 skipped, screenshots of the photo surfaces on `main` from `scripts/award-2/capture-photo.mjs`) and `after/phase-6/` (the same screenshots, `axe.json`, the Lighthouse A/B, `playwright-full.log`), plus the grade contact sheet `photo-grade.webp`.
+
+| Item | Before | After |
+| --- | --- | --- |
+| 6.1 widths and crops | landscape 1536 / 1024 / 640, portrait 800 / 480, named `<id>-<w>` | landscape 2560 / 1536 / 1280 / 1024 / 640, portrait 1024 / 800 / 480, wide 21:8 2560 / 1536; a width wider than its crop's source is skipped and logged (with today's 1536 px masters: landscape 2560, portrait 1024 and wide 2560 wait for regenerated masters); `Photo crop="wide"` on the page-hero band (from 800 px) and `crop="art"` on the closing chapter (portrait on phones) |
+| 6.2 object position | focus applied to landscape only, as an inline style | the scene's focus within whichever crop is shown (`--pos-l / -p / -w`), switching with the art-directed source |
+| 6.3 shared grade | none; mean R−B ranged 0.5–36.8 across masters | `modulate(saturation 0.92)`, `linear(1.06, −6)`, warmth brought to 12 ± 4 (parameters in `scenes.json` `grade`); every scene now 9.5–12.6; contact sheet `docs/redesign/award-2/photo-grade.webp` |
+| 6.5 badge policy | "Illustrative photograph" pill on 5 homepage images; "Illustrative" 7 times on `/en` | `label: 'pill' \| 'caption' \| 'none'`: the pill stays on heroes (homepage, page heroes, leadership photo); photo chapters print one line, "Photographs are generated illustrations." (5 on the homepage); decorative images carry nothing; the footer carries the same line site-wide; every photograph keeps its provenance in `title`. Homepage: 1 pill, "Illustrative" 3 times |
+| 6.6 cache | unhashed names under an immutable `/media` header; `/brand` uncached | `<id>-<crop>-<w>.<hash8>.<ext>` with the mapping in `content/photography.generated.json`; files the manifest no longer lists are deleted by the build; `/brand/*` `max-age=86400, stale-while-revalidate=604800` |
+
+Checks: typecheck, lint, vitest 60/60 (new `tests/unit/photography.test.ts`: 12), Playwright 149/149 + 1 skipped (new `tests/e2e/photo.spec.ts`: 4 + the DPR 2 sharpness check, which skips until a 2560 candidate exists), hans table current, `curly.mjs --check` 0, `content/legal.ts` untouched. `scripts/award-2/axe.mjs` on 8 touched pages × 2 widths: 0. Bands re-measured (five caption lines). Lighthouse mobile `/en`, 8 interleaved pairs: `main` 85 / branch 86. Photography on disk 3.1 → 4.9 MB (two new crops/widths); the `/services` hero at 1440 now loads the 1536 wide crop (30 KB) instead of the 1536 landscape (46 KB).
+
+Pending (handoff, brief 6.4): regenerated masters at ≥ 2,560 px. Dropping them into `assets-src/photography/incoming/` and running `RAW_DIR=… node scripts/build-photography.mjs` fills in the skipped widths; the provenance table then gets a new hash table in `award-2/`.
+
 ## Phase log
 
 | Phase | PR | What changed | Before → after |
@@ -176,3 +192,4 @@ Phase 5 deviations from the brief (reasons in the PR): the audit has no "Content
 | 3 | feat/award-pass-2-copy | Headline accents on inner pages (EN serif, zh emphasis dots, keep-all), the new hero line, microcopy and zh terms, one sample notice, case outcomes as observable states and the four-block case page | "Illustrative" outside photo pills 6 → 2; deny-listed outcomes 10 → 0; 12 new regression tests, all red on main, and 4 pages added to the axe spec |
 | 4 | feat/award-pass-2-shell | Footer in four columns with an icon row and no prefetch, hover-intent mega menu with scrim and a featured column, contact disclosure and email card, per-template share images, two-line hero at 1920 | footer-only prefetches 96 → 0; hero 4 → 2 lines at 1920; share images 1 static → per page; 16 new regression tests (15 red on main, plus the href snapshot guard) |
 | 5 | feat/award-pass-2-hubs | Editorial list on the four hubs (one row per record, headline link, one artefact), objective filter as a client island (`/services` static), 14 summaries cut to ≤ 15 words, object-specific link labels | card grids 4 hubs → 0; `/services` dynamic → static; summaries over 16 words 14 → 0; 7 new regression tests, all red on main |
+| 6 | feat/award-pass-2-photo | Photo pipeline: 1280 / 2560 / wide 21:8 / portrait 1024 (skipped until larger masters), focus per crop, shared grade, content-hashed names, badge policy (pill on heroes, one caption per chapter, footer note), `/brand` cache header | homepage pills 5 → 1, "Illustrative" 7 → 3; R−B spread 0.5–36.8 → 9.5–12.6; 17 new regression tests, 16 red on main (+1 skipped by design) |

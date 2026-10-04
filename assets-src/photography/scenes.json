@@ -1,6 +1,12 @@
 {
   "$comment": "Photographic scene briefs for the cinematic redesign. Single source for image generation prompts, crops, alt text and the provenance manifest (docs/redesign/cinematic/photography-provenance.md). Every scene is ILLUSTRATIVE: generated people are not FIMMICK staff, generated places are not client premises, and nothing on screen represents a real product interface.",
   "style": "Editorial business photography for a Hong Kong B2B company website, shot on a 35mm full-frame camera, natural light, shallow depth of field, tactile materials, calm and credible, like a Monocle or Kinfolk business feature. Palette: warm white, pale grey, oak, deep navy, with at most one small magenta or lime accent. Any printed text must be tiny and out of focus (never legible). No logos or brand names, no readable screens or user interfaces (screens, if present, are dark or blurred), no robots, no holograms, no glowing effects, no neon, no identifiable faces (people are seen from behind, at the edge of frame or out of focus). Landscape 3:2, 1536x1024.",
+  "grade": {
+    "$comment": "One grade for every master before resizing (scripts/build-photography.mjs): saturation, a mild S-curve as linear(multiplier, offset), then the mean R−B brought to target ± tolerance.",
+    "saturation": 0.92,
+    "linear": [1.06, -6],
+    "warmth": { "target": 12, "tolerance": 4 }
+  },
   "scenes": [
     {
       "id": "review-desk",
