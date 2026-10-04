@@ -1,0 +1,98 @@
+{
+  "mobile /en": {
+    "score": 89,
+    "lcp": 3400,
+    "tbt": 157,
+    "cls": 0,
+    "weightKB": 343,
+    "scores": [
+      90,
+      89,
+      82
+    ]
+  },
+  "mobile /en/platform": {
+    "score": 90,
+    "lcp": 3083,
+    "tbt": 190,
+    "cls": 0,
+    "weightKB": 289,
+    "scores": [
+      90,
+      88,
+      93
+    ]
+  },
+  "mobile /en/services": {
+    "score": 93,
+    "lcp": 3052,
+    "tbt": 136,
+    "cls": 0,
+    "weightKB": 307,
+    "scores": [
+      93,
+      93,
+      87
+    ]
+  },
+  "mobile /zh-hant": {
+    "score": 86,
+    "lcp": 3315,
+    "tbt": 259,
+    "cls": 0,
+    "weightKB": 349,
+    "scores": [
+      86,
+      91,
+      80
+    ]
+  },
+  "desktop /en": {
+    "score": 99,
+    "lcp": 745,
+    "tbt": 3,
+    "cls": 0,
+    "weightKB": 387,
+    "scores": [
+      99,
+      99,
+      99
+    ]
+  },
+  "desktop /en/platform": {
+    "score": 100,
+    "lcp": 726,
+    "tbt": 11,
+    "cls": 0,
+    "weightKB": 294,
+    "scores": [
+      100,
+      99,
+      100
+    ]
+  },
+  "desktop /en/services": {
+    "score": 99,
+    "lcp": 780,
+    "tbt": 9,
+    "cls": 0,
+    "weightKB": 331,
+    "scores": [
+      99,
+      99,
+      99
+    ]
+  },
+  "desktop /zh-hant": {
+    "score": 99,
+    "lcp": 796,
+    "tbt": 8,
+    "cls": 0,
+    "weightKB": 392,
+    "scores": [
+      99,
+      100,
+      99
+    ]
+  }
+}

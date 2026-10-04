@@ -1,0 +1,81 @@
+# Award pass 2
+
+Execution record for the 21-item fix plan in [`handoff/03-FimmickWebsite2-Fix-Plan-Implementation-Brief.md`](handoff/03-FimmickWebsite2-Fix-Plan-Implementation-Brief.md), against the audit in [`handoff/02-FimmickWebsite2-Award-Level-Audit.md`](handoff/02-FimmickWebsite2-Award-Level-Audit.md) (main@10c886e, 6.8/10). This folder supersedes the measurement parts of `docs/redesign/award/` and `docs/redesign/cinematic/`; those reports are kept as written.
+
+- `handoff/` — the bundle as delivered (brief, audit, evidence index, 62 "before" screenshots from the audit).
+- `before/` — Phase 0 baseline regenerated on this machine: `frames/` (fold + contact sheet per page and width, plus the mega-menu and drawer states), `heights.json`, `axe.json`, `verify.json`, `bytes.json`, `lighthouse.json`.
+- `after/` — the same measurements after each phase.
+- Scripts: `scripts/award-2/` (`capture-scroll.mjs`, `heights.mjs`, `verify.mjs`, `axe.mjs`, `bytes.mjs`, `lighthouse.mjs`). All expect a production build on port 3100 (`npm run build && npx next start -p 3100`); `OUT=before|after` picks the folder.
+
+## Phase 0 baseline (4 Oct 2026, main@10c886e)
+
+Local production build (`next build`, 1,549 static pages, Google Fonts reachable so no font substitution), `next start -p 3100`, Playwright Chromium 1243 on Windows 11. Lighthouse 13.5.0, simulated throttling, median of 3.
+
+### Checks
+
+| Check | Result |
+| --- | --- |
+| `npm run typecheck` | pass |
+| `npm run lint` | pass |
+| `npm test` (vitest) | 23 / 23 pass |
+| `npx playwright test` (existing `site.spec.ts`) | 25 / 25 pass |
+| Pre-existing failures | none |
+
+### Lighthouse (median of 3)
+
+| Page | Mobile | Mobile LCP | Mobile TBT | Desktop | Weight |
+| --- | --- | --- | --- | --- | --- |
+| /en | 89 (90/89/82) | 3.40 s | 157 ms | 99 | 343 KB |
+| /en/platform | 90 (90/88/93) | 3.08 s | 190 ms | 100 | 289 KB |
+| /en/services | 93 (93/93/87) | 3.05 s | 136 ms | 99 | 307 KB |
+| /zh-hant | 86 (86/91/80) | 3.32 s | 259 ms | 99 | 349 KB |
+
+CLS is 0 on every run. Mobile scores sit 4–8 points under the audit's (94/98/95/91): this laptop's simulated runs swing by up to 10 points (see the run spread), so later phases compare medians as an interleaved A/B against a `main` build, not against this table alone.
+
+### Document height drift on the first scroll-through
+
+`scripts/award-2/heights.mjs`: largest |scrollHeight − scrollHeight at load| while scrolling top to bottom.
+
+| Page | 1440 load → end | 1440 drift | 390 load → end | 390 drift |
+| --- | --- | --- | --- | --- |
+| /en | 12,715 → 12,398 | 762 | 14,784 → 19,550 | **4,766** |
+| /zh-hant | 12,601 → 12,020 | 718 | 14,331 → 18,434 | 4,103 |
+| /en/platform | 6,913 → 7,515 | 896 | 10,064 → 15,402 | **5,338** |
+| /en/services | 5,305 → 5,552 | 247 | 8,269 → 9,386 | 1,117 |
+| /en/solutions/content-production | 11,705 → 8,891 | 2,814 | 11,458 → 14,075 | 2,617 |
+
+Matches the audit (4,767 / 762 / 5,338 / 1,117; content-production −2,814 at 1440).
+
+### Accessibility
+
+axe-core 4.13 (`wcag2a wcag2aa wcag21aa wcag22aa best-practice`) on 12 pages (`/en`, `/zh-hant`, `/zh-hans`, platform, services, content-production, industries, the real-estate case, contact, the CRM article, team, `/en/nonexistent`) at 1440×900 and 390×844, after a full scroll and a 1.5 s settle: **0 violations** (24 / 24). Method: every rule at the top of the page, plus `target-size` alone at the bottom on targets wholly inside the viewport (axe sizes only on-screen targets; see `tests/e2e/axe.spec.ts`).
+
+The audit's two 24 px hits (footer "Cookies", 48.6 × 21.4 px; the zh ghost "Resources" button) reproduce only at intermediate scroll positions, where the fixed header overlaps them; at rest axe passes them on spacing. Phase 1.4 guards both with a direct size assertion instead.
+
+### Transfer
+
+| Measure | Value |
+| --- | --- |
+| CSS per route (all routes identical) | 2 files, 98.3 KB raw, 20.8 KB gzip |
+| RSC prefetch, full scroll of /en at 1440 | 96 requests, 1,068 KB raw, 257 KB gzip |
+| RSC prefetch, full scroll of /en at 390 | 92 requests, 1,066 KB raw, 257 KB gzip |
+| RSC prefetch, full scroll of /en/platform at 1440 | 115 requests, 1,167 KB raw, 281 KB gzip |
+
+Gzip is recomputed at level 9 from the response bodies, so it is a little under the audit's on-the-wire 325–361 KB.
+
+### Phase 1 findings reproduced (`before/verify.json`)
+
+| Item | Measurement |
+| --- | --- |
+| 1.2 nav | `.primary-nav` `display: none` at 1024 and 1200; drawer at 820 and 1200 is full width (820 / 1,200 px) |
+| 1.4 utility focus | after scroll 1500 → 1200, Shift+Tab from the logo focuses 简体中文 at top −35 px (header translated −37 px) |
+| 1.5 drawer opening | after scroll down/up, drawer height 109 px at 60, 200 and 450 ms; 844 px only at 700 ms |
+| 1.5 drawer resize | opened at 1000, resized to 1300: still open, `body` overflow hidden, in-drawer close button `display: none` |
+| 1.5 route change | /en → /en/platform from a scrolled position: header at −37 px on the first frame of the new page, back at 0 after ~670 ms |
+| 1.6 hero badge | at 390, topmost element at the badge centre is `aside.hero-card` |
+
+## Phase log
+
+| Phase | PR | What changed | Before → after |
+| --- | --- | --- | --- |
+| 0 | — (first commit of the Phase 1 branch) | Baseline, scripts, axe gate (`tests/e2e/axe.spec.ts`), `@axe-core/playwright` devDependency | see above |
