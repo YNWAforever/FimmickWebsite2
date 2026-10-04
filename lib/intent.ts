@@ -19,7 +19,7 @@ export const intents = ["demo", "configuration", "deployment", "managed", "trans
 export type Intent = (typeof intents)[number];
 
 export const intentLabels: Record<Intent, L> = {
-  demo: { en: "Request a product demo", zh: "預約產品示範" },
+  demo: { en: "Request a product demo", zh: "申請產品示範" },
   configuration: { en: "Discuss product configuration", zh: "討論產品配置" },
   deployment: { en: "Discuss deployment support", zh: "討論部署支援" },
   managed: { en: "Discuss managed operations", zh: "討論託管營運" },

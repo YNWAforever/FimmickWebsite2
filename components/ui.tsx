@@ -4,6 +4,7 @@ import { href, t, type L, type Locale } from "@/lib/i18n";
 import { ui } from "@/content/ui";
 import type { PhotoId } from "@/content/photography";
 import { Photo } from "@/components/media/Photo";
+import { Headline } from "@/components/motion/Headline";
 
 export function Crumbs({ locale, items }: { locale: Locale; items: { label: string; path?: string }[] }) {
   const all = [{ label: t(ui.home, locale), path: "/" }, ...items];
@@ -31,6 +32,7 @@ export function PageHero({
   crumbs,
   eyebrow,
   title,
+  accent,
   lead,
   actions,
   aside,
@@ -41,6 +43,8 @@ export function PageHero({
   crumbs: { label: string; path?: string }[];
   eyebrow?: string;
   title: ReactNode;
+  /** Phrase inside a string `title` set in the editorial accent (zh: emphasis marks), as on the homepage. */
+  accent?: string;
   lead?: ReactNode;
   actions?: ReactNode;
   aside?: ReactNode;
@@ -55,7 +59,7 @@ export function PageHero({
         <div className="page-hero-grid">
           <div>
             {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-            <h1>{title}</h1>
+            {typeof title === "string" ? <Headline as="h1" text={title} accent={accent} /> : <h1>{title}</h1>}
             {lead ? <p className="lead">{lead}</p> : null}
             {notice ? (
               <p className="notice" style={{ marginTop: 20 }}>
@@ -72,13 +76,13 @@ export function PageHero({
   );
 }
 
-export function SectionHead({ eyebrow, title, lead, action, as = "h2" }: { eyebrow?: string; title: ReactNode; lead?: ReactNode; action?: ReactNode; as?: "h2" | "h3" }) {
+export function SectionHead({ eyebrow, title, accent, lead, action, as = "h2" }: { eyebrow?: string; title: ReactNode; accent?: string; lead?: ReactNode; action?: ReactNode; as?: "h2" | "h3" }) {
   const Heading = as;
   return (
     <div className={action ? "section-head section-head--row reveal" : "section-head reveal"}>
       <div className="stack" style={{ ["--stack" as string]: "14px" }}>
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        <Heading>{title}</Heading>
+        {typeof title === "string" && accent ? <Headline as={as} text={title} accent={accent} /> : <Heading>{title}</Heading>}
         {lead ? <p className="lead">{lead}</p> : null}
       </div>
       {action ? <div>{action}</div> : null}

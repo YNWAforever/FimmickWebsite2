@@ -62,7 +62,7 @@ export function ArticleList({ locale, shellLocale, page, category, basePath }: {
   );
 }
 
-/** Which locale's body to render and whether it is a fallback. */
+/** Which locale’s body to render and whether it is a fallback. */
 export function articleSource(slug: string, locale: LegacyLocale) {
   const entry = articleBySlug(slug);
   if (!entry) return null;
@@ -119,7 +119,7 @@ export async function ArticleView({ slug, locale, shellLocale }: { slug: string;
                       <strong>{en ? "Archive article" : hans ? zh("文章存档", locale) : zh("文章存檔", locale)}</strong>
                       <span>
                         {en
-                          ? `Originally published ${formatDate(entry.published, "en")}. It reflects FIMMICK's positioning at that time and has not been rewritten; some terms, figures and links may be out of date.`
+                          ? `Originally published ${formatDate(entry.published, "en")}. It reflects FIMMICK’s positioning at that time and has not been rewritten; some terms, figures and links may be out of date.`
                           : hans
                             ? zh(`原于 ${formatDate(entry.published, "zh-hans")} 发布，反映 FIMMICK 当时的定位，内容未经改写；部分用语、数字及链接可能已过时。`, locale)
                             : zh(`原於 ${formatDate(entry.published, "zh-hant")} 發布，反映 FIMMICK 當時的定位，內容未經改寫；部分用語、數字及連結可能已過時。`, locale)}

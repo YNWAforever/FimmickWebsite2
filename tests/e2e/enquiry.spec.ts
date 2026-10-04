@@ -97,7 +97,7 @@ test.describe("2.2 validation and status", () => {
     await fillRequired(page);
     await context.setOffline(true);
     await submitButton(page).click();
-    await expect(page.getByText(/couldn't confirm that your request was received/)).toBeVisible();
+    await expect(page.getByText(/couldn’t confirm that your request was received/)).toBeVisible();
     await expect(page.getByText(/took too long/)).toHaveCount(0);
     await context.setOffline(false);
   });

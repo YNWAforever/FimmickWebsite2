@@ -19,7 +19,7 @@ export type PlatformLayer = {
  * All values are illustrative sample data.
  */
 export const sampleScenario = {
-  brand: { en: "Sample brand · Reusable bottle", zh: "示例品牌・可重用水樽" },
+  brand: { en: "Sample brand · Reusable bottle", zh: "示例品牌·可重用水樽" },
   steps: [
     { en: "Brand context", zh: "品牌資料" },
     { en: "Content preparation", zh: "內容準備" },
@@ -75,7 +75,7 @@ export const platformLayers: PlatformLayer[] = [
   {
     id: "approvals",
     number: "03",
-    name: { en: "Approvals & Handoffs", zh: "審批與交接" },
+    name: { en: "Approvals & Handoffs", zh: "批核與交接" },
     question: { en: "Where does my team decide?", zh: "團隊在哪裏作決定？" },
     explanation: {
       en: "People approve, correct or reject prepared work at the points you choose. Ownership is explicit: each handoff names who decides next, and editing an approved item sends it back for review.",
@@ -96,7 +96,7 @@ export const platformLayers: PlatformLayer[] = [
   {
     id: "records",
     number: "04",
-    name: { en: "Records & Improvement", zh: "記錄與改善" },
+    name: { en: "Records & Improvement", zh: "紀錄與改善" },
     question: { en: "What happened, and what can we improve?", zh: "發生了甚麼？有甚麼可以改善？" },
     explanation: {
       en: "The selected output is exported with its sources, review notes and exceptions. That record makes the work reusable and shows where the next iteration should improve.",
@@ -107,7 +107,7 @@ export const platformLayers: PlatformLayer[] = [
       zh: ["輸出編號", "審閱歷史", "例外紀錄"],
     },
     scenario: {
-      label: { en: "Export record", zh: "匯出記錄" },
+      label: { en: "Export record", zh: "匯出紀錄" },
       items: {
         en: ["Exported: caption + invitation (sample file)", "Review notes attached", "Exception: colour name mismatch logged", "Next round: add colour names to the facts list"],
         zh: ["已匯出：文案＋邀請（示例檔案）", "附上審閱意見", "例外：已記錄顏色名稱不符", "下一輪：把顏色名稱加入資料清單"],

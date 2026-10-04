@@ -46,8 +46,9 @@ export default async function ServicePage({ params }: SlugParams) {
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Services" : zh("專業服務", locale), path: "/services" }, { label: t(s.name, locale) }]}
-        eyebrow={`${t(objective.name, locale)} · ${t(s.eyebrow, locale)}`}
-        title={t(s.name, locale)}
+        eyebrow={`${t(objective.name, locale)} · ${t(s.name, locale)}`}
+        title={t(s.eyebrow, locale)}
+        accent={s.headlineAccent ? t(s.headlineAccent, locale) : undefined}
         lead={t(s.summary, locale)}
         actions={
           <>

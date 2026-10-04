@@ -8,7 +8,7 @@ const srcset = (id: PhotoId, ext: "avif" | "webp", portrait: boolean) =>
 
 /**
  * Art-directed editorial photograph.
- * - `landscape` (3:2) and `portrait` (4:5, cropped around the scene's focus)
+ * - `landscape` (3:2) and `portrait` (4:5, cropped around the scene’s focus)
  *   crops; `art` uses the portrait crop below 700 px and landscape above.
  * - AVIF with WebP fallback, intrinsic size set to avoid layout shift, the
  *   dominant colour as the loading placeholder, lazy unless `priority`.

@@ -8,7 +8,7 @@ import built from "./photography.generated.json";
  * Every photograph is an ILLUSTRATIVE generated image (see
  * docs/redesign/cinematic/photography-provenance.md): generated people are not
  * FIMMICK staff, generated places are not client premises, and no photograph
- * shows a real product interface. Product evidence uses the site's own working
+ * shows a real product interface. Product evidence uses the site’s own working
  * examples and the explainer film instead.
  */
 export type PhotoId =

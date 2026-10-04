@@ -11,24 +11,18 @@ import type { CaseStudy } from "./types";
  * because their scope, dates, baselines and definitions are not documented in
  * the source record. Re-introduce a figure only with approved evidence.
  */
-const legacyBasis: L = {
-  en: "Anonymised engagement summary previously published on fimmick.com. Client identity withheld. Outcome figures shown on the previous site are not repeated because their scope, dates and definitions were not documented.",
-  zh: "此為曾於 fimmick.com 發布的匿名項目摘要，客戶身份不予公開。由於舊網站所列成效數字未有記錄範圍、日期及定義，此處不再引用。",
-};
-const legacyPeriod: L = { en: "Not stated in the source record", zh: "來源紀錄未有註明" };
-const legacyLimits: L = {
-  en: "Qualitative summary. No client-approved metrics, baseline or dates are available for publication, so results are described rather than quantified.",
-  zh: "此為質性摘要。由於沒有經客戶批准可公開的指標、基線或日期，成果只作描述，不作量化。",
+/** One provenance line for every anonymised client case (no period is recorded, so none is shown). */
+const provenance: L = {
+  en: "Anonymised client engagement. Described, not quantified until the client approves figures.",
+  zh: "匿名客戶項目。在客戶批准公開數字前，只作描述，不作量化。",
 };
 
-type Draft = Omit<CaseStudy, "kind" | "publicationBasis" | "period" | "limitations" | "context"> & { context?: L };
+type Draft = Omit<CaseStudy, "kind" | "publicationBasis" | "context"> & { context?: L };
 
 const client = (d: Draft): CaseStudy => ({
   kind: "client-work",
-  publicationBasis: legacyBasis,
-  period: legacyPeriod,
-  limitations: legacyLimits,
-  context: d.context ?? { en: `${d.sector.en} · ${d.market.en}`, zh: `${d.sector.zh}・${d.market.zh}` },
+  publicationBasis: provenance,
+  context: d.context ?? { en: `${d.sector.en} · ${d.market.en}`, zh: `${d.sector.zh}·${d.market.zh}` },
   ...d,
 });
 
@@ -36,13 +30,13 @@ export const cases: CaseStudy[] = [
   {
     slug: "fimmick-ai-native-operating-model",
     kind: "internal-application",
-    title: { en: "Redesigning FIMMICK's own delivery work before offering it to clients", zh: "先改造 FIMMICK 自身的工作方式，再提供給客戶" },
-    sector: { en: "FIMMICK · internal operations", zh: "FIMMICK・內部營運" },
+    title: { en: "Redesigning FIMMICK’s own delivery work before offering it to clients", zh: "先改造 FIMMICK 自身的工作方式，再提供給客戶" },
+    sector: { en: "FIMMICK · internal operations", zh: "FIMMICK·內部營運" },
     market: { en: "Hong Kong", zh: "香港" },
     industries: [],
     services: ["ai-transformation", "workflow-automation", "business-intelligence"],
     products: ["creativemax", "social-listening", "customer-ops"],
-    publicationBasis: { en: "FIMMICK's own operating experience, described by the company.", zh: "由 FIMMICK 描述的自身營運經驗。" },
+    publicationBasis: { en: "FIMMICK’s own operating experience, described by the company.", zh: "由 FIMMICK 描述的自身營運經驗。" },
     period: { en: "2024 onwards (company timeline)", zh: "2024 年起（公司發展時間線）" },
     context: {
       en: "Founded in Hong Kong in 2008, FIMMICK spent years running campaigns, content, CRM, social and reporting work for brands. From 2024 the company began turning its own recurring delivery work into configured AI workflows.",
@@ -54,7 +48,7 @@ export const cases: CaseStudy[] = [
     },
     scope: { en: ["Recurring research and listening briefs", "Content preparation and review", "Reporting commentary", "Enquiry and follow-up records"], zh: ["經常性研究及聆聽簡報", "內容準備及審閱", "報告評述", "查詢及跟進紀錄"] },
     workflowBefore: { en: ["Each team rebuilt briefs and reports from scratch", "Approvals happened in chat threads", "Learning stayed with individuals"], zh: ["各團隊每次由零開始整理簡報及報告", "批核在聊天記錄中進行", "經驗只留在個別同事身上"] },
-    workflowAfter: { en: ["Defined workflows with approved inputs", "AI prepares drafts; named people review", "Records kept so the next round improves"], zh: ["以已確認輸入界定流程", "AI 準備草稿，由指定人員審閱", "保留記錄，令下一輪有所改善"] },
+    workflowAfter: { en: ["Defined workflows with approved inputs", "AI prepares drafts; named people review", "Records kept so the next round improves"], zh: ["以已確認輸入界定流程", "AI 準備草稿，由指定人員審閱", "保留紀錄，令下一輪有所改善"] },
     humanDecisions: { en: "Account leads and specialists approve every client-facing output. Commercial and creative judgement stays with people.", zh: "所有面向客戶的輸出均由客戶主管及專家批准；商業及創意判斷仍由人負責。" },
     dataFoundation: { en: "Internal templates, approved client briefs and brand facts, reporting exports.", zh: "內部範本、已確認的客戶簡報及品牌資料、報告匯出檔。" },
     outcome: { en: "The practical experience behind FIMMICK AIP and the transformation method: what to automate, where people must decide, and what records make work reusable.", zh: "成為 FIMMICK AIP 及轉型方法背後的實戰經驗：哪些工作應自動化、哪些地方必須由人決定，以及哪些記錄能令工作得以重用。" },
@@ -66,13 +60,13 @@ export const cases: CaseStudy[] = [
     title: { en: "Omni-channel retail intelligence", zh: "全渠道零售數據洞察" },
     sector: { en: "Retail", zh: "零售" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["retail-ecommerce"], services: ["data-hub", "business-intelligence"], products: ["social-listening"],
-    problem: { en: "A multi-store retailer's data was split across POS, e-commerce, CRM, media and social. Teams could see activity but not which campaigns, channels or products were working.", zh: "一家多店零售商的資料分散於 POS、網店、CRM、媒體及社交平台。團隊看得到活動，卻看不清哪些宣傳、渠道或產品真正奏效。" },
+    problem: { en: "A multi-store retailer’s data was split across POS, e-commerce, CRM, media and social. Teams could see activity but not which campaigns, channels or products were working.", zh: "一家多店零售商的資料分散於 POS、網店、CRM、媒體及社交平台。團隊看得到活動，卻看不清哪些宣傳、渠道或產品真正奏效。" },
     scope: { en: ["Data source mapping", "Connected reporting layer", "Management decision view"], zh: ["資料來源對照", "連接式報告層", "管理層決策視圖"] },
     workflowBefore: { en: ["Scattered reports checked by hand", "No shared definitions"], zh: ["人手翻查分散的報告", "沒有共同定義"] },
     workflowAfter: { en: ["Key signals unified in one view", "AI-prepared performance summaries", "Management review of budget and content shifts"], zh: ["主要訊號整合於同一視圖", "由 AI 準備成效摘要", "管理層審閱預算及內容調整"] },
     humanDecisions: { en: "The management team reviewed the reports and made final budget and campaign decisions.", zh: "管理團隊審閱報告，並作出最終預算及宣傳決定。" },
     dataFoundation: { en: "POS, e-commerce platform, CRM records, media platform APIs, social metrics.", zh: "POS、網店平台、CRM 紀錄、媒體平台介面、社交數據。" },
-    outcome: { en: "The client moved from checking scattered reports to a clearer performance view used in campaign reviews and management discussion.", zh: "客戶由翻查分散報告，轉為以更清晰的成效視圖進行宣傳檢討及管理層討論。" },
+    outcome: { en: "Key signals now sit in one view; AI prepares the performance summaries, and management reviews budget and content shifts from them.", zh: "主要訊號整合於同一視圖；成效摘要由 AI 準備，管理層據此審閱預算及內容調整。" },
     reusable: { en: "A retail performance reporting workflow.", zh: "零售成效報告流程。" },
   }),
   client({
@@ -86,7 +80,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["AI flags stronger segments and creative options", "Marketing team reviews recommendations", "CRM lead records inform the next round"], zh: ["AI 標示表現較佳的受眾及創意選項", "市場團隊審閱建議", "CRM 商機紀錄為下一輪提供依據"] },
     humanDecisions: { en: "The marketing team reviewed every recommendation and made final campaign decisions.", zh: "市場團隊審閱每項建議，並作出最終宣傳決定。" },
     dataFoundation: { en: "Media platform data, CRM lead records, audience segments, creative performance.", zh: "媒體平台數據、CRM 商機紀錄、受眾分組、創意成效。" },
-    outcome: { en: "Clearer visibility into which audiences, creatives and channels produced real business opportunities.", zh: "更清楚了解哪些受眾、創意及渠道帶來真正的商機。" },
+    outcome: { en: "AI flags the stronger segments and creative options, the marketing team reviews each recommendation, and CRM lead records feed the next round.", zh: "AI 標示表現較佳的受眾及創意選項，市場團隊逐一審閱建議，CRM 商機紀錄為下一輪提供依據。" },
     reusable: { en: "Lead-quality review and campaign optimisation workflow.", zh: "商機質素審閱及宣傳優化流程。" },
   }),
   client({
@@ -100,7 +94,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["AI-assisted content calendar", "Brand-approved creator briefs", "Regular performance review"], zh: ["AI 輔助內容日程", "經品牌批准的創作者簡報", "定期成效檢討"] },
     humanDecisions: { en: "The brand team reviewed content plans, approved creator briefs and adjusted messaging.", zh: "品牌團隊審閱內容計劃、批准創作者簡報並調整訊息。" },
     dataFoundation: { en: "Social analytics, e-commerce sales, creator content performance, product catalogue.", zh: "社交分析、電商銷售、創作者內容成效、產品目錄。" },
-    outcome: { en: "A repeatable social commerce operating model that could test, learn and scale across markets.", zh: "建立可在不同市場測試、學習及擴展的社交電商營運模式。" },
+    outcome: { en: "Content runs from an AI-assisted calendar, creators work from brand-approved briefs, and performance is reviewed on a regular cycle.", zh: "內容按 AI 輔助的日程推進，創作者依經品牌批准的簡報工作，成效定期檢討。" },
     reusable: { en: "Content calendar and creator campaign workflow.", zh: "內容日程及創作者宣傳流程。" },
   }),
   client({
@@ -114,7 +108,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["AI-assisted segment and trigger suggestions", "Team-approved messaging", "Performance reporting"], zh: ["AI 輔助建議分組及觸發條件", "經團隊批准的訊息", "成效報告"] },
     humanDecisions: { en: "The marketing team reviewed segments and approved messaging before deployment.", zh: "市場團隊在推出前審閱分組並批准訊息。" },
     dataFoundation: { en: "CRM records, purchase history, loyalty data, messaging engagement.", zh: "CRM 紀錄、購買記錄、會員資料、訊息互動。" },
-    outcome: { en: "A more structured customer relationship system for reaching the right customers at the right time.", zh: "建立更有系統的顧客關係機制，在合適時間接觸合適顧客。" },
+    outcome: { en: "Segment and trigger suggestions arrive AI-assisted, every message is team-approved before it goes out, and performance is reported back.", zh: "分組及觸發條件由 AI 輔助建議，每則訊息發出前經團隊批准，成效有報告回饋。" },
     reusable: { en: "Lifecycle and retention journey templates.", zh: "生命周期及留客旅程範本。" },
   }),
   client({
@@ -128,7 +122,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Connected touchpoint view", "Attribution and insight analysis", "Dashboards for leadership"], zh: ["連接各接觸點的視圖", "歸因及洞察分析", "供管理層使用的儀表板"] },
     humanDecisions: { en: "Marketing and management teams used the dashboards for strategic decisions.", zh: "市場及管理團隊以儀表板作策略決定。" },
     dataFoundation: { en: "First-party customer data, boutique POS, e-commerce, media APIs, campaign tools.", zh: "第一方顧客資料、專門店 POS、網店、媒體介面、宣傳工具。" },
-    outcome: { en: "Greater confidence about which channels and touchpoints contributed to results.", zh: "更有信心判斷哪些渠道及接觸點對成果有貢獻。" },
+    outcome: { en: "Touchpoints sit in one connected view, attribution and insight analysis run on it, and leadership reads the results from dashboards.", zh: "各接觸點連接於同一視圖，歸因及洞察分析以此為基礎，管理層透過儀表板查看結果。" },
     reusable: { en: "Customer insight and attribution model.", zh: "顧客洞察及歸因模型。" },
   }),
   client({
@@ -142,7 +136,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Planned education content", "AI-assisted compliance checks", "Professional approval before publication"], zh: ["有規劃的健康教育內容", "AI 輔助合規檢查", "發布前由專業人員批准"] },
     humanDecisions: { en: "Healthcare professionals reviewed and approved all content before publication.", zh: "所有內容在發布前均由醫護專業人員審閱及批准。" },
     dataFoundation: { en: "Website analytics, search data, social metrics, engagement data.", zh: "網站分析、搜尋數據、社交數據、互動數據。" },
-    outcome: { en: "A more structured and responsible approach to digital education and enquiry generation.", zh: "以更有系統、更負責任的方式進行數碼健康教育及引發查詢。" },
+    outcome: { en: "Education content is planned ahead, AI checks it for compliance, and a professional approves every piece before it is published.", zh: "健康教育內容預先規劃，由 AI 輔助合規檢查，每項內容發布前都由專業人員批准。" },
     reusable: { en: "Content review workflow for regulated topics.", zh: "受規管題材的內容審閱流程。" },
   }),
   client({
@@ -156,7 +150,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Structured update collection", "AI-drafted sections", "Leads edit and approve"], zh: ["以結構化方式收集進度", "由 AI 草擬章節", "主管修改及批准"] },
     humanDecisions: { en: "Team leads and management reviewed, edited and approved every report.", zh: "每份報告均由團隊主管及管理層審閱、修改及批准。" },
     dataFoundation: { en: "Project tools, spreadsheets, document repositories, team inputs.", zh: "項目工具、試算表、文件庫、團隊輸入。" },
-    outcome: { en: "Less repetitive preparation work, with final approval and sensitive judgement kept with people.", zh: "減少重複的準備工作，最終批核及敏感判斷仍由人負責。" },
+    outcome: { en: "Updates are collected in a structured form, AI drafts the sections, and leads edit and approve each one.", zh: "進度以結構化方式收集，章節由 AI 草擬，主管逐一修改及批准。" },
     reusable: { en: "Management briefing workflow.", zh: "管理層簡報流程。" },
   }),
   client({
@@ -170,7 +164,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Buyer summaries prepared from listing and CRM data", "Follow-up drafts for the sales owner", "Managers see pipeline status"], zh: ["根據物業及 CRM 資料準備買家摘要", "為銷售負責人準備跟進草稿", "管理層可查看銷售管道狀況"] },
     humanDecisions: { en: "Sales agents reviewed and sent every follow-up themselves; managers monitored the pipeline.", zh: "每則跟進均由經紀審閱後親自發送；管理層監察銷售管道。" },
     dataFoundation: { en: "Listing data, CRM lead records, buyer requirement forms, messaging channels.", zh: "物業資料、CRM 商機紀錄、買家需要表格、訊息渠道。" },
-    outcome: { en: "More consistent sales communication and better visibility of follow-up discipline.", zh: "銷售溝通更一致，跟進紀律更清晰可見。" },
+    outcome: { en: "Buyer summaries are prepared from listing and CRM data, the sales owner gets a follow-up draft, and managers read pipeline status from the record.", zh: "買家摘要根據物業及 CRM 資料準備，銷售負責人收到跟進草稿，管理層直接從紀錄查看銷售管道狀況。" },
     reusable: { en: "Listing-to-enquiry follow-up workflow (see Property & Real Estate).", zh: "由物業資料到查詢跟進的流程（見「地產及物業」）。" },
   }),
   client({
@@ -184,7 +178,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Feedback classified and flagged", "Sentiment summaries", "Manager-approved recovery replies"], zh: ["意見已分類及標示", "情緒摘要", "經經理批准的補救回覆"] },
     humanDecisions: { en: "Hotel managers reviewed flagged issues and approved recovery responses before sending.", zh: "酒店經理審閱被標示的問題，並在發送前批准補救回覆。" },
     dataFoundation: { en: "Review sites, surveys, email feedback, front-desk logs, social mentions.", zh: "評論網站、問卷、電郵意見、前台記錄、社交提及。" },
-    outcome: { en: "Recurring guest pain points identified and a repeatable service-improvement loop established.", zh: "找出反覆出現的住客痛點，並建立可重複的服務改善循環。" },
+    outcome: { en: "Guest feedback is classified and flagged, sentiment is summarised, and recovery replies go out only after a manager approves them.", zh: "住客意見已分類及標示，並附情緒摘要；補救回覆須經經理批准才發出。" },
     reusable: { en: "Guest review summary and recovery workflow.", zh: "住客評論摘要及補救流程。" },
   }),
   client({
@@ -198,7 +192,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["AI-assisted brief drafting", "Classified submissions", "Brand-approved content and reports"], zh: ["AI 輔助草擬簡報", "已分類的提交內容", "經品牌批准的內容及報告"] },
     humanDecisions: { en: "The brand team approved creator briefs, submissions and final reports.", zh: "品牌團隊批准創作者簡報、提交內容及最終報告。" },
     dataFoundation: { en: "Creator platform data, social analytics, content library, campaign calendar.", zh: "創作者平台資料、社交分析、內容庫、宣傳日程。" },
-    outcome: { en: "More creator content with campaign operations that were easier to manage.", zh: "創作者內容增加，宣傳運作亦更易管理。" },
+    outcome: { en: "Briefs are drafted with AI help, creator submissions arrive classified, and content and reports are brand-approved.", zh: "簡報由 AI 輔助草擬，創作者提交的內容已分類，內容及報告均經品牌批准。" },
     reusable: { en: "Creator briefing and campaign reporting workflow.", zh: "創作者簡報及宣傳報告流程。" },
   }),
   client({
@@ -212,7 +206,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Drafts from approved course information", "Sensitive cases routed to staff", "Approved templates"], zh: ["根據已批准的課程資料草擬", "敏感個案轉交職員", "已批准的範本"] },
     humanDecisions: { en: "Admin staff handled complex or sensitive cases and approved response templates.", zh: "行政職員處理複雜或敏感個案，並批准回覆範本。" },
     dataFoundation: { en: "Course catalogue, FAQs, CRM enquiry records, messaging logs.", zh: "課程目錄、常見問題、CRM 查詢紀錄、訊息記錄。" },
-    outcome: { en: "Less time spent on routine enquiries and more consistent course communication.", zh: "減少處理例行查詢的時間，課程溝通更一致。" },
+    outcome: { en: "Replies are drafted from approved course information and templates, and sensitive cases go straight to staff.", zh: "回覆根據已批准的課程資料及範本草擬，敏感個案直接轉交職員。" },
     reusable: { en: "Enquiry support workflow.", zh: "查詢支援流程。" },
   }),
   client({
@@ -226,7 +220,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Fields extracted for comparison", "Gaps flagged", "Team decides the supplier"], zh: ["擷取欄位作比較", "標示缺口", "由團隊決定供應商"] },
     humanDecisions: { en: "The trading team reviewed comparisons and made supplier decisions.", zh: "貿易團隊審閱比較結果並決定供應商。" },
     dataFoundation: { en: "Email archives, PDF quotations, spreadsheets, supplier database.", zh: "電郵存檔、PDF 報價、試算表、供應商資料庫。" },
-    outcome: { en: "More structured supplier follow-up and clearer review of exceptions.", zh: "供應商跟進更有系統，例外情況亦更易檢視。" },
+    outcome: { en: "Supplier fields are extracted side by side, gaps are flagged, and the team makes the supplier decision.", zh: "供應商欄位擷取後並列比較，缺口已標示，由團隊決定供應商。" },
     reusable: { en: "Quotation comparison workflow.", zh: "報價比較流程。" },
   }),
   client({
@@ -240,7 +234,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Search limited to approved material", "Structured first version", "Consultant refines"], zh: ["只搜尋已批准的資料", "結構化初稿", "由顧問修飾"] },
     humanDecisions: { en: "Consultants reviewed, refined and personalised every draft.", zh: "每份草稿均由顧問審閱、修飾及個人化。" },
     dataFoundation: { en: "Proposal library, case database, service descriptions.", zh: "建議書庫、案例資料庫、服務說明。" },
-    outcome: { en: "Faster first drafts with more consistent structure.", zh: "初稿更快完成，結構更一致。" },
+    outcome: { en: "First versions come structured from approved material only, and the consultant refines each one.", zh: "初稿只根據已批准的資料、以結構化方式產生，再由顧問逐份修飾。" },
     reusable: { en: "Knowledge search and drafting workflow.", zh: "知識搜尋及草擬流程。" },
   }),
   client({
@@ -254,7 +248,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Unusual movements flagged", "Draft commentary for review", "Finance adds context"], zh: ["標示異常變動", "草擬評述供審閱", "由財務團隊補充背景"] },
     humanDecisions: { en: "The finance team reviewed summaries and added strategic context before distribution.", zh: "財務團隊在發出前審閱摘要並補充策略背景。" },
     dataFoundation: { en: "Financial spreadsheets, KPI dashboards, budget files.", zh: "財務試算表、KPI 儀表板、預算檔案。" },
-    outcome: { en: "Clearer explanations behind performance changes for managers.", zh: "管理層更清楚了解成效變化背後的原因。" },
+    outcome: { en: "Unusual movements are flagged, commentary arrives as a draft for review, and finance adds the context.", zh: "異常變動已標示，評述以草稿形式供審閱，由財務團隊補充背景。" },
     reusable: { en: "Management pack workflow.", zh: "管理報告流程。" },
   }),
   client({
@@ -268,7 +262,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Answers drawn from approved documents", "Sensitive matters routed to HR", "HR reviews knowledge updates"], zh: ["答案取自已批准文件", "敏感事宜轉交人力資源部", "人力資源部審閱知識更新"] },
     humanDecisions: { en: "HR staff handled all sensitive employee matters and reviewed knowledge updates.", zh: "所有敏感僱員事宜由人力資源部處理，並由其審閱知識更新。" },
     dataFoundation: { en: "HR policies, onboarding guides, training materials, SOPs.", zh: "人事政策、入職指南、培訓資料、標準作業程序。" },
-    outcome: { en: "Onboarding information became easier for employees to find.", zh: "員工更容易找到入職資訊。" },
+    outcome: { en: "Answers come from approved documents, sensitive matters go to HR, and HR reviews every knowledge update.", zh: "答案取自已批准文件，敏感事宜轉交人力資源部，知識更新由人力資源部審閱。" },
     reusable: { en: "Internal knowledge Q&A workflow.", zh: "內部知識問答流程。" },
   }),
   client({
@@ -282,7 +276,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Shared calendar with branch variants", "Drafted review responses", "Branch manager approval"], zh: ["共用日程配合分店版本", "草擬評論回覆", "分店經理批准"] },
     humanDecisions: { en: "Branch managers reviewed and approved responses and content.", zh: "分店經理審閱及批准回覆和內容。" },
     dataFoundation: { en: "Local search data, maps listings, social profiles, reviews, menus.", zh: "地區搜尋數據、地圖資料、社交專頁、評論、餐牌。" },
-    outcome: { en: "More consistent branch marketing across locations.", zh: "各分店的推廣更一致。" },
+    outcome: { en: "Branches work from a shared calendar with their own variants, review responses arrive drafted, and the branch manager approves them.", zh: "各分店使用共用日程並有各自版本，評論回覆預先草擬，由分店經理批准。" },
     reusable: { en: "Branch content and review response workflow.", zh: "分店內容及評論回覆流程。" },
   }),
   client({
@@ -296,7 +290,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Classified prospects", "Drafts for sales approval", "Reminders for pending actions"], zh: ["已分類的潛在客戶", "供銷售批准的草稿", "待辦事項提醒"] },
     humanDecisions: { en: "Sales teams reviewed classifications and approved messages before sending.", zh: "銷售團隊審閱分類並在發送前批准訊息。" },
     dataFoundation: { en: "Ad lead data, CRM records, landing page forms.", zh: "廣告商機資料、CRM 紀錄、登陸頁表格。" },
-    outcome: { en: "Better follow-up discipline in the sales team.", zh: "銷售團隊的跟進紀律有所改善。" },
+    outcome: { en: "Prospects arrive classified, drafts wait for sales approval, and pending actions trigger reminders.", zh: "潛在客戶已分類，草稿等待銷售批准，待辦事項會發出提醒。" },
     reusable: { en: "Lead follow-up workflow.", zh: "商機跟進流程。" },
   }),
   client({
@@ -310,7 +304,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Classified and prioritised tasks", "Routed to the right team", "Managers handle escalations"], zh: ["已分類及排序的工作", "轉交合適團隊", "經理處理上報個案"] },
     humanDecisions: { en: "Operations managers reviewed summaries and handled escalated cases.", zh: "營運經理審閱摘要並處理上報個案。" },
     dataFoundation: { en: "Request forms, call logs, chat, email, maintenance database.", zh: "要求表格、通話記錄、聊天、電郵、維修資料庫。" },
-    outcome: { en: "A clearer view of recurring building issues.", zh: "更清楚掌握反覆出現的大廈問題。" },
+    outcome: { en: "Resident tasks are classified, prioritised and routed to the right team, and managers handle the escalations.", zh: "住戶工作已分類、排序並轉交合適團隊，上報個案由經理處理。" },
     reusable: { en: "Request routing workflow.", zh: "要求分流流程。" },
   }),
   client({
@@ -324,7 +318,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Regular market briefs", "Gap analysis", "Strategy team decides"], zh: ["定期市場簡報", "缺口分析", "由策略團隊決定"] },
     humanDecisions: { en: "The market strategy team reviewed reports and made expansion decisions.", zh: "市場策略團隊審閱報告並作出拓展決定。" },
     dataFoundation: { en: "Competitor data, search trends, listening data, platform behaviour.", zh: "競爭對手資料、搜尋趨勢、聆聽資料、平台行為。" },
-    outcome: { en: "A repeatable market-intelligence workflow for expansion planning.", zh: "建立可重複使用的市場情報流程，支援拓展規劃。" },
+    outcome: { en: "Market briefs and gap analysis arrive on a regular cycle, and the strategy team makes the call.", zh: "定期提供市場簡報及缺口分析，由策略團隊作出決定。" },
     reusable: { en: "Market intelligence brief workflow.", zh: "市場情報簡報流程。" },
   }),
   client({
@@ -338,7 +332,7 @@ export const cases: CaseStudy[] = [
     workflowAfter: { en: ["Classified comments", "Draft summaries", "Public affairs review before use"], zh: ["已分類的意見", "草擬摘要", "使用前由公共事務團隊審閱"] },
     humanDecisions: { en: "The public affairs team reviewed all summaries before any public-facing use.", zh: "所有摘要在對外使用前均由公共事務團隊審閱。" },
     dataFoundation: { en: "Survey data, event feedback, emails, social comments.", zh: "問卷資料、活動意見、電郵、社交留言。" },
-    outcome: { en: "More timely input for public communication and planning.", zh: "為公共溝通及規劃提供更適時的參考。" },
+    outcome: { en: "Comments are classified and summarised in draft, and public affairs reviews every summary before it is used.", zh: "意見已分類並草擬摘要，每份摘要使用前都由公共事務團隊審閱。" },
     reusable: { en: "Feedback intelligence workflow.", zh: "意見情報流程。" },
   }),
 ];

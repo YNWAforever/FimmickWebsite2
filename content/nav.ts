@@ -24,7 +24,7 @@ export type NavPillar = {
 export const pillars: NavPillar[] = [
   {
     id: "platform",
-    label: { en: "Platform & Solutions", zh: "平台與解決方案" },
+    label: { en: "Platform & solutions", zh: "平台與解決方案" },
     short: { en: "Platform", zh: "平台與解決方案" },
     overview: { label: { en: "Platform overview", zh: "平台概覽" }, href: "/platform" },
     groups: [
@@ -48,7 +48,7 @@ export const pillars: NavPillar[] = [
   },
   {
     id: "transformation",
-    label: { en: "AI Transformation", zh: "AI 轉型" },
+    label: { en: "AI transformation", zh: "AI 轉型" },
     short: { en: "Transformation", zh: "AI 轉型" },
     overview: { label: { en: "Transformation overview", zh: "轉型概覽" }, href: "/ai-transformation" },
     groups: [
@@ -80,13 +80,13 @@ export const pillars: NavPillar[] = [
   },
   {
     id: "cases",
-    label: { en: "Case Studies", zh: "成功案例" },
-    short: { en: "Cases", zh: "成功案例" },
+    label: { en: "Case studies", zh: "客戶案例" },
+    short: { en: "Cases", zh: "客戶案例" },
     overview: { label: { en: "Case library", zh: "案例庫" }, href: "/case-studies" },
     groups: [
       { heading: { en: "Browse", zh: "瀏覽" }, links: [
         { label: { en: "Client work", zh: "客戶項目" }, href: "/case-studies?kind=client-work" },
-        { label: { en: "FIMMICK's own transformation", zh: "FIMMICK 自身轉型" }, href: "/case-studies/fimmick-ai-native-operating-model" },
+        { label: { en: "FIMMICK’s own transformation", zh: "FIMMICK 自身轉型" }, href: "/case-studies/fimmick-ai-native-operating-model" },
         { label: { en: "Examples & demos", zh: "示例與示範" }, href: "/cases-and-demos" },
       ] },
     ],

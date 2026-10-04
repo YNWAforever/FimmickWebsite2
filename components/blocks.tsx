@@ -81,7 +81,7 @@ export function exampleData<K extends ExampleId>(locale: Locale, id: K): Example
       changes: ex.recordChanges.map((c) => ({ id: c.id, label: tr(c.label, locale), record: c.record, variant: c.id === "new-colour" ? "stone" : c.id === "missing-field" ? "lime" : "blue", fields: c.fields.map((f) => ({ name: tr(f.name, locale), before: tr(f.before, locale), after: tr(f.after, locale), changed: f.changed, valid: f.valid, note: f.note ? tr(f.note, locale) : undefined })), preview: { title: tr(c.preview.title, locale), lines: c.preview.lines.map((l) => tr(l, locale)) } })),
       s: en
         ? { change: "Record change", record: "Record", field: "Field", before: "Before", after: "After", validation: "Validation", valid: "all required fields present", invalid: "required field missing — held", approve: "Approve change", returnLabel: "Return", statusPending: "Awaiting review", statusApproved: "Approved — preview updated (sample)", statusReturned: "Returned to editor", statusHeld: "Held until the missing field is supplied", preview: "Page preview · sample", previewNote: "Preview only. Nothing is published in this example.", history: "Change history", historyCreated: "change drafted from record", historyApproved: "approved by content owner (sample)", historyReturned: "returned by content owner (sample)" }
-        : { change: zh("紀錄變更", locale), record: zh("紀錄", locale), field: zh("欄位", locale), before: zh("更新前", locale), after: zh("更新後", locale), validation: zh("驗證", locale), valid: zh("必填欄位齊全", locale), invalid: zh("欠缺必填欄位——暫緩", locale), approve: zh("批准變更", locale), returnLabel: zh("退回", locale), statusPending: zh("等待審閱", locale), statusApproved: zh("已批准——預覽已更新（示例）", locale), statusReturned: zh("已退回編輯", locale), statusHeld: zh("補交缺漏欄位前暫緩", locale), preview: zh("頁面預覽・示例", locale), previewNote: zh("只供預覽，此示例不會發布任何內容。", locale), history: zh("變更記錄", locale), historyCreated: zh("根據紀錄草擬變更", locale), historyApproved: zh("內容負責人已批准（示例）", locale), historyReturned: zh("內容負責人已退回（示例）", locale) },
+        : { change: zh("紀錄變更", locale), record: zh("紀錄", locale), field: zh("欄位", locale), before: zh("更新前", locale), after: zh("更新後", locale), validation: zh("驗證", locale), valid: zh("必填欄位齊全", locale), invalid: zh("欠缺必填欄位——暫緩", locale), approve: zh("批准變更", locale), returnLabel: zh("退回", locale), statusPending: zh("等待審閱", locale), statusApproved: zh("已批准——預覽已更新（示例）", locale), statusReturned: zh("已退回編輯", locale), statusHeld: zh("補交缺漏欄位前暫緩", locale), preview: zh("頁面預覽·示例", locale), previewNote: zh("只供預覽，此示例不會發布任何內容。", locale), history: zh("變更紀錄", locale), historyCreated: zh("根據紀錄草擬變更", locale), historyApproved: zh("內容負責人已批准（示例）", locale), historyReturned: zh("內容負責人已退回（示例）", locale) },
     }),
   };
   return builders[id]() as ExampleBundle[K];
@@ -446,7 +446,8 @@ export function SampleRecord({ locale, label, rows, id }: { locale: Locale; labe
   );
 }
 
-export function CaseCards({ locale, items }: { locale: Locale; items: CaseStudy[] }) {
+/** `heading` is h2 where the cards sit directly under the page h1 (the case-studies hub). */
+export function CaseCards({ locale, items, heading: Heading = "h3" }: { locale: Locale; items: CaseStudy[]; heading?: "h2" | "h3" }) {
   return (
     <div className="related-grid">
       {items.map((c) => (
@@ -455,7 +456,7 @@ export function CaseCards({ locale, items }: { locale: Locale; items: CaseStudy[
             <span className={c.kind === "client-work" ? "chip chip--sky" : "chip chip--lime"}>{tr(caseKindLabel[c.kind], locale)}</span>
             {tr(c.sector, locale)} · {tr(c.market, locale)}
           </span>
-          <h3>{tr(c.title, locale)}</h3>
+          <Heading>{tr(c.title, locale)}</Heading>
           <p className="small muted">{tr(c.problem, locale)}</p>
           <span className="card-foot">
             {locale === "en" ? "Read the case" : zh("閱讀案例", locale)} <span aria-hidden="true">→</span>

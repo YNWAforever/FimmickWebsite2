@@ -25,15 +25,15 @@ import { Headline } from "@/components/motion/Headline";
 
 /** One accented phrase per display headline (Traditional copy is converted for Simplified). */
 const accents: Record<string, L> = {
-  outputs: { en: "what you get", zh: "先看成果" },
-  cases: { en: "how we run our own.", zh: "如何營運自己" },
+  outputs: { en: "what you get", zh: "再講做法" },
+  cases: { en: "how we run our own.", zh: "我們自己也在用" },
   signature: { en: "People decide.", zh: "由人決定" },
-  change: { en: "specialists.", zh: "引入專家" },
-  industries: { en: "for your sector.", zh: "按你的行業配置" },
-  ecosystem: { en: "we build and run.", zh: "建立及營運" },
-  resources: { en: "read.", zh: "閱讀" },
+  change: { en: "specialists.", zh: "或直接找專家" },
+  industries: { en: "Your sector’s rules.", zh: "按你行業的規矩" },
+  ecosystem: { en: "we also run.", zh: "我們也在營運" },
+  resources: { en: "you can use today.", zh: "今天就用得上" },
   start: { en: "how much", zh: "承擔多少工作" },
-  closing: { en: "improve.", zh: "改善哪項工作" },
+  closing: { en: "improve.", zh: "告訴我們" },
 };
 const accent = (key: string, locale: Locale) => t(accents[key], locale);
 
@@ -47,7 +47,7 @@ export function CinematicHero({ locale }: P) {
     <section className="cine-hero" aria-labelledby="home-title">
       <div className="cine-hero__copy">
         <p className="eyebrow">{t(hero.eyebrow, locale)}</p>
-        <Headline as="h1" id="home-title" className="cine-hero__title" text={`${t(hero.titleLead, locale)} ${t(hero.titleAccent, locale)}`} accent={t(hero.titleAccent, locale)} split />
+        <Headline as="h1" id="home-title" className="cine-hero__title" text={`${t(hero.titleLead, locale)}${locale === "en" ? " " : ""}${t(hero.titleAccent, locale)}`} accent={t(hero.titleAccent, locale)} split />
         <p className="cine-hero__body">{t(cinema.heroBody, locale)}</p>
         <div className="btn-row">
           <LinkButton to={href(locale, "/solutions")}>{t(ui.exploreSolutions, locale)}</LinkButton>
@@ -83,6 +83,7 @@ export function CinematicHero({ locale }: P) {
               </li>
             ))}
           </ol>
+          <p className="hero-card__notice">{t(card.notice, locale)}</p>
         </aside>
       </div>
     </section>
@@ -98,7 +99,7 @@ function BriefArtifact({ locale }: P) {
   return (
     <div className="artifact artifact--doc">
       <p className="artifact__head">
-        <span>{locale === "en" ? "Insight brief · sample brand" : zh("洞察簡報・示例品牌", locale)}</span>
+        <span>{locale === "en" ? "Insight brief · sample brand" : zh("洞察簡報·示例品牌", locale)}</span>
         <span>2026-09</span>
       </p>
       <p className="artifact__headline">{t(cinema.brief.headline, locale)}</p>
@@ -413,7 +414,6 @@ export function SignatureWorkflow({ locale }: P) {
             step: locale === "en" ? "Step" : zh("步驟", locale),
           }}
         />
-        <p className="sig__notice micro">{t(ex.sampleNotice, locale)}</p>
         <p className="cine-foot">
           <TextLink to={href(locale, "/platform")}>{t(s.platformLink, locale)}</TextLink>
           <TextLink to={href(locale, "/resources/videos")}>{t(s.filmLink, locale)}</TextLink>
@@ -455,7 +455,7 @@ function MiniHeatmap({ locale }: P) {
         </tbody>
       </table>
       <figcaption>
-        {t(cinema.pathways.transformation.deliverable, locale)} · {en ? "illustrative sample, not a validated score" : zh("示例，並非經驗證的分數", locale)}
+        {t(cinema.pathways.transformation.deliverable, locale)} · {en ? "Sample scores" : zh("示例分數", locale)}
       </figcaption>
     </figure>
   );
@@ -572,7 +572,6 @@ export function IndustryPhotos({ locale }: P) {
             );
           })}
         </ul>
-        <p className="micro muted cine-note">{locale === "en" ? "Illustrative photographs." : zh("示意相片。", locale)}</p>
       </div>
     </section>
   );
@@ -638,7 +637,7 @@ export function ResourcePreviews({ locale }: P) {
           <div className="shelf__film">
             <ExplainerPlayer locale={locale} media={explainerMedia} title={t(explainerVideo.title, locale)} compact />
             <p className="micro muted">
-              <span className="chip">{locale === "en" ? "Video · 42 s" : zh("影片・42 秒", locale)}</span> {t(explainerVideo.mode, locale)}{" "}
+              <span className="chip">{locale === "en" ? "Video · 42 s" : zh("影片·42 秒", locale)}</span> {t(explainerVideo.mode, locale)}{" "}
               <Link href={href(locale, "/resources/videos")}>{locale === "en" ? "Transcript and captions" : zh("文字稿及字幕", locale)}</Link>
             </p>
           </div>
@@ -715,7 +714,7 @@ export function StartDecision({ locale }: P) {
 }
 
 export function ClosingChapter({ locale }: P) {
-  // The stage paints the white seen past the sheet's rounded corners while it scales in.
+  // The stage paints the white seen past the sheet’s rounded corners while it scales in.
   return (
     <div className="closing-stage">
       <section className="closing" aria-labelledby="closing">

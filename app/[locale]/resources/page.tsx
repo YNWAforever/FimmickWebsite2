@@ -19,7 +19,7 @@ const copy = {
 
 const langLabel = (lang: string, locale: Locale) => {
   const en = locale === "en";
-  return ({ en: en ? "English" : zh("英文", locale), "zh-hant": en ? "Traditional Chinese" : "繁體中文", "zh-hans": en ? "Simplified Chinese" : zh("簡體中文", locale), bilingual: en ? "English · 繁中" : zh("英文・繁中", locale) } as Record<string, string>)[lang] ?? lang;
+  return ({ en: en ? "English" : zh("英文", locale), "zh-hant": en ? "Traditional Chinese" : "繁體中文", "zh-hans": en ? "Simplified Chinese" : zh("簡體中文", locale), bilingual: en ? "English · 繁中" : zh("英文·繁中", locale) } as Record<string, string>)[lang] ?? lang;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -47,7 +47,7 @@ export default async function ResourcesPage({ params, searchParams }: Props) {
   const filtered = Boolean(format || topic || q);
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Learn, inspect and download." : zh("學習、查看及下載。", locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Guides, films and worked examples you can reuse." : zh("指南、短片及實例，都可以重用。", locale)} accent={en ? "you can reuse." : zh("都可以重用", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
           <form className="search-form" action={base} method="get" role="search" style={{ marginBottom: 24 }}>
@@ -101,7 +101,7 @@ export default async function ResourcesPage({ params, searchParams }: Props) {
                       {item.date ? formatDate(item.date, locale) : en ? "On request" : zh("按需安排", locale)}
                       {item.status === "past" ? <span>· {en ? "Past event" : zh("已舉行", locale)}</span> : null}
                     </span>
-                    <h3>{item.title}</h3>
+                    <h2>{item.title}</h2>
                     <p className="small muted" style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.summary}</p>
                     <span className="micro muted">{t(ui.originalLanguage, locale)}: {langLabel(item.contentLanguage, locale)}</span>
                   </Link>

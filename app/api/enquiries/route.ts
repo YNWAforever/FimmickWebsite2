@@ -62,7 +62,7 @@ function sweep(now: number) {
   for (const [key, entry] of idempotency) if (now - entry.at >= IDEMPOTENCY_TTL_MS) idempotency.delete(key);
 }
 
-/** The platform's view of the client: Vercel sets x-vercel-forwarded-for; X-Forwarded-For is client-controlled. */
+/** The platform’s view of the client: Vercel sets x-vercel-forwarded-for; X-Forwarded-For is client-controlled. */
 function clientIp(request: Request): string {
   const vercel = request.headers.get("x-vercel-forwarded-for")?.split(",")[0]?.trim();
   return vercel || request.headers.get("x-real-ip")?.trim() || "unknown";
@@ -176,7 +176,7 @@ export async function POST(request: Request) {
   const lang = payload.lang === "zh-hant" || payload.lang === "zh-hans" ? payload.lang : "en";
 
   // Bind the key to what it was first used for; between this lookup and the store below there is
-  // no await, so concurrent requests with one key always find the first one's promise.
+  // no await, so concurrent requests with one key always find the first one’s promise.
   const fp = createHash("sha256").update(JSON.stringify(fields) + context.intent).digest("hex");
   const existing = idempotency.get(key);
   if (existing) {

@@ -59,7 +59,7 @@ export const businessFunctions: BusinessFunction[] = [
       label: { en: "Sample weekly growth queue", zh: "每週增長工作清單示例" },
       rows: {
         en: [["Brief", "Autumn launch — awaiting approval"], ["Content drafts", "12 prepared · 3 returned for tone"], ["Visibility", "4 priority questions without a clear answer page"], ["Follow-up", "9 replies drafted · 2 escalated (pricing questions)"]],
-        zh: [["簡報", "秋季新品推出——等待批准"], ["內容草稿", "已準備 12 項・3 項因語調退回"], ["能見度", "4 條優先問題未有清晰答案頁"], ["跟進", "已草擬 9 則回覆・2 則轉交專人（價格查詢）"]],
+        zh: [["簡報", "秋季新品推出——等待批准"], ["內容草稿", "已準備 12 項·3 項因語調退回"], ["能見度", "4 條優先問題未有清晰答案頁"], ["跟進", "已草擬 9 則回覆·2 則轉交專人（價格查詢）"]],
       },
     },
     startingScope: { en: "One campaign or one enquiry type, in one market.", zh: "一個市場內的一次宣傳或一類查詢。" },
@@ -71,7 +71,7 @@ export const businessFunctions: BusinessFunction[] = [
   {
     id: "operations",
     name: { en: "Operations", zh: "營運" },
-    owner: { en: "For operations, digital and e-commerce leads", zh: "適合營運、數碼及電子商貿主管" },
+    owner: { en: "For operations, digital and e-commerce leads", zh: "適合營運、數碼及電商主管" },
     summary: {
       en: "Recurring cross-system work — website and listing updates, request routing, data checks and status packs — redesigned as workflows with visible owners and exceptions.",
       zh: "把跨系統的重複工作——網站及資料更新、要求分流、資料檢查及進度報告——重新設計為負責人及例外情況清晰可見的流程。",
@@ -154,7 +154,7 @@ export const businessFunctions: BusinessFunction[] = [
       w({ en: "Policy and handbook answers", zh: "政策及員工手冊解答" }, { en: "Approved policies, FAQ library", zh: "已批准政策、常見問題庫" }, { en: "Draft answers citing the policy section", zh: "引用政策條文的解答草稿" }, { en: "HR reviews new or sensitive questions before replying", zh: "新問題或敏感問題由人力資源審閱後才回覆" }),
       w({ en: "Onboarding pack preparation", zh: "入職資料準備" }, { en: "Role profile, checklists, policies", zh: "職位資料、清單、政策" }, { en: "Draft onboarding plan and welcome materials", zh: "入職計劃及歡迎資料草稿" }, { en: "Hiring manager and HR approve", zh: "由招聘經理及人力資源批准" }),
       w({ en: "Training content from real workflows", zh: "以真實流程製作培訓內容" }, { en: "Workflow documentation, worked examples", zh: "流程文件、實例" }, { en: "Draft exercises and quick-reference guides", zh: "練習及速查指南草稿" }, { en: "Training owner approves before use", zh: "由培訓負責人批准後使用" }),
-      w({ en: "Internal request triage", zh: "內部要求分流" }, { en: "Requests, categories", zh: "要求、類別" }, { en: "Classified queue with a suggested owner", zh: "附建議負責人的分類清單" }, { en: "HR assigns anything about an individual's case", zh: "涉及個別員工個案的事項由人力資源分派" }),
+      w({ en: "Internal request triage", zh: "內部要求分流" }, { en: "Requests, categories", zh: "要求、類別" }, { en: "Classified queue with a suggested owner", zh: "附建議負責人的分類清單" }, { en: "HR assigns anything about an individual’s case", zh: "涉及個別員工個案的事項由人力資源分派" }),
     ],
     boundaries: {
       en: ["Hiring decisions", "Performance assessment", "Disciplinary matters and pay", "Personal data beyond the defined purpose"],
@@ -249,7 +249,7 @@ export const businessFunctions: BusinessFunction[] = [
     name: { en: "Leadership & executive reporting", zh: "管理層與行政報告" },
     owner: { en: "For CEOs, general managers and leadership teams", zh: "適合行政總裁、總經理及管理團隊" },
     summary: {
-      en: "Weekly leadership briefs, management pack drafts and decision logs assembled from the business's own reports, so leaders see what changed, why, and what needs their decision.",
+      en: "Weekly leadership briefs, management pack drafts and decision logs assembled from the business’s own reports, so leaders see what changed, why, and what needs their decision.",
       zh: "以公司自身的報告整合每週管理層簡報、管理報告草稿及決策紀錄，讓管理層看清有何改變、原因，以及需要他們決定的事項。",
     },
     problem: {

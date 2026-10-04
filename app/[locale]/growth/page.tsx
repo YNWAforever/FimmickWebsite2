@@ -43,7 +43,7 @@ export default async function GrowthPage({ params }: LocaleParams) {
         actions={
           <>
             <LinkButton to={href(locale, paths.contact({ intent: "service" }))} variant="accent">{t(ui.discussScope, locale)}</LinkButton>
-            <LinkButton to="#stages" variant="ghost">{en ? "Acquire · Convert · Retain" : zh("獲客・轉化・留客", locale)}</LinkButton>
+            <LinkButton to="#stages" variant="ghost">{en ? "Acquire · Convert · Retain" : zh("獲客·轉化·留客", locale)}</LinkButton>
           </>
         }
       />

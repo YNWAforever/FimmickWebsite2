@@ -6,7 +6,7 @@ import { usePrefersReducedMotion } from "@/components/motion/Reveal";
 export type StageStep = { id: string; label: string; title: string };
 
 /**
- * The homepage's one signature motion sequence: input → prepared work →
+ * The homepage’s one signature motion sequence: input → prepared work →
  * human review → usable output.
  *
  * - Server markup is the static storyboard (all four frames visible), which is

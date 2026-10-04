@@ -124,6 +124,7 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 @keyframes fade-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 
 /* Hero card: paper with depth and a living status. */
+.hero-card__notice { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 0.74rem; line-height: 1.45; }
 .hero-card { border: 1px solid rgb(13 20 51 / 6%); box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 40px 80px -32px rgb(13 20 51 / 50%), 0 12px 24px -16px rgb(13 20 51 / 20%); }
 
 /* ================================================================
@@ -490,13 +491,13 @@ html.has-bubble [data-cursor] { cursor: none; }
    contain-intrinsic-block-size excludes padding). English and Chinese differ by up to 220 px a
    band on phones, so each locale has its own set. Re-measure after any change to the homepage's
    copy or layout. */
-html { --band-outputs: 2700px; --band-evidence: 2470px; --band-night: 1100px; --band-paths: 2370px; --band-industries: 1450px; --band-eco: 1780px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 1610px; }
-html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2480px; --band-evidence: 2250px; --band-night: 1040px; --band-paths: 2150px; --band-industries: 1430px; --band-eco: 1670px; --band-resources: 1140px; --band-start: 1130px; --band-faq: 550px; --band-closing: 650px; --band-footer: 1490px; }
+html { --band-outputs: 2700px; --band-evidence: 2540px; --band-night: 1060px; --band-paths: 2370px; --band-industries: 1370px; --band-eco: 1710px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 1610px; }
+html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2500px; --band-evidence: 2270px; --band-night: 1060px; --band-paths: 2160px; --band-industries: 1400px; --band-eco: 1680px; --band-resources: 1170px; --band-start: 1140px; --band-faq: 550px; --band-closing: 650px; --band-footer: 1490px; }
 @media (min-width: 700px) {
-  html { --band-outputs: 2060px; --band-evidence: 1650px; --band-night: 950px; --band-paths: 2470px; --band-industries: 1150px; --band-eco: 1370px; --band-resources: 990px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 920px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2060px; --band-evidence: 1580px; --band-night: 890px; --band-paths: 2490px; --band-industries: 1170px; --band-eco: 1300px; --band-resources: 980px; --band-start: 810px; --band-faq: 570px; --band-closing: 770px; --band-footer: 890px; }
+  html { --band-outputs: 2060px; --band-evidence: 1650px; --band-night: 920px; --band-paths: 2470px; --band-industries: 1110px; --band-eco: 1320px; --band-resources: 1040px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 920px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2070px; --band-evidence: 1630px; --band-night: 870px; --band-paths: 2510px; --band-industries: 1150px; --band-eco: 1260px; --band-resources: 1000px; --band-start: 830px; --band-faq: 570px; --band-closing: 770px; --band-footer: 890px; }
 }
 @media (min-width: 1000px) {
-  html { --band-outputs: 1300px; --band-evidence: 1110px; --band-night: 1020px; --band-paths: 1350px; --band-industries: 650px; --band-eco: 900px; --band-resources: 570px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 720px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1260px; --band-evidence: 1030px; --band-night: 1010px; --band-paths: 1300px; --band-industries: 600px; --band-eco: 820px; --band-resources: 590px; --band-start: 530px; --band-faq: 390px; --band-closing: 690px; --band-footer: 630px; }
+  html { --band-outputs: 1300px; --band-evidence: 1110px; --band-night: 980px; --band-paths: 1350px; --band-industries: 610px; --band-eco: 830px; --band-resources: 640px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 720px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1290px; --band-evidence: 1060px; --band-night: 1000px; --band-paths: 1330px; --band-industries: 660px; --band-eco: 850px; --band-resources: 620px; --band-start: 560px; --band-faq: 390px; --band-closing: 690px; --band-footer: 630px; }
 }

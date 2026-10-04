@@ -1,0 +1,34 @@
+
+Running 1 test using 1 worker
+
+[1/1] [chromium] › tests\e2e\copy.spec.ts:45:1 › Chinese hero text never breaks inside a word at 390 px (決定, 批准)
+  1) [chromium] › tests\e2e\copy.spec.ts:45:1 › Chinese hero text never breaks inside a word at 390 px (決定, 批准) 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  [342, 368]
+
+      48 |   await page.waitForTimeout(1500);
+      49 |   expect(await lineTops(page, "h1", "決定")).toHaveLength(1);
+    > 50 |   expect(await lineTops(page, ".cine-hero__body", "批准")).toHaveLength(1);
+         |                                                          ^
+      51 | });
+      52 |
+      53 | test("the homepage carries one sample notice; 'Illustrative' and 'people decide' stay rare", async ({ page }) => {
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\copy.spec.ts:50:58
+
+    Error Context: test-results\copy-Chinese-hero-text-nev-54c21-ide-a-word-at-390-px-決定-批准--chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\copy-Chinese-hero-text-nev-54c21-ide-a-word-at-390-px-決定-批准--chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\copy-Chinese-hero-text-nev-54c21-ide-a-word-at-390-px-決定-批准--chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [chromium] › tests\e2e\copy.spec.ts:45:1 › Chinese hero text never breaks inside a word at 390 px (決定, 批准) 

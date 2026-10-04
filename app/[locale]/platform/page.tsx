@@ -17,7 +17,7 @@ const copy = {
   title: { en: "FIMMICK AIP — Agentic AI Platform", zh: "FIMMICK AIP — 企業 AI 智能體平台" },
   lead: {
     en: "FIMMICK AIP connects approved data, AI tasks and human approvals into workflows your team can run and check. Four layers answer four business questions.",
-    zh: "FIMMICK AIP 把已確認的資料、AI 任務及人手審批連成團隊可以運作及檢查的流程。四個層面回答四個業務問題。",
+    zh: "FIMMICK AIP 把已確認的資料、AI 任務及人手批核連成團隊可以運作及檢查的流程。四個層面回答四個業務問題。",
   },
 };
 
@@ -44,7 +44,8 @@ export default async function PlatformPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale) }]}
         eyebrow={en ? "Platform" : zh("平台", locale)}
-        title={en ? "Connect data, AI tasks and human approvals into workflows you can run." : zh("把資料、AI 任務與人手審批，連成可執行的流程。", locale)}
+        title={en ? "Four layers. One workflow you can run." : zh("四個層面，一個可以運作的流程。", locale)}
+        accent={en ? "One workflow you can run." : zh("一個可以運作的流程", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>
@@ -57,7 +58,7 @@ export default async function PlatformPage({ params }: LocaleParams) {
       <section className="section section--night" id="layers">
         <div className="container">
           <SectionHead
-            eyebrow={en ? "Four layers · one scenario" : zh("四個層面・一個情境", locale)}
+            eyebrow={en ? "Four layers · one scenario" : zh("四個層面·一個情境", locale)}
             title={en ? "Brand context → content preparation → human review → selected export → record" : zh("品牌資料 → 內容準備 → 人手審閱 → 選定匯出 → 記錄", locale)}
             lead={en ? "Select a layer to see what it does in the sample scenario. On smaller screens every layer is listed in order." : zh("選擇一個層面，查看它在示例情境中的作用。在較小的螢幕上，所有層面會按次序列出。", locale)}
           />

@@ -3,6 +3,7 @@ import type { Solution, SolutionId } from "./types";
 export const solutions: Solution[] = [
   {
     id: "market-intelligence",
+    headlineAccent: { en: "then decide what to do next.", zh: "再決定下一步行動" },
     number: "01",
     name: { en: "Market Intelligence & AI Visibility", zh: "市場洞察與 AI 搜尋曝光" },
     short: { en: "Market intelligence", zh: "市場洞察" },
@@ -56,6 +57,7 @@ export const solutions: Solution[] = [
   },
   {
     id: "content-production",
+    headlineAccent: { en: "your team signs off.", zh: "團隊可以修改和批核" },
     number: "02",
     name: { en: "Content & Creative Production", zh: "內容創作與品牌素材" },
     short: { en: "Content production", zh: "內容製作" },
@@ -68,7 +70,7 @@ export const solutions: Solution[] = [
       zh: "每次宣傳都由零開始，產品資料在不同版本之間走樣，批核散落在聊天記錄中，事後無從追查。",
     },
     deliverable: {
-      en: "Editable copy, visual variants and a labelled export, with the reviewer's decision recorded.",
+      en: "Editable copy, visual variants and a labelled export, with the reviewer’s decision recorded.",
       zh: "可編輯文案、視覺版本及已標示的匯出檔，並記錄審閱人的決定。",
     },
     inputs: {
@@ -85,7 +87,7 @@ export const solutions: Solution[] = [
       { title: { en: "Brief and facts", zh: "簡報與資料" }, copy: { en: "Start from the brief and the approved facts, so claims come from a source rather than memory.", zh: "由簡報及已確認資料出發，令每項宣稱都有來源，而不是憑記憶撰寫。" } },
       { title: { en: "Prepare variants", zh: "準備不同版本" }, copy: { en: "CreativeMax prepares copy and visual options for each requested format.", zh: "CreativeMax 按所需格式準備文案及視覺選項。" } },
       { title: { en: "Edit and review", zh: "修改與審閱" }, copy: { en: "Your team edits, approves or returns each variant. Editing an approved item sends it back for review.", zh: "團隊可修改、批准或退回每個版本；已批准的內容一經修改，便需重新審閱。" } },
-      { title: { en: "Export and record", zh: "匯出與記錄" }, copy: { en: "Selected items are exported with their review history for reuse.", zh: "選定的內容連同審閱記錄一併匯出，方便日後重用。" } },
+      { title: { en: "Export and record", zh: "匯出與記錄" }, copy: { en: "Selected items are exported with their review history for reuse.", zh: "選定的內容連同審閱紀錄一併匯出，方便日後重用。" } },
     ],
     humanDecision: {
       en: "A named brand reviewer approves, edits or rejects each item before export. Nothing is published by the workflow.",
@@ -109,6 +111,7 @@ export const solutions: Solution[] = [
   },
   {
     id: "customer-engagement",
+    headlineAccent: { en: "before it goes cold.", zh: "不會因延誤而流失" },
     number: "03",
     name: { en: "Customer Engagement & Follow-up", zh: "客戶互動與商機跟進" },
     short: { en: "Customer follow-up", zh: "客戶跟進" },
@@ -162,6 +165,7 @@ export const solutions: Solution[] = [
   },
   {
     id: "website-operations",
+    headlineAccent: { en: "into reviewed page updates.", zh: "保持準確" },
     number: "04",
     name: { en: "Website, Commerce & Operations", zh: "網站、電商與日常營運" },
     short: { en: "Website operations", zh: "網站營運" },
@@ -175,7 +179,7 @@ export const solutions: Solution[] = [
     },
     deliverable: {
       en: "A structured record, a reviewed content update, a page preview or export, and the change history.",
-      zh: "結構化紀錄、經審閱的內容更新、頁面預覽或匯出檔，以及變更記錄。",
+      zh: "結構化紀錄、經審閱的內容更新、頁面預覽或匯出檔，以及變更紀錄。",
     },
     inputs: {
       en: ["Structured records (products, listings, services)", "Field rules and required values", "Page templates", "Approval owner for each content type"],
@@ -183,7 +187,7 @@ export const solutions: Solution[] = [
     },
     outputs: {
       en: ["Validated record with flagged gaps", "Before/after field comparison", "Page preview or export", "Change history"],
-      zh: ["已驗證並標示缺漏的紀錄", "更新前後的欄位對照", "頁面預覽或匯出檔", "變更記錄"],
+      zh: ["已驗證並標示缺漏的紀錄", "更新前後的欄位對照", "頁面預覽或匯出檔", "變更紀錄"],
     },
     products: ["website-cms"],
     example: "website-ops",
@@ -191,7 +195,7 @@ export const solutions: Solution[] = [
       { title: { en: "Update the record", zh: "更新紀錄" }, copy: { en: "A change starts in the structured record, not in page copy.", zh: "每項變更都由結構化紀錄開始，而不是直接改動頁面文字。" } },
       { title: { en: "Validate fields", zh: "驗證欄位" }, copy: { en: "Required fields and rules are checked; gaps are flagged instead of guessed.", zh: "檢查必填欄位及規則；缺漏會被標示，而不是自行猜測填補。" } },
       { title: { en: "Review the change", zh: "審閱變更" }, copy: { en: "The owner sees the before/after fields and the page preview, then approves or returns it.", zh: "負責人查看更新前後的欄位及頁面預覽，再決定批准或退回。" } },
-      { title: { en: "Export and log", zh: "匯出與記錄" }, copy: { en: "The approved update is exported or published through your configured CMS, with history kept.", zh: "已批准的更新透過已設定的 CMS 匯出或發布，並保留記錄。" } },
+      { title: { en: "Export and log", zh: "匯出與記錄" }, copy: { en: "The approved update is exported or published through your configured CMS, with history kept.", zh: "已批准的更新透過已設定的 CMS 匯出或發布，並保留紀錄。" } },
     ],
     humanDecision: {
       en: "A content owner approves each change before it reaches a page. Listing preparation does not include inventory, payment, refund or order management.",
@@ -199,7 +203,7 @@ export const solutions: Solution[] = [
     },
     evidence: {
       en: "The change history shows which field changed, who approved it and which page it affected.",
-      zh: "變更記錄會顯示哪個欄位改動了、由誰批准，以及影響了哪個頁面。",
+      zh: "變更紀錄會顯示哪個欄位改動了、由誰批准，以及影響了哪個頁面。",
     },
     startingScope: {
       en: "One content type (for example product or property listings) on one site, with one approval owner.",
@@ -208,7 +212,7 @@ export const solutions: Solution[] = [
     faqs: [
       { q: { en: "Do you manage stock, payments or orders?", zh: "你們會管理庫存、付款或訂單嗎？" }, a: { en: "No. This solution prepares and reviews content. Commerce transactions stay in your commerce platform.", zh: "不會。此方案負責準備及審閱內容；交易仍在你的電商平台處理。" } },
       { q: { en: "Which CMS do you work with?", zh: "支援哪些 CMS？" }, a: { en: "We confirm compatibility during scoping. Where publishing is not connected, the output is an export your team uploads.", zh: "我們會在界定範圍時確認兼容性；如未連接發布功能，輸出會是由團隊自行上載的匯出檔。" } },
-      { q: { en: "Can updates go live automatically?", zh: "更新可以自動上線嗎？" }, a: { en: "Only if you configure it that way for specific low-risk fields. By default every change needs an owner's approval.", zh: "只有在你為特定低風險欄位作此設定時才會。預設情況下，每項變更都需要負責人批准。" } },
+      { q: { en: "Can updates go live automatically?", zh: "更新可以自動上線嗎？" }, a: { en: "Only if you configure it that way for specific low-risk fields. By default every change needs an owner’s approval.", zh: "只有在你為特定低風險欄位作此設定時才會。預設情況下，每項變更都需要負責人批准。" } },
     ],
     services: ["ecommerce-growth", "workflow-automation", "data-hub"],
     industries: ["property-real-estate", "retail-ecommerce", "food-beverage", "hospitality-travel"],

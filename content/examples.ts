@@ -11,7 +11,7 @@ export const exampleMeta: Record<ExampleId, { solution: SolutionId; products: Pr
   intelligence: {
     solution: "market-intelligence",
     products: ["social-listening", "aiso"],
-    title: { en: "Intelligence brief", zh: "洞察簡報" },
+    title: { en: "Insight brief", zh: "洞察簡報" },
     lead: { en: "Choose a topic and a dataset. Evidence, interpretation and priorities change together.", zh: "選擇話題及資料組合，證據、解讀及優先次序會同步更新。" },
   },
   content: {
@@ -56,7 +56,7 @@ export const intelEvidence: { id: string; topic: IntelTopic; source: IntelSource
   { id: "E-102", topic: "lids", source: "reviews", date: "2026-09-05", tone: "positive", text: { en: "“Lock on the lid is the reason I bought it.”", zh: "「就係因為個蓋有鎖先買。」" } },
   { id: "E-103", topic: "lids", source: "forums", date: "2026-09-08", tone: "mixed", text: { en: "“Does anyone know which bottles are safe for laptops in the same bag?”", zh: "「有冇人知邊隻水樽同手提電腦放埋一齊都唔怕？」" } },
   { id: "E-201", topic: "cleaning", source: "reviews", date: "2026-09-03", tone: "negative", text: { en: "“Hard to clean the bottom — needs a brush.”", zh: "「樽底好難洗，要用刷。」" } },
-  { id: "E-202", topic: "cleaning", source: "forums", date: "2026-09-10", tone: "mixed", text: { en: "“Is it dishwasher safe? The box doesn't say.”", zh: "「可唔可以放洗碗碟機？盒上面冇寫。」" } },
+  { id: "E-202", topic: "cleaning", source: "forums", date: "2026-09-10", tone: "mixed", text: { en: "“Is it dishwasher safe? The box doesn’t say.”", zh: "「可唔可以放洗碗碟機？盒上面冇寫。」" } },
   { id: "E-203", topic: "cleaning", source: "social", date: "2026-09-12", tone: "positive", text: { en: "“Wide mouth makes it easy to add ice and wash.”", zh: "「闊口加冰同洗都方便。」" } },
   { id: "E-301", topic: "colours", source: "social", date: "2026-09-04", tone: "positive", text: { en: "“The lime one is so bright, love it.”", zh: "「青檸色好鮮，好鍾意。」" } },
   { id: "E-302", topic: "colours", source: "reviews", date: "2026-09-09", tone: "mixed", text: { en: "“Stone looks greyer than the photos.”", zh: "「石灰色實物比相片灰。」" } },
@@ -92,7 +92,7 @@ export const intelInterpretation: Record<IntelTopic, { summary: L; priorities: L
 
 /** Separate AI-search dataset (AISO). Assistants are anonymised in the sample. */
 export const aisoChecks: { id: string; topic: IntelTopic; question: L; assistant: string; date: string; mentioned: boolean; note: L }[] = [
-  { id: "Q-01", topic: "lids", question: { en: "Which reusable bottle won't leak in a bag?", zh: "邊款可重用水樽放袋都唔會漏？" }, assistant: "Assistant A", date: "2026-09-15", mentioned: false, note: { en: "Answer cites two competitors; sample brand page lacks a clear leak-proof statement.", zh: "答案引用兩個競爭對手；示例品牌頁面欠缺清晰的防漏說明。" } },
+  { id: "Q-01", topic: "lids", question: { en: "Which reusable bottle won’t leak in a bag?", zh: "邊款可重用水樽放袋都唔會漏？" }, assistant: "Assistant A", date: "2026-09-15", mentioned: false, note: { en: "Answer cites two competitors; sample brand page lacks a clear leak-proof statement.", zh: "答案引用兩個競爭對手；示例品牌頁面欠缺清晰的防漏說明。" } },
   { id: "Q-02", topic: "cleaning", question: { en: "Are stainless steel bottles dishwasher safe?", zh: "不銹鋼水樽可以放洗碗碟機嗎？" }, assistant: "Assistant B", date: "2026-09-15", mentioned: false, note: { en: "Generic answer; no brand cited. A care FAQ could be a citable source.", zh: "答案屬一般資訊，未引用品牌；清洗常見問題可成為可被引用的來源。" } },
   { id: "Q-03", topic: "colours", question: { en: "Best bright-coloured water bottle in Hong Kong?", zh: "香港有邊款顏色鮮艷嘅水樽推介？" }, assistant: "Assistant A", date: "2026-09-15", mentioned: true, note: { en: "Sample brand mentioned via a retailer page, not its own site.", zh: "示例品牌經零售商頁面被提及，而非自家網站。" } },
 ];
@@ -144,7 +144,7 @@ export const contentScenarios: {
         id: "email",
         label: { en: "Email invitation", zh: "電郵邀請" },
         draft: {
-          en: "You're invited to an in-store preview in Causeway Bay this Saturday, 11am–6pm. Try the new 750 ml bottle, test the locking lid and see all three colours in person.",
+          en: "You’re invited to an in-store preview in Causeway Bay this Saturday, 11am–6pm. Try the new 750 ml bottle, test the locking lid and see all three colours in person.",
           zh: "誠邀你本星期六上午 11 時至下午 6 時蒞臨銅鑼灣門市預覽。親身試用全新 750 毫升水樽、測試鎖扣杯蓋，一次過睇晒三款顏色。",
         },
       },
@@ -153,7 +153,7 @@ export const contentScenarios: {
         label: { en: "Store poster copy", zh: "門市海報文字" },
         draft: {
           en: "Preview day — this Saturday. Try the 750 ml bottle with the locking lid. Harbour Blue · Stone · Lime.",
-          zh: "預覽日——本星期六。即場試用 750 毫升鎖扣杯蓋水樽。海港藍・石灰・青檸。",
+          zh: "預覽日——本星期六。即場試用 750 毫升鎖扣杯蓋水樽。海港藍·石灰·青檸。",
         },
       },
     ],
@@ -217,7 +217,7 @@ export const enquiries: {
     id: "ENQ-2041",
     channel: { en: "Website form", zh: "網站表格" },
     received: "2026-09-18 10:12",
-    message: { en: "Hi, we'd like 200 bottles with our logo for staff gifts. Is that possible?", zh: "你好，我哋想訂 200 個印有公司標誌嘅水樽做員工禮物，可唔可以？" },
+    message: { en: "Hi, we’d like 200 bottles with our logo for staff gifts. Is that possible?", zh: "你好，我哋想訂 200 個印有公司標誌嘅水樽做員工禮物，可唔可以？" },
     intent: { en: "Corporate order", zh: "企業訂購" },
     suggestedOwner: "wholesale",
     suggestedAction: "call",
@@ -279,7 +279,7 @@ export const recordChanges: {
       { name: { en: "Care", zh: "保養" }, before: { en: "—", zh: "—" }, after: { en: "Hand wash recommended. Lid: top-rack dishwasher safe.", zh: "建議以手清洗。杯蓋：可放洗碗碟機上層。" }, changed: true, valid: true },
       { name: { en: "Status", zh: "狀態" }, before: { en: "Published", zh: "已發布" }, after: { en: "Published", zh: "已發布" }, changed: false, valid: true },
     ],
-    preview: { title: { en: "750 ml Bottle — Harbour Blue", zh: "750 毫升水樽——海港藍" }, lines: [{ en: "Double-wall stainless steel · Locking lid", zh: "雙層不銹鋼・鎖扣杯蓋" }, { en: "Care: Hand wash recommended. Lid: top-rack dishwasher safe.", zh: "保養：建議以手清洗。杯蓋：可放洗碗碟機上層。" }] },
+    preview: { title: { en: "750 ml Bottle — Harbour Blue", zh: "750 毫升水樽——海港藍" }, lines: [{ en: "Double-wall stainless steel · Locking lid", zh: "雙層不銹鋼·鎖扣杯蓋" }, { en: "Care: Hand wash recommended. Lid: top-rack dishwasher safe.", zh: "保養：建議以手清洗。杯蓋：可放洗碗碟機上層。" }] },
   },
   {
     id: "new-colour",
@@ -290,7 +290,7 @@ export const recordChanges: {
       { name: { en: "Image alt text", zh: "圖片替代文字" }, before: { en: "Grey bottle", zh: "灰色水樽" }, after: { en: "Stone-coloured 750 ml bottle", zh: "石灰色 750 毫升水樽" }, changed: true, valid: true },
       { name: { en: "Status", zh: "狀態" }, before: { en: "Published", zh: "已發布" }, after: { en: "Published", zh: "已發布" }, changed: false, valid: true },
     ],
-    preview: { title: { en: "750 ml Bottle — Stone", zh: "750 毫升水樽——石灰" }, lines: [{ en: "Double-wall stainless steel · Locking lid", zh: "雙層不銹鋼・鎖扣杯蓋" }, { en: "Colour: Stone", zh: "顏色：石灰" }] },
+    preview: { title: { en: "750 ml Bottle — Stone", zh: "750 毫升水樽——石灰" }, lines: [{ en: "Double-wall stainless steel · Locking lid", zh: "雙層不銹鋼·鎖扣杯蓋" }, { en: "Colour: Stone", zh: "顏色：石灰" }] },
   },
   {
     id: "missing-field",
@@ -305,4 +305,4 @@ export const recordChanges: {
   },
 ];
 
-export const sampleNotice: L = { en: "Illustrative example — sample data", zh: "流程示範・示例資料" };
+export const sampleNotice: L = { en: "Illustrative example — sample data", zh: "流程示範·示例資料" };

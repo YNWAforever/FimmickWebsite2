@@ -1,7 +1,7 @@
 /**
  * Media registry for the product explainer film. Files are rendered by
  * `npm run video:render` from video/composition.html (see video/README.md).
- * Rights: original work rendered from this repository's own sample interface;
+ * Rights: original work rendered from this repository’s own sample interface;
  * uses the FIMMICK logo from fimmick.com and the Manrope font (SIL OFL 1.1).
  */
 export type ExplainerMedia = {

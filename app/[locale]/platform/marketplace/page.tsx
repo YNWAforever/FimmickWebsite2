@@ -78,7 +78,7 @@ export default async function TemplatesPage({ params }: LocaleParams) {
             <h2>{en ? "What changes when a template is configured" : zh("範本配置後有何改變", locale)}</h2>
           </div>
           <ol className="steps">
-            <li><h3>{en ? "Your sources" : zh("你的來源", locale)}</h3><p>{en ? "The template's inputs are replaced with your approved facts, libraries and exports." : zh("以你已確認的資料、答案庫及匯出檔取代範本輸入。", locale)}</p></li>
+            <li><h3>{en ? "Your sources" : zh("你的來源", locale)}</h3><p>{en ? "The template’s inputs are replaced with your approved facts, libraries and exports." : zh("以你已確認的資料、答案庫及匯出檔取代範本輸入。", locale)}</p></li>
             <li><h3>{en ? "Your rules" : zh("你的規則", locale)}</h3><p>{en ? "Brand, compliance and format checks are written for your business." : zh("按你的業務制定品牌、合規及格式檢查。", locale)}</p></li>
             <li><h3>{en ? "Your reviewers" : zh("你的審閱人", locale)}</h3><p>{en ? "Named people are assigned to each review point." : zh("每個審閱環節都有指定人員。", locale)}</p></li>
             <li><h3>{en ? "Your systems" : zh("你的系統", locale)}</h3><p>{en ? "Outputs start as exports; connections are added only when agreed." : zh("輸出先以匯出檔提供，串接只在議定後加入。", locale)}</p></li>

@@ -64,8 +64,8 @@ test.describe("routes, redirects and indexing", () => {
 
   test("Simplified Chinese pages render converted copy with a zh-Hans hreflang", async ({ request }) => {
     const html = await (await request.get("/zh-hans")).text();
-    expect(html).toContain("预约产品示范");
-    expect(html).not.toContain("預約產品示範");
+    expect(html).toContain("申请产品示范");
+    expect(html).not.toContain("申請產品示範");
     expect(html).toContain('hrefLang="zh-Hans"');
     const services = await (await request.get("/zh-hans/services")).text();
     expect(services).toContain("专业服务");
@@ -107,7 +107,7 @@ test.describe("navigation", () => {
     const toggle = page.getByRole("button", { name: "Menu" });
     await toggle.click();
     const drawer = page.getByRole("dialog");
-    for (const label of ["Platform & Solutions", "AI Transformation", "Services", "Industries", "Case Studies", "Resources", "Ecosystem", "About"]) {
+    for (const label of ["Platform & solutions", "AI transformation", "Services", "Industries", "Case studies", "Resources", "Ecosystem", "About"]) {
       await expect(drawer.locator("summary", { hasText: label })).toBeVisible();
     }
     await page.keyboard.press("Escape");
@@ -174,7 +174,7 @@ test.describe("enquiry journey", () => {
     await page.getByLabel(/^Work email/).fill("test@example.com");
     await page.getByLabel(/What work do you want to improve/).fill("Launch content approvals");
     await page.getByRole("button", { name: "Send request" }).click();
-    await expect(page.getByText(/Online submission isn't available right now/)).toBeVisible();
+    await expect(page.getByText(/Online submission isn’t available right now/)).toBeVisible();
     await expect(page.getByText(/request has been sent/)).toHaveCount(0);
     await expect(page.getByRole("link", { name: /Open email app/ })).toHaveAttribute("href", /^mailto:business@fimmick\.com/);
     expect(page.url()).not.toContain("example.com");

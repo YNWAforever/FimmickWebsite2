@@ -140,13 +140,16 @@ a.chip:hover { border-color: var(--ink-2); }
 .card--link { text-decoration: none; color: inherit; }
 .card--link:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--line-strong); }
 .card--link:focus-visible { border-radius: var(--radius-l); }
-.card h3 { font-size: 1.2rem; }
+.card :is(h2, h3) { font-size: 1.2rem; }
+/* Listing pages use h2 card titles under the h1; they match the h3 cards elsewhere. */
+.card h2 { letter-spacing: -0.015em; }
+:lang(zh-Hant-HK) .card h2, :lang(zh-Hans) .card h2 { letter-spacing: 0; }
 .card .card-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--subtle); font-size: var(--fs-micro); font-weight: 700; }
 .card .card-foot { margin-top: auto; padding-top: 8px; display: flex; align-items: center; gap: 8px; font-weight: 750; color: var(--ink); }
 .card--flat { box-shadow: none; }
 .card--tint { background: var(--canvas); border-color: transparent; box-shadow: none; }
 .section--night .card { background: var(--night-2); border-color: var(--night-line); color: var(--night-text); box-shadow: none; }
-.section--night .card h3 { color: #fff; }
+.section--night .card :is(h2, h3) { color: #fff; }
 
 .number-tag {
   font-variant-numeric: tabular-nums;

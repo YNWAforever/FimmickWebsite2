@@ -38,7 +38,7 @@ export function FlowScene({ locale }: { locale: Locale }) {
           <div className="flow-card">
             <p className="flow-card__label">
               <span>{en ? "Prepared work" : zh("準備好的工作", locale)}</span>
-              <em>{en ? "Instagram caption · draft" : zh("Instagram 文案・草稿", locale)}</em>
+              <em>{en ? "Instagram caption · draft" : zh("Instagram 文案·草稿", locale)}</em>
             </p>
             <blockquote>{draft}</blockquote>
           </div>
@@ -65,7 +65,7 @@ export function FlowScene({ locale }: { locale: Locale }) {
               <em>{en ? "Export + record" : zh("匯出＋記錄", locale)}</em>
             </p>
             <span className="file">launch-pack_sample.txt</span>
-            <p style={{ marginTop: 8 }}>{en ? "Record REC-0412 · sources, edits and reviewer notes attached" : zh("紀錄 REC-0412・附來源、修改及審閱意見", locale)}</p>
+            <p style={{ marginTop: 8 }}>{en ? "Record REC-0412 · sources, edits and reviewer notes attached" : zh("紀錄 REC-0412·附來源、修改及審閱意見", locale)}</p>
           </div>
         </li>
       </ol>

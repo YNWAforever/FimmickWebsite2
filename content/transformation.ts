@@ -113,7 +113,7 @@ export const workstreams: Workstream[] = [
       zh: "在這個流程中，AI 應準備或執行甚麼？哪些地方必須由人決定？",
     },
     answer: {
-      en: "FIMMICK starts from the work itself: triggers, inputs, tasks, handoffs, standards and exceptions. We then define each AI task's permitted actions and the human decisions around it, so the outcome always has an owner.",
+      en: "FIMMICK starts from the work itself: triggers, inputs, tasks, handoffs, standards and exceptions. We then define each AI task’s permitted actions and the human decisions around it, so the outcome always has an owner.",
       zh: "FIMMICK 由工作本身出發：觸發點、輸入、任務、交接、標準及例外情況；再界定每項 AI 任務可採取的行動，以及周邊的人手決策，確保每個結果都有負責人。",
     },
     buyerFit: {
@@ -121,7 +121,7 @@ export const workstreams: Workstream[] = [
       zh: "已選定流程，需要一份團隊及 IT 部門都能落實運作的設計的營運及部門主管。",
     },
     problem: {
-      en: "Automation projects fail on edge cases nobody mapped: a missing field, a sensitive request, an approval that lives in someone's head.",
+      en: "Automation projects fail on edge cases nobody mapped: a missing field, a sensitive request, an approval that lives in someone’s head.",
       zh: "自動化項目往往失敗於無人預計的特殊情況：缺漏的欄位、敏感的要求，或只存在於某人腦海中的批核步驟。",
     },
     inputs: {
@@ -218,7 +218,7 @@ export const programme: ProgrammeStep[] = [
   { id: "design", number: "03", name: { en: "Workflow & agent design", zh: "流程與智能體設計" }, decision: { en: "What does AI prepare, and where do people decide?", zh: "AI 準備甚麼？人在哪裏決定？" }, inputs: { en: "Real examples, rules, systems touched", zh: "真實例子、規則、涉及的系統" }, deliverable: { en: "Workflow blueprint and input/output contract", zh: "流程藍圖及輸入／輸出規格" }, humanRole: { en: "Workflow owner approves the design", zh: "流程負責人批准設計" }, workstream: "workflow-agent-design" },
   { id: "integrate", number: "04", name: { en: "Systems integration", zh: "系統串接" }, decision: { en: "Which connections are needed, and what may they do?", zh: "需要哪些串接？這些串接可以做甚麼？" }, inputs: { en: "Access to systems in scope, data rules", zh: "範圍內系統的存取權限、資料規則" }, deliverable: { en: "Tested connections or export routines", zh: "已測試的串接或匯出程序" }, humanRole: { en: "IT and data owners approve access", zh: "IT 及資料負責人批准存取" }, service: "data-hub" },
   { id: "enable", number: "05", name: { en: "Team enablement", zh: "團隊培訓" }, decision: { en: "Can the team run and review this confidently?", zh: "團隊能否有信心地運作及審閱？" }, inputs: { en: "Roles, the designed workflow, practice cases", zh: "角色、已設計的流程、練習個案" }, deliverable: { en: "Role-based training and operating playbook", zh: "按角色培訓及營運手冊" }, humanRole: { en: "Managers confirm readiness to go live", zh: "經理確認可以正式運作" }, service: "ai-training" },
-  { id: "govern", number: "06", name: { en: "Governance & optimisation", zh: "管治與優化" }, decision: { en: "Is it working, and what should change?", zh: "成效如何？有甚麼需要改變？" }, inputs: { en: "Review records, corrections, exceptions", zh: "審閱記錄、修改、例外" }, deliverable: { en: "Review cadence, adoption measures, rule updates", zh: "檢討周期、推行指標、規則更新" }, humanRole: { en: "Owners review evidence and decide changes", zh: "負責人檢視證據並決定改動" }, workstream: "governance-adoption" },
+  { id: "govern", number: "06", name: { en: "Governance & optimisation", zh: "管治與優化" }, decision: { en: "Is it working, and what should change?", zh: "成效如何？有甚麼需要改變？" }, inputs: { en: "Review records, corrections, exceptions", zh: "審閱紀錄、修改、例外" }, deliverable: { en: "Review cadence, adoption measures, rule updates", zh: "檢討周期、推行指標、規則更新" }, humanRole: { en: "Owners review evidence and decide changes", zh: "負責人檢視證據並決定改動" }, workstream: "governance-adoption" },
 ];
 
 export const programmeNote: L = {

@@ -72,7 +72,7 @@ export default async function VideosPage({ params }: LocaleParams) {
           </aside>
         </div>
       </section>
-      <EnquirySection locale={locale} title={en ? "See the workflow with your own content" : zh("以你自己的內容了解流程", locale)} primary={{ label: en ? "Request a Demo" : zh("預約產品示範", locale), to: paths.contact({ intent: "demo", resource: "fimmick-aip-explainer" }) }} />
+      <EnquirySection locale={locale} title={en ? "See the workflow with your own content" : zh("以你自己的內容了解流程", locale)} primary={{ label: en ? "Request a demo" : zh("申請產品示範", locale), to: paths.contact({ intent: "demo", resource: "fimmick-aip-explainer" }) }} />
     </>
   );
 }

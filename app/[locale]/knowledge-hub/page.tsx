@@ -11,7 +11,7 @@ type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ page
 
 const copy = {
   title: { en: "Knowledge Hub", zh: "知識庫" },
-  lead: { en: "FIMMICK's article archive since 2015 — kept at its original addresses, with original dates and language. Newer guides and the product explainer are in the Resource Centre.", zh: "FIMMICK 自 2015 年起的文章存檔，保留原有網址、日期及語言。較新的指南及產品示範影片見資源中心。" },
+  lead: { en: "FIMMICK’s article archive since 2015 — kept at its original addresses, with original dates and language. Newer guides and the product explainer are in the Resource Centre.", zh: "FIMMICK 自 2015 年起的文章存檔，保留原有網址、日期及語言。較新的指南及產品示範影片見資源中心。" },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
