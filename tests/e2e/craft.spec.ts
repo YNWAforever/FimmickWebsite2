@@ -111,6 +111,8 @@ test.describe("1.2 navigation from 1024 px; drawer as a sheet", () => {
     await page.mouse.click(100, 600);
     await expect(drawer).toBeHidden();
     await expect(page.locator("body")).toHaveAttribute("data-menu-open", "false");
+    // Like Escape and the close button, the scrim returns focus to the control that opened the dialog.
+    await expect(page.locator(".header-actions .menu-toggle")).toBeFocused();
   });
 
   test("on phones the drawer stays full-screen", async ({ page }) => {

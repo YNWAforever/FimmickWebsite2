@@ -204,7 +204,15 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
 
       {/* The drawer is a sibling of <header>, not a child: the header moves with a transform while
           reading, which would make it the drawer's containing block and squash the opening frames. */}
-      <div className="drawer-scrim" hidden={!drawer} aria-hidden="true" onClick={() => setDrawer(false)} />
+      <div
+        className="drawer-scrim"
+        hidden={!drawer}
+        aria-hidden="true"
+        onClick={() => {
+          setDrawer(false);
+          toggleRef.current?.focus();
+        }}
+      />
       <div className="drawer" id={`${uid}-drawer`} hidden={!drawer} ref={drawerRef} role="dialog" aria-modal="true" aria-label={labels.menu}>
         <div className="container drawer-head">
           <Link className="brand" href={home} aria-label={labels.logoAlt}>
