@@ -1,0 +1,100 @@
+
+ RUN  v3.2.7 C:/Users/laich/Documents/FimmickWebsite2
+
+ ❯ tests/unit/award-2.test.ts (10 tests | 1 failed) 54ms
+   ✓ award pass 2 — Knowledge Hub records > article titles and summaries carry no HTML entities 3ms
+   ✓ award pass 2 — Knowledge Hub records > decoding repeats until the double-escaped capture is plain text 1ms
+   ✓ award pass 2 — Knowledge Hub records > only articles published before the relaunch are marked as archive 0ms
+   ✓ award pass 2 — headlines (3.1) > every detail record has an accent phrase that occurs in its headline, in all three locales 1ms
+   ✓ award pass 2 — microcopy (3.2) > no Chinese string uses the Japanese middle dot (U+30FB) 28ms
+   ✓ award pass 2 — microcopy (3.2) > the demo call to action asks for a request, not a booking (申請, not 預約) 1ms
+   ✓ award pass 2 — microcopy (3.2) > buttons are in sentence case 0ms
+   ✓ award pass 2 — case evidence (3.3) > every case outcome is an observable state: present, under 220 characters, no evaluative adjectives 1ms
+   ✓ award pass 2 — case evidence (3.3) > client cases carry one provenance line and no unknown period 2ms
+   × award pass 2 — hub copy (5.3) > every service, product and function summary says what it does in at most 16 words 16ms
+     → expected [ …(14) ] to deeply equal []
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/award-2.test.ts > award pass 2 — hub copy (5.3) > every service, product and function summary says what it does in at most 16 words
+AssertionError: expected [ …(14) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "id": "digital-experience",
++     "words": 25,
++   },
++   {
++     "id": "social-listening",
++     "words": 23,
++   },
++   {
++     "id": "aiso",
++     "words": 25,
++   },
++   {
++     "id": "creativemax",
++     "words": 23,
++   },
++   {
++     "id": "whatsapp-aigc",
++     "words": 26,
++   },
++   {
++     "id": "customer-ops",
++     "words": 23,
++   },
++   {
++     "id": "website-cms",
++     "words": 22,
++   },
++   {
++     "id": "growth",
++     "words": 24,
++   },
++   {
++     "id": "operations",
++     "words": 24,
++   },
++   {
++     "id": "finance",
++     "words": 25,
++   },
++   {
++     "id": "hr",
++     "words": 22,
++   },
++   {
++     "id": "cx",
++     "words": 26,
++   },
++   {
++     "id": "expansion",
++     "words": 24,
++   },
++   {
++     "id": "executive",
++     "words": 26,
++   },
++ ]
+
+ ❯ tests/unit/award-2.test.ts:125:18
+    123|       .map((r) => ({ id: r.id, words: r.summary.en.trim().split(/\s+/)…
+    124|       .filter((r) => r.words > 16);
+    125|     expect(long).toEqual([]);
+       |                  ^
+    126|   });
+    127| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 9 passed (10)
+   Start at  01:12:50
+   Duration  1.32s (transform 323ms, setup 0ms, collect 454ms, tests 54ms, environment 0ms, prepare 190ms)
+

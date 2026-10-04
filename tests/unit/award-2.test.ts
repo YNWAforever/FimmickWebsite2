@@ -112,3 +112,14 @@ describe("award pass 2 — case evidence (3.3)", () => {
     }
   });
 });
+
+import { businessFunctions } from "@/content/functions";
+
+describe("award pass 2 — hub copy (5.3)", () => {
+  it("every service, product and function summary says what it does in at most 16 words", () => {
+    const long = [...services, ...products, ...businessFunctions]
+      .map((r) => ({ id: r.id, words: r.summary.en.trim().split(/\s+/).length }))
+      .filter((r) => r.words > 16);
+    expect(long).toEqual([]);
+  });
+});

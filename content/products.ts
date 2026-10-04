@@ -15,8 +15,8 @@ export const products: Product[] = [
     availability: "discuss",
     exampleMode: "illustrative-sample",
     summary: {
-      en: "Monitors permitted public conversation about your brand, category and competitors, then prepares an insight brief where every point links back to its source.",
-      zh: "監察獲准使用的公開討論（品牌、品類及競爭對手），並整理洞察簡報，每一點都連結回原始來源。",
+      en: "Turns permitted public conversation about your brand and competitors into a source-linked insight brief.",
+      zh: "把獲准使用的公開討論（品牌及競爭對手）整理成連結來源的洞察簡報。",
     },
     whoFor: { en: "Brand, marketing and insight teams who need evidence, not screenshots.", zh: "需要證據而非截圖的品牌、市場推廣及市場研究團隊。" },
     supportedActions: {
@@ -58,8 +58,8 @@ export const products: Product[] = [
     availability: "discuss",
     exampleMode: "illustrative-sample",
     summary: {
-      en: "Checks how named AI assistants answer a defined set of questions about your category, records the answers with dates, and prioritises content and page improvements.",
-      zh: "檢查指定 AI 助手如何回答一組關於你品類的既定問題，按日期記錄答案，並排列內容及頁面改善的優先次序。",
+      en: "Records how named AI assistants answer questions about your category, and prioritises page improvements.",
+      zh: "記錄指定 AI 助手如何回答關於你品類的問題，並排列頁面改善的優先次序。",
     },
     whoFor: { en: "Marketing, SEO and web teams who want to know how their brand appears when people ask AI for recommendations.", zh: "想知道顧客向 AI 查詢推薦時品牌如何出現的市場推廣、SEO 及網站團隊。" },
     supportedActions: {
@@ -100,8 +100,8 @@ export const products: Product[] = [
     availability: "discuss",
     exampleMode: "illustrative-sample",
     summary: {
-      en: "Prepares copy and visual variants from a brief and approved brand facts, keeps each draft editable, and records who reviewed what before export.",
-      zh: "根據簡報及已確認的品牌資料準備文案及視覺版本，所有草稿均可編輯，並在匯出前記錄審閱人及審閱內容。",
+      en: "Drafts editable copy and visuals from approved brand facts, recording every review before export.",
+      zh: "根據已確認的品牌資料草擬可編輯的文案及視覺，並在匯出前記錄每次審閱。",
     },
     whoFor: { en: "Brand and content teams producing recurring campaign, product and social content.", zh: "需要經常製作宣傳、產品及社交內容的品牌及內容團隊。" },
     supportedActions: {
@@ -143,8 +143,8 @@ export const products: Product[] = [
     availability: "discuss",
     exampleMode: "illustrative-sample",
     summary: {
-      en: "Lets participants — for example store staff, creators or partners — submit photos and details through WhatsApp, then prepares content drafts from those materials for review.",
-      zh: "讓參與者（例如門市員工、創作者或合作夥伴）透過 WhatsApp 提交相片及資料，再根據素材準備內容草稿供審閱。",
+      en: "Turns photos and details that participants send on WhatsApp into content drafts for review.",
+      zh: "把參與者透過 WhatsApp 提交的相片及資料，整理成供審閱的內容草稿。",
     },
     whoFor: { en: "Brands that collect content materials from many people in the field.", zh: "需要從前線多人收集內容素材的品牌。" },
     supportedActions: {
@@ -185,8 +185,8 @@ export const products: Product[] = [
     availability: "discuss",
     exampleMode: "illustrative-sample",
     summary: {
-      en: "Turns each incoming enquiry into a structured record with a proposed owner, a draft response from approved answers and a tracked next task.",
-      zh: "把每個傳入查詢轉化為結構化紀錄，附建議負責人、根據已確認答案草擬的回覆，以及可追蹤的下一步工作。",
+      en: "Each enquiry gets a proposed owner, a draft reply from approved answers, and a next task.",
+      zh: "每個查詢都會有建議負責人、根據已確認答案草擬的回覆，以及下一步工作。",
     },
     whoFor: { en: "Sales, service and admin teams handling enquiries from several channels.", zh: "處理多渠道查詢的銷售、客戶服務及行政團隊。" },
     supportedActions: {
@@ -227,8 +227,8 @@ export const products: Product[] = [
     availability: "discuss",
     exampleMode: "illustrative-sample",
     summary: {
-      en: "Keeps page content tied to structured records, validates required fields, shows the before/after change and a preview, and records who approved it.",
-      zh: "令頁面內容與結構化紀錄保持一致，驗證必填欄位，顯示更新前後對照及預覽，並記錄批核人。",
+      en: "Ties page content to structured records, previews each change and logs who approved it.",
+      zh: "令頁面內容與結構化紀錄保持一致，預覽每次更新，並記錄批核人。",
     },
     whoFor: { en: "Teams maintaining product, property, service or location pages.", zh: "負責維護產品、物業、服務或分店頁面的團隊。" },
     supportedActions: {

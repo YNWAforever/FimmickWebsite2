@@ -8,7 +8,7 @@ import { products } from "@/content/products";
 import { solutions } from "@/content/solutions";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
-import { EnquirySection } from "@/components/blocks";
+import { EditorialList, EnquirySection } from "@/components/blocks";
 
 const copy = {
   title: { en: "Products", zh: "產品" },
@@ -37,17 +37,24 @@ export default async function ProductsPage({ params }: LocaleParams) {
         <section key={s.id} className={index % 2 ? "section section--tight section--surface" : "section section--tight"}>
           <div className="container">
             <SectionHead eyebrow={`${s.number} · ${t(s.short, locale)}`} title={t(s.name, locale)} lead={t(s.deliverable, locale)} action={<Link className="text-link" href={href(locale, paths.solution(s.id))}>{en ? "Solution overview" : zh("解決方案概覽", locale)} <span className="arrow" aria-hidden="true">→</span></Link>} />
-            <div className="grid grid-2">
-              {products.filter((p) => p.solution === s.id).map((p) => (
-                <Link key={p.id} className="hub-card" href={href(locale, paths.product(p.id))}>
-                  <span className="chip chip--magenta" style={{ alignSelf: "flex-start" }}>{t(p.descriptor, locale)}</span>
-                  <h3>{p.name}</h3>
-                  <p className="muted">{t(p.summary, locale)}</p>
-                  <p className="small"><strong>{en ? "Output: " : zh("輸出：", locale)}</strong>{t(p.output, locale)}</p>
-                  <span className="card-foot">{t(ui.learnMore, locale)} →</span>
-                </Link>
-              ))}
-            </div>
+            <EditorialList
+              start={products.findIndex((p) => p.solution === s.id) + 1}
+              rows={products.filter((p) => p.solution === s.id).map((p) => ({
+                id: p.id,
+                href: href(locale, paths.product(p.id)),
+                label: p.name,
+                headline: t(p.descriptor, locale),
+                accent: p.headlineAccent ? t(p.headlineAccent, locale) : undefined,
+                line: t(p.summary, locale),
+                aside: (
+                  <p className="editorial-row__output">
+                    <strong>{en ? "Output" : zh("輸出", locale)}</strong>
+                    {t(p.output, locale)}
+                  </p>
+                ),
+                cue: t(ui.howItWorks, locale),
+              }))}
+            />
           </div>
         </section>
       ))}

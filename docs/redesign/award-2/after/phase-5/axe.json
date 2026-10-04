@@ -1,0 +1,102 @@
+[
+  {
+    "page": "/en/services",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/services",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans/services",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/products",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/products",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/functions",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/functions",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/platform",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans/platform",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/services",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/services",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans/services",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/products",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/products",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/functions",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/functions",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/platform",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans/platform",
+    "viewport": "390x844",
+    "violations": []
+  }
+]

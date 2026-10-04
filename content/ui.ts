@@ -13,6 +13,14 @@ export const ui = {
   language: { en: "Language", zh: "語言" },
   overview: { en: "Overview", zh: "概覽" },
   learnMore: { en: "Learn more", zh: "了解更多" },
+  /** Object-specific link labels for the hub rows (award pass 2, 5.4); zh drafted, for native review. */
+  howItWorks: { en: "How it works", zh: "了解運作方式" },
+  readArchitecture: { en: "Read the architecture", zh: "閱讀平台架構" },
+  meetAgents: { en: "Meet the agents", zh: "認識智能體" },
+  seeTemplates: { en: "See the templates", zh: "查看流程範本" },
+  seeWorkflows: { en: "See the workflows", zh: "查看流程" },
+  /** Followed by the capability name: "Explore Market intelligence". */
+  explore: { en: "Explore", zh: "探索" },
   viewAll: { en: "View all", zh: "查看全部" },
   home: { en: "Home", zh: "首頁" },
   breadcrumb: { en: "Breadcrumb", zh: "導覽路徑" },

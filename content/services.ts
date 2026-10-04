@@ -246,7 +246,7 @@ export const services: Service[] = [
     objective: "convert",
     name: { en: "Digital Experience", zh: "數碼體驗" },
     eyebrow: { en: "Websites and journeys that convert", zh: "有助轉化的網站及顧客旅程" },
-    summary: { en: "Website, landing page and journey design and build — structured content, accessible interfaces and measurement, on the platform you already use or one we agree.", zh: "網站、登陸頁及顧客旅程的設計與建立——結構化內容、無障礙介面及成效衡量，可沿用你現有的平台或議定新平台。" },
+    summary: { en: "Websites, landing pages and journeys, designed and built with structured content and accessible interfaces.", zh: "網站、登陸頁及顧客旅程的設計與建立，採用結構化內容及無障礙介面。" },
     problem: { en: "The website says one thing, campaigns say another, and every page change waits for a developer. Visitors leave before they find the answer or the next step.", zh: "網站與宣傳內容各說各話，每次修改頁面都要等待開發人員；訪客未找到答案或下一步便已離開。" },
     deliverables: { en: ["Journey map and page structure", "Page and landing page designs", "Build on the agreed platform", "Content model for future updates", "Measurement plan and launch checks"], zh: ["顧客旅程圖及頁面結構", "頁面及登陸頁設計", "於議定平台上建立", "方便日後更新的內容模型", "成效衡量計劃及推出前檢查"] },
     inputs: { en: ["Business objective and audiences", "Brand guidelines and existing content", "Platform and hosting access", "Analytics access"], zh: ["業務目標及受眾", "品牌指引及現有內容", "平台及託管存取權", "分析工具存取權"] },

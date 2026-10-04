@@ -1,0 +1,230 @@
+
+Running 6 tests using 4 workers
+
+[1/6] [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/products: editorial rows, no card grid, the row link is named by its headline
+[2/6] [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/platform: editorial rows, no card grid, the row link is named by its headline
+[3/6] [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/services: editorial rows, no card grid, the row link is named by its headline
+[4/6] [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/functions: editorial rows, no card grid, the row link is named by its headline
+  1) [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/products: editorial rows, no card grid, the row link is named by its headline 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.card-grid, .hub-card')
+    Expected: 0
+    Received: 6
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.card-grid, .hub-card') with timeout 5000ms
+      - waiting for locator('.card-grid, .hub-card')
+        13 × locator resolved to 6 elements
+           - unexpected value "6"
+
+
+      15 |   test(`${path}: editorial rows, no card grid, the row link is named by its headline`, async ({ page }) => {
+      16 |     await page.goto(path);
+    > 17 |     await expect(page.locator(".card-grid, .hub-card")).toHaveCount(0);
+         |                                                         ^
+      18 |     const list = page.locator(".editorial-row");
+      19 |     if (rows) await expect(list).toHaveCount(rows);
+      20 |     else expect(await list.count()).toBeGreaterThanOrEqual(10);
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\hubs.spec.ts:17:57
+
+    Error Context: test-results\hubs--en-products-editoria-d96b7-nk-is-named-by-its-headline-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\hubs--en-products-editoria-d96b7-nk-is-named-by-its-headline-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\hubs--en-products-editoria-d96b7-nk-is-named-by-its-headline-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2) [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/functions: editorial rows, no card grid, the row link is named by its headline 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.card-grid, .hub-card')
+    Expected: 0
+    Received: 7
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.card-grid, .hub-card') with timeout 5000ms
+      - waiting for locator('.card-grid, .hub-card')
+        13 × locator resolved to 7 elements
+           - unexpected value "7"
+
+
+      15 |   test(`${path}: editorial rows, no card grid, the row link is named by its headline`, async ({ page }) => {
+      16 |     await page.goto(path);
+    > 17 |     await expect(page.locator(".card-grid, .hub-card")).toHaveCount(0);
+         |                                                         ^
+      18 |     const list = page.locator(".editorial-row");
+      19 |     if (rows) await expect(list).toHaveCount(rows);
+      20 |     else expect(await list.count()).toBeGreaterThanOrEqual(10);
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\hubs.spec.ts:17:57
+
+    Error Context: test-results\hubs--en-functions-editori-9d5eb-nk-is-named-by-its-headline-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\hubs--en-functions-editori-9d5eb-nk-is-named-by-its-headline-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\hubs--en-functions-editori-9d5eb-nk-is-named-by-its-headline-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[5/6] [chromium] › tests\e2e\hubs.spec.ts:31:1 › products and functions name what the link opens
+  3) [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/services: editorial rows, no card grid, the row link is named by its headline 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.card-grid, .hub-card')
+    Expected: 0
+    Received: 16
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.card-grid, .hub-card') with timeout 5000ms
+      - waiting for locator('.card-grid, .hub-card')
+        13 × locator resolved to 16 elements
+           - unexpected value "16"
+
+
+      15 |   test(`${path}: editorial rows, no card grid, the row link is named by its headline`, async ({ page }) => {
+      16 |     await page.goto(path);
+    > 17 |     await expect(page.locator(".card-grid, .hub-card")).toHaveCount(0);
+         |                                                         ^
+      18 |     const list = page.locator(".editorial-row");
+      19 |     if (rows) await expect(list).toHaveCount(rows);
+      20 |     else expect(await list.count()).toBeGreaterThanOrEqual(10);
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\hubs.spec.ts:17:57
+
+    Error Context: test-results\hubs--en-services-editoria-c93f0-nk-is-named-by-its-headline-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\hubs--en-services-editoria-c93f0-nk-is-named-by-its-headline-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\hubs--en-services-editoria-c93f0-nk-is-named-by-its-headline-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[6/6] [chromium] › tests\e2e\hubs.spec.ts:38:1 › the services filter works in place: no server round trip, URL kept in step
+  4) [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/platform: editorial rows, no card grid, the row link is named by its headline 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.card-grid, .hub-card')
+    Expected: 0
+    Received: 16
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.card-grid, .hub-card') with timeout 5000ms
+      - waiting for locator('.card-grid, .hub-card')
+        13 × locator resolved to 16 elements
+           - unexpected value "16"
+
+
+      15 |   test(`${path}: editorial rows, no card grid, the row link is named by its headline`, async ({ page }) => {
+      16 |     await page.goto(path);
+    > 17 |     await expect(page.locator(".card-grid, .hub-card")).toHaveCount(0);
+         |                                                         ^
+      18 |     const list = page.locator(".editorial-row");
+      19 |     if (rows) await expect(list).toHaveCount(rows);
+      20 |     else expect(await list.count()).toBeGreaterThanOrEqual(10);
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\hubs.spec.ts:17:57
+
+    Error Context: test-results\hubs--en-platform-editoria-87345-nk-is-named-by-its-headline-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\hubs--en-platform-editoria-87345-nk-is-named-by-its-headline-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\hubs--en-platform-editoria-87345-nk-is-named-by-its-headline-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  5) [chromium] › tests\e2e\hubs.spec.ts:31:1 › products and functions name what the link opens ────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.editorial-row__cue').first()
+    Expected pattern: /How it works/
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('.editorial-row__cue').first() with timeout 5000ms
+      - waiting for locator('.editorial-row__cue').first()
+
+
+      31 | test("products and functions name what the link opens", async ({ page }) => {
+      32 |   await page.goto("/en/products");
+    > 33 |   await expect(page.locator(".editorial-row__cue").first()).toHaveText(/How it works/);
+         |                                                             ^
+      34 |   await page.goto("/en/functions");
+      35 |   await expect(page.locator(".editorial-row__cue").first()).toHaveText(/See the workflows/);
+      36 | });
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\hubs.spec.ts:33:61
+
+    Error Context: test-results\hubs-products-and-functions-name-what-the-link-opens-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\hubs-products-and-functions-name-what-the-link-opens-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\hubs-products-and-functions-name-what-the-link-opens-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  6) [chromium] › tests\e2e\hubs.spec.ts:38:1 › the services filter works in place: no server round trip, URL kept in step 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.editorial-row:visible')
+    Expected: 3
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.editorial-row:visible') with timeout 5000ms
+      - waiting for locator('.editorial-row:visible')
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      48 |   await pill.click();
+      49 |   await expect(page).toHaveURL(/[?&]objective=convert/);
+    > 50 |   await expect(page.locator(".editorial-row:visible")).toHaveCount(expected);
+         |                                                        ^
+      51 |   await expect(pill).toHaveAttribute("aria-current", "true");
+      52 |   // Only the hub itself: rows prefetch their detail pages, which is expected.
+      53 |   expect(rsc.filter((u) => new URL(u).pathname === "/en/services")).toEqual([]);
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\hubs.spec.ts:50:56
+
+    Error Context: test-results\hubs-the-services-filter-w-d514f-round-trip-URL-kept-in-step-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\hubs-the-services-filter-w-d514f-round-trip-URL-kept-in-step-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\hubs-the-services-filter-w-d514f-round-trip-URL-kept-in-step-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  6 failed
+    [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/services: editorial rows, no card grid, the row link is named by its headline 
+    [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/products: editorial rows, no card grid, the row link is named by its headline 
+    [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/functions: editorial rows, no card grid, the row link is named by its headline 
+    [chromium] › tests\e2e\hubs.spec.ts:15:3 › /en/platform: editorial rows, no card grid, the row link is named by its headline 
+    [chromium] › tests\e2e\hubs.spec.ts:31:1 › products and functions name what the link opens ─────
+    [chromium] › tests\e2e\hubs.spec.ts:38:1 › the services filter works in place: no server round trip, URL kept in step 
