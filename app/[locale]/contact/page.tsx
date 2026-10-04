@@ -85,10 +85,11 @@ export default async function ContactPage({ params, searchParams }: Props) {
               {offices.map((o) => (
                 <div key={o.email} className="office">
                   <strong>{t(o.name, locale)}</strong>
-                  {o.address ? <span>{t(o.address, locale)}</span> : null}
-                  <br />
-                  {o.phone ? <><a href={`tel:${o.phone.replace(/\s/g, "")}`}>{o.phone}</a> · </> : null}
-                  <a href={`mailto:${o.email}`}>{o.email}</a>
+                  {o.address ? <span className="office__address">{t(o.address, locale)}</span> : null}
+                  <span className="office__contact">
+                    {o.phone ? <><a href={`tel:${o.phone.replace(/\s/g, "")}`}>{o.phone}</a> · </> : null}
+                    <a href={`mailto:${o.email}`}>{o.email}</a>
+                  </span>
                 </div>
               ))}
             </div>

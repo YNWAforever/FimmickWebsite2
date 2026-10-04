@@ -282,7 +282,7 @@ export function ContactForm({ lang, action, intents, initialIntent, initialConte
             {field("email", s.email, { type: "email", required: true, autoComplete: "email" })}
             {field("work", s.work, { required: true, textarea: true, hint: s.workHint })}
             <details open={detailsOpen} onToggle={(e) => setDetailsOpen(e.currentTarget.open)}>
-              <summary className="small" style={{ cursor: "pointer", fontWeight: 750, minHeight: 44, display: "flex", alignItems: "center" }}>{s.more}</summary>
+              <summary className="form-disclosure">{s.more}</summary>
               <div className="stack" style={{ ["--stack" as string]: "14px", marginTop: 8 }}>
                 <div className="form-row">
                   {field("phone", s.phone, { type: "tel", autoComplete: "tel" })}

@@ -132,11 +132,19 @@
 .form-status[data-kind="success"] { background: var(--lime-soft); color: var(--lime-ink); }
 .form-status[data-kind="error"] { background: #fde8e8; color: #8a1c1c; }
 .form-status[data-kind="info"] { background: var(--sky-soft); color: var(--ink); }
-.email-preview { white-space: pre-wrap; padding: 14px; border-radius: 12px; background: var(--canvas); font-size: var(--fs-small); border: 1px solid var(--line); max-height: 260px; overflow: auto; }
+/* The prepared email reads as a letter: a card in the body face, not a code block. */
+.email-preview { white-space: pre-wrap; margin: 0; padding: 18px 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-1); font-family: inherit; font-size: var(--fs-small); line-height: 1.6; color: var(--ink); max-height: 300px; overflow: auto; }
+/* "More detail" disclosure: the FAQ's + / × indicator. */
+.form-disclosure { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; cursor: pointer; list-style: none; font-size: var(--fs-small); font-weight: 750; color: var(--ink); }
+.form-disclosure::-webkit-details-marker { display: none; }
+.form-disclosure::after { content: "+"; font-size: 1.4rem; line-height: 1; color: var(--magenta-ink); transition: transform var(--t-fast) var(--ease); }
+details[open] > .form-disclosure::after { transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { .form-disclosure::after { transition: none; } }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .office-list { display: grid; gap: 12px; }
 .office { padding: 16px 18px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-small); }
-.office strong { display: block; color: var(--ink); }
+.office strong, .office__address, .office__contact { display: block; }
+.office strong { color: var(--ink); }
 
 /* Not found */
 .nf { padding-block: clamp(64px, 10vw, 140px); }

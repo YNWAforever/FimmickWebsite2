@@ -95,6 +95,15 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 /* CJK: the accent line is one unbroken phrase (keep-all), so size it to fit the copy column. */
 :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: clamp(2.1rem, 0.4rem + 3.6vw, 4rem); }
 @media (max-width: 999px) { :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: min(11vw, 3.4rem); } }
+/* ≥1680 px: the copy column widens (still aligned with the page container) and the headline sits on
+   two lines, the English accent sentence on its own line. The size is fitted to the 44rem column
+   ("AI prepares the work." is ~9.3 em wide), not grown with the viewport. */
+@media (min-width: 1680px) {
+  .cine-hero { grid-template-columns: calc((100% - var(--container)) / 2) minmax(0, 1.1fr) minmax(0, 1fr) 0; }
+  .cine-hero__copy { padding-right: 72px; max-width: calc(44rem + 72px); }
+  .cine-hero__title { max-width: none; font-size: 4.5rem; text-wrap: balance; } /* under the brief’s 6.4rem cap */
+  :lang(en) .cine-hero__title .accent { display: block; }
+}
 .cine-hero__photo { border-radius: 32px 0 0 32px; }
 @media (max-width: 999px) {
   .cine-hero__photo { border-radius: 0; }
@@ -346,7 +355,7 @@ main:has(.closing) + .site-footer .footer-cta { display: none; }
 .site-footer .footer-contact { margin-top: 14px; line-height: 1.9; }
 .site-footer .footer-contact a { color: #fff; }
 .site-footer .footer-social a { color: var(--night-muted); }
-.site-footer .footer-social a:hover { color: #fff; }
+.site-footer .footer-social a:hover { color: #fff; background: rgb(255 255 255 / 8%); }
 .site-footer .footer-cols h2 { color: rgb(255 255 255 / 58%); }
 .site-footer .footer-cols a { color: var(--night-text); }
 .site-footer .footer-cols a:hover { color: #fff; }
@@ -491,13 +500,13 @@ html.has-bubble [data-cursor] { cursor: none; }
    contain-intrinsic-block-size excludes padding). English and Chinese differ by up to 220 px a
    band on phones, so each locale has its own set. Re-measure after any change to the homepage's
    copy or layout. */
-html { --band-outputs: 2700px; --band-evidence: 2540px; --band-night: 1060px; --band-paths: 2370px; --band-industries: 1370px; --band-eco: 1710px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 1610px; }
-html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2500px; --band-evidence: 2270px; --band-night: 1060px; --band-paths: 2160px; --band-industries: 1400px; --band-eco: 1680px; --band-resources: 1170px; --band-start: 1140px; --band-faq: 550px; --band-closing: 650px; --band-footer: 1490px; }
+html { --band-outputs: 2700px; --band-evidence: 2540px; --band-night: 1060px; --band-paths: 2370px; --band-industries: 1370px; --band-eco: 1710px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 2480px; }
+html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2500px; --band-evidence: 2270px; --band-night: 1060px; --band-paths: 2160px; --band-industries: 1400px; --band-eco: 1680px; --band-resources: 1170px; --band-start: 1140px; --band-faq: 550px; --band-closing: 650px; --band-footer: 2550px; }
 @media (min-width: 700px) {
-  html { --band-outputs: 2060px; --band-evidence: 1650px; --band-night: 920px; --band-paths: 2470px; --band-industries: 1110px; --band-eco: 1320px; --band-resources: 1040px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 920px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2070px; --band-evidence: 1630px; --band-night: 870px; --band-paths: 2510px; --band-industries: 1150px; --band-eco: 1260px; --band-resources: 1000px; --band-start: 830px; --band-faq: 570px; --band-closing: 770px; --band-footer: 890px; }
+  html { --band-outputs: 2060px; --band-evidence: 1650px; --band-night: 920px; --band-paths: 2470px; --band-industries: 1110px; --band-eco: 1320px; --band-resources: 1040px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 1470px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2070px; --band-evidence: 1630px; --band-night: 870px; --band-paths: 2510px; --band-industries: 1150px; --band-eco: 1260px; --band-resources: 1000px; --band-start: 830px; --band-faq: 570px; --band-closing: 770px; --band-footer: 1520px; }
 }
 @media (min-width: 1000px) {
-  html { --band-outputs: 1300px; --band-evidence: 1110px; --band-night: 980px; --band-paths: 1350px; --band-industries: 610px; --band-eco: 830px; --band-resources: 640px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 720px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1290px; --band-evidence: 1060px; --band-night: 1000px; --band-paths: 1330px; --band-industries: 660px; --band-eco: 850px; --band-resources: 620px; --band-start: 560px; --band-faq: 390px; --band-closing: 690px; --band-footer: 630px; }
+  html { --band-outputs: 1300px; --band-evidence: 1110px; --band-night: 980px; --band-paths: 1350px; --band-industries: 610px; --band-eco: 830px; --band-resources: 640px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 700px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1290px; --band-evidence: 1060px; --band-night: 1000px; --band-paths: 1330px; --band-industries: 660px; --band-eco: 850px; --band-resources: 620px; --band-start: 560px; --band-faq: 390px; --band-closing: 690px; --band-footer: 670px; }
 }

@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const locale = await resolveLocale(params);
   const e = eventById((await params).slug);
   if (!e) return {};
-  return pageMetadata({ locale, path: `/events/${e.id}`, title: e.title, description: e.summary });
+  return pageMetadata({ locale, path: `/events/${e.id}`, title: e.title, description: e.summary, generatedImage: true });
 }
 
 const strip = (s: string) => s.replace(/\*\*/g, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");

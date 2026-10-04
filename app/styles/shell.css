@@ -152,10 +152,18 @@
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: var(--surface);
-  box-shadow: var(--shadow-3);
+  /* A bottom shadow separates the panel from the page it covers. */
+  box-shadow: var(--shadow-3), 0 36px 56px -32px rgb(7 11 31 / 38%);
 }
 
 .mega[hidden] { display: none; }
+
+/* Dims the page under an open panel; the header (z-index 50) stays above it. */
+.mega-scrim { position: fixed; inset: 0; z-index: 49; background: rgb(7 11 31 / 24%); }
+@media (prefers-reduced-motion: no-preference) {
+  .mega-scrim:not([hidden]) { animation: mega-scrim-in 200ms var(--ease); }
+}
+@keyframes mega-scrim-in { from { opacity: 0; } }
 
 @media (prefers-reduced-motion: no-preference) {
   .mega:not([hidden]) { animation: mega-in 200ms var(--ease); }
@@ -185,6 +193,16 @@
 .mega-group a:hover { background: var(--canvas); }
 .mega-group a small { display: block; color: var(--muted); font-weight: 500; font-size: var(--fs-micro); }
 .mega-featured { padding: 20px; border-radius: var(--radius); background: var(--night); color: var(--night-text); text-decoration: none; display: grid; gap: 8px; align-content: start; }
+/* A panel with a featured card lays everything in one row: the card takes the last, wider column. */
+.mega-groups:has(> .mega-featured) { display: flex; }
+.mega-groups:has(> .mega-featured) > .mega-group { flex: 1 1 0; min-width: 0; }
+.mega-groups > .mega-featured { flex: 1.3 1 0; min-width: 0; align-self: start; }
+/* Miniature of the signature frame: four moments on one line, the approval in lime. */
+.mega-featured__frame { position: relative; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; padding: 16px 14px; border-radius: 12px; background: rgb(255 255 255 / 6%); }
+.mega-featured__frame::before { content: ""; position: absolute; left: 26px; right: 26px; top: 50%; height: 1px; background: rgb(255 255 255 / 22%); }
+.mega-featured__frame i { position: relative; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid rgb(255 255 255 / 55%); background: var(--night); color: #fff; font-style: normal; font-size: 0.66rem; font-weight: 750; }
+.mega-featured__frame i:nth-child(2) { border-color: var(--magenta); }
+.mega-featured__frame i[data-state="approved"] { border-color: var(--lime); background: var(--lime); color: var(--night); }
 .mega-featured strong { color: #fff; font-size: 1.05rem; }
 .mega-featured span { color: var(--night-muted); font-size: var(--fs-small); }
 
@@ -237,8 +255,14 @@ body[data-menu-open="true"] { overflow: hidden; }
 @media (min-width: 1000px) { .footer-top { grid-template-columns: minmax(0, 1.2fr) minmax(0, 3fr); } }
 .footer-brand p { margin-top: 16px; color: var(--muted); font-size: var(--fs-small); max-width: 36ch; }
 .footer-brand img { width: 132px; }
-.footer-cols { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+/* Four columns of two stacked groups (two columns on tablets, one on phones). Headings reserve two
+   lines where columns sit side by side, so every list starts at the same height. */
+.footer-cols { display: grid; gap: 36px 28px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 560px) { .footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .footer-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.footer-col { display: grid; gap: 36px; align-content: start; }
 .footer-cols h2 { font-size: var(--fs-micro); letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); margin-bottom: 12px; }
+@media (min-width: 560px) { .footer-cols h2 { min-height: 2lh; } }
 .footer-cols ul { list-style: none; display: grid; gap: 2px; }
 .footer-cols a { display: inline-flex; min-height: 32px; align-items: center; color: var(--ink); text-decoration: none; font-size: var(--fs-small); font-weight: 600; }
 .footer-cols a:hover { text-decoration: underline; }
@@ -248,5 +272,7 @@ body[data-menu-open="true"] { overflow: hidden; }
 @media (pointer: coarse) {
   .footer-bottom nav a { display: inline-flex; align-items: center; min-height: 44px; }
 }
-.footer-social { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
-.footer-social a { font-size: var(--fs-micro); font-weight: 700; color: var(--muted); }
+/* Icon row: 44 px targets, the first icon's glyph aligned with the text above. */
+.footer-social { display: flex; gap: 4px; flex-wrap: wrap; margin: 12px 0 0 -12px; }
+.footer-social a { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: var(--muted); transition: color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease); }
+.footer-social a:hover { color: var(--ink); background: var(--canvas); }

@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: locale === "en" ? "FIMMICK — Agentic AI Platform & Business Solutions" : zh("FIMMICK — 企業 AI 智能體平台與業務解決方案", locale),
       // The meta description is the visible hero body, so search results match the page.
       description: t(cinema.heroBody, locale),
+      generatedImage: true,
     }),
     title: { absolute: locale === "en" ? "FIMMICK — Agentic AI Platform & Business Solutions" : zh("FIMMICK — 企業 AI 智能體平台與業務解決方案", locale) },
   };

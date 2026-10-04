@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const locale = await resolveLocale(params);
   const s = find((await params).slug);
   if (!s) return {};
-  return pageMetadata({ locale, path: paths.solution(s.id), title: t(s.name, locale), description: `${t(s.job, locale)} ${t(s.deliverable, locale)}` });
+  return pageMetadata({ locale, path: paths.solution(s.id), title: t(s.name, locale), description: `${t(s.job, locale)} ${t(s.deliverable, locale)}`, generatedImage: true });
 }
 
 export default async function SolutionPage({ params }: SlugParams) {
