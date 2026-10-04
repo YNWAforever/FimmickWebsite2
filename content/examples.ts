@@ -183,6 +183,39 @@ export const contentScenarios: {
   },
 ];
 
+/**
+ * The homepage hero card, live (award pass 2, 7): the launch caption and the four approved facts it
+ * was drafted from. `phrase` is the wording each fact became in the caption, per language; the card
+ * derives the character ranges to underline from it (a unit test keeps every phrase in its caption).
+ */
+export const heroSample = {
+  caption: contentScenarios[0].formats[0].draft,
+  record: "REC-0412",
+  facts: [
+    { id: "capacity", label: { en: contentFacts.en[0], zh: contentFacts.zh[0] }, phrase: { en: "750 ml", zh: "750 毫升" } },
+    { id: "material", label: { en: contentFacts.en[1], zh: contentFacts.zh[1] }, phrase: { en: "Double-wall stainless steel", zh: "雙層不銹鋼" } },
+    { id: "lid", label: { en: contentFacts.en[2], zh: contentFacts.zh[2] }, phrase: { en: "lid that locks", zh: "杯蓋有鎖扣" } },
+    { id: "colours", label: { en: contentFacts.en[3], zh: contentFacts.zh[3] }, phrase: { en: "three colours: Harbour Blue, Stone and Lime", zh: "三款顏色：海港藍、石灰、青檸" } },
+  ] as { id: string; label: L; phrase: L }[],
+};
+
+/** A caption cut into runs at each fact’s wording: [text] or [text, factId]. */
+export function captionRuns(text: string, phrases: [id: string, phrase: string][]): [string, string?][] {
+  const marks = phrases
+    .map(([id, phrase]) => ({ id, at: text.indexOf(phrase), length: phrase.length }))
+    .filter((m) => m.at >= 0)
+    .sort((a, b) => a.at - b.at);
+  const runs: [string, string?][] = [];
+  let i = 0;
+  for (const m of marks) {
+    if (m.at > i) runs.push([text.slice(i, m.at)]);
+    runs.push([text.slice(m.at, m.at + m.length), m.id]);
+    i = m.at + m.length;
+  }
+  if (i < text.length) runs.push([text.slice(i)]);
+  return runs;
+}
+
 /* ------------------------------------------------------------------- follow-up */
 
 export type EnquiryId = "ENQ-2041" | "ENQ-2042" | "ENQ-2043";

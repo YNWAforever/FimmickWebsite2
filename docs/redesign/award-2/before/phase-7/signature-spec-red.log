@@ -1,0 +1,180 @@
+
+Running 6 tests using 4 workers
+
+[1/6] [chromium] › tests\e2e\signature.spec.ts:45:1 › arrow keys move between fact chips; hover lights the words too
+[2/6] [chromium] › tests\e2e\signature.spec.ts:20:1 › keyboard: a fact chip lights the words it supplied; Approve toggles the stamp and the export step
+[3/6] [chromium] › tests\e2e\signature.spec.ts:67:1 › reduced motion: the underline and the stamp appear without animation
+[4/6] [chromium] › tests\e2e\signature.spec.ts:59:1 › without JavaScript the card shows the finished state
+  1) [chromium] › tests\e2e\signature.spec.ts:59:1 › without JavaScript the card shows the finished state 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "aria-pressed=\"true\""
+    Received string:    "class=\"hero-card\" aria-label=\"Sample output · launch caption\"><p class=\"hero-card__label\">Sample output · launch caption</p><p class=\"hero-card__draft\" lang=\"en\">Meet the 750 ml bottle that stays put in your bag.</p><p class=\"hero-card__draft\" lang=\"zh-Hant-HK\">750 毫升，放入袋都安心。</p><p class=\"hero-card__approved\"><span aria-hidden=\"true\">✓</span> <!-- -->Approved by brand manager</p><ol class=\"hero-ledger\" aria-label=\"Workflow stages\"><li data-role=\"source\"><span class=\"hero-ledger__node\" aria-hidden=\"true\">01</span><span class=\"hero-ledger__label\">Facts</span></li><li data-role=\"work\"><span class=\"hero-ledger__node\" aria-hidden=\"true\">02</span><span class=\"hero-ledger__label\">Drafted</span></li><li data-role=\"review\"><span class=\"hero-ledger__node\" aria-hidden=\"true\">✓</span><span class=\"hero-ledger__label\">Approved</span></li><li data-role=\"result\"><span class=\"hero-ledger__node\" aria-hidden=\"true\">04</span><span class=\"hero-ledger__label\">Exported</span></li></ol><p class=\""
+
+      60 |   const html = await (await request.get("/en")).text();
+      61 |   const card = html.slice(html.indexOf('class="hero-card"'), html.indexOf("hero-card__notice"));
+    > 62 |   expect(card).toContain('aria-pressed="true"');
+         |                ^
+      63 |   expect(card).toContain("REC-0412");
+      64 |   expect(card).toContain("Double-wall stainless steel");
+      65 | });
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\signature.spec.ts:62:16
+
+    Error Context: test-results\signature-without-JavaScri-b478a-rd-shows-the-finished-state-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\signature-without-JavaScri-b478a-rd-shows-the-finished-state-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\signature-without-JavaScri-b478a-rd-shows-the-finished-state-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[5/6] [chromium] › tests\e2e\signature.spec.ts:74:1 › the card's island is at most 6 KB gzipped
+  2) [chromium] › tests\e2e\signature.spec.ts:20:1 › keyboard: a fact chip lights the words it supplied; Approve toggles the stamp and the export step 
+
+    Error: Tab never reached .hero-fact
+
+      15 |     if (await page.locator(selector).evaluateAll((els) => els.some((el) => el === document.activeElement))) return;
+      16 |   }
+    > 17 |   throw new Error(`Tab never reached ${selector}`);
+         |         ^
+      18 | }
+      19 |
+      20 | test("keyboard: a fact chip lights the words it supplied; Approve toggles the stamp and the export step", async ({ page }) => {
+        at tabTo (C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\signature.spec.ts:17:9)
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\signature.spec.ts:22:3
+
+    Error Context: test-results\signature-keyboard-a-fact--4d01b-e-stamp-and-the-export-step-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\signature-keyboard-a-fact--4d01b-e-stamp-and-the-export-step-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\signature-keyboard-a-fact--4d01b-e-stamp-and-the-export-step-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[6/6] [chromium] › tests\e2e\signature.spec.ts:86:1 › on phones the whole card shows: nothing is clipped by the hero
+  3) [chromium] › tests\e2e\signature.spec.ts:74:1 › the card's island is at most 6 KB gzipped ─────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+      80 |   const chunks = await Promise.all(scripts.map(async (url) => ({ url, body: await (await page.request.get(url)).text() })));
+      81 |   const island = chunks.filter((c) => c.body.includes("hero-fact"));
+    > 82 |   expect(island.length).toBeGreaterThan(0);
+         |                         ^
+      83 |   for (const c of island) expect(gzipSync(c.body).length, c.url).toBeLessThanOrEqual(6 * 1024);
+      84 | });
+      85 |
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\signature.spec.ts:82:25
+
+    Error Context: test-results\signature-the-card-s-island-is-at-most-6-KB-gzipped-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\signature-the-card-s-island-is-at-most-6-KB-gzipped-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\signature-the-card-s-island-is-at-most-6-KB-gzipped-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4) [chromium] › tests\e2e\signature.spec.ts:86:1 › on phones the whole card shows: nothing is clipped by the hero 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 1098.6875
+    Received:    1222.78125
+
+      91 |     heroBottom: hero.getBoundingClientRect().bottom,
+      92 |   }));
+    > 93 |   expect(cardBottom).toBeLessThanOrEqual(heroBottom);
+         |                      ^
+      94 |   await page.locator(".hero-card__notice").scrollIntoViewIfNeeded();
+      95 |   await expect(page.locator(".hero-card__notice")).toBeInViewport();
+      96 | });
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\signature.spec.ts:93:22
+
+    Error Context: test-results\signature-on-phones-the-wh-45045-hing-is-clipped-by-the-hero-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\signature-on-phones-the-wh-45045-hing-is-clipped-by-the-hero-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\signature-on-phones-the-wh-45045-hing-is-clipped-by-the-hero-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  5) [chromium] › tests\e2e\signature.spec.ts:67:1 › reduced motion: the underline and the stamp appear without animation 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.evaluate: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for locator('.hero-card [data-fact]').first()
+
+
+      69 |   await page.goto("/en");
+      70 |   const text = page.locator(".hero-card [data-fact]").first();
+    > 71 |   expect(await text.evaluate((el) => getComputedStyle(el).transitionDuration)).toBe("0s");
+         |                     ^
+      72 | });
+      73 |
+      74 | test("the card's island is at most 6 KB gzipped", async ({ page }) => {
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\signature.spec.ts:71:21
+
+    Error Context: test-results\signature-reduced-motion-t-1e463-mp-appear-without-animation-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\signature-reduced-motion-t-1e463-mp-appear-without-animation-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\signature-reduced-motion-t-1e463-mp-appear-without-animation-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  6) [chromium] › tests\e2e\signature.spec.ts:45:1 › arrow keys move between fact chips; hover lights the words too 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.focus: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for locator('.hero-fact').first()
+
+
+      46 |   await page.goto("/en");
+      47 |   const chips = page.locator(".hero-fact");
+    > 48 |   await chips.first().focus();
+         |                       ^
+      49 |   await page.keyboard.press("ArrowRight");
+      50 |   await expect(chips.nth(1)).toBeFocused();
+      51 |   await expect(chips.nth(1)).toHaveAttribute("tabindex", "0");
+        at C:\Users\laich\AppData\Local\Temp\claude\C--Users-laich-Documents-FimmickWebsite2\1e8738c2-4128-4a63-bc7e-a01ee08dfae7\scratchpad\main-wt\tests\e2e\signature.spec.ts:48:23
+
+    Error Context: test-results\signature-arrow-keys-move--df775--hover-lights-the-words-too-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\signature-arrow-keys-move--df775--hover-lights-the-words-too-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\signature-arrow-keys-move--df775--hover-lights-the-words-too-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  6 failed
+    [chromium] › tests\e2e\signature.spec.ts:20:1 › keyboard: a fact chip lights the words it supplied; Approve toggles the stamp and the export step 
+    [chromium] › tests\e2e\signature.spec.ts:45:1 › arrow keys move between fact chips; hover lights the words too 
+    [chromium] › tests\e2e\signature.spec.ts:59:1 › without JavaScript the card shows the finished state 
+    [chromium] › tests\e2e\signature.spec.ts:67:1 › reduced motion: the underline and the stamp appear without animation 
+    [chromium] › tests\e2e\signature.spec.ts:74:1 › the card's island is at most 6 KB gzipped ──────
+    [chromium] › tests\e2e\signature.spec.ts:86:1 › on phones the whole card shows: nothing is clipped by the hero 

@@ -1,0 +1,33 @@
+
+Running 1 test using 1 worker
+
+[1/1] [chromium] › tests\e2e\signature.spec.ts:86:1 › on phones the whole card shows: nothing is clipped by the hero
+  1) [chromium] › tests\e2e\signature.spec.ts:86:1 › on phones the whole card shows: nothing is clipped by the hero 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 1098.6875
+    Received:    1467.671875
+
+      91 |     heroBottom: hero.getBoundingClientRect().bottom,
+      92 |   }));
+    > 93 |   expect(cardBottom).toBeLessThanOrEqual(heroBottom);
+         |                      ^
+      94 |   await page.locator(".hero-card__notice").scrollIntoViewIfNeeded();
+      95 |   await expect(page.locator(".hero-card__notice")).toBeInViewport();
+      96 | });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\signature.spec.ts:93:22
+
+    Error Context: test-results\signature-on-phones-the-wh-45045-hing-is-clipped-by-the-hero-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\signature-on-phones-the-wh-45045-hing-is-clipped-by-the-hero-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\signature-on-phones-the-wh-45045-hing-is-clipped-by-the-hero-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [chromium] › tests\e2e\signature.spec.ts:86:1 › on phones the whole card shows: nothing is clipped by the hero 

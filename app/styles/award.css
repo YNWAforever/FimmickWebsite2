@@ -561,3 +561,34 @@ html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2540px; --band-evide
 .photo img { object-position: var(--pos); }
 .photo-caption { margin-top: 16px; }
 .site-footer .photo-note { margin-top: 4px; color: var(--night-muted); }
+
+/* ================================================================
+   Live hero card (award pass 2, 7): fact chips, the words they supplied, the approval stamp and the
+   typed export record. Nothing moves without input; reduced motion shows the end states at once.
+================================================================ */
+.hero-facts { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.hero-fact { padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--canvas); color: var(--ink-2); font: inherit; font-size: 0.72rem; font-weight: 700; line-height: 1.3; cursor: pointer; transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease); }
+.hero-fact:hover, .hero-fact[aria-pressed="true"] { border-color: var(--magenta); color: var(--magenta-ink); }
+.hero-card__draft [data-fact] { background: linear-gradient(var(--magenta), var(--magenta)) no-repeat 0 100% / 0% 2px; transition: background-size 360ms var(--ease-out); }
+.hero-card__draft [data-lit] { background-size: 100% 2px; }
+.hero-card__approved { border: 0; font-family: inherit; cursor: pointer; }
+.hero-card__approved[aria-pressed="false"] { background: var(--ink); color: #fff; }
+.hero-card__approved[data-stamp] { animation: hero-stamp 240ms var(--ease-out) both; }
+@keyframes hero-stamp { from { opacity: 0; transform: scale(1.3); } to { opacity: 1; transform: none; } }
+.hero-ledger [data-state="pending"] .hero-ledger__node { border-color: var(--line); background: var(--paper); color: var(--subtle); }
+.hero-ledger [data-state="pending"] .hero-ledger__label { color: var(--subtle); }
+.hero-card__record { margin-top: 8px; font-size: 0.72rem; font-weight: 700; color: var(--ink-2); }
+.hero-card__record[data-pending] { visibility: hidden; }
+.hero-card__record-id { display: inline-block; overflow: hidden; vertical-align: bottom; white-space: nowrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.hero-card__record[data-typed] .hero-card__record-id { animation: hero-type 520ms steps(8) both; }
+/* Below 1000 px the card (taller with its chips and captions) sits in the flow under the photo,
+   still overlapping it by 64 px, instead of hanging into a fixed reserve the hero would clip. */
+@media (max-width: 999px) {
+  .cine-hero__media { margin-bottom: 32px; }
+  .hero-card { position: relative; inset: auto; margin: -64px var(--gutter) 0; }
+}
+@keyframes hero-type { from { width: 0; } to { width: 8ch; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-fact, .hero-card__draft [data-fact] { transition: none; }
+  .hero-card__approved[data-stamp], .hero-card__record[data-typed] .hero-card__record-id { animation: none; }
+}

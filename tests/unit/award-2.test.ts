@@ -123,3 +123,15 @@ describe("award pass 2 — hub copy (5.3)", () => {
     expect(long).toEqual([]);
   });
 });
+
+import { heroSample } from "@/content/examples";
+
+describe("award pass 2 — live hero card (7)", () => {
+  it("every approved fact maps to words that appear in both captions", () => {
+    expect(heroSample.facts).toHaveLength(4);
+    for (const fact of heroSample.facts) {
+      expect(heroSample.caption.en, fact.id).toContain(fact.phrase.en);
+      expect(heroSample.caption.zh, fact.id).toContain(fact.phrase.zh);
+    }
+  });
+});
