@@ -47,7 +47,7 @@ export default async function HomePage({ params }: Props) {
       <ResourcePreviews locale={locale} />
       {/* 9. Starting decision, questions and closing CTA (dark chapter) */}
       <StartDecision locale={locale} />
-      <section className="section section--surface" aria-labelledby="faq">
+      <section className="section section--surface home-faq" aria-labelledby="faq">
         <div className="container split">
           <div>
             <SectionHead eyebrow={t(sections.faq.eyebrow, locale)} title={<span id="faq">{t(sections.faq.title, locale)}</span>} />

@@ -45,6 +45,8 @@ for (const [w, h] of [[390, 844], [320, 640]]) {
   out.heroBadge[w] = await page.evaluate(() => {
     const badge = document.querySelector(".cine-hero .photo__label");
     if (!badge) return { badge: false };
+    // The badge is pointer-events: none; enable hit-testing so elementFromPoint reports paint order.
+    badge.style.pointerEvents = "auto";
     const r = badge.getBoundingClientRect();
     const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
     return { rect: [r.left, r.top, r.width, r.height].map(Math.round), topmost: top ? `${top.tagName.toLowerCase()}.${String(top.className).split(" ")[0]}` : null, visible: !!top && (top === badge || badge.contains(top)) };

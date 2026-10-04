@@ -77,16 +77,22 @@ if (process.env.STATES !== "0") {
   await page.getByRole("button", { name: "Services", exact: true }).click();
   await page.waitForTimeout(500);
   await state(page, "state-mega-menu-1440");
-  for (const [w, h] of [[390, 844], [1200, 800]]) {
+  // The drawer exists below 1024 px (from award pass 2); at 1200 the header itself is the state.
+  for (const [w, h] of [[390, 844], [820, 1180], [1200, 800]]) {
     await page.setViewportSize({ width: w, height: h });
     await page.goto(base + "/en", { waitUntil: "load" });
     await page.waitForTimeout(900);
     await jumpTo(page, 0);
-    await page.getByRole("button", { name: "Menu" }).click();
-    await page.waitForTimeout(700);
-    await state(page, `state-drawer-${w}`);
+    const toggle = page.locator(".header-actions .menu-toggle");
+    if (await toggle.isVisible()) {
+      await toggle.click();
+      await page.waitForTimeout(700);
+      await state(page, `state-drawer-${w}`);
+    } else {
+      await state(page, `state-header-${w}`);
+    }
   }
-  console.log("states: mega menu 1440, drawer 390 and 1200");
+  console.log("states: mega menu 1440, drawer or header at 390, 820 and 1200");
 }
 await browser.close();
 if (!fs.existsSync(dir)) process.exit(1);

@@ -57,8 +57,11 @@ try {
       const png = await page.screenshot({ type: "png" });
       await write(mp4.stdin, png);
       await write(webm.stdin, png);
-      if (lang === "en" && i === FPS * 25) {
-        await sharp(png).webp({ quality: 78 }).toFile(path.join(out, "poster.webp"));
+      // Poster: the title card (1 s), not a mid-interaction frame. New names, because /media is
+      // served immutable: a changed file under an old name would stay cached for a year.
+      if (lang === "en" && i === FPS * 1) {
+        await sharp(png).webp({ quality: 82 }).toFile(path.join(out, "poster-title.webp"));
+        await sharp(png).resize(640).webp({ quality: 80 }).toFile(path.join(out, "poster-title-640.webp"));
       }
       if (i % (FPS * 5) === 0) process.stdout.write(`${lang}: ${Math.round((i / total) * 100)}%\n`);
     }

@@ -11,6 +11,8 @@ export type NavGroup = { heading: L; links: NavLink[] };
 export type NavPillar = {
   id: string;
   label: L;
+  /** Shorter label for the 1024–1279 px desktop bar; omitted where the full label already fits. */
+  short?: L;
   overview: NavLink;
   groups: NavGroup[];
   featured?: NavLink;
@@ -23,6 +25,7 @@ export const pillars: NavPillar[] = [
   {
     id: "platform",
     label: { en: "Platform & Solutions", zh: "平台與解決方案" },
+    short: { en: "Platform", zh: "平台與解決方案" },
     overview: { label: { en: "Platform overview", zh: "平台概覽" }, href: "/platform" },
     groups: [
       { heading: { en: "Business jobs", zh: "業務工作" }, links: solutions.map((s) => ({ label: s.name, href: `/solutions/${s.id}` })) },
@@ -46,6 +49,7 @@ export const pillars: NavPillar[] = [
   {
     id: "transformation",
     label: { en: "AI Transformation", zh: "AI 轉型" },
+    short: { en: "Transformation", zh: "AI 轉型" },
     overview: { label: { en: "Transformation overview", zh: "轉型概覽" }, href: "/ai-transformation" },
     groups: [
       { heading: { en: "Decision pathways", zh: "決策路徑" }, links: workstreams.map((w) => ({ label: w.name, href: `/ai-transformation/${w.id}` })) },
@@ -77,6 +81,7 @@ export const pillars: NavPillar[] = [
   {
     id: "cases",
     label: { en: "Case Studies", zh: "成功案例" },
+    short: { en: "Cases", zh: "成功案例" },
     overview: { label: { en: "Case library", zh: "案例庫" }, href: "/case-studies" },
     groups: [
       { heading: { en: "Browse", zh: "瀏覽" }, links: [

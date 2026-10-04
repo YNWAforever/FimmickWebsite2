@@ -15,6 +15,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { decodeEntities } from "./entities.mjs";
 
 const [, , input] = process.argv;
 if (!input) {
@@ -40,15 +41,8 @@ const TOPIC_BY_SECTION = [
   [/^(Learning & Culture|Career Tips|Recruitment Marketing|News|Events)/i, "company-news"],
 ];
 
-const decode = (s) =>
-  s
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;|&#x27;/g, "'")
-    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)));
+// Decodes to a fixed point: the capture double-escaped some titles ("&amp;amp;").
+const decode = decodeEntities;
 
 function inline(html) {
   let s = html

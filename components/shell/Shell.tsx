@@ -29,6 +29,7 @@ export function Shell({ locale, children, languages }: { locale: Locale; childre
   const headerPillars: HeaderPillar[] = pillars.map((p) => ({
     id: p.id,
     label: t(p.label, locale),
+    short: p.short && t(p.short, locale) !== t(p.label, locale) ? t(p.short, locale) : undefined,
     utility: p.utility,
     overview: { label: t(p.overview.label, locale), href: href(locale, p.overview.href), description: t(pillarDescriptions[p.id], locale) },
     groups: p.groups.map((g) => ({ heading: t(g.heading, locale), links: g.links.map((l) => ({ label: t(l.label, locale), href: href(locale, l.href), note: l.note ? t(l.note, locale) : undefined })) })),

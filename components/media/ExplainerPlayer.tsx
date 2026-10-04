@@ -39,7 +39,12 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
             }
           }}
           onEnded={() => track("video_completed", { video: "explainer", locale })}
-          onError={() => setState("error")}
+          // A failing <source> fires its own error, which bubbles here; only the element's own error
+          // means playback failed. Otherwise a browser without H.264 never reaches the WebM.
+          onError={(e) => {
+            if (e.target !== e.currentTarget) return;
+            setState("error");
+          }}
         >
           <source src={src.mp4} type="video/mp4" />
           {/* Errors on the last source mean no playable source was found. */}
@@ -51,7 +56,7 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
       ) : (
         <button type="button" className="player__poster" onClick={() => setState("playing")}>
           {/* eslint-disable-next-line @next/next/no-img-element -- poster must render without the image optimiser */}
-          <img src={media.poster} alt="" width={media.width} height={media.height} loading="lazy" decoding="async" />
+          <img src={media.poster} srcSet={`${media.posterSmall} 640w, ${media.poster} ${media.width}w`} sizes="(min-width: 1000px) 760px, 100vw" alt="" width={media.width} height={media.height} loading="lazy" decoding="async" />
           <span className="player__play" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="28" height="28">
               <path d="M8 5.5v13l11-6.5z" fill="currentColor" />

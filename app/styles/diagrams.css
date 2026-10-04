@@ -278,7 +278,7 @@
 
 .matrix td.on { text-align: center; }
 .matrix td.on span { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--magenta); }
-.matrix td.off { text-align: center; color: var(--line-strong); }
+.matrix td.off { text-align: center; color: var(--subtle); }
 .matrix th[scope="row"] { background: var(--surface); text-transform: none; letter-spacing: 0; font-size: var(--fs-small); color: var(--ink); }
 
 /* ------------------------------------------------------------------

@@ -9,6 +9,7 @@ import { aboutPages, deliverySteps, leaders, methodSteps, offices, principles, t
 import { caseBySlug } from "@/content/cases";
 import { members } from "@/content/ecosystem";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
+import { Photo } from "@/components/media/Photo";
 import { CaseCards, EnquirySection } from "@/components/blocks";
 
 export const dynamicParams = false;
@@ -153,20 +154,21 @@ function Body({ slug, locale }: { slug: AboutPage; locale: Locale }) {
       </section>
     );
   }
+  // One composed block: the two published leaders beside a context photograph (no portraits yet).
   return (
     <section className="section">
-      <div className="container">
-        <div className="grid grid-2">
+      <div className="container split leaders">
+        <Photo id="workshop-wall" locale={locale} crop="portrait" sizes="(min-width: 1000px) 38vw, 92vw" className="leaders__photo" />
+        <div className="leaders__list">
           {leaders.map((l) => (
-            <article key={l.name} className="io-card">
-              <h2 style={{ fontSize: "1.4rem" }}>{l.name}</h2>
-              <p className="eyebrow" style={{ margin: "6px 0 14px" }}>{t(l.role, locale)}</p>
+            <article key={l.name} className="leader">
+              <h2>{l.name}</h2>
+              <p className="eyebrow">{t(l.role, locale)}</p>
               <p className="muted">{t(l.bio, locale)}</p>
-              {l.linkedin ? <p style={{ marginTop: 14 }}><a href={l.linkedin} rel="noopener noreferrer" target="_blank">LinkedIn ↗</a></p> : null}
+              {l.linkedin ? <p><a href={l.linkedin} rel="noopener noreferrer" target="_blank">LinkedIn ↗</a></p> : null}
             </article>
           ))}
         </div>
-        <p className="micro muted" style={{ marginTop: 20 }}>{en ? "Additional leadership profiles will be added once they are approved for publication." : zh("其他領導層簡介獲批准公開後會在此加入。", locale)}</p>
       </div>
     </section>
   );

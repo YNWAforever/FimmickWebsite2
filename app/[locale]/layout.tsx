@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(canonicalOrigin),
     title: { default: locale !== "en" ? zh("FIMMICK — 企業 AI 智能體平台與業務解決方案", locale) : "FIMMICK — Agentic AI Platform & Business Solutions", template: "%s | FIMMICK" },
     applicationName: "FIMMICK",
-    icons: { icon: "/favicon.ico" },
+    // Icons and the manifest come from the file conventions: app/icon.svg, app/apple-icon.png, app/manifest.ts.
     robots: isProduction() ? { index: true, follow: true } : { index: false, follow: false },
   };
 }

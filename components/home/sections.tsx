@@ -376,19 +376,23 @@ export function SignatureWorkflow({ locale }: P) {
   ];
   return (
     <section className="section chapter-night" aria-labelledby="signature">
-      {/* Decorative: the four moments repeat as a moving band; the stage below carries the content. */}
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee__track">
-          {[0, 1].map((copy) => (
-            <span key={copy} className="marquee__run">
-              {s.steps.map((st) => (
-                <span key={st.id} className="marquee__item" data-role={st.id}>
-                  {t(st.title, locale)}
-                  <span className="marquee__dot" />
-                </span>
-              ))}
-            </span>
-          ))}
+      {/* Decorative: the four moments repeat as a band that slides while the chapter rises into
+          view, then rests with the review moment centred (data-rest; offset set by Motion.tsx).
+          The stage below carries the content. The hairlines sit outside the edge mask. */}
+      <div className="marquee-band" aria-hidden="true">
+        <div className="marquee">
+          <div className="marquee__track">
+            {[0, 1].map((copy) => (
+              <span key={copy} className="marquee__run">
+                {s.steps.map((st) => (
+                  <span key={st.id} className="marquee__item" data-role={st.id} data-rest={copy === 0 && st.id === "review" ? "" : undefined}>
+                    {t(st.title, locale)}
+                    <span className="marquee__dot" />
+                  </span>
+                ))}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
       <div className="container">
@@ -711,21 +715,24 @@ export function StartDecision({ locale }: P) {
 }
 
 export function ClosingChapter({ locale }: P) {
+  // The stage paints the white seen past the sheet's rounded corners while it scales in.
   return (
-    <section className="closing" aria-labelledby="closing">
-      <Photo id="night-table" locale={locale} sizes="100vw" label={false} decorative className="closing__photo" />
-      <div className="container closing__inner">
-        <Headline id="closing" text={t(cinema.closing.title, locale)} accent={accent("closing", locale)} />
-        <p>{t(cinema.closing.body, locale)}</p>
-        <div className="btn-row">
-          <LinkButton to={href(locale, "/contact?intent=demo")} variant="accent">
-            {t(ui.requestDemo, locale)}
-          </LinkButton>
-          <LinkButton to={href(locale, "/how-to-start")} variant="light">
-            {locale === "en" ? "How to start" : zh("如何開始", locale)}
-          </LinkButton>
+    <div className="closing-stage">
+      <section className="closing" aria-labelledby="closing">
+        <Photo id="night-table" locale={locale} sizes="100vw" label={false} decorative className="closing__photo" />
+        <div className="container closing__inner">
+          <Headline id="closing" text={t(cinema.closing.title, locale)} accent={accent("closing", locale)} />
+          <p>{t(cinema.closing.body, locale)}</p>
+          <div className="btn-row">
+            <LinkButton to={href(locale, "/contact?intent=demo")} variant="accent">
+              {t(ui.requestDemo, locale)}
+            </LinkButton>
+            <LinkButton to={href(locale, "/how-to-start")} variant="light">
+              {locale === "en" ? "How to start" : zh("如何開始", locale)}
+            </LinkButton>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

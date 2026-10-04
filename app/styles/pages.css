@@ -106,7 +106,7 @@
   width: 100%;
   min-height: 48px;
   padding: 10px 14px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--subtle); /* field edges need 3:1 (WCAG 1.4.11); --line-strong is 1.58:1 */
   border-radius: 12px;
   background: var(--surface);
   font-size: 1rem;
@@ -129,3 +129,14 @@
 /* Not found */
 .nf { padding-block: clamp(64px, 10vw, 140px); }
 .nf h1 { max-width: 18ch; }
+
+/* Leadership: one composed block, a context photograph beside the published profiles */
+.leaders { align-items: start; }
+.leaders__photo { aspect-ratio: 4 / 5; border-radius: var(--radius-l); }
+/* Two classes: .photo (cinematic.css, loaded later) sets position: relative at one class. */
+@media (min-width: 960px) { .leaders > .leaders__photo { position: sticky; top: calc(var(--header-h) + 24px); } }
+.leaders__list { display: grid; }
+.leader { display: grid; gap: 10px; padding-block: clamp(24px, 3vw, 36px); border-top: 1px solid var(--line); }
+.leader:first-child { padding-top: 0; border-top: 0; }
+.leader h2 { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); letter-spacing: -0.02em; }
+.leader .muted { max-width: 60ch; }

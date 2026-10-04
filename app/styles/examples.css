@@ -38,7 +38,7 @@
 
 .field { display: grid; gap: 6px; }
 .field > span, .field > label { font-size: var(--fs-micro); font-weight: 750; color: var(--muted); }
-.field select, .field textarea, .field input[type="text"] { width: 100%; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); }
+.field select, .field textarea, .field input[type="text"] { width: 100%; min-height: 44px; padding: 8px 12px; border: 1px solid var(--subtle); border-radius: 10px; background: var(--surface); }
 .field textarea { min-height: 170px; resize: vertical; line-height: 1.55; font-size: var(--fs-small); }
 .radio-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .radio-row label { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: var(--fs-small); font-weight: 700; cursor: pointer; }

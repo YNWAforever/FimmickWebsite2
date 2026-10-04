@@ -32,8 +32,9 @@
 
 /* ================================================================
    Header: glass bar that sheds the utility row while reading and
-   steps away on downward scroll. The glass lives on a pseudo-element
-   so the fixed-position drawer is not trapped in a containing block.
+   steps away on downward scroll. The transform makes the header a
+   containing block for fixed descendants, so the drawer is rendered
+   beside it (SiteHeader.tsx), never inside it.
 ================================================================ */
 .site-header {
   background: transparent;
@@ -54,10 +55,16 @@
 .utility-inner { min-height: calc(var(--utility-h) - 1px); }
 html[data-scroll="up"] .site-header, html[data-scroll="down"] .site-header { transform: translateY(calc(-1 * var(--utility-h))); }
 html[data-scroll="down"] .site-header:not(:has(.pillar-trigger[aria-expanded="true"]), :focus-within) { transform: translateY(-100%); }
+/* Keyboard focus in the utility row (About, AIP login, language) brings the whole header back:
+   the condensed states would otherwise leave the focused link above the viewport (WCAG 2.4.11). */
+html[data-scroll] .site-header:has(.utility-bar :focus-visible) { transform: none; }
 body[data-menu-open="true"] .site-header { transform: none !important; }
+/* Route change: the header is put in its top state before paint (Motion.tsx), without sliding. */
+.site-header.no-transition { transition: none; }
 @media (prefers-reduced-motion: reduce) {
   .site-header { transition: none; }
   html[data-scroll="down"] .site-header:not(:has(.pillar-trigger[aria-expanded="true"]), :focus-within) { transform: translateY(calc(-1 * var(--utility-h))); }
+  html[data-scroll] .site-header:has(.utility-bar :focus-visible) { transform: none; }
 }
 /* Nav labels: quiet underline that grows from the left. */
 .pillar-trigger { position: relative; }
@@ -92,6 +99,12 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 @media (max-width: 999px) {
   .cine-hero__photo { border-radius: 0; }
 }
+/* The provenance badge sits above the photograph; on phones the sample card overlaps the photo's
+   lower edge, so the badge moves to the top. */
+.cine-hero .photo__label { z-index: 2; }
+@media (max-width: 699px) {
+  .cine-hero .photo__label { top: 10px; left: 10px; right: auto; bottom: auto; }
+}
 
 /* Word masks */
 .w { display: inline-block; vertical-align: top; overflow: clip; overflow-clip-margin: 0.12em; padding-block: 0.06em 0.1em; margin-block: -0.06em -0.1em; }
@@ -103,7 +116,7 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
   .cine-hero__body { animation: fade-up 900ms var(--ease-out) 420ms both; }
   .cine-hero .btn-row { animation: fade-up 900ms var(--ease-out) 520ms both; }
   .scroll-cue { animation: fade-up 900ms var(--ease-out) 1300ms both; }
-  .scroll-cue__line::after { animation: cue-drop 1800ms var(--ease-in-out) 1800ms 3 both; }
+  .scroll-cue__line::after { animation: cue-drop 1800ms var(--ease-in-out) 1800ms 2 both; }
   .hero-card { animation-duration: 1000ms; animation-timing-function: var(--ease-out); animation-delay: 640ms; }
   .hero-ledger [data-role="review"] .hero-ledger__node { animation-delay: 1350ms; }
 }
@@ -188,6 +201,8 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 ================================================================ */
 .output-tile, .case-photo, .door, .decision__opt, .shelf__item { border-color: transparent; box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 0 0 1px rgb(13 20 51 / 6%); transition: transform 600ms var(--ease-out), box-shadow 600ms var(--ease-out); }
 .output-tile:hover, .case-photo:hover, .shelf__item:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgb(13 20 51 / 6%), 0 34px 60px -30px rgb(13 20 51 / 38%); }
+/* Hover must not replace the keyboard focus ring (cinematic.css sets it on :focus-within). */
+.output-tile:focus-within:hover { box-shadow: var(--focus), 0 34px 60px -30px rgb(13 20 51 / 38%); }
 .output-tile__paper { transition: transform 800ms var(--ease-out), box-shadow 800ms var(--ease-out); }
 .output-tile:hover .output-tile__paper { transform: translateY(-6px) rotate(-0.6deg); box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 36px 60px -30px rgb(13 20 51 / 55%); }
 .output-tile__go, .case-photo h3 { transition: transform 500ms var(--ease-out), color 300ms ease; }
@@ -235,10 +250,13 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 }
 .chapter-night > *, .closing > :not(.closing__photo), .site-footer > * { position: relative; z-index: 1; }
 
-.marquee {
+/* The hairlines live on the band, outside the edge mask, so they run full-bleed with the type. */
+.marquee-band {
   margin: calc(var(--section) * -0.35) 0 calc(var(--section) * 0.55);
-  overflow: clip;
   border-block: 1px solid rgb(255 255 255 / 8%);
+}
+.marquee {
+  overflow: clip;
   padding-block: clamp(14px, 2vw, 26px);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
@@ -257,18 +275,34 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
   color: transparent;
   -webkit-text-stroke: 1px rgb(255 255 255 / 34%);
 }
-.marquee__item:nth-child(even) { color: #fff; -webkit-text-stroke: 0; }
+/* Solid on odd items, so the phrase the band rests on (the review moment, third) is the solid one. */
+.marquee__item:nth-child(odd) { color: #fff; -webkit-text-stroke: 0; }
+/* Phones: the resting phrase must fit with its separator in view (at 2.2rem it filled 387 of 390 px). */
+@media (max-width: 699px) {
+  .marquee__item { font-size: clamp(1.4rem, 7.2vw, 2.2rem); }
+}
 :lang(zh-Hant-HK) .marquee__item, :lang(zh-Hans) .marquee__item { letter-spacing: 0; }
 .marquee__dot { width: 0.22em; height: 0.22em; border-radius: 50%; background: var(--role-source); flex: none; }
 [data-role="work"] > .marquee__dot { background: var(--magenta); }
 [data-role="review"] > .marquee__dot { background: var(--lime); }
 [data-role="result"] > .marquee__dot { background: #fff; }
+/* Rest position: the review moment ("A named person decides") centred. Motion.tsx measures the
+   offset into --marquee-rest; without JS the fallback is close. Reduced motion and browsers without
+   scroll-driven animations show this position statically. */
+.marquee__track { transform: translateX(var(--marquee-rest, -24%)); }
+/* The band slides only while the chapter rises into view (its top travelling from the bottom of the
+   viewport to 40% of its height), then holds: wherever a visitor stops to read, a whole phrase is
+   centred. The slide covers at most 60vw and never opens a gap at the left edge. */
+.chapter-night { view-timeline: --night block; }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .marquee__track { animation: marquee-slide linear both; animation-timeline: view(); animation-range: cover; }
+    .marquee__track { animation: marquee-slide linear both; animation-timeline: --night; animation-range: entry 0% entry 60vh; }
   }
 }
-@keyframes marquee-slide { from { transform: translateX(0); } to { transform: translateX(-38%); } }
+@keyframes marquee-slide {
+  from { transform: translateX(calc(var(--marquee-rest, -24%) + min(60vw, -1 * var(--marquee-rest, -24%)))); }
+  to { transform: translateX(var(--marquee-rest, -24%)); }
+}
 @media (forced-colors: active) {
   .marquee__item { color: CanvasText; -webkit-text-stroke: 0; }
 }
@@ -356,7 +390,7 @@ html.has-bubble [data-cursor] { cursor: none; }
 }
 @keyframes page-in { from { opacity: 0; transform: translateY(28px); } }
 
-/* Hero scroll cue (decorative; the line drops three times, then rests) */
+/* Hero scroll cue (decorative; the line drops twice, then rests: under 5 s of movement) */
 .scroll-cue { display: none; }
 @media (min-width: 1000px) and (min-height: 760px) {
   .scroll-cue { display: inline-flex; align-items: center; gap: 14px; margin-top: clamp(40px, 6vh, 72px); color: var(--subtle); font-size: var(--fs-micro); font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
@@ -422,8 +456,8 @@ html.has-bubble [data-cursor] { cursor: none; }
    composited scale tied to its entry (transform only, so no repaint while scrolling). */
 .closing { border-radius: clamp(24px, 3vw, 44px) clamp(24px, 3vw, 44px) 0 0; }
 /* What shows past the rounded corners (and beside the sheet while it scales) is the white of
-   the questions section above, not the grey page canvas. */
-main:has(.closing) { background: linear-gradient(180deg, transparent calc(100% - 1400px), var(--surface) calc(100% - 1400px)); }
+   the questions section above, not the grey page canvas: the stage is exactly the closing's box. */
+.closing-stage { background: var(--surface); }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .closing { transform-origin: 50% 0; animation: sheet-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 85%; }
@@ -431,10 +465,38 @@ main:has(.closing) { background: linear-gradient(180deg, transparent calc(100% -
 }
 @keyframes sheet-rise { from { transform: scale(0.94); } to { transform: none; } }
 
-/* Rendering: page bands below the fold skip layout and paint until they come near the viewport,
-   so the first frame only lays out the header and hero. Content stays in the DOM, the
-   accessibility tree, anchors and find-in-page; `auto` remembers each band's real height once
-   it has rendered, so scrolling back up does not jump. Heroes (the LCP areas) are not bands. */
+/* Rendering: the homepage's bands below the fold skip layout and paint until they come near the
+   viewport, so the first frame only lays out the header and hero. Content stays in the DOM, the
+   accessibility tree, anchors and find-in-page. Each band reserves its own measured height at three
+   widths (<700, 700–999, ≥1000), so the scrollbar and in-page anchors stay put on the first pass;
+   `auto` then remembers the real height. Inner pages are short enough that the A/B showed no gain,
+   so they render normally. Heroes (the LCP areas) are not bands. */
 @supports (content-visibility: auto) {
-  main section.section, main section.closing, .site-footer { content-visibility: auto; contain-intrinsic-size: auto 800px; }
+  :is(.cine-outputs, .cine-evidence, .chapter-night, .cine-paths, .cine-industries, .cine-eco, .cine-resources, .cine-start, .home-faq, .closing),
+  main:has(.closing) + .site-footer { content-visibility: auto; }
+  .cine-outputs { contain-intrinsic-block-size: auto var(--band-outputs); }
+  .cine-evidence { contain-intrinsic-block-size: auto var(--band-evidence); }
+  .chapter-night { contain-intrinsic-block-size: auto var(--band-night); }
+  .cine-paths { contain-intrinsic-block-size: auto var(--band-paths); }
+  .cine-industries { contain-intrinsic-block-size: auto var(--band-industries); }
+  .cine-eco { contain-intrinsic-block-size: auto var(--band-eco); }
+  .cine-resources { contain-intrinsic-block-size: auto var(--band-resources); }
+  .cine-start { contain-intrinsic-block-size: auto var(--band-start); }
+  .home-faq { contain-intrinsic-block-size: auto var(--band-faq); }
+  .closing { contain-intrinsic-block-size: auto var(--band-closing); }
+  main:has(.closing) + .site-footer { contain-intrinsic-block-size: auto var(--band-footer); }
+}
+/* Measured content-box heights of the bands (scripts/award-2/bands.mjs at 390, 820 and 1440 px;
+   contain-intrinsic-block-size excludes padding). English and Chinese differ by up to 220 px a
+   band on phones, so each locale has its own set. Re-measure after any change to the homepage's
+   copy or layout. */
+html { --band-outputs: 2700px; --band-evidence: 2470px; --band-night: 1100px; --band-paths: 2370px; --band-industries: 1450px; --band-eco: 1780px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 1610px; }
+html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2480px; --band-evidence: 2250px; --band-night: 1040px; --band-paths: 2150px; --band-industries: 1430px; --band-eco: 1670px; --band-resources: 1140px; --band-start: 1130px; --band-faq: 550px; --band-closing: 650px; --band-footer: 1490px; }
+@media (min-width: 700px) {
+  html { --band-outputs: 2060px; --band-evidence: 1650px; --band-night: 950px; --band-paths: 2470px; --band-industries: 1150px; --band-eco: 1370px; --band-resources: 990px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 920px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2060px; --band-evidence: 1580px; --band-night: 890px; --band-paths: 2490px; --band-industries: 1170px; --band-eco: 1300px; --band-resources: 980px; --band-start: 810px; --band-faq: 570px; --band-closing: 770px; --band-footer: 890px; }
+}
+@media (min-width: 1000px) {
+  html { --band-outputs: 1300px; --band-evidence: 1110px; --band-night: 1020px; --band-paths: 1350px; --band-industries: 650px; --band-eco: 900px; --band-resources: 570px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 720px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1260px; --band-evidence: 1030px; --band-night: 1010px; --band-paths: 1300px; --band-industries: 600px; --band-eco: 820px; --band-resources: 590px; --band-start: 530px; --band-faq: 390px; --band-closing: 690px; --band-footer: 630px; }
 }

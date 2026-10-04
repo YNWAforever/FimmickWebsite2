@@ -8,7 +8,9 @@ export type ExplainerMedia = {
   width: number;
   height: number;
   durationSeconds: number;
+  /** Title card (1 s into the film), full width; `posterSmall` is the same frame at 640 w. */
   poster: string;
+  posterSmall: string;
   sources: Record<"en" | "zh-hant", { mp4: string; webm: string }>;
   captions: { srclang: string; label: string; src: string; locale: "en" | "zh-hant" }[];
   rights: string;
@@ -31,7 +33,8 @@ export const explainerMedia: ExplainerMedia = {
   width: 1280,
   height: 720,
   durationSeconds: 42,
-  poster: "/media/explainer/poster.webp",
+  poster: "/media/explainer/poster-title.webp",
+  posterSmall: "/media/explainer/poster-title-640.webp",
   sources: {
     en: { mp4: "/media/explainer/fimmick-aip-explainer-en.mp4", webm: "/media/explainer/fimmick-aip-explainer-en.webm" },
     "zh-hant": { mp4: "/media/explainer/fimmick-aip-explainer-zh-hant.mp4", webm: "/media/explainer/fimmick-aip-explainer-zh-hant.webm" },
