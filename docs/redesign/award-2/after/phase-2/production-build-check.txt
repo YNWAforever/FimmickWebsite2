@@ -1,0 +1,1 @@
+Production build check passed: robots allows crawling with a sitemap, 1530 prerendered pages without noindex, no X-Robots-Tag rule, self-canonicals on /en, /zh-hant, /zh-hans.
