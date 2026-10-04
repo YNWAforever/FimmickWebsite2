@@ -22,6 +22,56 @@ import { EcosystemMap } from "./diagrams/EcosystemMap";
 import { ExampleViewer, SingleExample, type ExampleBundle } from "./examples/ExampleViewer";
 import type { ExampleChrome } from "./examples/Examples";
 import { CtaBand, LinkButton } from "./ui";
+import { AccentText } from "./motion/Headline";
+
+export type EditorialRow = {
+  id: string;
+  href: string;
+  /** Small label beside the index, e.g. the service name. */
+  label?: string;
+  /** The record’s headline (link text); `accent` is the phrase inside it set in the editorial face. */
+  headline: string;
+  accent?: string;
+  /** One line: the deliverable or job. */
+  line?: string;
+  /** One supporting artefact on the right: deliverables, an output, a photo. Never a link. */
+  aside?: ReactNode;
+  /** What the link opens ("How it works"); the arrow alone when no specific label exists. */
+  cue?: string;
+};
+
+/**
+ * Hub list (award pass 2, 5.1): one row per record. The headline is the only link, stretched over
+ * the row, so the row is one target and the link is named by its headline; the cue is decorative.
+ */
+export function EditorialList({ rows, start = 1 }: { rows: EditorialRow[]; start?: number }) {
+  return (
+    <ol className="editorial-list" start={start}>
+      {rows.map((row, i) => (
+        <li key={row.id} className="editorial-row">
+          <div className="editorial-row__main">
+            <p className="editorial-row__meta">
+              <span className="editorial-row__index" aria-hidden="true">{String(start + i).padStart(2, "0")}</span>
+              {row.label ? <span className="editorial-row__label">{row.label}</span> : null}
+            </p>
+            <h3 className="editorial-row__title">
+              <Link href={row.href}>
+                <AccentText text={row.headline} accent={row.accent} />
+              </Link>
+            </h3>
+            {row.line ? <p className="editorial-row__line">{row.line}</p> : null}
+          </div>
+          {row.aside ? <div className="editorial-row__aside">{row.aside}</div> : null}
+          {/* Last on phones (after the artefact); under the text on desktop (award.css). */}
+          <span className="editorial-row__cue" aria-hidden="true">
+            {row.cue ? `${row.cue} ` : null}
+            <span className="arrow">→</span>
+          </span>
+        </li>
+      ))}
+    </ol>
+  );
+}
 
 const tr = <T,>(value: L<T>, locale: Locale) => t(value, locale);
 

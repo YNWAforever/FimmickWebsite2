@@ -13,6 +13,7 @@ const pages = [
   "/en/case-studies/real-estate-sales-follow-up", "/en/contact", "/en/knowledge-hub/4-types-of-crm-system", "/en/about/team",
   "/en/nonexistent", "/zh-hant/platform/nope", "/en/resources/videos", "/zh-hant/contact",
   "/en/case-studies", "/en/resources", "/en/fimmick-ecosystem", "/zh-hant/services/digitalmarketing",
+  "/en/products", "/en/functions", "/zh-hant/services",
 ];
 const tags = ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa", "best-practice"];
 

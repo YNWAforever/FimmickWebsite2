@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { href, t, zh } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -7,7 +6,7 @@ import { paths } from "@/lib/routes";
 import { businessFunctions } from "@/content/functions";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
-import { EnquirySection } from "@/components/blocks";
+import { EditorialList, EnquirySection } from "@/components/blocks";
 import { JsonLd } from "@/components/JsonLd";
 
 const copy = {
@@ -45,17 +44,21 @@ export default async function FunctionsHub({ params }: LocaleParams) {
       <section className="section">
         <div className="container">
           <SectionHead eyebrow={en ? "Seven functions" : zh("七個職能", locale)} title={en ? "Choose the team" : zh("選擇團隊", locale)} lead={en ? "Each page shows four example workflows with their inputs, the prepared output and the human decision." : zh("每頁列出四個流程例子，包括輸入、準備好的輸出及由人作出的決定。", locale)} />
-          <div className="grid grid-3">
-            {businessFunctions.map((f, i) => (
-              <Link key={f.id} className="hub-card" href={href(locale, paths.function(f.id))}>
-                <span className="number-tag">{String(i + 1).padStart(2, "0")}</span>
-                <h3>{t(f.name, locale)}</h3>
-                <p className="small muted">{t(f.owner, locale)}</p>
-                <p className="small">{t(f.summary, locale)}</p>
-                <span className="card-foot">{t(ui.learnMore, locale)} →</span>
-              </Link>
-            ))}
-          </div>
+          <EditorialList
+            rows={businessFunctions.map((f) => ({
+              id: f.id,
+              href: href(locale, paths.function(f.id)),
+              label: t(f.owner, locale),
+              headline: t(f.name, locale),
+              line: t(f.summary, locale),
+              aside: (
+                <ul className="editorial-row__list">
+                  {f.workflows.slice(0, 2).map((w) => <li key={w.name.en}>{t(w.name, locale)}</li>)}
+                </ul>
+              ),
+              cue: t(ui.seeWorkflows, locale),
+            }))}
+          />
         </div>
       </section>
       <section className="section section--surface">

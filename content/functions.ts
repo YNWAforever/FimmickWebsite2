@@ -38,8 +38,8 @@ export const businessFunctions: BusinessFunction[] = [
     name: { en: "Marketing & growth", zh: "市場推廣與增長" },
     owner: { en: "For marketing, brand and sales leaders", zh: "適合市場、品牌及銷售主管" },
     summary: {
-      en: "Campaign briefs, multichannel content, search visibility and sales follow-up prepared as reviewable workflows, so your team spends its time on judgement rather than assembly.",
-      zh: "以可審閱的流程準備宣傳簡報、多渠道內容、搜尋能見度及銷售跟進，讓團隊把時間用於判斷，而非拼湊資料。",
+      en: "Campaign briefs, content, search visibility and sales follow-up, prepared as reviewable workflows.",
+      zh: "以可審閱的流程準備宣傳簡報、內容、搜尋能見度及銷售跟進。",
     },
     problem: {
       en: "Growth teams stitch research, briefs, copy, reports and follow-up together by hand across too many tools. Good ideas stall while the next draft is prepared.",
@@ -73,8 +73,8 @@ export const businessFunctions: BusinessFunction[] = [
     name: { en: "Operations", zh: "營運" },
     owner: { en: "For operations, digital and e-commerce leads", zh: "適合營運、數碼及電商主管" },
     summary: {
-      en: "Recurring cross-system work — website and listing updates, request routing, data checks and status packs — redesigned as workflows with visible owners and exceptions.",
-      zh: "把跨系統的重複工作——網站及資料更新、要求分流、資料檢查及進度報告——重新設計為負責人及例外情況清晰可見的流程。",
+      en: "Website updates, request routing, data checks and status packs as workflows with visible owners.",
+      zh: "把網站更新、要求分流、資料檢查及進度報告，設計為負責人清晰可見的流程。",
     },
     problem: {
       en: "Operational work moves by email and spreadsheet. Nobody can see what is waiting, who owns it, or why the same error keeps returning.",
@@ -108,8 +108,8 @@ export const businessFunctions: BusinessFunction[] = [
     name: { en: "Finance & reporting", zh: "財務與報告" },
     owner: { en: "For finance, commercial and planning teams", zh: "適合財務、商務及規劃團隊" },
     summary: {
-      en: "KPI monitoring, variance commentary and management packs prepared from reconciled data — every figure traceable to its source, every material call left to finance owners.",
-      zh: "以已核對的資料準備 KPI 監察、差異分析及管理報告——每個數字都可追溯來源，所有重要判斷均由財務負責人作出。",
+      en: "KPI monitoring, variance commentary and management packs from reconciled data, every figure traceable.",
+      zh: "以已核對的資料準備 KPI 監察、差異分析及管理報告——每個數字都可追溯來源。",
     },
     problem: {
       en: "Month-end reporting consumes the people who should be interpreting it. Definitions differ between teams, so meetings debate the numbers instead of the decisions.",
@@ -143,8 +143,8 @@ export const businessFunctions: BusinessFunction[] = [
     name: { en: "People & HR", zh: "人力資源" },
     owner: { en: "For HR, learning and internal communications teams", zh: "適合人力資源、培訓及內部溝通團隊" },
     summary: {
-      en: "Policy answers, onboarding materials, training content and internal request triage handled as governed workflows, with privacy boundaries and human ownership built in.",
-      zh: "以受管治的流程處理政策解答、入職資料、培訓內容及內部要求分流，並內置私隱界線及人手負責。",
+      en: "Policy answers, onboarding, training and request triage as governed workflows with privacy boundaries.",
+      zh: "以受管治的流程處理政策解答、入職、培訓及要求分流，並設私隱界線。",
     },
     problem: {
       en: "HR teams answer the same questions again and again, onboarding packs drift out of date, and training rarely keeps pace with new tools.",
@@ -179,8 +179,8 @@ export const businessFunctions: BusinessFunction[] = [
     name: { en: "Customer experience", zh: "顧客體驗" },
     owner: { en: "For customer service, CRM and loyalty leads", zh: "適合客戶服務、CRM 及會員主管" },
     summary: {
-      en: "Enquiry replies, WhatsApp conversations, case routing and feedback themes prepared from an approved answer library. Routine needs are handled faster, and sensitive ones go to people.",
-      zh: "以已批准的答案庫準備查詢回覆、WhatsApp 對話、個案分流及意見主題：常見需要處理得更快，敏感事項則交由專人。",
+      en: "Enquiry replies prepared from an approved answer library, with sensitive cases routed to people.",
+      zh: "以已批准的答案庫準備查詢回覆，敏感事項則交由專人處理。",
     },
     problem: {
       en: "Customers wait while staff search for the right answer. The same questions arrive on several channels, and feedback rarely reaches the teams who could fix the cause.",
@@ -214,8 +214,8 @@ export const businessFunctions: BusinessFunction[] = [
     name: { en: "Market expansion", zh: "市場拓展" },
     owner: { en: "For regional, business development and strategy teams", zh: "適合區域、業務拓展及策略團隊" },
     summary: {
-      en: "Market scans, competitor tracking, localisation and launch preparation for new markets — prepared from approved sources and reviewed by people who know each market.",
-      zh: "為新市場準備市場掃描、競爭對手追蹤、本地化內容及推出準備——資料來自已確認來源，並由熟悉當地市場的人審閱。",
+      en: "Market scans, competitor tracking and localisation, reviewed by people who know each market.",
+      zh: "市場掃描、競爭對手追蹤及本地化內容，由熟悉當地市場的人審閱。",
     },
     problem: {
       en: "Entering a new market means weeks of desk research, translated materials that miss the local tone, and no shared view of what competitors are doing.",
@@ -249,8 +249,8 @@ export const businessFunctions: BusinessFunction[] = [
     name: { en: "Leadership & executive reporting", zh: "管理層與行政報告" },
     owner: { en: "For CEOs, general managers and leadership teams", zh: "適合行政總裁、總經理及管理團隊" },
     summary: {
-      en: "Weekly leadership briefs, management pack drafts and decision logs assembled from the business’s own reports, so leaders see what changed, why, and what needs their decision.",
-      zh: "以公司自身的報告整合每週管理層簡報、管理報告草稿及決策紀錄，讓管理層看清有何改變、原因，以及需要他們決定的事項。",
+      en: "Leadership briefs from your own reports: what changed, why, and what needs a decision.",
+      zh: "以公司自身的報告整合管理層簡報：有何改變、原因，以及需要決定的事項。",
     },
     problem: {
       en: "Leaders receive many reports but few decisions. The same numbers arrive in different formats, and open decisions are lost between meetings.",

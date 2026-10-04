@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { href, t, zh } from "@/lib/i18n";
-import { resolveLocale } from "@/lib/page";
+import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { objectives, services } from "@/content/services";
 import { ui } from "@/content/ui";
-import type { ServiceObjective } from "@/content/types";
-import { PageHero, LinkButton } from "@/components/ui";
-import { EnquirySection } from "@/components/blocks";
-
-type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ objective?: string }> };
+import { PageHero, LinkButton, SectionHead } from "@/components/ui";
+import { EditorialList, EnquirySection } from "@/components/blocks";
+import { ObjectiveFilter } from "@/components/hubs/ObjectiveFilter";
 
 const copy = {
   title: { en: "Services", zh: "專業服務" },
@@ -20,18 +17,48 @@ const copy = {
   },
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
   return pageMetadata({ locale, path: "/services", title: t(copy.title, locale), description: t(copy.lead, locale) });
 }
 
-export default async function ServicesPage({ params, searchParams }: Props) {
+/** Static: the objective filter runs in the browser (ObjectiveFilter), not on `?objective=`. */
+export default async function ServicesPage({ params }: LocaleParams) {
   const locale = await resolveLocale(params);
   const en = locale === "en";
-  const raw = (await searchParams).objective;
-  const active = objectives.find((o) => o.id === raw)?.id as ServiceObjective | undefined;
-  const shown = active ? objectives.filter((o) => o.id === active) : objectives;
   const base = href(locale, "/services");
+  // Rows are numbered across the whole list, in objective order.
+  const ordered = objectives.flatMap((o) => services.filter((s) => s.objective === o.id));
+  const groups = objectives.map((o) => {
+    const rows = services.filter((s) => s.objective === o.id);
+    const start = ordered.indexOf(rows[0]) + 1;
+    return {
+      id: o.id,
+      label: t(o.name, locale),
+      count: rows.length,
+      content: (
+        <section aria-labelledby={`obj-${o.id}`}>
+          <SectionHead eyebrow={t(o.name, locale)} title={<span id={`obj-${o.id}`}>{t(o.question, locale)}</span>} />
+          <EditorialList
+            start={start}
+            rows={rows.map((s) => ({
+              id: s.id,
+              href: href(locale, s.canonicalPath ?? paths.service(s.id)),
+              label: t(s.name, locale),
+              headline: t(s.eyebrow, locale),
+              accent: s.headlineAccent ? t(s.headlineAccent, locale) : undefined,
+              line: t(s.summary, locale),
+              aside: (
+                <ul className="editorial-row__list">
+                  {t(s.deliverables, locale).slice(0, 2).map((d) => <li key={d}>{d}</li>)}
+                </ul>
+              ),
+            }))}
+          />
+        </section>
+      ),
+    };
+  });
   return (
     <>
       <PageHero
@@ -45,45 +72,11 @@ export default async function ServicesPage({ params, searchParams }: Props) {
       />
       <section className="section">
         <div className="container">
-          <nav className="filter-bar" aria-label={en ? "Filter services by objective" : zh("按目標篩選服務", locale)}>
-            <div className="filter-group">
-              <span className="filter-label">{en ? "Objective" : zh("目標", locale)}</span>
-              <Link className="filter-pill" href={base} aria-current={!active ? "true" : undefined} scroll={false}>
-                {t(ui.all, locale)} <span className="count">{services.length}</span>
-              </Link>
-              {objectives.map((o) => (
-                <Link key={o.id} className="filter-pill" href={`${base}?objective=${o.id}`} aria-current={active === o.id ? "true" : undefined} scroll={false}>
-                  {t(o.name, locale)} <span className="count">{services.filter((s) => s.objective === o.id).length}</span>
-                </Link>
-              ))}
-            </div>
-            {active ? (
-              <p className="small">
-                <Link href={base} scroll={false}>{t(ui.clearFilters, locale)}</Link>
-              </p>
-            ) : null}
-          </nav>
-          <div className="stack" style={{ ["--stack" as string]: "48px" }}>
-            {shown.map((o) => (
-              <section key={o.id} aria-labelledby={`obj-${o.id}`}>
-                <div style={{ marginBottom: 20 }}>
-                  <p className="eyebrow">{t(o.name, locale)}</p>
-                  <h2 id={`obj-${o.id}`} style={{ fontSize: "1.6rem" }}>{t(o.question, locale)}</h2>
-                </div>
-                <div className="grid grid-3">
-                  {services.filter((s) => s.objective === o.id).map((s) => (
-                    <Link key={s.id} className="hub-card" href={href(locale, paths.service(s.id))}>
-                      <span className="micro muted" style={{ fontWeight: 750 }}>{t(s.eyebrow, locale)}</span>
-                      <h3>{t(s.name, locale)}</h3>
-                      <p className="small muted">{t(s.summary, locale)}</p>
-                      <p className="small"><strong>{en ? "Deliverables: " : zh("交付成果：", locale)}</strong>{t(s.deliverables, locale).slice(0, 3).join(" · ")}</p>
-                      <span className="card-foot">{s.canonicalPath ? (en ? "Go to AI Transformation" : zh("前往 AI 轉型", locale)) : t(ui.learnMore, locale)} →</span>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
+          <ObjectiveFilter
+            base={base}
+            groups={groups}
+            labels={{ nav: en ? "Filter services by objective" : zh("按目標篩選服務", locale), filter: en ? "Objective" : zh("目標", locale), all: t(ui.all, locale), clear: t(ui.clearFilters, locale) }}
+          />
         </div>
       </section>
       <EnquirySection

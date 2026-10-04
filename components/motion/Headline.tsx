@@ -31,16 +31,32 @@ export function zhBreaks(text: string): ReactNode {
  * The accessible name is the plain sentence: masks are presentational spans,
  * and the accent is an <em>, so screen readers and tests read the same text.
  */
-export function Headline({ text, accent, as: Tag = "h2", id, className, split = false }: Props) {
+function accentParts(text: string, accent?: string): { text: string; accent: boolean }[] {
   const at = accent ? text.indexOf(accent) : -1;
-  const parts: { text: string; accent: boolean }[] =
-    at < 0 || !accent
-      ? [{ text, accent: false }]
-      : [
-          { text: text.slice(0, at), accent: false },
-          { text: accent, accent: true },
-          { text: text.slice(at + accent.length), accent: false },
-        ].filter((p) => p.text);
+  return at < 0 || !accent
+    ? [{ text, accent: false }]
+    : [
+        { text: text.slice(0, at), accent: false },
+        { text: accent, accent: true },
+        { text: text.slice(at + accent.length), accent: false },
+      ].filter((p) => p.text);
+}
+
+/** The headline’s text and accent without a heading element, e.g. inside a link in an h3. */
+export function AccentText({ text, accent }: { text: string; accent?: string }) {
+  return accentParts(text, accent).map((p, i) =>
+    p.accent ? (
+      <em key={i} className="accent">
+        {zhBreaks(p.text)}
+      </em>
+    ) : (
+      <span key={i}>{zhBreaks(p.text)}</span>
+    ),
+  );
+}
+
+export function Headline({ text, accent, as: Tag = "h2", id, className, split = false }: Props) {
+  const parts = accentParts(text, accent);
 
   let index = 0;
   const render = (chunk: string): ReactNode => {
