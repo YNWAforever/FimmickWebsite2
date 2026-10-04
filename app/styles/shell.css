@@ -124,11 +124,12 @@
   .utility-about { display: inline; }
 }
 
-/* Measured at 1024: these settings leave 16 px (EN, short labels) and 30 px (zh, full labels)
-   between the last pillar and the CTA; the brief's 14 px gap and 0.92 rem overlapped it by 87 px. */
+/* Measured at 1024 (EN short labels, the tightest case): the seven pillars leave ~28 px spare on
+   Windows and ~9 px on Linux, which renders the bar ~19 px wider (a 10 px gap overlapped the CTA
+   there). The brief's 14 px gap and 0.92 rem overlapped it by 87 px. */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .header-main { gap: 14px; }
-  .pillar-list { gap: 10px; }
+  .pillar-list { gap: 6px; }
   .pillar-trigger { gap: 4px; padding-inline: 2px; font-size: 0.86rem; }
   /* One label is rendered at a time, so the accessible name is always the visible text. */
   .pillar-trigger:has(.pillar-label--short) .pillar-label:not(.pillar-label--short) { display: none; }
