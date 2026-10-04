@@ -1,0 +1,32 @@
+[
+  {
+    "page": "/en",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "390x844",
+    "violations": []
+  }
+]

@@ -23,8 +23,11 @@ export const cinema = {
   } as L,
   heroCard: {
     label: { en: "Sample output · launch caption", zh: "示例成果·推出文案" } as L,
-    draft: { en: "Meet the 750 ml bottle that stays put in your bag.", zh: "750 毫升，放入袋都安心。" } as L,
+    /** The caption and its facts come from content/examples.ts (heroSample). */
+    facts: { en: "Approved facts", zh: "已確認資料" } as L,
     approved: { en: "Approved by brand manager", zh: "品牌經理已批准" } as L,
+    approve: { en: "Approve", zh: "批准" } as L,
+    record: { en: "Record", zh: "紀錄" } as L,
     /** The one sample-data notice on the homepage; artefacts below carry a one-word "Sample" tag. */
     notice: { en: "Everything on this page runs on sample data — a made-up bottle brand, so you can see the workflow, not our clients.", zh: "本頁所有示例都用示例資料——一個虛構的水樽品牌，讓你看清流程，而不是我們客戶的資料。" } as L,
     ledger: [

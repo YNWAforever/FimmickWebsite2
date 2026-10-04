@@ -21,6 +21,7 @@ import { ExplainerPlayer } from "@/components/media/ExplainerPlayer";
 import { LinkButton, TextLink } from "@/components/ui";
 import { workstreamCardsData } from "@/components/blocks";
 import { SignatureStage } from "./SignatureStage";
+import { HeroCard } from "./HeroCard";
 import { Headline } from "@/components/motion/Headline";
 
 /** One accented phrase per display headline (Traditional copy is converted for Simplified). */
@@ -62,29 +63,24 @@ export function CinematicHero({ locale }: P) {
       </div>
       <div className="cine-hero__media">
         <Photo id="review-desk" locale={locale} priority sizes="(min-width: 1100px) 60vw, 100vw" className="cine-hero__photo" />
-        <aside className="hero-card" aria-label={t(card.label, locale)}>
-          <p className="hero-card__label">{t(card.label, locale)}</p>
-          <p className="hero-card__draft" lang="en">
-            {card.draft.en}
-          </p>
-          <p className="hero-card__draft" lang="zh-Hant-HK">
-            {zh(card.draft.zh, locale)}
-          </p>
-          <p className="hero-card__approved">
-            <span aria-hidden="true">✓</span> {t(card.approved, locale)}
-          </p>
-          <ol className="hero-ledger" aria-label={locale === "en" ? "Workflow stages" : zh("流程階段", locale)}>
-            {card.ledger.map((step, i) => (
-              <li key={step.role} data-role={step.role}>
-                <span className="hero-ledger__node" aria-hidden="true">
-                  {step.role === "review" ? "✓" : String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="hero-ledger__label">{t(step.label, locale)}</span>
-              </li>
-            ))}
-          </ol>
-          <p className="hero-card__notice">{t(card.notice, locale)}</p>
-        </aside>
+        <HeroCard
+          label={t(card.label, locale)}
+          factsLabel={t(card.facts, locale)}
+          facts={ex.heroSample.facts.map((f) => ({ id: f.id, label: t(f.label, locale) }))}
+          captions={[
+            { lang: "en", runs: ex.captionRuns(ex.heroSample.caption.en, ex.heroSample.facts.map((f) => [f.id, f.phrase.en])) },
+            {
+              lang: locale === "zh-hans" ? "zh-Hans" : "zh-Hant-HK",
+              runs: ex.captionRuns(zh(ex.heroSample.caption.zh, locale), ex.heroSample.facts.map((f) => [f.id, zh(f.phrase.zh, locale)])),
+            },
+          ]}
+          approved={t(card.approved, locale)}
+          approve={t(card.approve, locale)}
+          ledgerLabel={locale === "en" ? "Workflow stages" : zh("流程階段", locale)}
+          ledger={card.ledger.map((step) => ({ role: step.role, label: t(step.label, locale) }))}
+          record={{ label: t(card.record, locale), id: ex.heroSample.record }}
+          notice={t(card.notice, locale)}
+        />
       </div>
     </section>
   );

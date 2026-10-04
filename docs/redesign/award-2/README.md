@@ -182,6 +182,19 @@ Checks: typecheck, lint, vitest 60/60 (new `tests/unit/photography.test.ts`: 12)
 
 Pending (handoff, brief 6.4): regenerated masters at ≥ 2,560 px. Dropping them into `assets-src/photography/incoming/` and running `RAW_DIR=… node scripts/build-photography.mjs` fills in the skipped widths; the provenance table then gets a new hash table in `award-2/`.
 
+## Phase 7 — signature interaction (fix plan 17), Option A
+
+Evidence: `before/phase-7/` (`signature-spec-red.log` 5/5 failing on `main`, `unit-red.log`, `phone-clip-red.log`, the static card at 1440 and 390) and `after/phase-7/` (the card at 1440 and 390, `hero-card-lit.webp` and `hero-card-pending.webp`, the 10-second recording `hero-card-interaction.webm`, `axe.json`, the Lighthouse A/B, `playwright-full.log`).
+
+| Item | Before | After |
+| --- | --- | --- |
+| Live card | a static card: label, the caption's first line in EN and zh, a fixed "Approved by brand manager" pill, the 01–04 row | `components/home/HeroCard.tsx`, a client island fed by `content/examples.ts` (`heroSample`, the launch caption and its four approved facts): fact chips above the full caption in EN and zh; hovering, focusing or pressing a chip draws a magenta underline under the words that fact supplied, in both languages; "Approve" is a toggle (`aria-pressed`) that stamps the pill (240 ms scale-in) and moves the row to 04 with the record `REC-0412` typed out; pressing again resets to the draft |
+| Keyboard | — | the chips are one tab stop (roving tabindex; arrows, Home, End), each a toggle button; Approve is the next tab stop |
+| Rules | — | no network, no timers, no autoplay; the photo never moves; reduced motion shows the underline and stamp without animation; the server renders the finished state (approved, exported), so the view without JavaScript and the LCP are unchanged |
+| Phones | the card hung below the photo into a fixed 170–210 px reserve and was already clipped by 124 px at 390 on `main` (since Phase 3 added the sample notice to it) | the card sits in the flow under the photo (still overlapping it by 64 px), so the taller card is never clipped by the hero |
+
+Checks: typecheck, lint, vitest 61/61, Playwright 155/155 + 1 skipped (new `tests/e2e/signature.spec.ts`: 6, all red on `main`, including the brief’s keyboard path, the 6 KB budget and the phone clipping), hans table current, `curly.mjs --check` 0, `content/legal.ts` untouched. Axe: `/en`, `/zh-hant`, `/zh-hans` × 2 widths 0 violations, and the card with a pinned chip and the reset state (en, zh-hant, 1440 and 390) 0. Island chunk: 5.1 KB raw, **1.9 KB gzipped** (budget 6 KB). Lighthouse mobile `/en`, 8 interleaved pairs against `main` 1618198: 93 / 93 (TBT median 126 → 142 ms, LCP 3,305 → 3,154 ms).
+
 ## Phase log
 
 | Phase | PR | What changed | Before → after |
@@ -193,3 +206,4 @@ Pending (handoff, brief 6.4): regenerated masters at ≥ 2,560 px. Dropping them
 | 4 | feat/award-pass-2-shell | Footer in four columns with an icon row and no prefetch, hover-intent mega menu with scrim and a featured column, contact disclosure and email card, per-template share images, two-line hero at 1920 | footer-only prefetches 96 → 0; hero 4 → 2 lines at 1920; share images 1 static → per page; 16 new regression tests (15 red on main, plus the href snapshot guard) |
 | 5 | feat/award-pass-2-hubs | Editorial list on the four hubs (one row per record, headline link, one artefact), objective filter as a client island (`/services` static), 14 summaries cut to ≤ 15 words, object-specific link labels | card grids 4 hubs → 0; `/services` dynamic → static; summaries over 16 words 14 → 0; 7 new regression tests, all red on main |
 | 6 | feat/award-pass-2-photo | Photo pipeline: 1280 / 2560 / wide 21:8 / portrait 1024 (skipped until larger masters), focus per crop, shared grade, content-hashed names, badge policy (pill on heroes, one caption per chapter, footer note), `/brand` cache header | homepage pills 5 → 1, "Illustrative" 7 → 3; R−B spread 0.5–36.8 → 9.5–12.6; 17 new regression tests, 16 red on main (+1 skipped by design) |
+| 7 | feat/award-pass-2-signature | Option A: the hero sample card is live (fact chips underline the words they supplied in EN and zh; Approve stamps and exports, toggles back); server renders the finished state | island 1.9 KB gz; Lighthouse /en 93 / 93; 7 new regression tests, all red on main |
