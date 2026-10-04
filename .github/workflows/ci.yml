@@ -1,0 +1,55 @@
+name: CI
+
+# Quality gate for every pull request and for main. Indexability is baked in at build time, so the
+# production build is checked from its output (robots, noindex, canonicals) before anything else
+# can be trusted; the end-to-end suite then runs against a review build, which is what previews
+# serve and what its noindex assertions describe.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - name: Simplified Chinese table is current
+        run: node scripts/i18n/build-hans-table.mjs --check
+
+      - name: Production build
+        run: npx next build
+        env:
+          SITE_ENV: production
+      - name: Production build is indexable
+        run: node scripts/award-2/assert-production-build.mjs
+
+      - name: Review build (what previews serve)
+        run: npx next build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end, accessibility and craft tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-results
+          path: test-results/
+          retention-days: 7

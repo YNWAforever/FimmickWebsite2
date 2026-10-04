@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { t, type Locale, zh } from "@/lib/i18n";
+import { href, t, type Locale, zh } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { contextKeys, intentLabels, intents, parseContext, type ContextKey } from "@/lib/intent";
@@ -66,7 +66,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
       <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={en ? "Contact" : zh("聯絡我們", locale)} title={en ? "Let's talk about the work." : zh("談談你的工作。", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container contact-grid">
-          <ContactForm lang={locale} intents={intents.map((i) => ({ id: i, label: t(intentLabels[i], locale) }))} initialIntent={context.intent} initialContext={items} email={company.email} s={s} />
+          <ContactForm lang={locale} action={href(locale, "/contact")} intents={intents.map((i) => ({ id: i, label: t(intentLabels[i], locale) }))} initialIntent={context.intent} initialContext={items} email={company.email} s={s} />
           <aside className="stack" style={{ ["--stack" as string]: "16px" }}>
             <div className="io-card">
               <h2 style={{ fontSize: "1.05rem", marginBottom: 10 }}>{en ? "What happens next" : zh("接下來會怎樣", locale)}</h2>
