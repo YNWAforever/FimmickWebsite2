@@ -1,0 +1,112 @@
+[
+  {
+    "page": "/en",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/contact",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/contact",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/knowledge-hub/4-types-of-crm-system",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/case-studies/omni-channel-retail-intelligence",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/solutions/market-intelligence",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/services/digitalmarketing",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en/events/ai-agent-strategy-seminar",
+    "viewport": "1440x900",
+    "violations": []
+  },
+  {
+    "page": "/en",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hans",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/platform",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/contact",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/contact",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/knowledge-hub/4-types-of-crm-system",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/zh-hant/case-studies/omni-channel-retail-intelligence",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/solutions/market-intelligence",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/services/digitalmarketing",
+    "viewport": "390x844",
+    "violations": []
+  },
+  {
+    "page": "/en/events/ai-agent-strategy-seminar",
+    "viewport": "390x844",
+    "violations": []
+  }
+]

@@ -13,6 +13,11 @@ type Input = {
   /** Locales that have an equivalent of this page. Defaults to all three. */
   alternates?: LegacyLocale[];
   image?: string;
+  /**
+   * The route draws its own share image (an opengraph-image.tsx beside the page). Next applies a file
+   * image only when the page's metadata sets no openGraph.images, so the fallback is left out.
+   */
+  generatedImage?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
 };
@@ -22,7 +27,7 @@ export function localeUrl(locale: LegacyLocale, path: string) {
   return `${canonicalOrigin}/${locale}${suffix}`;
 }
 
-export function pageMetadata({ locale, path, title, description, type = "website", alternates = ["en", "zh-hant", "zh-hans"], image = "/og.png", publishedTime, modifiedTime }: Input): Metadata {
+export function pageMetadata({ locale, path, title, description, type = "website", alternates = ["en", "zh-hant", "zh-hans"], image = "/og.png", generatedImage = false, publishedTime, modifiedTime }: Input): Metadata {
   const languages: Record<string, string> = {};
   for (const alt of alternates) languages[localeMeta[alt].hreflang] = localeUrl(alt, path);
   if (alternates.includes("en")) languages["x-default"] = localeUrl("en", path);
@@ -37,10 +42,12 @@ export function pageMetadata({ locale, path, title, description, type = "website
       description,
       url: localeUrl(locale, path),
       locale: localeMeta[locale].ogLocale,
-      images: [{ url: image, width: 1200, height: 630, alt: "FIMMICK — Agentic AI Platform & Business Solutions" }],
+      alternateLocale: alternates.filter((alt) => alt !== locale).map((alt) => localeMeta[alt].ogLocale),
+      ...(generatedImage ? {} : { images: [{ url: image, width: 1200, height: 630, alt: "FIMMICK — Agentic AI Platform & Business Solutions" }] }),
       ...(type === "article" ? { publishedTime, modifiedTime } : {}),
     },
-    twitter: { card: "summary_large_image", title, description, images: [image] },
+    // No twitter:image: X falls back to og:image, so a template's own share image reaches X too.
+    twitter: { card: "summary_large_image", title, description },
     robots: isProduction() ? { index: true, follow: true } : { index: false, follow: false },
   };
 }

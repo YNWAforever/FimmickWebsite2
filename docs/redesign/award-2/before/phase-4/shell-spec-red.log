@@ -1,0 +1,574 @@
+
+Running 15 tests using 4 workers
+
+[1/15] [chromium] › tests\e2e\shell.spec.ts:49:3 › 4.1 footer › footer links do not prefetch
+[2/15] [chromium] › tests\e2e\shell.spec.ts:21:3 › 4.1 footer › four columns of two groups at 1440, lists aligned
+[3/15] [chromium] › tests\e2e\shell.spec.ts:37:3 › 4.1 footer › social links are labelled 44 px icons
+[4/15] [chromium] › tests\e2e\shell.spec.ts:30:3 › 4.1 footer › one column of groups at 390
+  1) [chromium] › tests\e2e\shell.spec.ts:30:3 › 4.1 footer › one column of groups at 390 ──────────
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  [20, 209]
+
+      32 |     await page.goto("/en/platform");
+      33 |     await page.locator(".site-footer").scrollIntoViewIfNeeded();
+    > 34 |     expect((await footerColumns(page)).lefts).toHaveLength(1);
+         |                                               ^
+      35 |   });
+      36 |
+      37 |   test("social links are labelled 44 px icons", async ({ page }) => {
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:34:47
+
+    Error Context: test-results\shell-4-1-footer-one-column-of-groups-at-390-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-1-footer-one-column-of-groups-at-390-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-1-footer-one-column-of-groups-at-390-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2) [chromium] › tests\e2e\shell.spec.ts:21:3 › 4.1 footer › four columns of two groups at 1440, lists aligned 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 4
+    Received length: 5
+    Received array:  [474, 657, 840, 1023, 1205]
+
+      24 |     await page.locator(".site-footer").scrollIntoViewIfNeeded();
+      25 |     const { lefts, firstLinkTops } = await footerColumns(page);
+    > 26 |     expect(lefts).toHaveLength(4);
+         |                   ^
+      27 |     expect(Math.max(...firstLinkTops) - Math.min(...firstLinkTops)).toBeLessThanOrEqual(2);
+      28 |   });
+      29 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:26:19
+
+    Error Context: test-results\shell-4-1-footer-four-colu-32f2e-roups-at-1440-lists-aligned-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-1-footer-four-colu-32f2e-roups-at-1440-lists-aligned-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-1-footer-four-colu-32f2e-roups-at-1440-lists-aligned-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[5/15] [chromium] › tests\e2e\shell.spec.ts:80:3 › 4.2 mega menu › opens on hover intent and closes after the pointer leaves
+[6/15] [chromium] › tests\e2e\shell.spec.ts:91:3 › 4.2 mega menu › an open panel has a scrim and its featured card uses the right-hand column
+  3) [chromium] › tests\e2e\shell.spec.ts:49:3 › 4.1 footer › footer links do not prefetch ─────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 97
+
+    - Array []
+    + Array [
+    +   "/en/platform",
+    +   "/en/solutions/market-intelligence",
+    +   "/en/solutions/content-production",
+    +   "/en/solutions/customer-engagement",
+    +   "/en/solutions/website-operations",
+    +   "/en/products/social-listening",
+    +   "/en/ai-transformation",
+    +   "/en/ai-transformation/ai-readiness-maturity",
+    +   "/en/ai-transformation/strategy-roadmap",
+    +   "/en/ai-transformation/workflow-agent-design",
+    +   "/en/ai-transformation/governance-adoption",
+    +   "/en/workshop",
+    +   "/en/services",
+    +   "/en/services/digitalmarketing",
+    +   "/en/services/seo-aeo",
+    +   "/en/services/koc-community",
+    +   "/en/services/content-creative",
+    +   "/en/industries",
+    +   "/en/industries/retail-ecommerce",
+    +   "/en/industries/beauty-luxury",
+    +   "/en/industries/food-beverage",
+    +   "/en/industries/hospitality-travel",
+    +   "/en/case-studies",
+    +   "/en/case-studies?kind=client-work",
+    +   "/en/case-studies/fimmick-ai-native-operating-model",
+    +   "/en/cases-and-demos",
+    +   "/en/resources",
+    +   "/en/insights",
+    +   "/en/knowledge-hub",
+    +   "/en/resources/guides",
+    +   "/en/resources/videos",
+    +   "/en/events",
+    +   "/en/fimmick-ecosystem",
+    +   "/en/fimmick-ecosystem/aip",
+    +   "/en/fimmick-ecosystem/kocmax",
+    +   "/en/fimmick-ecosystem/adfocate",
+    +   "/en/fimmick-ecosystem/kinnso",
+    +   "/en/about/our-story",
+    +   "/en/about/how-we-work",
+    +   "/en/about/why-fimmick",
+    +   "/en/about/team",
+    +   "/en/how-to-start",
+    +   "/en/privacy",
+    +   "/en/terms",
+    +   "/en/cookies",
+    +   "/en/platform",
+    +   "/en/solutions/market-intelligence",
+    +   "/en/solutions/content-production",
+    +   "/en/solutions/customer-engagement",
+    +   "/en/solutions/website-operations",
+    +   "/en/products/social-listening",
+    +   "/en/ai-transformation",
+    +   "/en/ai-transformation/ai-readiness-maturity",
+    +   "/en/ai-transformation/strategy-roadmap",
+    +   "/en/ai-transformation/workflow-agent-design",
+    +   "/en/ai-transformation/governance-adoption",
+    +   "/en/workshop",
+    +   "/en/services",
+    +   "/en/services/digitalmarketing",
+    +   "/en/services/seo-aeo",
+    +   "/en/services/koc-community",
+    +   "/en/services/content-creative",
+    +   "/en/services/crm-sales",
+    +   "/en/services/ecommerce-growth",
+    +   "/en/industries",
+    +   "/en/industries/retail-ecommerce",
+    +   "/en/industries/beauty-luxury",
+    +   "/en/industries/food-beverage",
+    +   "/en/industries/hospitality-travel",
+    +   "/en/industries/financial-services",
+    +   "/en/case-studies",
+    +   "/en/case-studies?kind=client-work",
+    +   "/en/case-studies/fimmick-ai-native-operating-model",
+    +   "/en/cases-and-demos",
+    +   "/en/resources",
+    +   "/en/insights",
+    +   "/en/knowledge-hub",
+    +   "/en/resources/guides",
+    +   "/en/resources/videos",
+    +   "/en/events",
+    +   "/en/fimmick-ecosystem",
+    +   "/en/fimmick-ecosystem/aip",
+    +   "/en/fimmick-ecosystem/kocmax",
+    +   "/en/fimmick-ecosystem/adfocate",
+    +   "/en/fimmick-ecosystem/kinnso",
+    +   "/en/fimmick-ecosystem/50-add-oil",
+    +   "/en/about/our-story",
+    +   "/en/about/how-we-work",
+    +   "/en/about/why-fimmick",
+    +   "/en/about/team",
+    +   "/en/about/asia-delivery",
+    +   "/en/how-to-start",
+    +   "/en/privacy",
+    +   "/en/terms",
+    +   "/en/cookies",
+    + ]
+
+      69 |     });
+      70 |     expect(footerOnly.length).toBeGreaterThan(20);
+    > 71 |     expect(prefetched.filter((p) => footerOnly.includes(p))).toEqual([]);
+         |                                                              ^
+      72 |   });
+      73 | });
+      74 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:71:62
+
+    Error Context: test-results\shell-4-1-footer-footer-links-do-not-prefetch-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-1-footer-footer-links-do-not-prefetch-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-1-footer-footer-links-do-not-prefetch-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4) [chromium] › tests\e2e\shell.spec.ts:37:3 › 4.1 footer › social links are labelled 44 px icons 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('.footer-social a').first()
+    Expected pattern: /\S/
+    Received string:  ""
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.footer-social a').first() with timeout 5000ms
+      - waiting for locator('.footer-social a').first()
+        14 × locator resolved to <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/fimmick/">LinkedIn</a>
+           - unexpected value "null"
+
+
+      40 |     await expect(links).toHaveCount(4);
+      41 |     for (const link of await links.all()) {
+    > 42 |       await expect(link).toHaveAttribute("aria-label", /\S/);
+         |                          ^
+      43 |       await expect(link.locator("svg")).toHaveCount(1);
+      44 |       const box = (await link.boundingBox())!;
+      45 |       expect(Math.min(box.width, box.height)).toBeGreaterThanOrEqual(44);
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:42:26
+
+    Error Context: test-results\shell-4-1-footer-social-links-are-labelled-44-px-icons-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-1-footer-social-links-are-labelled-44-px-icons-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-1-footer-social-links-are-labelled-44-px-icons-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  5) [chromium] › tests\e2e\shell.spec.ts:80:3 › 4.2 mega menu › opens on hover intent and closes after the pointer leaves 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
+
+      83 |     await trigger.hover();
+      84 |     await page.waitForTimeout(250);
+    > 85 |     expect(await trigger.getAttribute("aria-expanded")).toBe("true");
+         |                                                         ^
+      86 |     await page.mouse.move(700, 880);
+      87 |     await page.waitForTimeout(400);
+      88 |     expect(await trigger.getAttribute("aria-expanded")).toBe("false");
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:85:57
+
+    Error Context: test-results\shell-4-2-mega-menu-opens--cd025-es-after-the-pointer-leaves-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-2-mega-menu-opens--cd025-es-after-the-pointer-leaves-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-2-mega-menu-opens--cd025-es-after-the-pointer-leaves-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  6) [chromium] › tests\e2e\shell.spec.ts:91:3 › 4.2 mega menu › an open panel has a scrim and its featured card uses the right-hand column 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.mega-scrim')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('.mega-scrim') with timeout 5000ms
+      - waiting for locator('.mega-scrim')
+
+
+      93 |     await page.locator(".pillar-trigger").first().click();
+      94 |     const scrim = page.locator(".mega-scrim");
+    > 95 |     await expect(scrim).toBeVisible();
+         |                         ^
+      96 |     expect(await scrim.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe("rgba(7, 11, 31, 0.24)");
+      97 |     const gap = await page.locator(".mega:not([hidden]) .mega-inner").evaluate((inner) => {
+      98 |       const columns = [...inner.querySelectorAll(".mega-groups > *")];
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:95:25
+
+    Error Context: test-results\shell-4-2-mega-menu-an-ope-29bf6--uses-the-right-hand-column-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-2-mega-menu-an-ope-29bf6--uses-the-right-hand-column-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-2-mega-menu-an-ope-29bf6--uses-the-right-hand-column-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[7/15] [chromium] › tests\e2e\shell.spec.ts:105:3 › 4.2 mega menu › Tab out of the nav closes the panel
+[8/15] [chromium] › tests\e2e\shell.spec.ts:117:3 › 4.2 mega menu › a link to the current page closes the panel
+[9/15] [chromium] › tests\e2e\shell.spec.ts:128:3 › 4.3 contact › the disclosure has the FAQ indicator and the prepared email is a card in the body face
+[10/15] [chromium] › tests\e2e\shell.spec.ts:144:3 › 4.3 contact › an office without an address has no empty line
+  7) [chromium] › tests\e2e\shell.spec.ts:128:3 › 4.3 contact › the disclosure has the FAQ indicator and the prepared email is a card in the body face 
+
+    Error: expect(received).not.toMatch(expected)
+
+    Expected pattern: not /^(none|normal)$/
+    Received string:      "none"
+
+      129 |     await page.goto("/en/contact");
+      130 |     const summary = page.locator("form summary").first();
+    > 131 |     expect(await summary.evaluate((el) => getComputedStyle(el, "::after").content)).not.toMatch(/^(none|normal)$/);
+          |                                                                                         ^
+      132 |     await expect(page.getByRole("button", { name: "Prepare email instead" })).toBeEnabled();
+      133 |     await page.getByLabel(/^Name/).fill("Test Person");
+      134 |     await page.getByLabel(/^Company/).fill("Example Ltd");
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:131:89
+
+    Error Context: test-results\shell-4-3-contact-the-disc-c6890--is-a-card-in-the-body-face-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-3-contact-the-disc-c6890--is-a-card-in-the-body-face-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-3-contact-the-disc-c6890--is-a-card-in-the-body-face-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[11/15] [chromium] › tests\e2e\shell.spec.ts:164:5 › 4.4 share images › /en/opengraph-image is a 1200×630 PNG
+  8) [chromium] › tests\e2e\shell.spec.ts:164:5 › 4.4 share images › /en/opengraph-image is a 1200×630 PNG 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 404
+
+      164 |     test(`${path} is a 1200×630 PNG`, async ({ request }) => {
+      165 |       const res = await request.get(path);
+    > 166 |       expect(res.status()).toBe(200);
+          |                            ^
+      167 |       expect(res.headers()["content-type"]).toBe("image/png");
+      168 |       expect(pngSize(await res.body())).toEqual({ width: 1200, height: 630 });
+      169 |     });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:166:28
+
+    Error Context: test-results\shell-4-4-share-images-en-opengraph-image-is-a-1200×630-PNG-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-4-share-images-en-opengraph-image-is-a-1200×630-PNG-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-4-share-images-en-opengraph-image-is-a-1200×630-PNG-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  9) [chromium] › tests\e2e\shell.spec.ts:144:3 › 4.3 contact › an office without an address has no empty line 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 8
+    Received:   26
+
+      150 |       return Math.round(link.top - name.bottom);
+      151 |     });
+    > 152 |     expect(gap).toBeLessThan(8);
+          |                 ^
+      153 |   });
+      154 | });
+      155 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:152:17
+
+    Error Context: test-results\shell-4-3-contact-an-offic-65051-n-address-has-no-empty-line-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-3-contact-an-offic-65051-n-address-has-no-empty-line-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-3-contact-an-offic-65051-n-address-has-no-empty-line-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[12/15] [chromium] › tests\e2e\shell.spec.ts:164:5 › 4.4 share images › /zh-hant/case-studies/omni-channel-retail-intelligence/opengraph-image is a 1200×630 PNG
+[13/15] [chromium] › tests\e2e\shell.spec.ts:172:3 › 4.4 share images › an article shares its own image; other pages keep the fallback
+  10) [chromium] › tests\e2e\shell.spec.ts:164:5 › 4.4 share images › /zh-hant/case-studies/omni-channel-retail-intelligence/opengraph-image is a 1200×630 PNG 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 404
+
+      164 |     test(`${path} is a 1200×630 PNG`, async ({ request }) => {
+      165 |       const res = await request.get(path);
+    > 166 |       expect(res.status()).toBe(200);
+          |                            ^
+      167 |       expect(res.headers()["content-type"]).toBe("image/png");
+      168 |       expect(pngSize(await res.body())).toEqual({ width: 1200, height: 630 });
+      169 |     });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:166:28
+
+    Error Context: test-results\shell-4-4-share-images-zh--9b8be-aph-image-is-a-1200×630-PNG-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-4-share-images-zh--9b8be-aph-image-is-a-1200×630-PNG-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-4-share-images-zh--9b8be-aph-image-is-a-1200×630-PNG-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[14/15] [chromium] › tests\e2e\shell.spec.ts:179:3 › 4.4 share images › Open Graph names the alternate locales
+  11) [chromium] › tests\e2e\shell.spec.ts:105:3 › 4.2 mega menu › Tab out of the nav closes the panel 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "false"
+    Received: "true"
+
+      112 |     await page.keyboard.press("Tab");
+      113 |     await expect(page.locator(".header-cta")).toBeFocused();
+    > 114 |     expect(await last.getAttribute("aria-expanded")).toBe("false");
+          |                                                      ^
+      115 |   });
+      116 |
+      117 |   test("a link to the current page closes the panel", async ({ page }) => {
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:114:54
+
+    Error Context: test-results\shell-4-2-mega-menu-Tab-out-of-the-nav-closes-the-panel-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-2-mega-menu-Tab-out-of-the-nav-closes-the-panel-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-2-mega-menu-Tab-out-of-the-nav-closes-the-panel-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[15/15] [chromium] › tests\e2e\shell.spec.ts:186:3 › 4.5 hero at 1920 › the headline sits on at most two lines in a copy column at least 640 px wide
+  12) [chromium] › tests\e2e\shell.spec.ts:117:3 › 4.2 mega menu › a link to the current page closes the panel 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "false"
+    Received: "true"
+
+      121 |     await page.locator(".mega:not([hidden]) .mega-overview a").click();
+      122 |     await page.waitForTimeout(300);
+    > 123 |     expect(await trigger.getAttribute("aria-expanded")).toBe("false");
+          |                                                         ^
+      124 |   });
+      125 | });
+      126 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:123:57
+
+    Error Context: test-results\shell-4-2-mega-menu-a-link-75934-rrent-page-closes-the-panel-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-2-mega-menu-a-link-75934-rrent-page-closes-the-panel-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-2-mega-menu-a-link-75934-rrent-page-closes-the-panel-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  13) [chromium] › tests\e2e\shell.spec.ts:172:3 › 4.4 share images › an article shares its own image; other pages keep the fallback 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('meta[property="og:image"]')
+    Expected pattern: /\/en\/knowledge-hub\/4-types-of-crm-system\/opengraph-image/
+    Received string:  "https://www.fimmick.com/og.png"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('meta[property="og:image"]') with timeout 5000ms
+      - waiting for locator('meta[property="og:image"]')
+        13 × locator resolved to <meta property="og:image" content="https://www.fimmick.com/og.png"/>
+           - unexpected value "https://www.fimmick.com/og.png"
+
+
+      172 |   test("an article shares its own image; other pages keep the fallback", async ({ page }) => {
+      173 |     await page.goto("/en/knowledge-hub/4-types-of-crm-system");
+    > 174 |     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /\/en\/knowledge-hub\/4-types-of-crm-system\/opengraph-image/);
+          |                                                             ^
+      175 |     await page.goto("/en/platform");
+      176 |     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /\/og\.png$/);
+      177 |   });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:174:61
+
+    Error Context: test-results\shell-4-4-share-images-an--1350b-her-pages-keep-the-fallback-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-4-share-images-an--1350b-her-pages-keep-the-fallback-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-4-share-images-an--1350b-her-pages-keep-the-fallback-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  14) [chromium] › tests\e2e\shell.spec.ts:186:3 › 4.5 hero at 1920 › the headline sits on at most two lines in a copy column at least 640 px wide 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 2
+    Received:    4
+
+      200 |       return { lines, column: copy.getBoundingClientRect().width - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) };
+      201 |     });
+    > 202 |     expect(lines).toBeLessThanOrEqual(2);
+          |                   ^
+      203 |     expect(column).toBeGreaterThanOrEqual(640);
+      204 |   });
+      205 | });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:202:19
+
+    Error Context: test-results\shell-4-5-hero-at-1920-the-0bbf1-column-at-least-640-px-wide-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-5-hero-at-1920-the-0bbf1-column-at-least-640-px-wide-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-5-hero-at-1920-the-0bbf1-column-at-least-640-px-wide-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  15) [chromium] › tests\e2e\shell.spec.ts:179:3 › 4.4 share images › Open Graph names the alternate locales 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('meta[property="og:locale:alternate"]')
+    Expected: 2
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('meta[property="og:locale:alternate"]') with timeout 5000ms
+      - waiting for locator('meta[property="og:locale:alternate"]')
+        13 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      179 |   test("Open Graph names the alternate locales", async ({ page }) => {
+      180 |     await page.goto("/en");
+    > 181 |     await expect(page.locator('meta[property="og:locale:alternate"]')).toHaveCount(2);
+          |                                                                        ^
+      182 |   });
+      183 | });
+      184 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\shell.spec.ts:181:72
+
+    Error Context: test-results\shell-4-4-share-images-Ope-8fbde-names-the-alternate-locales-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\shell-4-4-share-images-Ope-8fbde-names-the-alternate-locales-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\shell-4-4-share-images-Ope-8fbde-names-the-alternate-locales-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  15 failed
+    [chromium] › tests\e2e\shell.spec.ts:21:3 › 4.1 footer › four columns of two groups at 1440, lists aligned 
+    [chromium] › tests\e2e\shell.spec.ts:30:3 › 4.1 footer › one column of groups at 390 ───────────
+    [chromium] › tests\e2e\shell.spec.ts:37:3 › 4.1 footer › social links are labelled 44 px icons ─
+    [chromium] › tests\e2e\shell.spec.ts:49:3 › 4.1 footer › footer links do not prefetch ──────────
+    [chromium] › tests\e2e\shell.spec.ts:80:3 › 4.2 mega menu › opens on hover intent and closes after the pointer leaves 
+    [chromium] › tests\e2e\shell.spec.ts:91:3 › 4.2 mega menu › an open panel has a scrim and its featured card uses the right-hand column 
+    [chromium] › tests\e2e\shell.spec.ts:105:3 › 4.2 mega menu › Tab out of the nav closes the panel 
+    [chromium] › tests\e2e\shell.spec.ts:117:3 › 4.2 mega menu › a link to the current page closes the panel 
+    [chromium] › tests\e2e\shell.spec.ts:128:3 › 4.3 contact › the disclosure has the FAQ indicator and the prepared email is a card in the body face 
+    [chromium] › tests\e2e\shell.spec.ts:144:3 › 4.3 contact › an office without an address has no empty line 
+    [chromium] › tests\e2e\shell.spec.ts:164:5 › 4.4 share images › /en/opengraph-image is a 1200×630 PNG 
+    [chromium] › tests\e2e\shell.spec.ts:164:5 › 4.4 share images › /zh-hant/case-studies/omni-channel-retail-intelligence/opengraph-image is a 1200×630 PNG 
+    [chromium] › tests\e2e\shell.spec.ts:172:3 › 4.4 share images › an article shares its own image; other pages keep the fallback 
+    [chromium] › tests\e2e\shell.spec.ts:179:3 › 4.4 share images › Open Graph names the alternate locales 
+    [chromium] › tests\e2e\shell.spec.ts:186:3 › 4.5 hero at 1920 › the headline sits on at most two lines in a copy column at least 640 px wide 

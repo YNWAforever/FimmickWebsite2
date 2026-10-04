@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { LanguageSwitch, type LanguageOption } from "./LanguageSwitch";
 
 export type HeaderLink = { label: string; href: string; note?: string };
@@ -52,22 +52,56 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
     setDrawer(false);
   }
 
-  // Escape and outside click for mega panels.
+  // Escape and outside press for mega panels (pointerdown also covers touch and pen, e.g. iPad Safari).
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close(true);
     };
-    const onClick = (e: MouseEvent) => {
+    const onPress = (e: PointerEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) close(false);
     };
     document.addEventListener("keydown", onKey);
-    document.addEventListener("mousedown", onClick);
+    document.addEventListener("pointerdown", onPress);
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("pointerdown", onPress);
     };
   }, [open, close]);
+
+  // Hover intent on fine pointers: open after 150 ms over a trigger (at once when another panel is
+  // already open), close 200 ms after the pointer leaves the trigger and its panel. A panel opened
+  // by click or keyboard stays until it is dismissed; clicking a hover-opened trigger pins it.
+  const openedBy = useRef<"hover" | "click">("click");
+  const hoverTimer = useRef<number | undefined>(undefined);
+  const clearHover = useCallback(() => window.clearTimeout(hoverTimer.current), []);
+  useEffect(() => clearHover, [clearHover]);
+  const finePointer = (e: ReactPointerEvent) => e.pointerType === "mouse" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const hoverEnter = (e: ReactPointerEvent, id: string) => {
+    if (!finePointer(e)) return;
+    clearHover();
+    if (open === id) return;
+    const show = () => {
+      openedBy.current = "hover";
+      setOpen(id);
+    };
+    if (open) show();
+    else hoverTimer.current = window.setTimeout(show, 150);
+  };
+  const hoverLeave = (e: ReactPointerEvent) => {
+    if (!finePointer(e)) return;
+    clearHover();
+    if (open && openedBy.current === "hover") hoverTimer.current = window.setTimeout(() => setOpen(null), 200);
+  };
+  const toggle = (id: string, expanded: boolean) => {
+    clearHover();
+    if (expanded && openedBy.current === "hover") {
+      openedBy.current = "click";
+      return;
+    }
+    openedBy.current = "click";
+    setOpen(expanded ? null : id);
+  };
 
   // Drawer: lock scroll, trap focus, Escape returns focus to the toggle.
   useEffect(() => {
@@ -130,13 +164,21 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
           {/* eslint-disable-next-line @next/next/no-img-element -- small raster logo, fixed size, eagerly loaded */}
           <img src="/brand/fimmick-logo.webp" width={124} height={31} alt={labels.logoAlt} />
         </Link>
-        <nav className="primary-nav" aria-label={labels.primary} ref={navRef}>
+        <nav
+          className="primary-nav"
+          aria-label={labels.primary}
+          ref={navRef}
+          onBlur={(e) => {
+            const next = e.relatedTarget as Node | null;
+            if (open && next && !navRef.current?.contains(next)) close(false);
+          }}
+        >
           <ul className="pillar-list">
             {pillars.map((pillar) => {
               const panelId = `${uid}-${pillar.id}`;
               const expanded = open === pillar.id;
               return (
-                <li key={pillar.id} className={pillar.utility ? "pillar pillar--utility" : "pillar"}>
+                <li key={pillar.id} className={pillar.utility ? "pillar pillar--utility" : "pillar"} onPointerEnter={(e) => hoverEnter(e, pillar.id)} onPointerLeave={hoverLeave}>
                   <button
                     ref={(el) => {
                       triggerRefs.current[pillar.id] = el;
@@ -146,12 +188,19 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
                     aria-expanded={expanded}
                     aria-controls={panelId}
                     data-active={activePillar === pillar.id}
-                    onClick={() => setOpen(expanded ? null : pillar.id)}
+                    onClick={() => toggle(pillar.id, expanded)}
                   >
                     <span className="pillar-label">{pillar.label}</span>
                     {pillar.short ? <span className="pillar-label pillar-label--short">{pillar.short}</span> : null}
                   </button>
-                  <div className="mega" id={panelId} hidden={!expanded}>
+                  <div
+                    className="mega"
+                    id={panelId}
+                    hidden={!expanded}
+                    onClick={(e) => {
+                      if ((e.target as Element).closest("a")) close(false);
+                    }}
+                  >
                     <div className="container mega-inner">
                       <div className="mega-overview">
                         <h2>{pillar.label}</h2>
@@ -178,6 +227,13 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
                         ))}
                         {pillar.featured ? (
                           <Link className="mega-featured" href={pillar.featured.href}>
+                            {/* A miniature of the signature frame: facts, draft, approval, export. */}
+                            <span className="mega-featured__frame" aria-hidden="true">
+                              <i>01</i>
+                              <i>02</i>
+                              <i data-state="approved">03</i>
+                              <i>04</i>
+                            </span>
                             <strong>{pillar.featured.label} →</strong>
                             {pillar.featured.note ? <span>{pillar.featured.note}</span> : null}
                           </Link>
@@ -201,6 +257,9 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
         </div>
       </div>
     </header>
+
+      {/* Dims the page under an open mega panel; a press on it closes the panel (document pointerdown). */}
+      <div className="mega-scrim" hidden={!open} aria-hidden="true" />
 
       {/* The drawer is a sibling of <header>, not a child: the header moves with a transform while
           reading, which would make it the drawer’s containing block and squash the opening frames. */}

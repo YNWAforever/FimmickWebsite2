@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const locale = await resolveLocale(params);
   const c = find((await params).slug);
   if (!c) return {};
-  return pageMetadata({ locale, path: paths.case(c.slug), title: t(c.title, locale), description: t(c.problem, locale) });
+  return pageMetadata({ locale, path: paths.case(c.slug), title: t(c.title, locale), description: t(c.problem, locale), generatedImage: true });
 }
 
 /** The case reads in four blocks: the job (problem), what changed (the outcome over the before and

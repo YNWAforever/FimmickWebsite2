@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
     description: meta.summary.slice(0, 300),
     type: "article",
     alternates: available,
+    generatedImage: true,
     publishedTime: entry.published,
     modifiedTime: entry.modified,
   });
