@@ -23,31 +23,39 @@ export type PhotoId =
   | "community-event"
   | "night-table";
 
+/** landscape 3:2, portrait 4:5 and wide 21:8 (page-hero bands), built by scripts/build-photography.mjs. */
+export type PhotoCrop = "landscape" | "portrait" | "wide";
+/** Delivered files per width, named <id>-<crop>-<width>.<hash8>.<ext> (immutable, content-hashed). */
+export type PhotoFiles = Record<string, { avif: string; webp: string }>;
+
 export type PhotoRecord = {
   id: PhotoId;
   alt: L;
   width: number;
   height: number;
   portrait: { width: number; height: number };
+  wide: { width: number; height: number };
   color: string;
-  /** Focus point (0–1) used for portrait crops and as the CSS object-position. */
-  focus: [number, number];
+  /** The scene’s focus point (0–1) within each crop: the CSS object-position, so a crop never cuts it. */
+  focus: Record<PhotoCrop, [number, number]>;
+  files: Record<PhotoCrop, PhotoFiles>;
 };
 
-const sizes = built as Record<string, Omit<PhotoRecord, "id" | "alt" | "focus">>;
+const generated = built as unknown as Record<string, Omit<PhotoRecord, "id" | "alt">>;
 
 export const photos: Partial<Record<PhotoId, PhotoRecord>> = Object.fromEntries(
-  scenes.scenes
-    .filter((s) => sizes[s.id])
-    .map((s) => [s.id, { id: s.id as PhotoId, alt: s.alt as L, focus: s.focus as [number, number], ...sizes[s.id] }]),
+  scenes.scenes.filter((s) => generated[s.id]).map((s) => [s.id, { id: s.id as PhotoId, alt: s.alt as L, ...generated[s.id] }]),
 );
 
 export const photoBase = "/media/photography";
-export const landscapeWidths = [1536, 1024, 640] as const;
-export const portraitWidths = [800, 480] as const;
 
-/** Label shown on every photograph so it is never mistaken for a record of real people or premises. */
+/** Pill on photographs a viewer could take for real people or premises (the heroes). */
 export const illustrativeLabel: L = { en: "Illustrative photograph", zh: "示意相片" };
+/**
+ * One line under a chapter of photographs, and the footer’s site-wide note (award pass 2, 6.5).
+ * zh drafted, for native review.
+ */
+export const photoCaption: L = { en: "Photographs are generated illustrations.", zh: "相片均為生成的示意圖。" };
 
 /** Which photograph illustrates each page family (pages without an entry show no photograph). */
 export const solutionPhotos: Record<string, PhotoId> = {

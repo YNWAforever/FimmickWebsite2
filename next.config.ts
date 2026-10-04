@@ -29,6 +29,11 @@ const nextConfig: NextConfig = {
         source: "/media/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
+      {
+        // Brand files keep stable names, so they are cached for a day and revalidated in the background.
+        source: "/brand/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
+      },
     ];
   },
   async redirects() {

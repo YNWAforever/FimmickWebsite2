@@ -1,0 +1,100 @@
+
+ RUN  v3.2.7 C:/Users/laich/Documents/FimmickWebsite2
+
+ ❯ tests/unit/photography.test.ts (12 tests | 12 failed) 21ms
+   × photography pipeline (6) > records the shared grade in scenes.json 12ms
+     → expected undefined to match object { saturation: 0.92, …(2) }
+   × photography pipeline (6) > review-desk: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 1ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > workshop-wall: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 1ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > specialist-studio: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 1ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > property-gallery: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 0ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > retail-counter: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 1ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > hotel-desk: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 1ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > proposal-table: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 1ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > community-event: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 1ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > specialist-desk: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 0ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > night-table: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4 0ms
+     → Cannot read properties of undefined (reading 'landscape')
+   × photography pipeline (6) > delivers no file the manifest does not list 0ms
+     → Cannot convert undefined or null to object
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 12 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > records the shared grade in scenes.json
+AssertionError: expected undefined to match object { saturation: 0.92, …(2) }
+
+- Expected: 
+{
+  "linear": [
+    1.06,
+    -6,
+  ],
+  "saturation": 0.92,
+  "warmth": {
+    "target": 12,
+    "tolerance": 4,
+  },
+}
+
++ Received: 
+undefined
+
+ ❯ tests/unit/photography.test.ts:26:51
+     24| describe("photography pipeline (6)", () => {
+     25|   it("records the shared grade in scenes.json", () => {
+     26|     expect((scenes as { grade?: unknown }).grade).toMatchObject({ satu…
+       |                                                   ^
+     27|   });
+     28| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯
+
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > review-desk: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > workshop-wall: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > specialist-studio: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > property-gallery: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > retail-counter: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > hotel-desk: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > proposal-table: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > community-event: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > specialist-desk: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > night-table: every width/crop pair the master allows, hashed, never upscaled, graded warmth 12 ± 4
+TypeError: Cannot read properties of undefined (reading 'landscape')
+ ❯ tests/unit/photography.test.ts:35:26
+     33|       for (const crop of Object.keys(widths) as Crop[]) {
+     34|         for (const w of widths[crop]) {
+     35|           const file = e.files[crop]?.[String(w)];
+       |                          ^
+     36|           if (w > sourceWidth(e, crop)) {
+     37|             expect(file, `${crop} ${w} should be skipped`).toBeUndefin…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯
+
+ FAIL  tests/unit/photography.test.ts > photography pipeline (6) > delivers no file the manifest does not list
+TypeError: Cannot convert undefined or null to object
+ ❯ tests/unit/photography.test.ts:56:74
+     54| 
+     55|   it("delivers no file the manifest does not list", () => {
+     56|     const listed = new Set(Object.values(manifest).flatMap((e) => Obje…
+       |                                                                          ^
+     57|     expect(fs.readdirSync(dir).filter((f) => !listed.has(f))).toEqual(…
+     58|   });
+ ❯ tests/unit/photography.test.ts:56:52
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  12 failed (12)
+   Start at  02:34:16
+   Duration  2.82s (transform 182ms, setup 0ms, collect 1.01s, tests 21ms, environment 0ms, prepare 986ms)
+
