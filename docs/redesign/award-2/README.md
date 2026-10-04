@@ -74,8 +74,29 @@ Gzip is recomputed at level 9 from the response bodies, so it is a little under 
 | 1.5 route change | /en → /en/platform from a scrolled position: header at −37 px on the first frame of the new page, back at 0 after ~670 ms |
 | 1.6 hero badge | at 390, topmost element at the badge centre is `aside.hero-card` |
 
+## Phase 1 — craft breaks (fix plan 1–7)
+
+Measured on the branch build (`after/`): `heights.json`, `verify.json`, `axe.json`, `bytes.json`, `items/` (one screenshot per item, same state as `before/items/`), `frames/` for the touched pages.
+
+| Item | Before | After |
+| --- | --- | --- |
+| 1.1 locale 404 | unknown `/zh-hant/*` and `/en/*` paths → English global page, `lang="en"`, no shell | Chinese or English 404 inside the site shell, localised title, 404 status, `noindex` |
+| 1.2 navigation | nav hidden at 1024–1279; drawer stretched to 820 / 1,200 px | nav on one row from 1024 px (short EN labels; CTA clear by 16 px EN, 30 px zh); 420 px sheet over a scrim from 700 px |
+| 1.3 drift (1440 / 390) | /en 762 / 4,766 · /zh-hant 718 / 4,103 · /en/platform 896 / 5,338 · /en/services 247 / 1,117 | 6 / 8 · 17 / 5 · 0 / 0 · 0 / 0 |
+| 1.4 focus, contrast, targets | utility focus at −35 px; no ring in forced colours; borders 1.58:1; legal links 21 px | 2 px; outline ring; `--subtle` borders; 44 px on coarse pointers |
+| 1.5 drawer, route change | drawer 109 px tall for 450 ms; stays open past the breakpoint; header −37 px on the new page's first frame | full height from the first frame; closes at 1024 px; header in place |
+| 1.6 badge, marquee, cue, video, poster | badge under the card; marquee rests mid-word; 3 cue drops; MP4 failure blocks the WebM; poster with cursor ring | badge above the photo; rests on a whole, centred phrase; 2 drops; WebM plays; title-card poster with a 640 w candidate |
+| 1.7 icons, titles, banner, leadership | 28 px ICO only; 34 titles with `&amp;`; archive banner on 2026 guides; pending-approval note | SVG + 180 px + 16/32/48 ICO + manifest; 0 entities; banner before 2026-01-01 only; composed leadership block |
+
+Checks: typecheck, lint, vitest 26/26, Playwright 93/93 (axe 28/28 on 14 pages × 2 widths: 0 violations), cascade test green. CSS 98.3 → 102.7 KB raw. Lighthouse: LH_SUMMARY
+
+Phase 1 deviations from the brief (reasons in the PR): nav spacing at 1024–1279 (the brief's values overlapped the CTA by 87 px); per-locale measured band sizes (content box; `scripts/award-2/bands.mjs`, re-run after copy changes); a measured marquee rest instead of a fixed keyframe offset; new poster filenames (immutable `/media` cache); the article entity fix applied to the committed JSON because the original capture is not in the repo.
+
+Open: Next 16 renders a request-time `notFound()` as a 404 recovery shell that the browser fills in, so a visitor without JavaScript sees an empty page with the 404 title (question for Willy in the Phase 1 PR).
+
 ## Phase log
 
 | Phase | PR | What changed | Before → after |
 | --- | --- | --- | --- |
 | 0 | — (first commit of the Phase 1 branch) | Baseline, scripts, axe gate (`tests/e2e/axe.spec.ts`), `@axe-core/playwright` devDependency | see above |
+| 1 | feat/award-pass-2-craft | Locale 404, nav from 1024 px + sheet drawer, per-band intrinsic sizes, focus/contrast/targets, drawer and route-change coordination, badge/marquee/cue/video/poster, icons/titles/banner/leadership | drift /en 390 4,766 → 8 px; axe 0 → 0 (2 pages added); 40 new regression tests |
