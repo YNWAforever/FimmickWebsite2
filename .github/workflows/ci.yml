@@ -49,10 +49,16 @@ jobs:
           node scripts/i18n/check-hans.mjs
           kill %1
           wait %1 || true
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Install browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+      # Chromium runs every spec (axe, cascade, craft …); Firefox, WebKit, iPhone 14 and iPad landscape
+      # run the smoke set (playwright.config.ts).
       - name: End-to-end, accessibility and craft tests
         run: npx playwright test
+      # Lighthouse mobile /en, median of 5 (10 when under the floor), against the CI baseline in
+      # docs/redesign/award-2/quality-baseline.json: fails on a drop of more than 2 points.
+      - name: Lighthouse gate
+        run: node scripts/award-2/quality-gate.mjs --only=lighthouse --env=ci --no-write
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

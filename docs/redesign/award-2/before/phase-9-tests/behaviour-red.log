@@ -1,0 +1,108 @@
+
+Running 4 tests using 4 workers
+
+  ok 3 [chromium] › tests\e2e\behaviour.spec.ts:60:1 › the hero accent is the serif in English and emphasis marks in both Chinese scripts (3.6s)
+  x  1 [chromium] › tests\e2e\behaviour.spec.ts:40:3 › signature stage › pausing holds the step's progress and playing again resumes from there (4.8s)
+  x  2 [chromium] › tests\e2e\behaviour.spec.ts:19:3 › language switch › a modified click opens the other language in a new tab and leaves this page alone (6.6s)
+  x  4 [chromium] › tests\e2e\behaviour.spec.ts:9:3 › language switch › keeps the hash, with and without a query (7.8s)
+
+
+  1) [chromium] › tests\e2e\behaviour.spec.ts:9:3 › language switch › keeps the hash, with and without a query 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /\/zh-hant\/platform#how-it-works$/
+    Received string:  "http://localhost:3100/zh-hant/platform"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        13 × locator resolved to <html lang="zh-Hant-HK" data-scroll="top" data-scroll-behavior="smooth" class="manrope_aa06961d-module__3D1RKq__variable js has-bubble">…</html>
+           - unexpected value "http://localhost:3100/zh-hant/platform"
+
+
+      10 |     await page.goto("/en/platform#how-it-works");
+      11 |     await traditional(page).click();
+    > 12 |     await expect(page).toHaveURL(/\/zh-hant\/platform#how-it-works$/);
+         |                        ^
+      13 |
+      14 |     await page.goto("/en/contact?intent=service&service=seo-aeo#form");
+      15 |     await traditional(page).click();
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:12:24
+
+    Error Context: test-results\behaviour-language-switch--f31b3-sh-with-and-without-a-query-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-language-switch--f31b3-sh-with-and-without-a-query-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-language-switch--f31b3-sh-with-and-without-a-query-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\behaviour.spec.ts:19:3 › language switch › a modified click opens the other language in a new tab and leaves this page alone 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.utility-bar .lang-switch a[hreflang=\'zh-Hant-HK\']')
+    Expected: "/zh-hant/contact?intent=service&service=seo-aeo"
+    Received: "/zh-hant/contact"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.utility-bar .lang-switch a[hreflang=\'zh-Hant-HK\']') with timeout 5000ms
+      - waiting for locator('.utility-bar .lang-switch a[hreflang=\'zh-Hant-HK\']')
+        13 × locator resolved to <a title="繁體中文" lang="zh-Hant-HK" hreflang="zh-Hant-HK" href="/zh-hant/contact">…</a>
+           - unexpected value "/zh-hant/contact"
+
+
+      20 |     await page.goto("/en/contact?intent=service&service=seo-aeo");
+      21 |     const link = traditional(page);
+    > 22 |     await expect(link).toHaveAttribute("href", "/zh-hant/contact?intent=service&service=seo-aeo");
+         |                        ^
+      23 |     const [tab] = await Promise.all([context.waitForEvent("page"), link.click({ modifiers: ["ControlOrMeta"] })]);
+      24 |     await tab.waitForLoadState("domcontentloaded");
+      25 |     expect(new URL(tab.url()).pathname + new URL(tab.url()).search).toBe("/zh-hant/contact?intent=service&service=seo-aeo");
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:22:24
+
+    Error Context: test-results\behaviour-language-switch--90b97--and-leaves-this-page-alone-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-language-switch--90b97--and-leaves-this-page-alone-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-language-switch--90b97--and-leaves-this-page-alone-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests\e2e\behaviour.spec.ts:40:3 › signature stage › pausing holds the step's progress and playing again resumes from there 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0.1
+    Received:   0
+
+      47 |     await expect(play).toHaveAttribute("aria-pressed", "false");
+      48 |     const paused = await progress(page);
+    > 49 |     expect(paused).toBeGreaterThan(0.1);
+         |                    ^
+      50 |     await page.waitForTimeout(800);
+      51 |     expect(Math.abs((await progress(page)) - paused)).toBeLessThan(0.02);
+      52 |     await play.click();
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:49:20
+
+    Error Context: test-results\behaviour-signature-stage--c49aa-ng-again-resumes-from-there-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-signature-stage--c49aa-ng-again-resumes-from-there-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-signature-stage--c49aa-ng-again-resumes-from-there-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests\e2e\behaviour.spec.ts:9:3 › language switch › keeps the hash, with and without a query 
+    [chromium] › tests\e2e\behaviour.spec.ts:19:3 › language switch › a modified click opens the other language in a new tab and leaves this page alone 
+    [chromium] › tests\e2e\behaviour.spec.ts:40:3 › signature stage › pausing holds the step's progress and playing again resumes from there 
+  1 passed (10.2s)

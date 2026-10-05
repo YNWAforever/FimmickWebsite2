@@ -57,20 +57,30 @@ function summarise(results: Results) {
   );
 }
 
+async function check(page: Page, path: string) {
+  await page.goto(path, { waitUntil: "load" });
+  await scrollThrough(page);
+  await page.waitForTimeout(1500);
+  const bottom = await onScreen(page, await new AxeBuilder({ page }).withRules(["target-size"]).analyze());
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page.waitForTimeout(1500);
+  const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+  expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+}
+
+/** The audit's page list (Phase 0), checked a second time with motion reduced (Phase 9). */
+const auditList = [
+  "/en", "/zh-hant", "/zh-hans", "/en/platform", "/en/services", "/en/solutions/content-production", "/en/industries",
+  "/en/case-studies/real-estate-sales-follow-up", "/en/contact", "/en/knowledge-hub/4-types-of-crm-system", "/en/about/team", "/en/nonexistent",
+];
+
 for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mobile", { width: 390, height: 844 }]] as const) {
   test.describe(`axe at ${label}`, () => {
     test.use({ viewport });
-    for (const path of pages) {
-      test(`${path} has no violations`, async ({ page }) => {
-        await page.goto(path, { waitUntil: "load" });
-        await scrollThrough(page);
-        await page.waitForTimeout(1500);
-        const bottom = await onScreen(page, await new AxeBuilder({ page }).withRules(["target-size"]).analyze());
-        await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-        await page.waitForTimeout(1500);
-        const top = await new AxeBuilder({ page }).withTags(tags).analyze();
-        expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
-      });
-    }
+    for (const path of pages) test(`${path} has no violations`, ({ page }) => check(page, path));
+  });
+  test.describe(`axe at ${label} with reduced motion`, () => {
+    test.use({ viewport, reducedMotion: "reduce" });
+    for (const path of auditList) test(`${path} has no violations`, ({ page }) => check(page, path));
   });
 }
