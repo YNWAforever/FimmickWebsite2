@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { href, formatDate, localeMeta, t, zh, type LegacyLocale, type Locale } from "@/lib/i18n";
-import { articleBySlug, articleIndex, getArticleBlocks, isArchiveArticle } from "@/lib/resources";
+import { articleBySlug, articleIndex, articleLocales, getArticleBlocks, hasEnglish, isArchiveArticle } from "@/lib/resources";
 import { resolveLegacyHref } from "@/lib/redirects";
 import { canonicalOrigin } from "@/lib/env";
-import { localeUrl } from "@/lib/seo";
+import { localeUrl, organizationId } from "@/lib/seo";
 import { resourceTopics, topicRelations } from "@/content/resources";
 import { solutionById } from "@/content/solutions";
 import { serviceById } from "@/content/services";
@@ -17,7 +17,8 @@ export function ArticleList({ locale, shellLocale, page, category, basePath }: {
   const PAGE = 18;
   const en = locale === "en";
   const hans = locale === "zh-hans";
-  const list = articleIndex.filter((a) => (locale === "zh-hans" ? a.locales["zh-hans"] : a.locales[locale] || a.locales.en) && (!category || a.locales.en?.section === category));
+  // English lists only genuinely English articles (8.1.1); Chinese ones list under zh-hant.
+  const list = articleIndex.filter((a) => (locale === "en" ? hasEnglish(a) : locale === "zh-hans" ? a.locales["zh-hans"] : a.locales[locale] || a.locales.en) && (!category || a.locales.en?.section === category));
   const pages = Math.max(1, Math.ceil(list.length / PAGE));
   const current = Math.min(Math.max(1, page), pages);
   const items = list.slice((current - 1) * PAGE, current * PAGE);
@@ -66,8 +67,10 @@ export function ArticleList({ locale, shellLocale, page, category, basePath }: {
 export function articleSource(slug: string, locale: LegacyLocale) {
   const entry = articleBySlug(slug);
   if (!entry) return null;
-  const own = entry.locales[locale];
-  const source: LegacyLocale = own ? locale : entry.locales.en ? "en" : (Object.keys(entry.locales)[0] as LegacyLocale);
+  // A Chinese "en" record is not an English version (8.1.1): fall back to English only when it is
+  // genuinely English, otherwise to Traditional Chinese.
+  const own = locale === "en" ? hasEnglish(entry) : Boolean(entry.locales[locale]);
+  const source: LegacyLocale = own ? locale : hasEnglish(entry) ? "en" : entry.locales["zh-hant"] ? "zh-hant" : (Object.keys(entry.locales)[0] as LegacyLocale);
   return { entry, source, meta: entry.locales[source]!, fallback: !own };
 }
 
@@ -87,7 +90,10 @@ export async function ArticleView({ slug, locale, shellLocale }: { slug: string;
   const resolve = (raw: string) => resolveLegacyHref(raw, locale);
   const topic = resourceTopics.find((tp) => tp.id === entry.topic);
   const rel = topicRelations[entry.topic];
-  const others = (["en", "zh-hant", "zh-hans"] as LegacyLocale[]).filter((l) => l !== locale && entry.locales[l]);
+  const others = articleLocales(entry).filter((l) => l !== locale);
+  const canonical = localeUrl(fallback ? source : locale, `/knowledge-hub/${slug}`);
+  // Article dates are calendar days; schema.org wants a date-time, so they are pinned to Hong Kong time.
+  const hk = (date: string) => (date.includes("T") ? date : `${date}T00:00:00+08:00`);
   const contentLang = meta.contentLanguage === "en" ? "en" : localeMeta[meta.contentLanguage as LegacyLocale]?.htmlLang ?? "en";
   return (
     <>
@@ -97,17 +103,21 @@ export async function ArticleView({ slug, locale, shellLocale }: { slug: string;
           "@type": "Article",
           headline: meta.title,
           description: meta.summary,
-          datePublished: entry.published,
-          dateModified: entry.modified || entry.published,
+          image: `${canonical}/opengraph-image`,
+          datePublished: hk(entry.published),
+          dateModified: hk(entry.modified || entry.published),
           inLanguage: contentLang,
           author: { "@type": "Organization", name: meta.author || "FIMMICK" },
-          publisher: { "@type": "Organization", name: "FIMMICK", logo: { "@type": "ImageObject", url: `${canonicalOrigin}/brand/fimmick-logo.png` } },
-          mainEntityOfPage: localeUrl(locale, `/knowledge-hub/${slug}`),
+          publisher: { "@type": "Organization", "@id": organizationId, name: "FIMMICK", logo: { "@type": "ImageObject", url: `${canonicalOrigin}/brand/fimmick-logo.png` } },
+          mainEntityOfPage: canonical,
         }}
       />
-      <article className="section">
+      {/* The article root carries the content language; the shell (crumbs) keeps the page’s. */}
+      <article className="section" lang={contentLang}>
         <div className="container">
+          <div lang={localeMeta[shellLocale].htmlLang}>
           <Crumbs locale={shellLocale} items={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: en ? "Knowledge Hub" : hans ? zh("知识库", locale) : zh("知識庫", locale), path: "/knowledge-hub" }, { label: meta.title }]} />
+          </div>
           <div className="detail-grid">
             <div>
               {/* The archive note is for articles from before the relaunch; a recent article only

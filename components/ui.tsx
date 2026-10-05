@@ -5,10 +5,15 @@ import { ui } from "@/content/ui";
 import type { PhotoId } from "@/content/photography";
 import { Photo } from "@/components/media/Photo";
 import { Headline } from "@/components/motion/Headline";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export function Crumbs({ locale, items }: { locale: Locale; items: { label: string; path?: string }[] }) {
   const all = [{ label: t(ui.home, locale), path: "/" }, ...items];
+  // The BreadcrumbList comes from the crumbs themselves, so every page that shows them has one (8.1.3).
   return (
+    <>
+    <JsonLd data={breadcrumbJsonLd(locale, all.map((item, index) => ({ name: item.label, path: index < all.length - 1 ? item.path : undefined })))} />
     <nav className="breadcrumbs" aria-label={t(ui.breadcrumb, locale)}>
       <ol>
         {all.map((item, index) =>
@@ -24,6 +29,7 @@ export function Crumbs({ locale, items }: { locale: Locale; items: { label: stri
         )}
       </ol>
     </nav>
+    </>
   );
 }
 

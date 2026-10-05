@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { cases, caseKindLabel } from "@/content/cases";
 import { industryById } from "@/content/industries";
@@ -13,7 +13,6 @@ import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton, Chips } from "@/components/ui";
 import { casePhotos } from "@/content/photography";
 import { CaseCards, EnquirySection, RelatedSection } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -26,7 +25,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const locale = await resolveLocale(params);
   const c = find((await params).slug);
   if (!c) return {};
-  return pageMetadata({ locale, path: paths.case(c.slug), title: t(c.title, locale), description: t(c.problem, locale), generatedImage: true });
+  return pageMetadata({ locale, path: paths.case(c.slug), title: t(c.seoTitle ?? c.title, locale), description: t(c.seoDescription ?? c.problem, locale), generatedImage: true });
 }
 
 /** The case reads in four blocks: the job (problem), what changed (the outcome over the before and
@@ -40,7 +39,6 @@ export default async function CasePage({ params }: SlugParams) {
   const contact = paths.contact({ intent: c.kind === "internal-application" ? "transformation" : "general", case: c.slug });
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Case studies" : zh("客戶案例", locale), path: "/case-studies" }, { name: t(c.title, locale), path: paths.case(c.slug) }])} />
       <PageHero
         locale={locale}
         photo={casePhotos[c.slug]}

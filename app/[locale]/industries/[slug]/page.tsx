@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { industries } from "@/content/industries";
 import { productById } from "@/content/products";
@@ -13,7 +13,6 @@ import { casesFor } from "@/content/relations";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { industryPhotos } from "@/content/photography";
 import { CaseCards, EnquirySection, ProductCards, RelatedSection, ServiceCards } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -26,7 +25,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const locale = await resolveLocale(params);
   const i = find((await params).slug);
   if (!i) return {};
-  return pageMetadata({ locale, path: paths.industry(i.id), title: t(i.name, locale), description: t(i.problem, locale) });
+  return pageMetadata({ locale, path: paths.industry(i.id), title: t(i.seoTitle ?? i.name, locale), description: t(i.seoDescription ?? i.problem, locale) });
 }
 
 export default async function IndustryPage({ params }: SlugParams) {
@@ -38,7 +37,6 @@ export default async function IndustryPage({ params }: SlugParams) {
   const evidence = casesFor({ industry: i.id }, 3);
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Industries" : zh("行業應用", locale), path: "/industries" }, { name: t(i.name, locale), path: paths.industry(i.id) }])} />
       <PageHero
         locale={locale}
         photo={industryPhotos[i.id]}

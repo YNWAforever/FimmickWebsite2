@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { legal } = await params;
   const p = policies.find((x) => x.id === legal);
   if (!p) return {};
-  return pageMetadata({ locale, path: `/${p.id}`, title: t(p.title, locale), description: `FIMMICK ${p.title.en} policy. Last updated ${p.updated}.` });
+  return pageMetadata({ locale, path: `/${p.id}`, title: t(p.title, locale), description: `${p.sections[0].body[0]} Last updated ${p.updated}.` });
 }
 
 export default async function PolicyPage({ params }: Props) {

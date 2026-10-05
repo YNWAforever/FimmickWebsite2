@@ -45,6 +45,7 @@ export const services: Service[] = [
   },
   {
     id: "digitalmarketing",
+    seoTitle: { en: "Digital Marketing Services in Hong Kong", zh: "數碼營銷服務｜香港" },
     headlineAccent: { en: "as one system", zh: "一體化運作" },
     objective: "acquire",
     name: { en: "Digital Marketing", zh: "數碼營銷" },
@@ -73,6 +74,7 @@ export const services: Service[] = [
   },
   {
     id: "marketing-automation",
+    seoTitle: { en: "Marketing Automation Services in Hong Kong", zh: "營銷自動化服務｜香港" },
     headlineAccent: { en: "that keep running", zh: "持續運作" },
     objective: "automate",
     name: { en: "Marketing Automation", zh: "營銷自動化" },
@@ -101,6 +103,7 @@ export const services: Service[] = [
   },
   {
     id: "crm-sales",
+    seoTitle: { en: "CRM & Sales Automation Services in Hong Kong", zh: "CRM 與銷售自動化服務｜香港" },
     headlineAccent: { en: "has an owner", zh: "都有負責人" },
     objective: "convert",
     name: { en: "CRM & Sales Automation", zh: "CRM 與銷售自動化" },
@@ -130,6 +133,7 @@ export const services: Service[] = [
   },
   {
     id: "seo-aeo",
+    seoTitle: { en: "SEO, GEO & AEO Services in Hong Kong", zh: "SEO、GEO 與 AEO服務｜香港" },
     headlineAccent: { en: "and AI answers", zh: "AI 答案" },
     objective: "acquire",
     name: { en: "SEO, GEO & AEO", zh: "SEO、GEO 與 AEO" },
@@ -158,6 +162,7 @@ export const services: Service[] = [
   },
   {
     id: "social-listening",
+    seoTitle: { en: "Social Listening Services in Hong Kong", zh: "社交聆聽服務｜香港" },
     headlineAccent: { en: "public conversation", zh: "公開討論" },
     objective: "understand",
     name: { en: "Social Listening", zh: "社交聆聽" },
@@ -186,6 +191,7 @@ export const services: Service[] = [
   },
   {
     id: "koc-community",
+    seoTitle: { en: "Influencer, KOL & KOC Services in Hong Kong", zh: "網紅、KOL 與 KOC服務｜香港" },
     headlineAccent: { en: "as a workflow", zh: "以流程方式運作" },
     objective: "acquire",
     name: { en: "Influencer, KOL & KOC", zh: "網紅、KOL 與 KOC" },
@@ -214,6 +220,7 @@ export const services: Service[] = [
   },
   {
     id: "ecommerce-growth",
+    seoTitle: { en: "E-commerce Growth Services in Hong Kong", zh: "電商增長服務｜香港" },
     headlineAccent: { en: "to checkout", zh: "到結帳" },
     objective: "convert",
     name: { en: "E-commerce Growth", zh: "電商增長" },
@@ -242,6 +249,7 @@ export const services: Service[] = [
   },
   {
     id: "digital-experience",
+    seoTitle: { en: "Digital Experience Services in Hong Kong", zh: "數碼體驗服務｜香港" },
     headlineAccent: { en: "that convert", zh: "有助轉化" },
     objective: "convert",
     name: { en: "Digital Experience", zh: "數碼體驗" },
@@ -270,6 +278,7 @@ export const services: Service[] = [
   },
   {
     id: "business-intelligence",
+    seoTitle: { en: "Business Intelligence Services in Hong Kong", zh: "商業智能服務｜香港" },
     headlineAccent: { en: "act on", zh: "據此行動" },
     objective: "understand",
     name: { en: "Business Intelligence", zh: "商業智能" },
@@ -299,6 +308,7 @@ export const services: Service[] = [
   },
   {
     id: "data-hub",
+    seoTitle: { en: "Data Hub & Integration Services in Hong Kong", zh: "數據中樞與系統串接服務｜香港" },
     headlineAccent: { en: "every workflow", zh: "可依賴的資料" },
     objective: "scale",
     name: { en: "Data Hub & Integration", zh: "數據中樞與系統串接" },
@@ -327,6 +337,7 @@ export const services: Service[] = [
   },
   {
     id: "content-creative",
+    seoTitle: { en: "Content & Creative Services in Hong Kong", zh: "內容與創意服務｜香港" },
     headlineAccent: { en: "brand control", zh: "品牌可掌控" },
     objective: "acquire",
     name: { en: "Content & Creative", zh: "內容與創意" },
@@ -355,6 +366,7 @@ export const services: Service[] = [
   },
   {
     id: "customer-experience",
+    seoTitle: { en: "Customer Experience Services in Hong Kong", zh: "顧客體驗服務｜香港" },
     headlineAccent: { en: "route well", zh: "分流得宜" },
     objective: "retain",
     name: { en: "Customer Experience", zh: "顧客體驗" },
@@ -384,6 +396,7 @@ export const services: Service[] = [
   },
   {
     id: "workflow-automation",
+    seoTitle: { en: "Workflow Automation Services in Hong Kong", zh: "工作流程自動化服務｜香港" },
     headlineAccent: { en: "redesigned", zh: "重新設計" },
     objective: "automate",
     name: { en: "Workflow Automation", zh: "工作流程自動化" },
@@ -413,6 +426,7 @@ export const services: Service[] = [
   },
   {
     id: "whatsapp-automation",
+    seoTitle: { en: "WhatsApp Automation Services in Hong Kong", zh: "WhatsApp 自動化服務｜香港" },
     headlineAccent: { en: "with control", zh: "可控" },
     objective: "retain",
     name: { en: "WhatsApp Automation", zh: "WhatsApp 自動化" },
@@ -441,6 +455,7 @@ export const services: Service[] = [
   },
   {
     id: "ai-training",
+    seoTitle: { en: "AI Training & Enablement Services in Hong Kong", zh: "AI 培訓與能力建立服務｜香港" },
     headlineAccent: { en: "run AI work", zh: "駕馭 AI 工作" },
     objective: "scale",
     name: { en: "AI Training & Enablement", zh: "AI 培訓與能力建立" },

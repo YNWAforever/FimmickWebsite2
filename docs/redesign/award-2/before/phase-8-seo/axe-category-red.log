@@ -1,0 +1,72 @@
+
+Running 2 tests using 2 workers
+
+[1/2] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/knowledge-hub/category/Content%20Marketing has no violations
+[2/2] [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/knowledge-hub/category/Content%20Marketing has no violations
+  1) [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/knowledge-hub/category/Content%20Marketing has no violations 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "heading-order: .card.card--link:nth-child(1) > h3 — Heading order invalid",
+    + ]
+
+      68 |         await page.waitForTimeout(1500);
+      69 |         const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+    > 70 |         expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+         |                                                           ^
+      71 |       });
+      72 |     }
+      73 |   });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\axe.spec.ts:70:59
+
+    Error Context: test-results\axe-axe-at-desktop-zh-hant-a42a6-Marketing-has-no-violations-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\axe-axe-at-desktop-zh-hant-a42a6-Marketing-has-no-violations-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\axe-axe-at-desktop-zh-hant-a42a6-Marketing-has-no-violations-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2) [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/knowledge-hub/category/Content%20Marketing has no violations 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "heading-order: .card.card--link:nth-child(1) > h3 — Heading order invalid",
+    + ]
+
+      68 |         await page.waitForTimeout(1500);
+      69 |         const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+    > 70 |         expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+         |                                                           ^
+      71 |       });
+      72 |     }
+      73 |   });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\axe.spec.ts:70:59
+
+    Error Context: test-results\axe-axe-at-mobile-zh-hant--3eb97-Marketing-has-no-violations-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\axe-axe-at-mobile-zh-hant--3eb97-Marketing-has-no-violations-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\axe-axe-at-mobile-zh-hant--3eb97-Marketing-has-no-violations-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  2 failed
+    [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at desktop › /zh-hant/knowledge-hub/category/Content%20Marketing has no violations 
+    [chromium] › tests\e2e\axe.spec.ts:62:7 › axe at mobile › /zh-hant/knowledge-hub/category/Content%20Marketing has no violations 

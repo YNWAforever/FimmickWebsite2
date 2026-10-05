@@ -43,6 +43,9 @@ export type CaseKind = "client-work" | "internal-application" | "recorded-demons
 export type TitledCopy = { title: L; copy: L };
 
 export type Solution = {
+  /** Search title and description (award pass 2, 8.1.2); pages fall back to the name and summary. */
+  seoTitle?: L;
+  seoDescription?: L;
   id: SolutionId;
   number: string;
   name: L;
@@ -66,6 +69,9 @@ export type Solution = {
 };
 
 export type Product = {
+  /** Search title and description (award pass 2, 8.1.2); pages fall back to the name and summary. */
+  seoTitle?: L;
+  seoDescription?: L;
   id: ProductId;
   name: string;
   descriptor: L;
@@ -119,6 +125,9 @@ export type ProgrammeStep = {
 };
 
 export type Service = {
+  /** Search title and description (award pass 2, 8.1.2); pages fall back to the name and summary. */
+  seoTitle?: L;
+  seoDescription?: L;
   id: ServiceId;
   objective: ServiceObjective;
   name: L;
@@ -147,6 +156,9 @@ export type Service = {
 };
 
 export type Industry = {
+  /** Search title and description (award pass 2, 8.1.2); pages fall back to the name and summary. */
+  seoTitle?: L;
+  seoDescription?: L;
   id: IndustryId;
   name: L;
   group: "consumer" | "regulated" | "experience" | "b2b";
@@ -167,6 +179,9 @@ export type Industry = {
 };
 
 export type CaseStudy = {
+  /** Search title and description (award pass 2, 8.1.2); pages fall back to the name and summary. */
+  seoTitle?: L;
+  seoDescription?: L;
   slug: string;
   kind: CaseKind;
   title: L;

@@ -17,7 +17,7 @@ import { Gtm } from "@/components/analytics/Gtm";
 import { JsonLd } from "@/components/JsonLd";
 import { isLocale, localeMeta, locales, zh } from "@/lib/i18n";
 import { canonicalOrigin, isProduction } from "@/lib/env";
-import { organizationJsonLd } from "@/lib/seo";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
 
 export const dynamicParams = false;
@@ -54,6 +54,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd(locale)} />
       </head>
       <body>
         <Gtm />

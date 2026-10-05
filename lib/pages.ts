@@ -8,7 +8,8 @@ import { members } from "@/content/ecosystem";
 import { aboutPages } from "@/content/company";
 import { businessFunctions } from "@/content/functions";
 import { capabilities } from "@/content/platform-pages";
-import { articleIndex, legacyEvents } from "./resources";
+import { knowledgeCategories } from "@/app/[locale]/knowledge-hub/categories";
+import { articleIndex, articleLocales, legacyEvents } from "./resources";
 import type { LegacyLocale } from "./i18n";
 
 /** Release date of the rebuilt pages (genuine modification date for sitemaps). */
@@ -51,6 +52,7 @@ export function publicPages(): PublicPage[] {
     page("/resources/guides", "resource"),
     page("/resources/videos", "resource"),
     page("/knowledge-hub", "hub"),
+    ...knowledgeCategories.map((c) => page(`/knowledge-hub/category/${encodeURIComponent(c.slug)}`, "category")),
     page("/events", "hub"),
     page("/workshop", "resource"),
     page("/fimmick-ecosystem", "hub"),
@@ -64,9 +66,11 @@ export function publicPages(): PublicPage[] {
     page("/cookies", "legal", "2026-05-01"),
   ];
   for (const article of articleIndex) {
-    const locales = (["en", "zh-hant", "zh-hans"] as LegacyLocale[]).filter((l) => article.locales[l]);
+    // Chinese "en" records have no /en page (8.1.1).
+    const locales = articleLocales(article);
     list.push({ path: `/knowledge-hub/${article.slug}`, kind: "article", lastModified: article.modified || article.published, locales });
   }
-  for (const event of legacyEvents) list.push(page(`/events/${event.id}`, "event"));
+  // The legacy events exist in English only; their Chinese URLs point their canonical at English (8.1.6).
+  for (const event of legacyEvents) list.push(page(`/events/${event.id}`, "event", REBUILD_DATE, ["en"]));
   return list;
 }

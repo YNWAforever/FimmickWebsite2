@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, t, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { products } from "@/content/products";
 import { solutionById } from "@/content/solutions";
@@ -11,7 +11,6 @@ import { ui } from "@/content/ui";
 import { casesFor, industriesForProduct } from "@/content/relations";
 import { PageHero, SectionHead, LinkButton, Faq } from "@/components/ui";
 import { CaseCards, EnquirySection, ExampleBlock, FlowStrip, IndustryCards, RelatedSection, ServiceCards, StatusPanel } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -24,7 +23,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const locale = await resolveLocale(params);
   const p = find((await params).slug);
   if (!p) return {};
-  return pageMetadata({ locale, path: paths.product(p.id), title: `${p.name} — ${t(p.descriptor, locale)}`, description: t(p.summary, locale) });
+  return pageMetadata({ locale, path: paths.product(p.id), title: p.seoTitle ? t(p.seoTitle, locale) : `${p.name} — ${t(p.descriptor, locale)}`, description: t(p.seoDescription ?? p.summary, locale) });
 }
 
 export default async function ProductPage({ params }: SlugParams) {
@@ -37,7 +36,6 @@ export default async function ProductPage({ params }: SlugParams) {
   const related = casesFor({ product: p.id }, 3);
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Products" : zh("產品", locale), path: "/products" }, { name: p.name, path: paths.product(p.id) }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Products" : zh("產品", locale), path: "/products" }, { label: p.name }]}

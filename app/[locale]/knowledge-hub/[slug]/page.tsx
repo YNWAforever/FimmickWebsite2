@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
+import { resolveLocale, type SlugParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
-import { articleIndex } from "@/lib/resources";
+import { articleIndex, articleLocales, hasEnglish } from "@/lib/resources";
 import { ArticleView, articleSource } from "@/components/ArticleView";
-import type { LegacyLocale } from "@/lib/i18n";
 
 /**
  * Preserved production article URLs. EN and zh-HK cover every article in
@@ -14,9 +13,10 @@ import type { LegacyLocale } from "@/lib/i18n";
  */
 export const dynamicParams = false;
 export function generateStaticParams() {
-  const bilingual = articleIndex.filter((a) => a.locales.en || a.locales["zh-hant"]).map((a) => a.slug);
+  // /en only for genuine English articles; Chinese "en" records redirect to zh-hant (next.config.ts).
   return [
-    ...localeSlugParams(bilingual).filter((p) => p.locale !== "zh-hans"),
+    ...articleIndex.filter(hasEnglish).map((a) => ({ locale: "en", slug: a.slug })),
+    ...articleIndex.filter((a) => hasEnglish(a) || a.locales["zh-hant"]).map((a) => ({ locale: "zh-hant", slug: a.slug })),
     ...articleIndex.map((a) => ({ locale: "zh-hans", slug: a.slug })),
   ];
 }
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: SlugParams): Promise<Metadata
   const found = articleSource((await params).slug, locale);
   if (!found) return {};
   const { entry, meta, fallback, source } = found;
-  const available = (["en", "zh-hant", "zh-hans"] as LegacyLocale[]).filter((l) => entry.locales[l]);
+  const available = articleLocales(entry);
   const base = pageMetadata({
     locale: fallback ? source : locale,
     path: `/knowledge-hub/${entry.slug}`,

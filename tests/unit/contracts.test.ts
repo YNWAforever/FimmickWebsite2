@@ -12,7 +12,8 @@ import { cinema, hero, homeFaqs } from "@/content/home";
 import { contextQuery, parseContext } from "@/lib/intent";
 import { safeQueryForLocaleSwitch } from "@/lib/safe-query";
 import { localeMoves, resolveLegacyHref, resolveMove } from "@/lib/redirects";
-import { filterResources, articleIndex } from "@/lib/resources";
+import { filterResources, articleIndex, hasEnglish, legacyEvents } from "@/lib/resources";
+import { guides } from "@/content/resources";
 import { publicPages } from "@/lib/pages";
 import { businessFunctions } from "@/content/functions";
 import { agentAnatomy, capabilities, taskPatterns, workflowTemplates } from "@/content/platform-pages";
@@ -151,7 +152,10 @@ describe("legacy route migration", () => {
 describe("resources", () => {
   it("filters by format, topic and search, with safe pagination", () => {
     const all = filterResources("en", {});
-    expect(all.total).toBeGreaterThan(350);
+    // Every genuinely English article, every event, the guides, the film and the workshop; Chinese
+    // articles once filed under /en now list under zh-hant only (award pass 2, 8.1.1).
+    expect(all.total).toBe(articleIndex.filter(hasEnglish).length + legacyEvents.length + guides.length + 2);
+    expect(all.total).toBeGreaterThan(150);
     expect(filterResources("en", { format: "guide" }).items.every((i) => i.format === "guide")).toBe(true);
     expect(filterResources("en", { format: "event" }).items.every((i) => i.status === "past")).toBe(true);
     expect(filterResources("en", { q: "readiness" }).items.some((i) => i.id === "guide:ai-readiness-checklist")).toBe(true);

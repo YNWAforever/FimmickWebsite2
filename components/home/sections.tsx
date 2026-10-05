@@ -15,7 +15,7 @@ import * as ex from "@/content/examples";
 import { ui } from "@/content/ui";
 import type { IndustryId, SolutionId } from "@/content/types";
 import { casePhotos, industryPhotos, photoCaption } from "@/content/photography";
-import { articleIndex } from "@/lib/resources";
+import { articleIndex, hasEnglish } from "@/lib/resources";
 import { Photo } from "@/components/media/Photo";
 import { ExplainerPlayer } from "@/components/media/ExplainerPlayer";
 import { LinkButton, TextLink } from "@/components/ui";
@@ -620,7 +620,7 @@ export function ResourcePreviews({ locale }: P) {
   const r = cinema.resources;
   const guide = guides[0];
   const file = locale === "en" ? "en" : "zh-hant";
-  const latest = articleIndex.find((a) => a.locales[locale]) ?? articleIndex[0];
+  const latest = articleIndex.find((a) => (locale === "en" ? hasEnglish(a) : a.locales[locale])) ?? articleIndex[0];
   const meta = latest.locales[locale] ?? latest.locales.en!;
   return (
     <section className="section section--surface cine-resources" aria-labelledby="resources">

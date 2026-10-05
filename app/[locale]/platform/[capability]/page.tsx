@@ -3,14 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, locales, t, zh } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import type { EnquiryContext } from "@/lib/intent";
 import { capabilities, type Capability } from "@/content/platform-pages";
 import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { EnquirySection, ExampleBlock, FlowStrip, FunctionCards, IndustryCards, ProductCards, RelatedSection, ServiceCards, SolutionCards } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 type Props = { params: Promise<{ locale: string; capability: string }> };
 
@@ -42,7 +41,6 @@ export default async function CapabilityPage({ params }: Props) {
   const contact = paths.contact(contextFor(c));
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "Platform" : zh("平台", locale), path: "/platform" }, { name: t(c.name, locale), path: paths.capability(c.id) }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(c.name, locale) }]}

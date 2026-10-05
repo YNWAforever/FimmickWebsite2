@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { href, t, type L, type Locale, zh } from "@/lib/i18n";
 import { localeSlugParams, resolveLocale, type SlugParams } from "@/lib/page";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { paths } from "@/lib/routes";
 import { workstreams, workstreamById } from "@/content/transformation";
 import { caseBySlug } from "@/content/cases";
@@ -11,7 +11,6 @@ import { ui } from "@/content/ui";
 import type { WorkstreamId } from "@/content/types";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { CaseCards, EnquirySection, FlowStrip, HeatmapTable, ProductCards, RelatedSection, ServiceCards } from "@/components/blocks";
-import { JsonLd } from "@/components/JsonLd";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -141,7 +140,6 @@ export default async function WorkstreamPage({ params }: SlugParams) {
   const internal = caseBySlug("fimmick-ai-native-operating-model")!;
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd(locale, [{ name: t(ui.home, locale), path: "/" }, { name: en ? "AI Transformation" : zh("AI 轉型", locale), path: "/ai-transformation" }, { name: t(w.name, locale), path: paths.workstream(w.id) }])} />
       <PageHero
         locale={locale}
         crumbs={[{ label: en ? "AI Transformation" : zh("AI 轉型", locale), path: "/ai-transformation" }, { label: t(w.name, locale) }]}
