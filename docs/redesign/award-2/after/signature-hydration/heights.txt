@@ -1,0 +1,2 @@
+1440px: .sig__frames before hydration 363 px, after 363 px
+390px: .sig__frames before hydration 428 px, after 428 px
