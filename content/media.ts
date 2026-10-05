@@ -12,7 +12,8 @@ export type ExplainerMedia = {
   poster: string;
   posterSmall: string;
   sources: Record<"en" | "zh-hant", { mp4: string; webm: string }>;
-  captions: { srclang: string; label: string; src: string; locale: "en" | "zh-hant" }[];
+  /** Each track is labelled with its language’s own name (as the language switch is). */
+  captions: { srclang: string; label: string; src: string; locale: "en" | "zh-hant" | "zh-hans" }[];
   rights: string;
 };
 
@@ -42,6 +43,8 @@ export const explainerMedia: ExplainerMedia = {
   captions: [
     { srclang: "en", label: "English", src: "/media/explainer/captions-en.vtt", locale: "en" },
     { srclang: "zh-Hant-HK", label: "繁體中文", src: "/media/explainer/captions-zh-hant.vtt", locale: "zh-hant" },
+    // Generated from the Traditional track by npm run i18n:hans (award pass 2, 8.3), never edited by hand.
+    { srclang: "zh-Hans", label: "简体中文", src: "/media/explainer/captions-zh-hans.vtt", locale: "zh-hans" },
   ],
   rights: "Original FIMMICK work rendered from sample data; no stock footage, voice or third-party imagery.",
 };

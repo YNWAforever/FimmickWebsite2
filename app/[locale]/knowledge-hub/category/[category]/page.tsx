@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { formatDate, href, locales, zh } from "@/lib/i18n";
 import { resolveLocale } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
-import { articleIndex, hasEnglish } from "@/lib/resources";
+import { articleIndex, articleListing, contentLang, hasEnglish } from "@/lib/resources";
 import { PageHero } from "@/components/ui";
 import { knowledgeCategories } from "../../categories";
 
@@ -56,14 +56,19 @@ export default async function CategoryPage({ params }: Props) {
       <section className="section">
         <div className="container">
           <div className="related-grid">
-            {items.map((a) => (
-              <Link key={a.slug} className="card card--link" href={href(locale, `/knowledge-hub/${a.slug}`)}>
-                <span className="card-meta">{formatDate(a.published, locale)}{a.locales[locale] ? null : <span>· {en ? "English" : a.locales.en ? zh("英文原文", locale) : zh("原文", locale)}</span>}</span>
-                {/* Card titles sit directly under the h1 (a listing page). */}
-                <h2>{(a.locales[locale] ?? a.locales.en)!.title}</h2>
-                <p className="small muted">{(a.locales[locale] ?? a.locales.en)!.summary.slice(0, 180)}</p>
-              </Link>
-            ))}
+            {items.map((a) => {
+              // The record the article page shows, marked with its language when it is not the page’s (8.3).
+              const { meta, own } = articleListing(a, locale);
+              const lang = contentLang(meta.contentLanguage, locale);
+              return (
+                <Link key={a.slug} className="card card--link" href={href(locale, `/knowledge-hub/${a.slug}`)}>
+                  <span className="card-meta">{formatDate(a.published, locale)}{own ? null : <span>· {meta.contentLanguage === "en" ? (en ? "English" : zh("英文原文", locale)) : zh("原文", locale)}</span>}</span>
+                  {/* Card titles sit directly under the h1 (a listing page). */}
+                  <h2 lang={lang}>{meta.title}</h2>
+                  <p className="small muted" lang={lang}>{meta.summary.slice(0, 180)}</p>
+                </Link>
+              );
+            })}
           </div>
           <p style={{ marginTop: 32 }}>
             <Link className="text-link" href={href(locale, "/knowledge-hub")}>← {en ? "All articles" : zh("全部文章", locale)}</Link>

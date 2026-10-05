@@ -1,0 +1,180 @@
+
+Running 4 tests using 4 workers
+
+  x  1 [chromium] › tests\e2e\i18n.spec.ts:47:1 › Simplified listings mark the Traditional originals they show (1.7s)
+  x  3 [chromium] › tests\e2e\i18n.spec.ts:39:1 › Simplified pages use the mainland words (6.1s)
+  x  2 [chromium] › tests\e2e\i18n.spec.ts:30:1 › the explainer defaults to the page's own caption track (6.5s)
+  x  4 [chromium] › tests\e2e\i18n.spec.ts:16:1 › the homepage's Chinese samples are tagged and labelled for the page's script (6.9s)
+
+
+  1) [chromium] › tests\e2e\i18n.spec.ts:16:1 › the homepage's Chinese samples are tagged and labelled for the page's script 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('.artifact--captions .caption-card__meta').nth(1)
+    Expected: "Instagram · 简中"
+    Received: "Instagram · 繁中"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('.artifact--captions .caption-card__meta').nth(1) with timeout 5000ms
+      - waiting for locator('.artifact--captions .caption-card__meta').nth(1)
+        13 × locator resolved to <p class="caption-card__meta">Instagram · 繁中</p>
+           - unexpected value "Instagram · 繁中"
+
+
+      17 |   await page.goto("/zh-hans");
+      18 |   const meta = page.locator(".artifact--captions .caption-card__meta").nth(1);
+    > 19 |   await expect(meta).toHaveText("Instagram · 简中");
+         |                      ^
+      20 |   await expect(page.locator(".artifact--captions .caption-card").nth(1).locator("p[lang]")).toHaveAttribute("lang", "zh-Hans");
+      21 |   const frame = page.locator(".frame--drafts .caption-card").nth(1);
+      22 |   await expect(frame.locator(".caption-card__meta")).toHaveText("简中");
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\i18n.spec.ts:19:22
+
+    Error Context: test-results\i18n-the-homepage-s-Chines-8c946-elled-for-the-page-s-script-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\i18n-the-homepage-s-Chines-8c946-elled-for-the-page-s-script-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\i18n-the-homepage-s-Chines-8c946-elled-for-the-page-s-script-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\i18n.spec.ts:30:1 › the explainer defaults to the page's own caption track 
+
+    Error: /zh-hans/resources/videos
+
+    expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('video track[srclang=\'zh-Hans\']')
+    Expected: ""
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - /zh-hans/resources/videos locator('video track[srclang=\'zh-Hans\']') with timeout 5000ms
+      - waiting for locator('video track[srclang=\'zh-Hans\']')
+
+
+      32 |     await page.goto(route);
+      33 |     await page.locator(".player__poster").click();
+    > 34 |     await expect(page.locator(`video track[srclang='${track}']`), route).toHaveAttribute("default", "");
+         |                                                                          ^
+      35 |     await expect(page.locator("video track[default]"), route).toHaveCount(1);
+      36 |   }
+      37 | });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\i18n.spec.ts:34:74
+
+    Error Context: test-results\i18n-the-explainer-defaults-to-the-page-s-own-caption-track-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\i18n-the-explainer-defaults-to-the-page-s-own-caption-track-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\i18n-the-explainer-defaults-to-the-page-s-own-caption-track-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests\e2e\i18n.spec.ts:39:1 › Simplified pages use the mainland words ────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByLabel(/^工作邮件/)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByLabel(/^工作邮件/) with timeout 5000ms
+      - waiting for getByLabel(/^工作邮件/)
+
+
+      39 | test("Simplified pages use the mainland words", async ({ page }) => {
+      40 |   await page.goto("/zh-hans/contact");
+    > 41 |   await expect(page.getByLabel(/^工作邮件/)).toBeVisible();
+         |                                          ^
+      42 |   expect(await page.locator("main").innerText()).not.toContain("电邮");
+      43 |   await page.goto("/zh-hans/resources/videos");
+      44 |   await expect(page.locator("main")).toContainText("视频");
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\i18n.spec.ts:41:42
+
+    Error Context: test-results\i18n-Simplified-pages-use-the-mainland-words-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\i18n-Simplified-pages-use-the-mainland-words-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\i18n-Simplified-pages-use-the-mainland-words-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests\e2e\i18n.spec.ts:47:1 › Simplified listings mark the Traditional originals they show 
+
+    Error: /zh-hans/knowledge-hub/category/Instagram
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 33
+
+    - Array []
+    + Array [
+    +   "Instagram︰Reels 表現真的比較其他 Post 好？",
+    +   "Instagram Reels是 Instagram 全球增長最快的功能。品牌應否跟隨熱潮轉用 Reels？Reels 的表現是否真的比其他 Feed Post 內容格式好？讓我們一起看看！",
+    +   "Instagram︰十大最熱門 Instagram Reels Hashtags",
+    +   "現時 Instagram 用戶平均 20% 時間都花在 Reels 的影片上。如果你的品牌想利用 Reels 爭取更多曝光，懂得運用 hashtags。一起看看有哪些熱門 IG Reels Hashtags ！",
+    +   "Instagram︰IG 時間排序功能即將推出？其實當中另有玄機！",
+    +   "近期最受關注的 Instagram 新聞一定是 chronological feed ( 時間排序 )。究竟 Instagram 會否回復到 2016 年按貼文發佈時間的排法？看看 Instagram 怎麼說！",
+    +   "Instagram︰2021 十大熱門 IG Hashtags 及挑選貼士",
+    +   "有 hashtag 的 Instagram posts 互動量平均多 12.6%，可見想 IG 帳戶表現好就要懂得運用 hashtags。讓我們一起看看最多人使用什麼 IG hashtags ，再分享一些挑選 Instagram hashtags 的小貼士！",
+    +   "Instagram︰ Instagram Like 被隱藏了 ?",
+    +   "你會怎樣評定一個 post 受不受歡迎？看它得到多少 Like。 Like 一直都是大家衡量表現的重要指標，但是 Facebook 5 月起竟然開始把 Instagram Like 數量隱藏起來。這對品牌有什麼影響？ Marketers 有什麼應對策略呢？",
+    +   "Instagram︰Link in Bio 策略有用嗎？",
+    +   "最近有傳聞說在 Instagram post 中呼籲粉絲點撃帳戶簡介中的連結可能令表現變差。這傳聞是不是真的？Marketers 又可以怎樣應對？",
+    +   "Instagram︰4 種 Stories Highlights 推廣方法",
+    +   "Instagram 是接觸年輕顧客的理想平台，但是品牌只有一個 150 字體的簡介與連結介紹自己，怎會足夠？不如嘗試用 Instagram Stories Highlights 吧！",
+    +   "Instagram︰ 2019 Instagram 數碼營銷趨勢 (II)",
+    +   "雖然 Stories 被喻為即將取代 News Feed 的溝通渠道，但是很多品牌都不太熟悉 Stories 的環境。現在就讓我們看看在 2019 Instagram Stories Marketing 有什麼新趨勢，以及他們的應對方法！",
+    +   "Instagram︰ 2019 Instagram 數碼營銷趨勢 (I)",
+    +   "Instagram 的平台與其用戶的喜好每天都在轉變，去年的營銷策略現在可能已經不適用。讓我們看看在 2019 Instagram Marketing 有什麼新趨勢，以及他們的應對方法！",
+    +   "Instagram 如今是數碼營銷中不容忽視的宣傳平台，不能有任何閃失。然而，最近有些朋友覺得在 Instagram 的 like 突然變少，擔心帳戶被 Instagram ban 了。究竟是什麼回事呢？",
+    +   "Instagram︰增加 Instagram 粉絲 5 大關鍵",
+    +   "Instagram 是香港最受歡迎的社交媒體之一，不少品牌都已經進駐 Instagram，希望在這平台與顧客建立更緊密的關係。然而，很多品牌開設帳戶後就卡住了，似乎無論做些什麼 Instagram 粉絲數目就是不增加。究竟問題出在哪裡？你的策略可能缺少了以下的關鍵元素。",
+    +   "怎樣在 Instagram 獲得更多 Like？讓我們分享三個秘密招式！",
+    +   "Instagram︰要用盡 30 個 Instagram Hashtags 嗎？",
+    +   "有些人認為 Instagram hashtags 貴精不貴多，只會用最適合的。有些人認為既然 Instagram 容許我們用 30 個 hashtags 就應該用盡它們。有人認為 hashtags 作用不大，不如靠廣告。你認為在 Instagram 分享內容時應該用多少個 hashtags 呢？",
+    +   "Instagrammers 比任何社交媒體的用戶都活躍，亦更願意與品牌互動，是 Marketers 理想的宣傳平台。要把這些互動轉化成 Instagram Lead ，Marketers 要怎麼做呢？",
+    +   "Instagram︰如何戰勝 Instagram Algorithm",
+    +   "開設 Instagram 帳戶已是迫在眉睫的事情，但是開設帳戶後，Marketers 要怎樣才能戰勝 Instagram 的演算法，接觸更多的顧客？",
+    +   "Instagram︰Instagram 適合你的品牌嗎？",
+    +   "隨著 Facebook 經營成本增加，很多 Marketers 都想另覓新宣傳渠道，並把目光轉向 Instagram。然而，面對這個截然不同的平台，Marketers 仍有不少疑問。例如 Instagram 只是年輕人的玩意？在 Instagram 建立粉絲群很難？品牌是否應該嘗試呢？",
+    +   "Instagram︰ Shadowban 是事實還是虛構？",
+    +   "近月有不少用戶聲稱內容被 Instagram 暗地裡隱藏了，導致粉絲的增長及互動率大幅度下降。究竟什麼是 Instagram shadowban ？你又可以怎樣應對呢？",
+    + ]
+
+      48 |   for (const route of ["/zh-hans/knowledge-hub/category/Instagram", "/zh-hans/knowledge-hub/category/Events", "/zh-hans/knowledge-hub", "/zh-hans/resources"]) {
+      49 |     await page.goto(route);
+    > 50 |     expect(await unmarkedTraditional(page, ".card h2, .card p"), route).toEqual([]);
+         |                                                                         ^
+      51 |   }
+      52 |   await page.goto("/zh-hans/knowledge-hub/category/Instagram");
+      53 |   expect(await page.locator('.card h2[lang="zh-Hant-HK"]').count()).toBeGreaterThan(0);
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\i18n.spec.ts:50:73
+
+    Error Context: test-results\i18n-Simplified-listings-m-7e6cd-itional-originals-they-show-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\i18n-Simplified-listings-m-7e6cd-itional-originals-they-show-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\i18n-Simplified-listings-m-7e6cd-itional-originals-they-show-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › tests\e2e\i18n.spec.ts:16:1 › the homepage's Chinese samples are tagged and labelled for the page's script 
+    [chromium] › tests\e2e\i18n.spec.ts:30:1 › the explainer defaults to the page's own caption track 
+    [chromium] › tests\e2e\i18n.spec.ts:39:1 › Simplified pages use the mainland words ─────────────
+    [chromium] › tests\e2e\i18n.spec.ts:47:1 › Simplified listings mark the Traditional originals they show 

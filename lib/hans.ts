@@ -5,31 +5,42 @@ import { hansPairs, hansPhrases } from "./hans-table";
  * pages. Uses a generated table (scripts/i18n/build-hans-table.mjs) so the
  * server and the browser produce identical text.
  */
-let charMap: Map<string, string> | null = null;
-let phraseMap: Map<string, string> | null = null;
-let phrasePattern: RegExp | null = null;
 
-function init() {
-  charMap = new Map();
-  const chars = [...hansPairs];
+/**
+ * A converter from a pair string (Traditional, Simplified, Traditional, …) and a phrase list. Phrases
+ * are matched literally (the pattern is escaped), longest first, and masked before the character map
+ * runs, so a phrase's own Simplified form is kept; an empty phrase list skips the masking.
+ */
+export function createConverter(pairs: string, phrases: [string, string][]): (text: string) => string {
+  const charMap = new Map<string, string>();
+  const chars = [...pairs];
   for (let i = 0; i + 1 < chars.length; i += 2) charMap.set(chars[i], chars[i + 1]);
-  phraseMap = new Map(hansPhrases);
-  phrasePattern = new RegExp(hansPhrases.map(([from]) => from).sort((a, b) => b.length - a.length).join("|"), "g");
+  const phraseMap = new Map(phrases);
+  const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const phrasePattern = phrases.length
+    ? new RegExp(phrases.map(([from]) => from).sort((a, b) => b.length - a.length).map(escape).join("|"), "g")
+    : null;
+  return (text) => {
+    if (!/[㐀-鿿豈-﫿]/.test(text)) return text;
+    // Protect phrases first (placeholders cannot collide with CJK text), then map characters.
+    const kept: string[] = [];
+    const masked = phrasePattern
+      ? text.replace(phrasePattern, (m) => {
+          kept.push(phraseMap.get(m)!);
+          return `\u0000${kept.length - 1}\u0000`;
+        })
+      : text;
+    let result = "";
+    for (const ch of masked) result += charMap.get(ch) ?? ch;
+    return kept.length ? result.replace(/\u0000(\d+)\u0000/g, (_, i) => kept[Number(i)]) : result;
+  };
 }
 
+let convert: ((text: string) => string) | null = null;
+
 export function toHans(text: string): string {
-  if (!charMap) init();
-  if (!/[㐀-鿿豈-﫿]/.test(text)) return text;
-  const map = charMap!;
-  // Protect phrases first (placeholders cannot collide with CJK text), then map characters.
-  const kept: string[] = [];
-  const masked = text.replace(phrasePattern!, (m) => {
-    kept.push(phraseMap!.get(m)!);
-    return `\u0000${kept.length - 1}\u0000`;
-  });
-  let result = "";
-  for (const ch of masked) result += map.get(ch) ?? ch;
-  return result.replace(/\u0000(\d+)\u0000/g, (_, i) => kept[Number(i)]);
+  convert ??= createConverter(hansPairs, hansPhrases);
+  return convert(text);
 }
 
 /** Convert every string inside a value (strings, arrays, tuples, plain objects). */

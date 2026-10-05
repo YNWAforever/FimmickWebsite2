@@ -29,10 +29,14 @@ const convert = OpenCC.Converter({ from: "hk", to: "cn" });
 /** Words whose Simplified form differs from character-by-character conversion. */
 const phrases = [
   // 著 is simplified to 着 except in these words, where 著 is retained.
-  ["著名", "著名"], ["顯著", "显著"], ["著作", "著作"], ["名著", "名著"], ["原著", "原著"], ["土著", "土著"], ["編著", "编著"], ["論著", "论著"], ["專著", "专著"],
+  ["著名", "著名"], ["顯著", "显著"], ["著作", "著作"], ["名著", "名著"], ["原著", "原著"], ["土著", "土著"], ["編著", "编著"], ["論著", "论著"], ["專著", "专著"], ["著稱", "著称"], ["卓著", "卓著"],
   ["甚麼", "什么"],
   // 覆 → 复 in these words (覆 is kept in 覆蓋 etc.).
   ["回覆", "回复"], ["反覆", "反复"], ["答覆", "答复"],
+  // Glossary (award pass 2, 8.3): Hong Kong words that read as foreign on the mainland, replaced by the
+  // mainland word. A native reviewer's corrections go here too, never into the generated strings.
+  ["質素", "质量"], ["搜尋", "搜索"], ["預設", "默认"], ["介面", "界面"], ["程式", "程序"], ["影片", "视频"],
+  ["檔案", "文件"], ["存取", "访问"], ["登入", "登录"], ["電郵", "邮件"], ["資訊", "信息"], ["軟件", "软件"],
 ];
 const charOverrides = { "著": "着" };
 
@@ -66,14 +70,33 @@ export const hansPairs = ${JSON.stringify(pairs.join(""))};
 export const hansPhrases: [string, string][] = ${JSON.stringify(phrases)};
 `;
 
+/** The conversion lib/hans.ts runs (phrases masked longest first, then characters); a unit test holds them equal. */
+const charMap = new Map(pairs.map((p) => [...p]));
+const phraseMap = new Map(phrases);
+const phrasePattern = new RegExp(phrases.map(([from]) => from).sort((a, b) => b.length - a.length).map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "g");
+function toHans(text) {
+  const kept = [];
+  const masked = text.replace(phrasePattern, (m) => `\u0000${kept.push(phraseMap.get(m)) - 1}\u0000`);
+  return [...masked].map((ch) => charMap.get(ch) ?? ch).join("").replace(/\u0000(\d+)\u0000/g, (_, i) => kept[Number(i)]);
+}
+
+// The explainer's Simplified caption track, generated from the Traditional one (video/render.mjs writes
+// the English and Traditional tracks from content/media.ts).
+const captionsDir = path.join(root, "public", "media", "explainer");
+const hansCaptions = toHans(fs.readFileSync(path.join(captionsDir, "captions-zh-hant.vtt"), "utf8"));
+const outputs = [
+  [out, body],
+  [path.join(captionsDir, "captions-zh-hans.vtt"), hansCaptions],
+];
+
 if (process.argv.includes("--check")) {
-  const current = fs.existsSync(out) ? fs.readFileSync(out, "utf8") : "";
-  if (current !== body) {
-    console.error("lib/hans-table.ts is out of date. Run: npm run i18n:hans");
+  const stale = outputs.filter(([file, text]) => (fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "") !== text);
+  if (stale.length) {
+    console.error(`${stale.map(([file]) => path.relative(root, file)).join(", ")} out of date. Run: npm run i18n:hans`);
     process.exit(1);
   }
-  console.log(`hans table up to date (${pairs.length} characters)`);
+  console.log(`hans table up to date (${pairs.length} characters); Simplified captions current`);
 } else {
-  fs.writeFileSync(out, body);
-  console.log(`wrote ${path.relative(root, out)}: ${pairs.length} character pairs, ${phrases.length} phrases`);
+  for (const [file, text] of outputs) fs.writeFileSync(file, text);
+  console.log(`wrote ${path.relative(root, out)}: ${pairs.length} character pairs, ${phrases.length} phrases; and the Simplified captions`);
 }

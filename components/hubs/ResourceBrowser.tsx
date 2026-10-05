@@ -130,8 +130,8 @@ export function ResourceBrowser({ base, dataUrl, initial, formats, topics, label
                   {item.date}
                   {item.past ? <span>· {labels.pastEvent}</span> : null}
                 </span>
-                <h2>{item.title}</h2>
-                <p className="small muted" style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.summary}</p>
+                <h2 lang={item.tag}>{item.title}</h2>
+                <p className="small muted" lang={item.tag} style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.summary}</p>
                 <span className="micro muted">{labels.originalLanguage}: {item.lang}</span>
               </Link>
             );

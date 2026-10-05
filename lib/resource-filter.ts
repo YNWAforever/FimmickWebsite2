@@ -7,7 +7,7 @@ import type { ResourceFormat, ResourceTopic } from "@/content/types";
 export type ResourceFilter = { format?: ResourceFormat; topic?: ResourceTopic; q?: string; page?: number };
 export type Filterable = { format: ResourceFormat; topic: ResourceTopic; title: string; summary: string };
 /** A listing row with its labels already localised on the server (the browser imports no i18n tables). */
-export type ResourceRow = Filterable & { id: string; date: string; lang: string; href: string; past: boolean };
+export type ResourceRow = Filterable & { id: string; date: string; lang: string; href: string; past: boolean; /** lang attribute when the text is not in the page’s language. */ tag?: string };
 export const PAGE_SIZE = 12;
 
 export function filterRows<T extends Filterable>(all: T[], filter: ResourceFilter) {

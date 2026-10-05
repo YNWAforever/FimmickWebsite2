@@ -30,9 +30,8 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run lint
+      # Unit tests, then the Simplified Chinese table and caption check (both in npm test since 8.3).
       - run: npm test
-      - name: Simplified Chinese table is current
-        run: node scripts/i18n/build-hans-table.mjs --check
 
       - name: Production build
         run: npx next build
@@ -43,6 +42,13 @@ jobs:
 
       - name: Review build (what previews serve)
         run: npx next build
+      - name: Simplified Chinese pages carry no unmarked Traditional text
+        run: |
+          npx next start -p 3100 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3100/en && break; sleep 1; done
+          node scripts/i18n/check-hans.mjs
+          kill %1
+          wait %1 || true
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: End-to-end, accessibility and craft tests

@@ -50,7 +50,7 @@ export default async function VideosPage({ params }: LocaleParams) {
             <h2>{t(explainerVideo.title, locale)}</h2>
             <p className="muted">{t(explainerVideo.summary, locale)}</p>
             <p className="notice">{t(explainerVideo.mode, locale)}</p>
-            <p className="micro muted">{formatDate(explainerVideo.published, locale)} · {explainerMedia.durationSeconds}s · {en ? "No audio track. Captions: English, Traditional Chinese." : zh("沒有音軌。字幕：英文、繁體中文。", locale)}</p>
+            <p className="micro muted">{formatDate(explainerVideo.published, locale)} · {explainerMedia.durationSeconds}s · {en ? "No audio track. Captions: English, Traditional Chinese, Simplified Chinese." : zh("沒有音軌。字幕：英文、繁體中文、簡體中文。", locale)}</p>
           </div>
           <aside className="detail-aside">
             <div className="transcript" id="transcript">
