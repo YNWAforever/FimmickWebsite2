@@ -30,6 +30,8 @@ export function SignatureStage({
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [finished, setFinished] = useState(false);
+  /** The active step’s progress has begun: its bar keeps its place while paused (Phase 9). */
+  const [started, setStarted] = useState(false);
   const [reduced, setReduced] = useState(true);
   const autoStarted = useRef(false);
 
@@ -54,6 +56,7 @@ export function SignatureStage({
         if (entry.isIntersecting && !autoStarted.current) {
           autoStarted.current = true;
           setPlaying(true);
+          setStarted(true);
         }
         if (!entry.isIntersecting) setPlaying(false);
       },
@@ -85,15 +88,18 @@ export function SignatureStage({
       setActive(0);
       setFinished(false);
       setPlaying(true);
+      setStarted(true);
       return;
     }
     setPlaying((p) => !p);
+    setStarted(true);
   };
 
   const choose = (index: number) => {
     autoStarted.current = true;
     setMode("stage");
     setPlaying(false);
+    setStarted(false);
     setFinished(index === steps.length - 1);
     setActive(index);
   };
@@ -107,7 +113,9 @@ export function SignatureStage({
         <ol className="sig__steps">
           {steps.map((s, i) => {
             const done = staged && (i < active || (i === active && finished));
-            const running = staged && i === active && playing;
+            // Once a step has started, its bar keeps the animation and pausing only stops it, so a pause
+            // holds the progress and playing again resumes from there (it used to reset the step).
+            const running = staged && i === active && started && !finished;
             return (
               <li key={s.id} data-role={s.id}>
                 <button type="button" className="sig__step" aria-current={staged && i === active ? "step" : undefined} onClick={() => choose(i)}>
@@ -119,7 +127,12 @@ export function SignatureStage({
                     {s.label}
                   </span>
                   <span className="sig__bar" aria-hidden="true">
-                    <span key={`${active}-${playing}`} className={`sig__fill${done ? " is-done" : ""}${running ? " is-running" : ""}`} onAnimationEnd={running ? advance : undefined} />
+                    <span
+                      key={active}
+                      className={`sig__fill${done ? " is-done" : ""}${running ? " is-running" : ""}`}
+                      style={running ? { animationPlayState: playing ? "running" : "paused" } : undefined}
+                      onAnimationEnd={running ? advance : undefined}
+                    />
                   </span>
                 </button>
               </li>

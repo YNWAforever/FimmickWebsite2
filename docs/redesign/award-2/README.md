@@ -7,6 +7,22 @@ Execution record for the 21-item fix plan in [`handoff/03-FimmickWebsite2-Fix-Pl
 - `after/` — the same measurements after each phase.
 - Scripts: `scripts/award-2/` (`capture-scroll.mjs`, `heights.mjs`, `verify.mjs`, `axe.mjs`, `bytes.mjs`, `lighthouse.mjs`). All expect a production build on port 3100 (`npm run build && npx next start -p 3100`); `OUT=before|after` picks the folder.
 
+## Current quality gate
+
+Written by `node scripts/award-2/quality-gate.mjs` (Phase 9): typecheck, lint, unit tests and the hans table, Playwright in every project (axe and the cascade test included) and the Lighthouse median on mobile `/en` against `quality-baseline.json` (a drop of more than 2 points fails). CI runs the same Lighthouse gate on its own baseline; the PR checklist is `.github/pull_request_template.md`.
+
+<!-- quality-gate:start -->
+Last run 2026-10-05 on b509f32 with uncommitted changes (local): `node scripts/award-2/quality-gate.mjs`.
+
+| Check | Result | Time |
+| --- | --- | --- |
+| typecheck | pass | 5 s |
+| lint | pass | 18 s |
+| unit + hans table | pass | 12 s |
+| playwright | pass | 266 s |
+| lighthouse mobile /en (local) | pass — median 87 of 5, baseline 89, floor 87 | 128 s |
+<!-- quality-gate:end -->
+
 ## Phase 0 baseline (4 Oct 2026, main@10c886e)
 
 Local production build (`next build`, 1,549 static pages, Google Fonts reachable so no font substitution), `next start -p 3100`, Playwright Chromium 1243 on Windows 11. Lighthouse 13.5.0, simulated throttling, median of 3.
@@ -254,6 +270,25 @@ Lighthouse mobile `/en`, 8 interleaved pairs: `main` 91 / branch 87 (Phase 0 bas
 
 Not done (in the PR): the native review (Decision #7); `ArticleView` still carries a few hand-written Simplified strings from before this pass (知识库, 上一页, 文章存档 …), which render correctly.
 
+## Phase 9 — tests and CI (fix plan 21)
+
+Evidence: `before/phase-9-tests/behaviour-red.log` (3 of 4 new behaviour tests failing on `main`) and `after/phase-9-quality-gate.log` (the full gate: 260 Playwright tests across five projects + 1 skipped, Lighthouse median 87 of 5).
+
+| Item | Before (`main` b509f32) | After |
+| --- | --- | --- |
+| 9.1 browsers and devices | Chromium only; `reuseExistingServer: true` everywhere | `firefox`, `webkit`, `Mobile Safari` (iPhone 14) and `iPad landscape` (iPad gen 7) projects run `tests/e2e/smoke.spec.ts` (home, platform, services, contact, 404, video); Chromium runs every spec; CI never reuses a server and installs all three engines |
+| 9.2 axe | 33 pages × 2 widths | the same, plus the audit’s 12-page list × 2 widths with `reducedMotion: "reduce"` |
+| 9.3 behaviour tests | most of the list covered by the phases; no test for the language switch with modifier keys or a hash, signature-stage resume, or the hero accent on `/zh-hans` | `tests/e2e/behaviour.spec.ts`. Two defects the audit had listed were fixed with their tests: the language switch now carries the safe query and the hash in its `href` (refreshed from the live address when used) and intercepts only plain primary clicks, so Ctrl/Cmd-click opens a new tab; pausing the signature stage holds the step’s progress (`animation-play-state`) and playing again resumes instead of restarting the 5 s step |
+| 9.4 quality gate | — | `scripts/award-2/quality-gate.mjs`: typecheck, lint, `npm test`, Playwright in every project (axe and the cascade test included), Lighthouse mobile `/en` median of 5 (10 under the floor) against `quality-baseline.json`; writes the table above. CI runs its Lighthouse half against a CI baseline |
+| 9.5 waits | — | the smoke set waits on elements, URLs and attributes (no `networkidle`, no fixed timeouts); the Chromium-only specs keep theirs |
+| PR template | — | `.github/pull_request_template.md` with the brief’s gates; `tests/unit/ground-rules.test.ts` checks the mechanical ones (runtime dependencies, `app/fonts.ts`, where the award sheets are imported, an unchanged `content/legal.ts`) |
+
+Checks: typecheck, lint, vitest 96/96 then the table and caption check, Playwright 260/260 + 1 skipped across five projects (new: `behaviour.spec.ts` 4, `smoke.spec.ts` 6 × 5 projects, 24 reduced-motion axe tests), `content/legal.ts` untouched.
+
+CI Lighthouse baseline: 93, from this PR’s first green CI run (runs 93, 93, 93, 93, 94), so the CI gate fails below 91 from now on.
+
+Not done (in the PR): the signature stage still collapses from four frames to one at hydration (the audit’s other half of that item; it shifts content below the fold only).
+
 ## Phase log
 
 | Phase | PR | What changed | Before → after |
@@ -269,3 +304,4 @@ Not done (in the PR): the native review (Decision #7); `ArticleView` still carri
 | 8.1 | feat/award-pass-2-seo | Chinese articles out of /en (308, zh-hant records), JSON-LD escape and site graph, BreadcrumbList from Crumbs, title/description fitting and service SEO titles, sitemap categories and x-default, single-hop redirects and 410s, events hidden from zh hubs, hreflang zh-Hant | /en article URLs 344 → 130; redirect chains → 0 over 1,268 URLs; long titles 36 → 0; 24 new regression tests, 21 red on main |
 | 8.2 | feat/award-pass-2-perf | Static hubs (filter islands, static Knowledge Hub pages, contact context in the browser), prefetch on intent, CSS split by route, self-hosted fonts, 2× logos, CJK-first stacks on zh pages, shadow/progress/reduced-motion/header/print | dynamic hubs 4 → 0; `/en` full-scroll RSC 211 → 80 KB gz; `/en/services` CSS 111 → 50 KB; 31 new regression tests (17 + 2 axe red on `main`, plus the prototype-key test) |
 | 8.3 | feat/award-pass-2-i18n | zh-Hans glossary (12 mainland words), escaped phrase pattern and empty-list guard, 著称/卓著, zh-Hans tags and 简中 labels on the homepage samples, generated Simplified captions as the default on /zh-hans, table check in `npm test` and `check-hans` in CI, listings mark the Traditional originals they show | Hong Kong words on zh-Hans pages (the audit’s top 7: 175 occurrences in the source copy) → converted by the glossary; unmarked Traditional lines on zh-Hans pages 73 → 0; 23 new regression tests, 21 red on main |
+| 9 | feat/award-pass-2-tests | Firefox, WebKit, iPhone 14 and iPad-landscape smoke projects, reduced-motion axe pass, behaviour tests for the language switch (modifier keys, hash) and the signature stage (pause/resume) with their fixes, quality-gate script and CI Lighthouse gate, PR template, ground-rules test | browser projects 1 → 5; Playwright 202 → 260 tests; 3 new behaviour tests red on main |
