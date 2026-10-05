@@ -1,8 +1,8 @@
 {
-  "note": "Lighthouse mobile performance baselines for scripts/award-2/quality-gate.mjs. A run fails when the median drops more than `tolerance` points below its environment's baseline. `local` is the Phase 0 baseline on the reference laptop; `ci` is measured on GitHub's runners (record it from the first CI run's log; until then the CI gate reports without failing).",
+  "note": "Lighthouse mobile performance baselines for scripts/award-2/quality-gate.mjs. A run fails when the median drops more than `tolerance` points below its environment's baseline. `local` is the Phase 0 baseline on the reference laptop; `ci` was measured on GitHub's runners (CI run 37299169714 on ca2d4cc, Phase 9: runs 93, 93, 93, 93, 94).",
   "tolerance": 2,
   "lighthouse": {
     "local": { "/en": { "mobile": 89 } },
-    "ci": {}
+    "ci": { "/en": { "mobile": 93 } }
   }
 }

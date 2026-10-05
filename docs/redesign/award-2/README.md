@@ -285,7 +285,9 @@ Evidence: `before/phase-9-tests/behaviour-red.log` (3 of 4 new behaviour tests f
 
 Checks: typecheck, lint, vitest 96/96 then the table and caption check, Playwright 260/260 + 1 skipped across five projects (new: `behaviour.spec.ts` 4, `smoke.spec.ts` 6 × 5 projects, 24 reduced-motion axe tests), `content/legal.ts` untouched.
 
-Not done (in the PR): the CI Lighthouse baseline is recorded from this PR’s first CI run and committed after it; the signature stage still collapses from four frames to one at hydration (the audit’s other half of that item; it shifts content below the fold only).
+CI Lighthouse baseline: 93, from this PR’s first green CI run (runs 93, 93, 93, 93, 94), so the CI gate fails below 91 from now on.
+
+Not done (in the PR): the signature stage still collapses from four frames to one at hydration (the audit’s other half of that item; it shifts content below the fold only).
 
 ## Phase log
 
