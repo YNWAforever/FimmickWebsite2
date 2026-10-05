@@ -116,7 +116,10 @@ async function up() {
 }
 
 async function startServer() {
-  const child = spawn("npx", ["next", "start", "-p", String(port)], { cwd: root, shell: true, stdio: "ignore", env: { ...process.env, ENQUIRY_FORWARD_URL: "" } });
+  // Next's own binary in this process's node, not npx in a shell: killing a shell or npx wrapper
+  // leaves the server running and holding the port.
+  const next = path.join(root, "node_modules", "next", "dist", "bin", "next");
+  const child = spawn(process.execPath, [next, "start", "-p", String(port)], { cwd: root, stdio: "ignore", env: { ...process.env, ENQUIRY_FORWARD_URL: "" } });
   for (let i = 0; i < 60 && !(await up()); i++) await new Promise((r) => setTimeout(r, 1000));
   return child;
 }
