@@ -155,11 +155,23 @@ export function SignatureStage({
           })}
         </ol>
         <div className="sig__buttons">
+          {/* Each button holds every label it can show, stacked; CSS shows the current one, so the
+              widest sets the width and a new label never moves the row. */}
           <button type="button" className="sig__btn" onClick={togglePlay} aria-pressed={playing}>
-            <span aria-hidden="true" className="sig__icon">
-              {playing ? "❚❚" : finished ? "↺" : "▶"}
+            <span className="sig__opts">
+              {([
+                ["play", "▶", labels.play],
+                ["pause", "❚❚", labels.pause],
+                ["replay", "↺", labels.replay],
+              ] as const).map(([key, icon, text]) => (
+                <span key={key} className={`sig__opt${text === playLabel ? " is-on" : ""}`}>
+                  <span aria-hidden="true" className="sig__icon">
+                    {icon}
+                  </span>
+                  {text}
+                </span>
+              ))}
             </span>
-            {playLabel}
           </button>
           <button
             type="button"
@@ -171,7 +183,10 @@ export function SignatureStage({
               setMode(staged ? "all" : "stage");
             }}
           >
-            {staged ? labels.showAll : labels.showOne}
+            <span className="sig__opts">
+              <span className={`sig__opt sig__opt--all${staged ? " is-on" : ""}`}>{labels.showAll}</span>
+              <span className={`sig__opt sig__opt--one${staged ? "" : " is-on"}`}>{labels.showOne}</span>
+            </span>
           </button>
         </div>
       </div>

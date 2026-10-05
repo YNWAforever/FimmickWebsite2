@@ -99,6 +99,47 @@ test.describe("signature stage", () => {
     });
   }
 
+  /** Left edge and width of each step and button in the controls row, rounded to the pixel. */
+  const controls = (page: Page) =>
+    page.locator(".sig__step, .sig__btn").evaluateAll((els) =>
+      els.map((el) => {
+        const r = el.getBoundingClientRect();
+        return [Math.round(r.left), Math.round(r.width)];
+      }),
+    );
+
+  for (const width of [1440, 390]) {
+    test(`at ${width} px the controls row does not move through hydration`, async ({ browser }) => {
+      const layout = async (hydrate: boolean) => {
+        const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: "no-preference" });
+        const page = await context.newPage();
+        if (!hydrate) await page.route(/\/_next\/static\/chunks\/.+\.js/, (route) => route.abort());
+        await page.goto("/en");
+        if (hydrate) await expect(page.locator(".sig")).toHaveClass(/sig--stage/);
+        const result = await controls(page);
+        await context.close();
+        return result;
+      };
+      expect(await layout(true)).toEqual(await layout(false));
+    });
+  }
+
+  test("the buttons keep their size whatever they say", async ({ page }) => {
+    await page.goto("/en");
+    await expect(page.locator(".sig")).toHaveClass(/sig--stage/);
+    const play = page.locator(".sig__btn").first();
+    const start = await controls(page);
+    await page.locator(".sig__frames").scrollIntoViewIfNeeded();
+    await expect(play).toHaveAttribute("aria-pressed", "true"); // Pause
+    expect(await controls(page)).toEqual(start);
+    await page.locator(".sig__step").last().click(); // the last step: Replay
+    await expect(play).toHaveAccessibleName(/replay/i);
+    expect(await controls(page)).toEqual(start);
+    await page.getByRole("button", { name: "Show all four" }).click(); // now Step through
+    await expect(page.getByRole("button", { name: "Step through" })).toBeVisible();
+    expect(await controls(page)).toEqual(start);
+  });
+
   test("hydration does not replay the first frame's entrance; the next step still enters", async ({ page }) => {
     /** The entrance animations (`sig-in`) on a frame and its contents, finished ones included (fill: both). */
     const entrances = (role: string) =>

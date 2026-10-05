@@ -227,6 +227,11 @@
 .sig__btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 .sig__btn--quiet { background: none; }
 .sig__icon { font-size: 0.72rem; }
+/* Every label a button can show shares one grid cell; only the current one is visible (hidden ones also
+   leave the accessible name), so the button is as wide as its longest label and never resizes. */
+.sig__opts { display: grid; }
+.sig__opt { grid-area: 1 / 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px; visibility: hidden; }
+.sig__opt.is-on { visibility: visible; }
 
 .sig__frames { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
 .sig--all .sig__frames { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
@@ -243,7 +248,7 @@
 }
 /* Until the stage has read the motion setting it renders the storyboard (all four frames: the no-JS and
    reduced-motion view). With JavaScript on and motion allowed it is about to become the stage, so the
-   pending storyboard already looks like it (first frame, stage layout, empty bars) and hydration moves
+   pending storyboard already looks like it (first frame, stage layout, empty bars, the stage's view label) and hydration moves
    nothing; it used to collapse from four frames to one. */
 @media (prefers-reduced-motion: no-preference) {
   .js .sig--pending .sig__frames { grid-template-columns: minmax(0, 1fr); }
@@ -253,6 +258,8 @@
   .js .sig--pending .sig__frame-label { grid-column: 1; }
   .js .sig--pending .sig__frame-title { grid-column: 1; font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem); line-height: 1.1; }
   .js .sig--pending .sig__artifact { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .js .sig--pending .sig__opt--one { visibility: hidden; }
+  .js .sig--pending .sig__opt--all { visibility: visible; }
 }
 @media (prefers-reduced-motion: no-preference) and (max-width: 799px) {
   .js .sig--pending .sig__frame { grid-template-columns: minmax(0, 1fr); min-height: 0; }

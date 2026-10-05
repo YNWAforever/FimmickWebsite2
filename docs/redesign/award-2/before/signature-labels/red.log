@@ -1,0 +1,165 @@
+
+Running 3 tests using 3 workers
+
+  x  1 [chromium] › tests\e2e\behaviour.spec.ts:127:3 › signature stage › the buttons keep their size whatever they say (3.9s)
+  x  2 [chromium] › tests\e2e\behaviour.spec.ts:112:5 › signature stage › at 390 px the controls row does not move through hydration (4.6s)
+  x  3 [chromium] › tests\e2e\behaviour.spec.ts:112:5 › signature stage › at 1440 px the controls row does not move through hydration (5.0s)
+
+
+  1) [chromium] › tests\e2e\behaviour.spec.ts:112:5 › signature stage › at 1440 px the controls row does not move through hydration 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 5
+    + Received  + 5
+
+    @@ -6,21 +6,21 @@
+        Array [
+          322,
+          234,
+        ],
+        Array [
+    -     563,
+    +     564,
+          234,
+        ],
+        Array [
+    -     805,
+    +     807,
+          234,
+        ],
+        Array [
+    -     1062,
+    +     1065,
+          159,
+        ],
+        Array [
+    -     1229,
+    -     131,
+    +     1232,
+    +     128,
+        ],
+      ]
+
+      121 |         return result;
+      122 |       };
+    > 123 |       expect(await layout(true)).toEqual(await layout(false));
+          |                                  ^
+      124 |     });
+      125 |   }
+      126 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:123:34
+
+    Error Context: test-results\behaviour-signature-stage--24d94--not-move-through-hydration-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-signature-stage--24d94--not-move-through-hydration-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-signature-stage--24d94--not-move-through-hydration-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\behaviour.spec.ts:112:5 › signature stage › at 390 px the controls row does not move through hydration 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -19,8 +19,8 @@
+          20,
+          159,
+        ],
+        Array [
+          187,
+    -     131,
+    +     128,
+        ],
+      ]
+
+      121 |         return result;
+      122 |       };
+    > 123 |       expect(await layout(true)).toEqual(await layout(false));
+          |                                  ^
+      124 |     });
+      125 |   }
+      126 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:123:34
+
+    Error Context: test-results\behaviour-signature-stage--c69a6--not-move-through-hydration-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-signature-stage--c69a6--not-move-through-hydration-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-signature-stage--c69a6--not-move-through-hydration-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests\e2e\behaviour.spec.ts:127:3 › signature stage › the buttons keep their size whatever they say 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 9
+    + Received  + 9
+
+    @@ -1,25 +1,25 @@
+      Array [
+        Array [
+          80,
+    -     234,
+    +     231,
+        ],
+        Array [
+    -     322,
+    -     234,
+    +     319,
+    +     231,
+        ],
+        Array [
+    -     564,
+    -     234,
+    +     558,
+    +     231,
+        ],
+        Array [
+    -     807,
+    -     234,
+    +     797,
+    +     231,
+        ],
+        Array [
+    -     1065,
+    -     159,
+    +     1052,
+    +     172,
+        ],
+        Array [
+          1232,
+          128,
+        ],
+
+      132 |     await page.locator(".sig__frames").scrollIntoViewIfNeeded();
+      133 |     await expect(play).toHaveAttribute("aria-pressed", "true"); // Pause
+    > 134 |     expect(await controls(page)).toEqual(start);
+          |                                  ^
+      135 |     await page.locator(".sig__step").last().click(); // the last step: Replay
+      136 |     await expect(play).toHaveAccessibleName(/replay/i);
+      137 |     expect(await controls(page)).toEqual(start);
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:134:34
+
+    Error Context: test-results\behaviour-signature-stage--246dd-heir-size-whatever-they-say-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-signature-stage--246dd-heir-size-whatever-they-say-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-signature-stage--246dd-heir-size-whatever-they-say-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests\e2e\behaviour.spec.ts:112:5 › signature stage › at 1440 px the controls row does not move through hydration 
+    [chromium] › tests\e2e\behaviour.spec.ts:112:5 › signature stage › at 390 px the controls row does not move through hydration 
+    [chromium] › tests\e2e\behaviour.spec.ts:127:3 › signature stage › the buttons keep their size whatever they say 

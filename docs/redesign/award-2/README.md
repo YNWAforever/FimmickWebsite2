@@ -303,7 +303,7 @@ Evidence: `before/signature-hydration/` (`red.log`, `red-entrance.log`) and `aft
 
 Tests: 4 new in `behaviour.spec.ts`, 3 red before the change (both widths, the entrance), plus a guard that no-JS and reduced-motion visitors still get all four frames.
 
-Still changing at hydration: the play and view button labels (“Play sequence” → “Pause sequence” once it autoplays, “Step through” → “Show all four”), which moves the step bars about 3 px sideways at 1440; nothing moves vertically.
+The play and view button labels used to change width with their wording (“Step through” → “Show all four” at hydration, then Pause and Replay), moving the step bars 1–3 px sideways (1440: steps 234 → 231 px wide, the view button 131 → 128 px). Each button now stacks every label it can show in one grid cell and shows the current one (`.sig__opt.is-on`; hidden labels also leave the accessible name), and the pending storyboard already shows “Show all four”. The controls row is identical before and after hydration at 1440 and 390, and through Pause, Replay and Step through. Evidence: `before/signature-labels/red.log`, `after/signature-labels/` (`controls.txt`, the stage before and after hydration). Tests: 3 more in `behaviour.spec.ts`, all red before the change.
 
 ## Phase log
 
