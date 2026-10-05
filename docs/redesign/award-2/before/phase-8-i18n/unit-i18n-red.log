@@ -1,0 +1,309 @@
+
+[1m[46m RUN [49m[22m [36mv3.2.7 [39m[90mC:/Users/laich/Documents/FimmickWebsite2[39m
+
+ [31m❯[39m tests/unit/i18n.test.ts [2m([22m[2m19 tests[22m[2m | [22m[31m17 failed[39m[2m)[22m[32m 24[2mms[22m[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m質素 → 质量[39m[32m 10[2mms[22m[39m
+[31m     → expected '质素' to be '质量' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m搜尋 → 搜索[39m[32m 2[2mms[22m[39m
+[31m     → expected '搜寻' to be '搜索' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m預設 → 默认[39m[32m 1[2mms[22m[39m
+[31m     → expected '预设' to be '默认' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m介面 → 界面[39m[32m 1[2mms[22m[39m
+[31m     → expected '介面' to be '界面' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m程式 → 程序[39m[32m 1[2mms[22m[39m
+[31m     → expected '程式' to be '程序' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m影片 → 视频[39m[32m 1[2mms[22m[39m
+[31m     → expected '影片' to be '视频' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m檔案 → 文件[39m[32m 0[2mms[22m[39m
+[31m     → expected '档案' to be '文件' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m存取 → 访问[39m[32m 0[2mms[22m[39m
+[31m     → expected '存取' to be '访问' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m登入 → 登录[39m[32m 1[2mms[22m[39m
+[31m     → expected '登入' to be '登录' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m電郵 → 邮件[39m[32m 1[2mms[22m[39m
+[31m     → expected '电邮' to be '邮件' // Object.is equality[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22m資訊 → 信息[39m[32m 1[2mms[22m[39m
+[31m     → expected '资讯' to be '信息' // Object.is equality[39m
+   [32m✓[39m zh-Hans glossary[2m > [22m軟件 → 软件[32m 0[2mms[22m[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22muses the mainland word inside sentences[39m[32m 1[2mms[22m[39m
+[31m     → expected '工作电邮' to be '工作邮件' // Object.is equality[39m
+   [32m✓[39m zh-Hans glossary[2m > [22mkeeps 著 in 著稱 and 卓著, and simplifies it elsewhere[32m 0[2mms[22m[39m
+[31m   [31m×[31m zh-Hans glossary[2m > [22mmasks adjacent phrases independently[39m[32m 1[2mms[22m[39m
+[31m     → expected '请回复电邮' to be '请回复邮件' // Object.is equality[39m
+[31m   [31m×[31m the converter[2m > [22mmatches phrases literally (the pattern is escaped)[39m[32m 0[2mms[22m[39m
+[31m     → (0 , createConverter) is not a function[39m
+[31m   [31m×[31m the converter[2m > [22mworks with no phrases at all[39m[32m 0[2mms[22m[39m
+[31m     → (0 , createConverter) is not a function[39m
+[31m   [31m×[31m explainer captions[2m > [22mhas a Simplified track generated from the Traditional one[39m[32m 1[2mms[22m[39m
+[31m     → ENOENT: no such file or directory, open 'C:\Users\laich\Documents\FimmickWebsite2\public\media\explainer\captions-zh-hans.vtt'[39m
+[31m   [31m×[31m checks are wired[2m > [22mnpm test runs the table check, and CI checks the rendered zh-Hans pages[39m[32m 1[2mms[22m[39m
+[31m     → expected 'vitest run' to contain 'build-hans-table.mjs --check'[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 17 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m質素 → 质量
+[31m[1mAssertionError[22m: expected '质素' to be '质量' // Object.is equality[39m
+
+Expected: [32m"质[7m量[27m"[39m
+Received: [31m"质[7m素[27m"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m搜尋 → 搜索
+[31m[1mAssertionError[22m: expected '搜寻' to be '搜索' // Object.is equality[39m
+
+Expected: [32m"搜[7m索[27m"[39m
+Received: [31m"搜[7m寻[27m"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m預設 → 默认
+[31m[1mAssertionError[22m: expected '预设' to be '默认' // Object.is equality[39m
+
+Expected: [32m"默认"[39m
+Received: [31m"预设"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m介面 → 界面
+[31m[1mAssertionError[22m: expected '介面' to be '界面' // Object.is equality[39m
+
+Expected: [32m"[7m界[27m面"[39m
+Received: [31m"[7m介[27m面"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m程式 → 程序
+[31m[1mAssertionError[22m: expected '程式' to be '程序' // Object.is equality[39m
+
+Expected: [32m"程[7m序[27m"[39m
+Received: [31m"程[7m式[27m"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m影片 → 视频
+[31m[1mAssertionError[22m: expected '影片' to be '视频' // Object.is equality[39m
+
+Expected: [32m"视频"[39m
+Received: [31m"影片"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m檔案 → 文件
+[31m[1mAssertionError[22m: expected '档案' to be '文件' // Object.is equality[39m
+
+Expected: [32m"文件"[39m
+Received: [31m"档案"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m存取 → 访问
+[31m[1mAssertionError[22m: expected '存取' to be '访问' // Object.is equality[39m
+
+Expected: [32m"访问"[39m
+Received: [31m"存取"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m登入 → 登录
+[31m[1mAssertionError[22m: expected '登入' to be '登录' // Object.is equality[39m
+
+Expected: [32m"登[7m录[27m"[39m
+Received: [31m"登[7m入[27m"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m電郵 → 邮件
+[31m[1mAssertionError[22m: expected '电邮' to be '邮件' // Object.is equality[39m
+
+Expected: [32m"邮[7m件[27m"[39m
+Received: [31m"[7m电[27m邮"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22m資訊 → 信息
+[31m[1mAssertionError[22m: expected '资讯' to be '信息' // Object.is equality[39m
+
+Expected: [32m"信息"[39m
+Received: [31m"资讯"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m14:24[22m[39m
+    [90m 12| [39m  ][33m;[39m
+    [90m 13| [39m  it[33m.[39m[34meach[39m(glossary)([32m"%s → %s"[39m[33m,[39m (hk[33m,[39m cn) [33m=>[39m {
+    [90m 14| [39m    [34mexpect[39m([34mtoHans[39m(hk))[33m.[39m[34mtoBe[39m(cn)[33m;[39m
+    [90m   | [39m                       [31m^[39m
+    [90m 15| [39m  })[33m;[39m
+    [90m 16| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22muses the mainland word inside sentences
+[31m[1mAssertionError[22m: expected '工作电邮' to be '工作邮件' // Object.is equality[39m
+
+Expected: [32m"工作邮[7m件[27m"[39m
+Received: [31m"工作[7m电[27m邮"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m18:28[22m[39m
+    [90m 16| [39m
+    [90m 17| [39m  [34mit[39m([32m"uses the mainland word inside sentences"[39m[33m,[39m () [33m=>[39m {
+    [90m 18| [39m    [34mexpect[39m([34mtoHans[39m([32m"工作電郵"[39m))[33m.[39m[34mtoBe[39m([32m"工作邮件"[39m)[33m;[39m
+    [90m   | [39m                           [31m^[39m
+    [90m 19| [39m    [34mexpect[39m([34mtoHans[39m([32m"產品示範影片"[39m))[33m.[39m[34mtoBe[39m([32m"产品示范视频"[39m)[33m;[39m
+    [90m 20| [39m    [34mexpect[39m([34mtoHans[39m([32m"搜尋標題及摘要"[39m))[33m.[39m[34mtoBe[39m([32m"搜索标题及摘要"[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mzh-Hans glossary[2m > [22mmasks adjacent phrases independently
+[31m[1mAssertionError[22m: expected '请回复电邮' to be '请回复邮件' // Object.is equality[39m
+
+Expected: [32m"请回复邮[7m件[27m"[39m
+Received: [31m"请回复[7m电[27m邮"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m30:29[22m[39m
+    [90m 28| [39m
+    [90m 29| [39m  [34mit[39m([32m"masks adjacent phrases independently"[39m[33m,[39m () [33m=>[39m {
+    [90m 30| [39m    [34mexpect[39m([34mtoHans[39m([32m"請回覆電郵"[39m))[33m.[39m[34mtoBe[39m([32m"请回复邮件"[39m)[33m;[39m
+    [90m   | [39m                            [31m^[39m
+    [90m 31| [39m    [34mexpect[39m([34mtoHans[39m([32m"影片檔案"[39m))[33m.[39m[34mtoBe[39m([32m"视频文件"[39m)[33m;[39m
+    [90m 32| [39m    [34mexpect[39m([34mtoHans[39m([32m"回覆回覆"[39m))[33m.[39m[34mtoBe[39m([32m"回复回复"[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mthe converter[2m > [22mmatches phrases literally (the pattern is escaped)
+[31m[1mTypeError[22m: (0 , createConverter) is not a function[39m
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m38:21[22m[39m
+    [90m 36| [39m[34mdescribe[39m([32m"the converter"[39m[33m,[39m () [33m=>[39m {
+    [90m 37| [39m  [34mit[39m([32m"matches phrases literally (the pattern is escaped)"[39m[33m,[39m () [33m=>[39m {
+    [90m 38| [39m    [35mconst[39m convert [33m=[39m [34mcreateConverter[39m([32m""[39m[33m,[39m [[[32m"甲.乙"[39m[33m,[39m [32m"丙"[39m]])[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 39| [39m    [34mexpect[39m([34mconvert[39m([32m"甲.乙，甲丁乙"[39m))[33m.[39m[34mtoBe[39m([32m"丙，甲丁乙"[39m)[33m;[39m
+    [90m 40| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mthe converter[2m > [22mworks with no phrases at all
+[31m[1mTypeError[22m: (0 , createConverter) is not a function[39m
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m43:12[22m[39m
+    [90m 41| [39m
+    [90m 42| [39m  [34mit[39m([32m"works with no phrases at all"[39m[33m,[39m () [33m=>[39m {
+    [90m 43| [39m    [34mexpect[39m([34mcreateConverter[39m([32m"電电"[39m[33m,[39m [])([32m"電郵"[39m))[33m.[39m[34mtoBe[39m([32m"电郵"[39m)[33m;[39m
+    [90m   | [39m           [31m^[39m
+    [90m 44| [39m  })[33m;[39m
+    [90m 45| [39m})[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mexplainer captions[2m > [22mhas a Simplified track generated from the Traditional one
+[31m[1mError[22m: ENOENT: no such file or directory, open 'C:\Users\laich\Documents\FimmickWebsite2\public\media\explainer\captions-zh-hans.vtt'[39m
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m52:15[22m[39m
+    [90m 50| [39m  it("has a Simplified track generated from the Traditional one", () =…
+    [90m 51| [39m    const hant = fs.readFileSync(`${dir}/captions-zh-hant.vtt`, "utf8"…
+    [90m 52| [39m    expect(fs.readFileSync(`${dir}/captions-zh-hans.vtt`, "utf8")).toB…
+    [90m   | [39m              [31m^[39m
+    [90m 53| [39m    expect(explainerMedia.captions.find((c) => c.locale === "zh-hans")…
+    [90m 54| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/17]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/i18n.test.ts[2m > [22mchecks are wired[2m > [22mnpm test runs the table check, and CI checks the rendered zh-Hans pages
+[31m[1mAssertionError[22m: expected 'vitest run' to contain 'build-hans-table.mjs --check'[39m
+
+Expected: [32m"build-hans-table.mjs --check"[39m
+Received: [31m"vitest run"[39m
+
+[36m [2m❯[22m tests/unit/i18n.test.ts:[2m60:30[22m[39m
+    [90m 58| [39m  it("npm test runs the table check, and CI checks the rendered zh-Han…
+    [90m 59| [39m    const pkg = JSON.parse(fs.readFileSync("package.json", "utf8")) as…
+    [90m 60| [39m    [34mexpect[39m(pkg[33m.[39mscripts[33m.[39mtest)[33m.[39m[34mtoContain[39m([32m"build-hans-table.mjs --check"[39m)[33m;[39m
+    [90m   | [39m                             [31m^[39m
+    [90m 61| [39m    expect(fs.readFileSync(".github/workflows/ci.yml", "utf8")).toCont…
+    [90m 62| [39m  })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/17]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m17 failed[39m[22m[2m | [22m[1m[32m2 passed[39m[22m[90m (19)[39m
+[2m   Start at [22m 15:36:12
+[2m   Duration [22m 2.66s[2m (transform 240ms, setup 0ms, collect 215ms, tests 24ms, environment 0ms, prepare 977ms)[22m
+

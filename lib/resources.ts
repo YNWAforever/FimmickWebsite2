@@ -55,6 +55,23 @@ export const hasEnglish = (a: ArticleIndexEntry) => a.locales.en?.contentLanguag
 export const articleLocales = (a: ArticleIndexEntry): LegacyLocale[] =>
   (["en", "zh-hant", "zh-hans"] as LegacyLocale[]).filter((l) => (l === "en" ? hasEnglish(a) : Boolean(a.locales[l])));
 
+/**
+ * The record an article page and every listing show for a locale: its own, else the English one when it
+ * is genuinely English, else the Traditional Chinese one (8.1.1; listings follow the page since 8.3).
+ */
+export function articleListing(entry: ArticleIndexEntry, locale: LegacyLocale) {
+  const own = locale === "en" ? hasEnglish(entry) : Boolean(entry.locales[locale]);
+  const source: LegacyLocale = own ? locale : hasEnglish(entry) ? "en" : entry.locales["zh-hant"] ? "zh-hant" : (Object.keys(entry.locales)[0] as LegacyLocale);
+  return { source, meta: entry.locales[source]!, own };
+}
+
+/** The lang attribute for text written in `contentLanguage` on a `locale` page, or undefined when they match. */
+export function contentLang(contentLanguage: string, locale: LegacyLocale): string | undefined {
+  const tags: Record<string, string> = { en: "en", "zh-hant": "zh-Hant-HK", "zh-hans": "zh-Hans" };
+  const tag = tags[contentLanguage];
+  return tag && tag !== tags[locale] ? tag : undefined;
+}
+
 /** Knowledge Hub listing: articles per page, the list a locale shows, and its page count. */
 export const KNOWLEDGE_PAGE_SIZE = 18;
 export const knowledgeArticles = (locale: LegacyLocale) =>
@@ -125,10 +142,10 @@ export function allResources(locale: Locale): ResourceItem[] {
   }
   for (const article of articleIndex) {
     if (locale === "en" && !hasEnglish(article)) continue;
-    const meta = article.locales[locale] ?? article.locales.en;
+    // The record the article's own page shows, with the language it is written in (8.3).
+    const { meta } = articleListing(article, locale);
     if (!meta) continue;
-    const lang = (article.locales[locale] ? meta.contentLanguage : "en") as ResourceItem["contentLanguage"];
-    items.push({ id: `article:${article.slug}`, format: "article", topic: article.topic, title: meta.title, summary: meta.summary, date: article.published, contentLanguage: lang, href: `/knowledge-hub/${article.slug}` });
+    items.push({ id: `article:${article.slug}`, format: "article", topic: article.topic, title: meta.title, summary: meta.summary, date: article.published, contentLanguage: meta.contentLanguage as ResourceItem["contentLanguage"], href: `/knowledge-hub/${article.slug}` });
   }
   const sorted = items.sort((a, b) => (b.date || "9999").localeCompare(a.date || "9999"));
   cache = { ...cache, [locale]: sorted };

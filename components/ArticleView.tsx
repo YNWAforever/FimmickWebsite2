@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { href, formatDate, localeMeta, t, zh, type LegacyLocale, type Locale } from "@/lib/i18n";
-import { KNOWLEDGE_PAGE_SIZE, articleBySlug, articleLocales, getArticleBlocks, hasEnglish, isArchiveArticle, knowledgeArticles } from "@/lib/resources";
+import { KNOWLEDGE_PAGE_SIZE, articleBySlug, articleListing, articleLocales, contentLang as langFor, getArticleBlocks, isArchiveArticle, knowledgeArticles } from "@/lib/resources";
 import { resolveLegacyHref } from "@/lib/redirects";
 import { canonicalOrigin } from "@/lib/env";
 import { localeUrl, organizationId } from "@/lib/seo";
@@ -34,18 +34,18 @@ export function ArticleList({ locale, shellLocale, page, basePath }: { locale: L
       </div>
       <div className="related-grid">
         {items.map((a) => {
-          const meta = a.locales[locale] ?? a.locales.en!;
-          const own = Boolean(a.locales[locale]);
+          const { meta, own } = articleListing(a, locale);
+          const lang = langFor(meta.contentLanguage, locale);
           return (
             <Link key={a.slug} className="card card--link" href={`/${locale}/knowledge-hub/${a.slug}`}>
               <span className="card-meta">
                 <span className="chip">{meta.section ?? (en ? "Article" : zh("文章", locale))}</span>
                 {formatDate(a.published, locale)}
-                {!own ? <span>· {hans ? zh("英文原文", locale) : zh("英文原文", locale)}</span> : null}
+                {!own ? <span>· {meta.contentLanguage === "en" ? zh("英文原文", locale) : zh("原文", locale)}</span> : null}
               </span>
               {/* Card titles sit directly under the page’s h1 (a listing page). */}
-              <h2 lang={meta.contentLanguage === "en" ? "en" : undefined}>{meta.title}</h2>
-              <p className="small muted" style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{meta.summary}</p>
+              <h2 lang={lang}>{meta.title}</h2>
+              <p className="small muted" lang={lang} style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{meta.summary}</p>
             </Link>
           );
         })}
@@ -72,9 +72,8 @@ export function articleSource(slug: string, locale: LegacyLocale) {
   if (!entry) return null;
   // A Chinese "en" record is not an English version (8.1.1): fall back to English only when it is
   // genuinely English, otherwise to Traditional Chinese.
-  const own = locale === "en" ? hasEnglish(entry) : Boolean(entry.locales[locale]);
-  const source: LegacyLocale = own ? locale : hasEnglish(entry) ? "en" : entry.locales["zh-hant"] ? "zh-hant" : (Object.keys(entry.locales)[0] as LegacyLocale);
-  return { entry, source, meta: entry.locales[source]!, fallback: !own };
+  const { source, meta, own } = articleListing(entry, locale);
+  return { entry, source, meta, fallback: !own };
 }
 
 /**

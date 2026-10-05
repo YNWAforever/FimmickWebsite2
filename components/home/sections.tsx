@@ -21,6 +21,12 @@ import { LinkButton, TextLink } from "@/components/ui";
 // The homepage’s link lists (tiles, case photos, pathway rows, industries, ecosystem, shelf) prefetch
 // on intent; a full scroll used to fetch some 40 pages (8.2.2). Section buttons still prefetch on sight.
 import { HoverPrefetchLink as Link } from "@/components/shell/HoverPrefetchLink";
+
+/**
+ * The Chinese sample’s language tag and short label (8.3): on /zh-hans the sample is converted to
+ * Simplified, so it is tagged zh-Hans and labelled 简中; elsewhere it is the Traditional original.
+ */
+const zhSample = (locale: Locale) => (locale === "zh-hans" ? { lang: "zh-Hans", label: zh("簡中", locale) } : { lang: "zh-Hant-HK", label: "繁中" });
 import { workstreamCardsData } from "@/components/blocks";
 import { SignatureStage } from "./SignatureStage";
 import { HeroCard } from "./HeroCard";
@@ -72,7 +78,7 @@ export function CinematicHero({ locale }: P) {
           captions={[
             { lang: "en", runs: ex.captionRuns(ex.heroSample.caption.en, ex.heroSample.facts.map((f) => [f.id, f.phrase.en])) },
             {
-              lang: locale === "zh-hans" ? "zh-Hans" : "zh-Hant-HK",
+              lang: zhSample(locale).lang,
               runs: ex.captionRuns(zh(ex.heroSample.caption.zh, locale), ex.heroSample.facts.map((f) => [f.id, zh(f.phrase.zh, locale)])),
             },
           ]}
@@ -130,8 +136,8 @@ function ContentArtifact({ locale }: P) {
         <p lang="en">{draft.en}</p>
       </div>
       <div className="caption-card">
-        <p className="caption-card__meta">Instagram · 繁中</p>
-        <p lang="zh-Hant-HK">{zh(draft.zh, locale)}</p>
+        <p className="caption-card__meta">Instagram · {zhSample(locale).label}</p>
+        <p lang={zhSample(locale).lang}>{zh(draft.zh, locale)}</p>
       </div>
       <p className="artifact__check">
         <span aria-hidden="true">✓</span> {t(cinema.content.check, locale)}
@@ -348,8 +354,8 @@ export function SignatureWorkflow({ locale }: P) {
         <p lang="en">{firstSentence(draft.en)} …</p>
       </div>
       <div className="caption-card caption-card--night">
-        <p className="caption-card__meta">繁中</p>
-        <p lang="zh-Hant-HK">{zh(firstSentence(draft.zh), locale)} …</p>
+        <p className="caption-card__meta">{zhSample(locale).label}</p>
+        <p lang={zhSample(locale).lang}>{zh(firstSentence(draft.zh), locale)} …</p>
       </div>
       <p className="frame__check">
         <span aria-hidden="true">✓</span> {t(s.linked, locale)} · {t(cinema.content.check, locale)}

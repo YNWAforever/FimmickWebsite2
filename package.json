@@ -12,8 +12,9 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run && node scripts/i18n/build-hans-table.mjs --check",
     "test:e2e": "playwright test",
+    "test:i18n": "node scripts/i18n/build-hans-table.mjs --check && node scripts/i18n/check-hans.mjs",
     "video:render": "node video/render.mjs",
     "i18n:hans": "node scripts/i18n/build-hans-table.mjs"
   },

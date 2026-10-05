@@ -19,8 +19,10 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
   const started = useRef(false);
   const video = useRef<HTMLVideoElement>(null);
   const en = locale === "en";
-  // The film and captions exist in English and Traditional Chinese; Simplified pages use the Chinese film.
+  // The film exists in English and Traditional Chinese; Simplified pages use the Chinese film, with the
+  // page’s own captions when a track in that language exists (8.3).
   const film = locale === "en" ? "en" : "zh-hant";
+  const captionLocale = media.captions.some((c) => c.locale === locale) ? locale : film;
   const src = media.sources[film];
   const playing = state === "playing";
   return (
@@ -55,7 +57,7 @@ export function ExplainerPlayer({ locale, media, title, compact = false, transcr
         {/* Errors on the last source mean no playable source was found. */}
         <source src={src.webm} type="video/webm" onError={() => setState("error")} />
         {media.captions.map((c) => (
-          <track key={c.srclang} kind="captions" src={c.src} srcLang={c.srclang} label={c.label} default={c.locale === film} />
+          <track key={c.srclang} kind="captions" src={c.src} srcLang={c.srclang} label={c.label} default={c.locale === captionLocale} />
         ))}
       </video>
       {playing ? null : (

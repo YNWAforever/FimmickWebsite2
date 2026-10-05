@@ -1,5 +1,5 @@
 import { formatDate, href, zh, type Locale } from "@/lib/i18n";
-import { allResources } from "@/lib/resources";
+import { allResources, contentLang } from "@/lib/resources";
 import type { ResourceRow } from "@/lib/resource-filter";
 
 const langLabel = (lang: string, locale: Locale) => {
@@ -19,5 +19,6 @@ export function resourceRows(locale: Locale): ResourceRow[] {
     lang: langLabel(item.contentLanguage, locale),
     href: href(locale, item.href),
     past: item.status === "past",
+    tag: contentLang(item.contentLanguage, locale),
   }));
 }
