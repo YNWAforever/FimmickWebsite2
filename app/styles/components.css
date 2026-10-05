@@ -18,11 +18,28 @@
   line-height: 1.2;
   text-decoration: none;
   white-space: nowrap;
-  transition: transform var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+  position: relative;
+  transition: transform var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
 }
 
-.btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
-.btn:active { transform: translateY(0); box-shadow: none; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+/* Lift (award pass 2, 8.2.7): the raised shadow is a pseudo-element that fades in, so a hover animates
+   transform and opacity only, never box-shadow (a repaint on every frame). */
+:is(.btn, .card--link, .job-card, .hub-card)::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: var(--shadow-2);
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+  pointer-events: none;
+}
+.btn::after { inset: -1.5px; }
+:is(.btn, .card--link, .job-card, .hub-card):hover::after { opacity: 1; }
+.btn:active::after { opacity: 0; }
 
 .btn--accent { --btn-bg: var(--magenta); --btn-fg: #fff; }
 .btn--accent:hover { --btn-bg: #cc0071; }
@@ -134,11 +151,11 @@ a.chip:hover { border-color: var(--ink-2); }
   border-radius: var(--radius-l);
   background: var(--surface);
   box-shadow: var(--shadow-1);
-  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  transition: transform var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
 }
 
 .card--link { text-decoration: none; color: inherit; }
-.card--link:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--line-strong); }
+.card--link:hover { transform: translateY(-3px); border-color: var(--line-strong); }
 .card--link:focus-visible { border-radius: var(--radius-l); }
 .card :is(h2, h3) { font-size: 1.2rem; }
 /* Listing pages use h2 card titles under the h1; they match the h3 cards elsewhere. */
@@ -149,6 +166,7 @@ a.chip:hover { border-color: var(--ink-2); }
 .card--flat { box-shadow: none; }
 .card--tint { background: var(--canvas); border-color: transparent; box-shadow: none; }
 .section--night .card { background: var(--night-2); border-color: var(--night-line); color: var(--night-text); box-shadow: none; }
+.section--night .card::after { content: none; }
 .section--night .card :is(h2, h3) { color: #fff; }
 
 .number-tag {
@@ -282,6 +300,9 @@ a.chip:hover { border-color: var(--ink-2); }
 
 /* ---------- Related links ---------- */
 .related-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+/* Filterable grids (CaseFilter) wrap each card in a cell the filter can hide. */
+.related-grid__cell { display: grid; }
+.related-grid[hidden], .related-grid__cell[hidden] { display: none; }
 .related-block h2 { font-size: 1.35rem; margin-bottom: 16px; }
 
 /* ---------- Tables ---------- */
@@ -319,3 +340,19 @@ table.data tr:last-child td { border-bottom: 0; }
 .pagination { display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 36px; flex-wrap: wrap; }
 
 .empty-state { padding: 40px; text-align: center; border: 1px dashed var(--line-strong); border-radius: var(--radius-l); color: var(--muted); }
+
+/* ------------------------------------------------------------------
+   Motion policy: section entry (once), only with JS + no reduced motion
+------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+    transition-delay: var(--delay, 0ms);
+  }
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}

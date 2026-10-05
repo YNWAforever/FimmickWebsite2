@@ -256,3 +256,20 @@ button {
   font-weight: 700;
   font-size: var(--fs-small);
 }
+
+/* ------------------------------------------------------------------
+   Print (award pass 2, 8.2.7): the page's content in black on white, without the site chrome.
+   Content that waits for scrolling on screen (reveals, skipped bands) prints in full, and the dark
+   chapters print as plain text, because browsers drop background colours when printing.
+------------------------------------------------------------------- */
+@media print {
+  .skip-link, .site-header, .mega-scrim, .drawer, .drawer-scrim, .site-footer, .cursor-bubble, .scroll-cue, .marquee-band { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  * { content-visibility: visible !important; }
+  .reveal, .reveal :is(.eyebrow, .lead, h2, h3) { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  :is(.chapter-night, .closing, .section--night) { background: none !important; color: #000 !important; }
+  :is(.chapter-night, .closing, .section--night) :is(h1, h2, h3, p, li, a, span) { color: #000 !important; }
+  a { color: inherit; }
+  h1, h2, h3 { break-after: avoid; }
+  figure, img, .card { break-inside: avoid; }
+}

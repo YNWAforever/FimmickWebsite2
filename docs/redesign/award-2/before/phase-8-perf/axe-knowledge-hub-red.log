@@ -1,0 +1,75 @@
+
+Running 4 tests using 4 workers
+
+  ok 3 [chromium] › tests\e2e\axe.spec.ts:64:7 › axe at mobile › /en/knowledge-hub/page/2 has no violations (6.2s)
+  ok 1 [chromium] › tests\e2e\axe.spec.ts:64:7 › axe at desktop › /en/knowledge-hub/page/2 has no violations (6.5s)
+  x  4 [chromium] › tests\e2e\axe.spec.ts:64:7 › axe at desktop › /en/knowledge-hub has no violations (7.8s)
+  x  2 [chromium] › tests\e2e\axe.spec.ts:64:7 › axe at mobile › /en/knowledge-hub has no violations (8.5s)
+
+
+  1) [chromium] › tests\e2e\axe.spec.ts:64:7 › axe at desktop › /en/knowledge-hub has no violations 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "heading-order: .card.card--link:nth-child(1) > h3[lang=\"en\"] — Heading order invalid",
+    + ]
+
+      70 |         await page.waitForTimeout(1500);
+      71 |         const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+    > 72 |         expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+         |                                                           ^
+      73 |       });
+      74 |     }
+      75 |   });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\axe.spec.ts:72:59
+
+    Error Context: test-results\axe-axe-at-desktop-en-knowledge-hub-has-no-violations-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\axe-axe-at-desktop-en-knowledge-hub-has-no-violations-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\axe-axe-at-desktop-en-knowledge-hub-has-no-violations-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\axe.spec.ts:64:7 › axe at mobile › /en/knowledge-hub has no violations ─
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "heading-order: .card.card--link:nth-child(1) > h3[lang=\"en\"] — Heading order invalid",
+    + ]
+
+      70 |         await page.waitForTimeout(1500);
+      71 |         const top = await new AxeBuilder({ page }).withTags(tags).analyze();
+    > 72 |         expect([...summarise(top), ...summarise(bottom)]).toEqual([]);
+         |                                                           ^
+      73 |       });
+      74 |     }
+      75 |   });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\axe.spec.ts:72:59
+
+    Error Context: test-results\axe-axe-at-mobile-en-knowledge-hub-has-no-violations-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\axe-axe-at-mobile-en-knowledge-hub-has-no-violations-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\axe-axe-at-mobile-en-knowledge-hub-has-no-violations-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests\e2e\axe.spec.ts:64:7 › axe at desktop › /en/knowledge-hub has no violations ─
+    [chromium] › tests\e2e\axe.spec.ts:64:7 › axe at mobile › /en/knowledge-hub has no violations ──
+  2 passed (12.0s)

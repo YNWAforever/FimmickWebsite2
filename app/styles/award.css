@@ -22,13 +22,9 @@
 
 ::selection { background: var(--magenta); color: #fff; }
 
-/* The accent face itself lives in editorial.css (shared with the global 404).
-   This file must stay layout-only so it loads after cinematic.css; see the e2e cascade test. */
-
-/* Display sizes */
-.cine-head h2 { letter-spacing: -0.035em; line-height: 1.02; max-width: 17ch; }
-.closing h2 { letter-spacing: -0.035em; line-height: 1.02; }
-:lang(zh-Hant-HK) .cine-head h2, :lang(zh-Hans) .cine-head h2, :lang(zh-Hant-HK) .closing h2, :lang(zh-Hans) .closing h2 { letter-spacing: 0; line-height: 1.2; }
+/* The accent face itself lives in editorial.css (shared with the global 404). This file loads on
+   every route; the homepage-only rules are in award-home.css, which loads after cinematic.css (see
+   the e2e cascade test). */
 
 /* ================================================================
    Header: glass bar that sheds the utility row while reading and
@@ -46,9 +42,9 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: rgb(255 255 255 / 90%);
-  -webkit-backdrop-filter: saturate(1.6) blur(16px);
-  backdrop-filter: saturate(1.6) blur(16px);
+  /* A 96 % solid fill, not a backdrop blur (8.2.7): the blur re-rendered everything under the header on
+     every scrolled frame. */
+  background: rgb(255 255 255 / 96%);
   box-shadow: 0 1px 0 var(--line);
 }
 .utility-bar { height: var(--utility-h); background: transparent; }
@@ -82,59 +78,11 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 }
 .pillar-trigger:hover::before, .pillar-trigger[aria-expanded="true"]::before { transform: scaleX(1); }
 
-/* ================================================================
-   Hero
-================================================================ */
-.cine-hero { position: relative; isolation: isolate; }
-@media (min-width: 1000px) {
-  .cine-hero { grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, 600px) minmax(0, 680px) minmax(0, 1fr); }
-  .cine-hero__copy { padding-right: clamp(32px, 4.5vw, 72px); }
-}
-.cine-hero__title { font-size: var(--fs-cine); line-height: 0.98; letter-spacing: -0.045em; max-width: 11ch; }
-.cine-hero__title .accent { color: var(--magenta); display: inline; }
-/* CJK: the accent line is one unbroken phrase (keep-all), so size it to fit the copy column. */
-:lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: clamp(2.1rem, 0.4rem + 3.6vw, 4rem); }
-@media (max-width: 999px) { :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: min(11vw, 3.4rem); } }
-/* ≥1680 px: the copy column widens (still aligned with the page container) and the headline sits on
-   two lines, the English accent sentence on its own line. The size is fitted to the 44rem column
-   ("AI prepares the work." is ~9.3 em wide), not grown with the viewport. */
-@media (min-width: 1680px) {
-  .cine-hero { grid-template-columns: calc((100% - var(--container)) / 2) minmax(0, 1.1fr) minmax(0, 1fr) 0; }
-  .cine-hero__copy { padding-right: 72px; max-width: calc(44rem + 72px); }
-  .cine-hero__title { max-width: none; font-size: 4.5rem; text-wrap: balance; } /* under the brief’s 6.4rem cap */
-  :lang(en) .cine-hero__title .accent { display: block; }
-}
-.cine-hero__photo { border-radius: 32px 0 0 32px; }
-@media (max-width: 999px) {
-  .cine-hero__photo { border-radius: 0; }
-}
-/* The provenance badge sits above the photograph; on phones the sample card overlaps the photo's
-   lower edge, so the badge moves to the top. */
-.cine-hero .photo__label { z-index: 2; }
-@media (max-width: 699px) {
-  .cine-hero .photo__label { top: 10px; left: 10px; right: auto; bottom: auto; }
-}
-
 /* Word masks */
 .w { display: inline-block; vertical-align: top; overflow: clip; overflow-clip-margin: 0.12em; padding-block: 0.06em 0.1em; margin-block: -0.06em -0.1em; }
 .w > span { display: inline-block; }
 .accent .w { padding-inline-end: 0.08em; margin-inline-end: -0.08em; }
-@media (prefers-reduced-motion: no-preference) {
-  .cine-hero__title .w > span { animation: word-up 1000ms var(--ease-out) both; animation-delay: calc(100ms + var(--i) * 65ms); }
-  .cine-hero .eyebrow { animation: fade-up 900ms var(--ease-out) 60ms both; }
-  .cine-hero__body { animation: fade-up 900ms var(--ease-out) 420ms both; }
-  .cine-hero .btn-row { animation: fade-up 900ms var(--ease-out) 520ms both; }
-  .scroll-cue { animation: fade-up 900ms var(--ease-out) 1300ms both; }
-  .scroll-cue__line::after { animation: cue-drop 1800ms var(--ease-in-out) 1800ms 2 both; }
-  .hero-card { animation-duration: 1000ms; animation-timing-function: var(--ease-out); animation-delay: 640ms; }
-  .hero-ledger [data-role="review"] .hero-ledger__node { animation-delay: 1350ms; }
-}
-@keyframes word-up { from { transform: translateY(108%) rotate(4deg); } to { transform: none; } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-
-/* Hero card: paper with depth and a living status. */
-.hero-card__notice { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 0.74rem; line-height: 1.45; }
-.hero-card { border: 1px solid rgb(13 20 51 / 6%); box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 40px 80px -32px rgb(13 20 51 / 50%), 0 12px 24px -16px rgb(13 20 51 / 20%); }
 
 /* ================================================================
    Section heads: eyebrow index and a wipe-up headline
@@ -178,62 +126,21 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 ================================================================ */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .door__photo picture,
-    .cine-eco__photo picture,
-    .closing__photo picture,
     .page-hero__photo picture {
       animation: photo-drift linear both;
       animation-timeline: view();
       animation-range: cover;
-    }
-    .cine-hero__copy {
-      animation: copy-exit linear both;
-      animation-timeline: view();
-      /* Starts at exit 0%: view timelines inset by scroll-padding-top, so any earlier start would dim the copy at rest. */
-      animation-range: exit 0% exit 100%;
     }
   }
 }
 @keyframes photo-drift { from { transform: translateY(-5%) scale(1.12); } to { transform: translateY(5%) scale(1.12); } }
 /* view() resolves against the nearest scroll container, and `overflow: hidden` creates one, which
    froze every timeline inside these boxes. `clip` crops the same way without becoming a scroller. */
-.photo, .door, .marquee, .cine-hero { overflow: clip; }
-@keyframes copy-exit { from { opacity: 1; transform: none; } to { opacity: 0.2; transform: translateY(-40px); } }
-
-/* Hover zoom lives on the <img>, independent of any drift on <picture>. */
-.door__photo img, .output-tile__photo img { transition: transform 1200ms var(--ease-out); }
-.door:hover .door__photo img, .output-tile:hover .output-tile__photo img { transform: scale(1.04); }
-.case-photo__img img, .industry-shot__img img { transition-duration: 1200ms; transition-timing-function: var(--ease-out); }
-.case-photo:hover .case-photo__img img, .industry-shot:hover .industry-shot__img img { transform: scale(1.06); }
-
-/* ================================================================
-   Cards: fewer borders, more depth; consistent lift language
-================================================================ */
-.output-tile, .case-photo, .door, .decision__opt, .shelf__item { border-color: transparent; box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 0 0 1px rgb(13 20 51 / 6%); transition: transform 600ms var(--ease-out), box-shadow 600ms var(--ease-out); }
-.output-tile:hover, .case-photo:hover, .shelf__item:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgb(13 20 51 / 6%), 0 34px 60px -30px rgb(13 20 51 / 38%); }
-/* Hover must not replace the keyboard focus ring (cinematic.css sets it on :focus-within). */
-.output-tile:focus-within:hover { box-shadow: var(--focus), 0 34px 60px -30px rgb(13 20 51 / 38%); }
-.output-tile__paper { transition: transform 800ms var(--ease-out), box-shadow 800ms var(--ease-out); }
-.output-tile:hover .output-tile__paper { transform: translateY(-6px) rotate(-0.6deg); box-shadow: 0 1px 0 rgb(13 20 51 / 5%), 0 36px 60px -30px rgb(13 20 51 / 55%); }
-.output-tile__go, .case-photo h3 { transition: transform 500ms var(--ease-out), color 300ms ease; }
-.output-tile:hover .output-tile__go { transform: translateX(6px); color: var(--magenta-ink); }
-.case-photo:hover h3 { color: var(--magenta-ink); }
-.industry-shot__text { transition: transform 700ms var(--ease-out); }
-.industry-shot__text > span { transition: opacity 600ms var(--ease-out); }
-@media (hover: hover) and (min-width: 1000px) {
-  .industry-shot__text { transform: translateY(calc(100% - 3.6rem)); }
-  .industry-shot__text > span { opacity: 0; }
-  .industry-shot:hover .industry-shot__text, .industry-shot:focus-visible .industry-shot__text { transform: none; }
-  .industry-shot:hover .industry-shot__text > span, .industry-shot:focus-visible .industry-shot__text > span { opacity: 1; }
-}
-.industry-shot::after { background: linear-gradient(180deg, rgb(7 11 31 / 0%) 40%, rgb(7 11 31 / 82%) 100%); }
-.brand-tiles a { box-shadow: 0 0 0 1px rgb(13 20 51 / 6%); border-color: transparent; transition: transform 600ms var(--ease-out), box-shadow 600ms var(--ease-out); }
-.brand-tiles a:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px rgb(13 20 51 / 6%), 0 26px 50px -28px rgb(13 20 51 / 40%); }
-.brand-tiles a::before { transition: width 600ms var(--ease-out); }
-.brand-tiles a:hover::before { width: 10px; }
+.photo { overflow: clip; }
 
 /* Buttons: tactile press, arrow travel */
-.btn { transition: transform 450ms var(--ease-out), background-color 300ms ease, box-shadow 450ms var(--ease-out), color 300ms ease; }
+.btn { transition: transform 450ms var(--ease-out), background-color 300ms ease, color 300ms ease; }
+.btn::after { transition: opacity 450ms var(--ease-out); }
 .btn:active { transform: translateY(1px) scale(0.98); transition-duration: 120ms; }
 .btn .arrow { display: inline-block; transition: transform 450ms var(--ease-out); }
 .btn:hover .arrow { transform: translateX(4px); }
@@ -243,12 +150,7 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 .text-link:hover { text-decoration: none; background-size: calc(100% - 26px) 1.5px; }
 .text-link span.arrow { transition: transform 450ms var(--ease-out); }
 .text-link:hover span.arrow { transform: translateX(5px); }
-
-/* ================================================================
-   Dark chapters: grain and a scroll-linked marquee
-================================================================ */
-.chapter-night, .closing { position: relative; isolation: isolate; overflow: clip; }
-.chapter-night::after, .closing::after, .site-footer::after {
+.site-footer::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -258,71 +160,7 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
   opacity: 0.06;
   mix-blend-mode: overlay;
 }
-.chapter-night > *, .closing > :not(.closing__photo), .site-footer > * { position: relative; z-index: 1; }
-
-/* The hairlines live on the band, outside the edge mask, so they run full-bleed with the type. */
-.marquee-band {
-  margin: calc(var(--section) * -0.35) 0 calc(var(--section) * 0.55);
-  border-block: 1px solid rgb(255 255 255 / 8%);
-}
-.marquee {
-  overflow: clip;
-  padding-block: clamp(14px, 2vw, 26px);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee__track { display: flex; width: max-content; }
-.marquee__run { display: flex; flex: none; }
-.marquee__item {
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(20px, 3vw, 44px);
-  padding-right: clamp(20px, 3vw, 44px);
-  font-size: clamp(2.2rem, 1rem + 4.6vw, 6rem);
-  font-weight: 750;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1px rgb(255 255 255 / 34%);
-}
-/* Solid on odd items, so the phrase the band rests on (the review moment, third) is the solid one. */
-.marquee__item:nth-child(odd) { color: #fff; -webkit-text-stroke: 0; }
-/* Phones: the resting phrase must fit with its separator in view (at 2.2rem it filled 387 of 390 px). */
-@media (max-width: 699px) {
-  .marquee__item { font-size: clamp(1.4rem, 7.2vw, 2.2rem); }
-}
-:lang(zh-Hant-HK) .marquee__item, :lang(zh-Hans) .marquee__item { letter-spacing: 0; }
-.marquee__dot { width: 0.22em; height: 0.22em; border-radius: 50%; background: var(--role-source); flex: none; }
-[data-role="work"] > .marquee__dot { background: var(--magenta); }
-[data-role="review"] > .marquee__dot { background: var(--lime); }
-[data-role="result"] > .marquee__dot { background: #fff; }
-/* Rest position: the review moment ("A named person decides") centred. Motion.tsx measures the
-   offset into --marquee-rest; without JS the fallback is close. Reduced motion and browsers without
-   scroll-driven animations show this position statically. */
-.marquee__track { transform: translateX(var(--marquee-rest, -24%)); }
-/* The band slides only while the chapter rises into view (its top travelling from the bottom of the
-   viewport to 40% of its height), then holds: wherever a visitor stops to read, a whole phrase is
-   centred. The slide covers at most 60vw and never opens a gap at the left edge. */
-.chapter-night { view-timeline: --night block; }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .marquee__track { animation: marquee-slide linear both; animation-timeline: --night; animation-range: entry 0% entry 60vh; }
-  }
-}
-@keyframes marquee-slide {
-  from { transform: translateX(calc(var(--marquee-rest, -24%) + min(60vw, -1 * var(--marquee-rest, -24%)))); }
-  to { transform: translateX(var(--marquee-rest, -24%)); }
-}
-@media (forced-colors: active) {
-  .marquee__item { color: CanvasText; -webkit-text-stroke: 0; }
-}
-
-/* ================================================================
-   Closing chapter flows straight into a dark footer
-================================================================ */
-.closing { min-height: clamp(520px, 82vh, 820px); }
-.closing h2 { max-width: 13ch; font-size: clamp(2.6rem, 1.2rem + 4.2vw, 5.8rem); }
-:lang(zh-Hant-HK) .closing h2, :lang(zh-Hans) .closing h2 { font-size: clamp(2.2rem, 1.2rem + 3vw, 4.2rem); }
+.site-footer > * { position: relative; z-index: 1; }
 
 .site-footer {
   position: relative;
@@ -333,8 +171,6 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
   color: var(--night-muted);
   padding-block: clamp(64px, 8vw, 112px) 32px;
 }
-main:has(.closing) + .site-footer { border-top: 1px solid rgb(255 255 255 / 8%); }
-main:has(.closing) + .site-footer .footer-cta { display: none; }
 .footer-cta {
   display: grid;
   gap: 28px;
@@ -400,20 +236,6 @@ html.has-bubble [data-cursor] { cursor: none; }
 }
 @keyframes page-in { from { opacity: 0; transform: translateY(28px); } }
 
-/* Hero scroll cue (decorative; the line drops twice, then rests: under 5 s of movement) */
-.scroll-cue { display: none; }
-@media (min-width: 1000px) and (min-height: 760px) {
-  .scroll-cue { display: inline-flex; align-items: center; gap: 14px; margin-top: clamp(40px, 6vh, 72px); color: var(--subtle); font-size: var(--fs-micro); font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
-  :lang(zh-Hant-HK) .scroll-cue, :lang(zh-Hans) .scroll-cue { letter-spacing: 0.08em; }
-  .scroll-cue__line { position: relative; width: 1.5px; height: 44px; overflow: hidden; background: var(--line-strong); }
-  .scroll-cue__line::after { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: var(--magenta); transform: translateY(-100%); }
-}
-@keyframes cue-drop { 0% { transform: translateY(-100%); } 50% { transform: none; } 100% { transform: translateY(100%); } }
-
-/* Editorial numerals */
-.output-tile__meta .number-tag, .decision__n { font-family: var(--font-display-accent); font-style: italic; font-weight: 400; font-size: 1.7rem; line-height: 0.9; letter-spacing: 0; color: var(--magenta-ink); }
-.decision__n { font-size: 1.5rem; margin-right: 6px; }
-
 /* Inner pages: same display language, scaled for denser templates */
 .page-hero h1 { font-size: clamp(2.4rem, 1.3rem + 3vw, 4.1rem); letter-spacing: -0.04em; line-height: 1.02; }
 .section-head h2 { font-size: clamp(1.9rem, 1.25rem + 2vw, 3.1rem); letter-spacing: -0.032em; line-height: 1.05; }
@@ -461,55 +283,6 @@ html.has-bubble [data-cursor] { cursor: none; }
   .drawer:not([hidden]) .drawer-body > :nth-child(n + 8) { animation-delay: 210ms; }
 }
 @keyframes drawer-in { from { opacity: 0; } }
-
-/* Closing chapter rises as a sheet over the light page: rounded top edge, and a
-   composited scale tied to its entry (transform only, so no repaint while scrolling). */
-.closing { border-radius: clamp(24px, 3vw, 44px) clamp(24px, 3vw, 44px) 0 0; }
-/* What shows past the rounded corners (and beside the sheet while it scales) is the white of
-   the questions section above, not the grey page canvas: the stage is exactly the closing's box. */
-.closing-stage { background: var(--surface); }
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .closing { transform-origin: 50% 0; animation: sheet-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 85%; }
-  }
-}
-@keyframes sheet-rise { from { transform: scale(0.94); } to { transform: none; } }
-
-/* Rendering: the homepage's bands below the fold skip layout and paint until they come near the
-   viewport, so the first frame only lays out the header and hero. Content stays in the DOM, the
-   accessibility tree, anchors and find-in-page. Each band reserves its own measured height at three
-   widths (<700, 700–999, ≥1000), so the scrollbar and in-page anchors stay put on the first pass;
-   `auto` then remembers the real height. Inner pages are short enough that the A/B showed no gain,
-   so they render normally. Heroes (the LCP areas) are not bands. */
-@supports (content-visibility: auto) {
-  :is(.cine-outputs, .cine-evidence, .chapter-night, .cine-paths, .cine-industries, .cine-eco, .cine-resources, .cine-start, .home-faq, .closing),
-  main:has(.closing) + .site-footer { content-visibility: auto; }
-  .cine-outputs { contain-intrinsic-block-size: auto var(--band-outputs); }
-  .cine-evidence { contain-intrinsic-block-size: auto var(--band-evidence); }
-  .chapter-night { contain-intrinsic-block-size: auto var(--band-night); }
-  .cine-paths { contain-intrinsic-block-size: auto var(--band-paths); }
-  .cine-industries { contain-intrinsic-block-size: auto var(--band-industries); }
-  .cine-eco { contain-intrinsic-block-size: auto var(--band-eco); }
-  .cine-resources { contain-intrinsic-block-size: auto var(--band-resources); }
-  .cine-start { contain-intrinsic-block-size: auto var(--band-start); }
-  .home-faq { contain-intrinsic-block-size: auto var(--band-faq); }
-  .closing { contain-intrinsic-block-size: auto var(--band-closing); }
-  main:has(.closing) + .site-footer { contain-intrinsic-block-size: auto var(--band-footer); }
-}
-/* Measured content-box heights of the bands (scripts/award-2/bands.mjs at 390, 820 and 1440 px;
-   contain-intrinsic-block-size excludes padding). English and Chinese differ by up to 220 px a
-   band on phones, so each locale has its own set. Re-measure after any change to the homepage's
-   copy or layout. */
-html { --band-outputs: 2730px; --band-evidence: 2580px; --band-night: 1060px; --band-paths: 2410px; --band-industries: 1410px; --band-eco: 1750px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 2500px; }
-html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2540px; --band-evidence: 2310px; --band-night: 1060px; --band-paths: 2200px; --band-industries: 1440px; --band-eco: 1720px; --band-resources: 1170px; --band-start: 1140px; --band-faq: 550px; --band-closing: 650px; --band-footer: 2570px; }
-@media (min-width: 700px) {
-  html { --band-outputs: 2100px; --band-evidence: 1690px; --band-night: 920px; --band-paths: 2510px; --band-industries: 1140px; --band-eco: 1360px; --band-resources: 1040px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 1500px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2110px; --band-evidence: 1670px; --band-night: 870px; --band-paths: 2550px; --band-industries: 1190px; --band-eco: 1300px; --band-resources: 1000px; --band-start: 830px; --band-faq: 570px; --band-closing: 770px; --band-footer: 1540px; }
-}
-@media (min-width: 1000px) {
-  html { --band-outputs: 1330px; --band-evidence: 1150px; --band-night: 980px; --band-paths: 1380px; --band-industries: 650px; --band-eco: 870px; --band-resources: 640px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 720px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1330px; --band-evidence: 1100px; --band-night: 1000px; --band-paths: 1370px; --band-industries: 700px; --band-eco: 890px; --band-resources: 620px; --band-start: 560px; --band-faq: 390px; --band-closing: 690px; --band-footer: 700px; }
-}
 
 /* ================================================================
    Hub editorial list (award pass 2, 5.1): one row per record. The headline link is stretched over
@@ -559,36 +332,19 @@ html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2540px; --band-evide
 @media (max-width: 699px) { .photo--art { --pos: var(--pos-p, 50% 50%); } }
 @media (min-width: 800px) { .photo--wide { --pos: var(--pos-w, 50% 50%); } }
 .photo img { object-position: var(--pos); }
-.photo-caption { margin-top: 16px; }
 .site-footer .photo-note { margin-top: 4px; color: var(--night-muted); }
 
 /* ================================================================
-   Live hero card (award pass 2, 7): fact chips, the words they supplied, the approval stamp and the
-   typed export record. Nothing moves without input; reduced motion shows the end states at once.
+   Reduced motion, once for everything (award pass 2, 8.2.7): with prefers-reduced-motion nothing
+   animates or transitions, on any route (the homepage's sheets load after this one, hence !important).
+   The per-component rules above still choose their reduced end states, such as no hover lift.
 ================================================================ */
-.hero-facts { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.hero-fact { padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--canvas); color: var(--ink-2); font: inherit; font-size: 0.72rem; font-weight: 700; line-height: 1.3; cursor: pointer; transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease); }
-.hero-fact:hover, .hero-fact[aria-pressed="true"] { border-color: var(--magenta); color: var(--magenta-ink); }
-.hero-card__draft [data-fact] { background: linear-gradient(var(--magenta), var(--magenta)) no-repeat 0 100% / 0% 2px; transition: background-size 360ms var(--ease-out); }
-.hero-card__draft [data-lit] { background-size: 100% 2px; }
-.hero-card__approved { border: 0; font-family: inherit; cursor: pointer; }
-.hero-card__approved[aria-pressed="false"] { background: var(--ink); color: #fff; }
-.hero-card__approved[data-stamp] { animation: hero-stamp 240ms var(--ease-out) both; }
-@keyframes hero-stamp { from { opacity: 0; transform: scale(1.3); } to { opacity: 1; transform: none; } }
-.hero-ledger [data-state="pending"] .hero-ledger__node { border-color: var(--line); background: var(--paper); color: var(--subtle); }
-.hero-ledger [data-state="pending"] .hero-ledger__label { color: var(--subtle); }
-.hero-card__record { margin-top: 8px; font-size: 0.72rem; font-weight: 700; color: var(--ink-2); }
-.hero-card__record[data-pending] { visibility: hidden; }
-.hero-card__record-id { display: inline-block; overflow: hidden; vertical-align: bottom; white-space: nowrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-.hero-card__record[data-typed] .hero-card__record-id { animation: hero-type 520ms steps(8) both; }
-/* Below 1000 px the card (taller with its chips and captions) sits in the flow under the photo,
-   still overlapping it by 64 px, instead of hanging into a fixed reserve the hero would clip. */
-@media (max-width: 999px) {
-  .cine-hero__media { margin-bottom: 32px; }
-  .hero-card { position: relative; inset: auto; margin: -64px var(--gutter) 0; }
-}
-@keyframes hero-type { from { width: 0; } to { width: 8ch; } }
 @media (prefers-reduced-motion: reduce) {
-  .hero-fact, .hero-card__draft [data-fact] { transition: none; }
-  .hero-card__approved[data-stamp], .hero-card__record[data-typed] .hero-card__record-id { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    transition-delay: 0ms !important;
+  }
 }

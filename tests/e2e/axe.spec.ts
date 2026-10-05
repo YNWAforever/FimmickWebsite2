@@ -15,6 +15,8 @@ const pages = [
   "/en/case-studies", "/en/resources", "/en/fimmick-ecosystem", "/zh-hant/services/digitalmarketing",
   "/en/products", "/en/functions", "/zh-hant/services",
   "/zh-hant/knowledge-hub/category/Content%20Marketing", "/zh-hant/knowledge-hub/creative-video-questions",
+  // Phase 8.2: the static hub pages and a filtered view rendered by the browser island.
+  "/en/knowledge-hub", "/en/knowledge-hub/page/2", "/en/resources?format=guide&q=AI",
 ];
 const tags = ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa", "best-practice"];
 

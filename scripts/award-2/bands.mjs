@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
  * Measures the homepage bands' real heights (content-visibility forced off) per locale at the three
- * placeholder breakpoints and prints the custom-property block used by award.css for
+ * placeholder breakpoints and prints the custom-property block used by award-home.css for
  * `contain-intrinsic-block-size`. Re-run after any copy or layout change to the homepage bands,
- * then paste the output over the "Measured band heights" block in app/styles/award.css.
+ * then paste the output over the "Measured content-box heights" block in app/styles/award-home.css.
  *
  *   node scripts/award-2/bands.mjs
  */

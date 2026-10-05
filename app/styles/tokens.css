@@ -85,3 +85,23 @@
   --lh-body: 1.85;
   --lh-tight: 1.22;
 }
+
+/* Chinese pages name the CJK families first (award pass 2, 8.2.6): text then shapes in the first
+   family instead of falling through the Latin face glyph by glyph, which cost main-thread time on the
+   zh pages; Latin runs there use the CJK family's own Latin. */
+:root:lang(zh-Hant-HK) {
+  --font-sans: "PingFang HK", "Noto Sans CJK HK", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei", var(--font-manrope), "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+:root:lang(zh-Hans) {
+  --font-sans: "PingFang SC", "Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", var(--font-manrope), "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Cinematic tokens (moved from cinematic.css, award pass 2, 8.2.3: inner pages use them too). */
+:root {
+  --paper: #ffffff;
+  --desk: #eeebe5;
+  --night-deep: #070b1f;
+  --role-source: #8d97b5;
+  --fs-cine: clamp(2.6rem, 1.3rem + 3.5vw, 4.6rem);
+  --fs-cine-h2: clamp(2rem, 1.35rem + 2.5vw, 3.3rem);
+}

@@ -1,3 +1,5 @@
+// Route sheets (8.2.3), first so they keep their place before component sheets.
+import "@/app/styles/examples.css";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { href, t, zh } from "@/lib/i18n";

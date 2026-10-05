@@ -497,21 +497,27 @@ export function SampleRecord({ locale, label, rows, id }: { locale: Locale; labe
 }
 
 /** `heading` is h2 where the cards sit directly under the page h1 (the case-studies hub). */
-export function CaseCards({ locale, items, heading: Heading = "h3" }: { locale: Locale; items: CaseStudy[]; heading?: "h2" | "h3" }) {
+export function CaseCard({ locale, c, heading: Heading = "h3" }: { locale: Locale; c: CaseStudy; heading?: "h2" | "h3" }) {
+  return (
+    <Link className="card card--link" href={href(locale, paths.case(c.slug))}>
+      <span className="card-meta">
+        <span className={c.kind === "client-work" ? "chip chip--sky" : "chip chip--lime"}>{tr(caseKindLabel[c.kind], locale)}</span>
+        {tr(c.sector, locale)} · {tr(c.market, locale)}
+      </span>
+      <Heading>{tr(c.title, locale)}</Heading>
+      <p className="small muted">{tr(c.problem, locale)}</p>
+      <span className="card-foot">
+        {locale === "en" ? "Read the case" : zh("閱讀案例", locale)} <span aria-hidden="true">→</span>
+      </span>
+    </Link>
+  );
+}
+
+export function CaseCards({ locale, items, heading = "h3" }: { locale: Locale; items: CaseStudy[]; heading?: "h2" | "h3" }) {
   return (
     <div className="related-grid">
       {items.map((c) => (
-        <Link key={c.slug} className="card card--link" href={href(locale, paths.case(c.slug))}>
-          <span className="card-meta">
-            <span className={c.kind === "client-work" ? "chip chip--sky" : "chip chip--lime"}>{tr(caseKindLabel[c.kind], locale)}</span>
-            {tr(c.sector, locale)} · {tr(c.market, locale)}
-          </span>
-          <Heading>{tr(c.title, locale)}</Heading>
-          <p className="small muted">{tr(c.problem, locale)}</p>
-          <span className="card-foot">
-            {locale === "en" ? "Read the case" : zh("閱讀案例", locale)} <span aria-hidden="true">→</span>
-          </span>
-        </Link>
+        <CaseCard key={c.slug} locale={locale} c={c} heading={heading} />
       ))}
     </div>
   );

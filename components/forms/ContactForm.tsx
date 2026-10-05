@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
 import { flushSync } from "react-dom";
 import { track } from "@/lib/analytics";
 import type { Locale } from "@/lib/i18n";
+import { contextKeys, parseContextWith, type ContextKey } from "@/lib/intent-parse";
 import { ENQUIRY_FIELDS, ENQUIRY_LIMITS, ENQUIRY_OPTIONAL_DETAIL, emptyEnquiry, validateEnquiry, type EnquiryError, type EnquiryField, type EnquiryFields } from "@/lib/enquiry-schema";
 
 export type ContextItem = { key: string; value: string; label: string; kind: string };
@@ -70,6 +72,19 @@ const newSalt = () => (typeof crypto !== "undefined" && "randomUUID" in crypto ?
 /** True once hydrated: the fields stay disabled until then, so a pre-hydration submit cannot happen. */
 const noopSubscribe = () => () => {};
 
+/** Labels for every context ID the page accepts, keyed by context key then ID. */
+export type ContextOptions = Record<ContextKey, Record<string, { kind: string; label: string }>>;
+
+/**
+ * Reports the address’s query string, now and after every navigation. Inside its own Suspense boundary
+ * so the static page still prerenders the whole form (useSearchParams opts its boundary out).
+ */
+function AddressContext({ onSearch }: { onSearch: (search: string) => void }) {
+  const search = useSearchParams().toString();
+  useEffect(() => onSearch(search), [search, onSearch]);
+  return null;
+}
+
 /**
  * Enquiry form. Short first step; optional detail on request. Context comes from the originating
  * page (known IDs only) and can be corrected. Personal data never goes into URLs, analytics or
@@ -80,11 +95,21 @@ const noopSubscribe = () => () => {};
  * Request keys are derived from the payload: retrying the same request reuses its key (the server
  * answers once), and any change to a field, the intent or the context makes a new one.
  */
-export function ContactForm({ lang, action, intents, initialIntent, initialContext, email, s }: { lang: Locale; action: string; intents: { id: string; label: string }[]; initialIntent: string; initialContext: ContextItem[]; email: string; s: ContactStrings }) {
+export function ContactForm({ lang, action, intents, contextOptions, email, s }: { lang: Locale; action: string; intents: { id: string; label: string }[]; contextOptions: ContextOptions; email: string; s: ContactStrings }) {
   const hydrated = useSyncExternalStore(noopSubscribe, () => true, () => false);
   const [fields, setFields] = useState<EnquiryFields>(emptyEnquiry);
-  const [intent, setIntent] = useState(initialIntent);
-  const [context, setContext] = useState<ContextItem[]>(initialContext);
+  const [intent, setIntent] = useState<string>("general");
+  const [context, setContext] = useState<ContextItem[]>([]);
+  /** The page is static (8.2.1), so the intent and context come from the address in the browser. */
+  const applySearch = useCallback(
+    (search: string) => {
+      const known = (key: ContextKey, value: string) => Object.hasOwn(contextOptions[key] ?? {}, value);
+      const parsed = parseContextWith(new URLSearchParams(search), known);
+      setIntent(parsed.intent);
+      setContext(contextKeys.filter((k) => parsed[k]).map((k) => ({ key: k, value: parsed[k]!, ...contextOptions[k][parsed[k]!] })));
+    },
+    [contextOptions],
+  );
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -250,6 +275,9 @@ export function ContactForm({ lang, action, intents, initialIntent, initialConte
         </div>
       ) : (
         <form className="form" method="post" action={action} onSubmit={submit} noValidate aria-describedby="form-privacy">
+          <Suspense fallback={null}>
+            <AddressContext onSearch={applySearch} />
+          </Suspense>
           <fieldset disabled={!hydrated}>
             <legend>{s.legend}</legend>
             <div className="f">

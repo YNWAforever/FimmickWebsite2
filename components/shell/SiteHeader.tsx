@@ -1,9 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { LanguageSwitch, type LanguageOption } from "./LanguageSwitch";
+// Header, mega-panel and drawer links prefetch on intent, not on sight (8.2.2): the logo is a
+// self-link on the home page, and an opened panel would otherwise fetch every page it lists.
+import { HoverPrefetchLink as Link } from "./HoverPrefetchLink";
 
 export type HeaderLink = { label: string; href: string; note?: string };
 export type HeaderPillar = {
@@ -162,7 +164,7 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
       <div className="container header-main">
         <Link className="brand" href={home} aria-label={labels.logoAlt}>
           {/* eslint-disable-next-line @next/next/no-img-element -- small raster logo, fixed size, eagerly loaded */}
-          <img src="/brand/fimmick-logo.webp" width={124} height={31} alt={labels.logoAlt} />
+          <img src="/brand/fimmick-logo-248.webp" width={124} height={31} alt={labels.logoAlt} />
         </Link>
         <nav
           className="primary-nav"
@@ -276,7 +278,7 @@ export function SiteHeader({ home, pillars, cta, login, about, languages, labels
         <div className="container drawer-head">
           <Link className="brand" href={home} aria-label={labels.logoAlt}>
             {/* eslint-disable-next-line @next/next/no-img-element -- see header logo */}
-            <img src="/brand/fimmick-logo.webp" width={112} height={28} alt={labels.logoAlt} />
+            <img src="/brand/fimmick-logo-248.webp" width={112} height={28} alt={labels.logoAlt} />
           </Link>
           <button
             type="button"

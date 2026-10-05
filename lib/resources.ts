@@ -3,6 +3,9 @@ import eventsJson from "@/content/legacy/events.json";
 import { explainerVideo, guides, workshopResource } from "@/content/resources";
 import type { ResourceFormat, ResourceTopic } from "@/content/types";
 import { t, type LegacyLocale, type Locale } from "./i18n";
+import { filterRows, type ResourceFilter } from "./resource-filter";
+
+export { PAGE_SIZE, type ResourceFilter } from "./resource-filter";
 
 export type ArticleLocaleMeta = {
   title: string;
@@ -51,6 +54,13 @@ export const hasEnglish = (a: ArticleIndexEntry) => a.locales.en?.contentLanguag
 /** The locales an article has its own page in. */
 export const articleLocales = (a: ArticleIndexEntry): LegacyLocale[] =>
   (["en", "zh-hant", "zh-hans"] as LegacyLocale[]).filter((l) => (l === "en" ? hasEnglish(a) : Boolean(a.locales[l])));
+
+/** Knowledge Hub listing: articles per page, the list a locale shows, and its page count. */
+export const KNOWLEDGE_PAGE_SIZE = 18;
+export const knowledgeArticles = (locale: LegacyLocale) =>
+  // English lists only genuinely English articles (8.1.1); Chinese ones list under zh-hant.
+  articleIndex.filter((a) => (locale === "en" ? hasEnglish(a) : locale === "zh-hans" ? a.locales["zh-hans"] : a.locales[locale] || a.locales.en));
+export const knowledgePageCount = (locale: LegacyLocale) => Math.max(1, Math.ceil(knowledgeArticles(locale).length / KNOWLEDGE_PAGE_SIZE));
 
 export function eventIsoDate(display: string): string {
   const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
@@ -125,28 +135,8 @@ export function allResources(locale: Locale): ResourceItem[] {
   return sorted;
 }
 
-export type ResourceFilter = { format?: ResourceFormat; topic?: ResourceTopic; q?: string; page?: number };
-export const PAGE_SIZE = 12;
-
 export function filterResources(locale: Locale, filter: ResourceFilter) {
-  const q = (filter.q || "").trim().toLowerCase().slice(0, 80);
-  const all = allResources(locale);
-  const matches = (item: ResourceItem, ignore?: "format" | "topic") =>
-    (ignore === "format" || !filter.format || item.format === filter.format) &&
-    (ignore === "topic" || !filter.topic || item.topic === filter.topic) &&
-    (!q || item.title.toLowerCase().includes(q) || item.summary.toLowerCase().includes(q));
-  const matched = all.filter((item) => matches(item));
-  const pages = Math.max(1, Math.ceil(matched.length / PAGE_SIZE));
-  const page = Math.min(Math.max(1, filter.page || 1), pages);
-  const count = (ignore: "format" | "topic", key: keyof ResourceItem, value: string) => all.filter((i) => matches(i, ignore) && i[key] === value).length;
-  return {
-    total: matched.length,
-    page,
-    pages,
-    items: matched.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
-    formatCount: (format: ResourceFormat) => count("format", "format", format),
-    topicCount: (topic: ResourceTopic) => count("topic", "topic", topic),
-  };
+  return filterRows(allResources(locale), filter);
 }
 
 /** Load article body blocks for a locale (server only). */

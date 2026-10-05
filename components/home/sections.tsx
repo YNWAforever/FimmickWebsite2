@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { href, t, type L, type Locale, zh } from "@/lib/i18n";
 import { paths } from "@/lib/routes";
 import { cinema, hero, startOptions } from "@/content/home";
@@ -19,6 +18,9 @@ import { articleIndex, hasEnglish } from "@/lib/resources";
 import { Photo } from "@/components/media/Photo";
 import { ExplainerPlayer } from "@/components/media/ExplainerPlayer";
 import { LinkButton, TextLink } from "@/components/ui";
+// The homepage’s link lists (tiles, case photos, pathway rows, industries, ecosystem, shelf) prefetch
+// on intent; a full scroll used to fetch some 40 pages (8.2.2). Section buttons still prefetch on sight.
+import { HoverPrefetchLink as Link } from "@/components/shell/HoverPrefetchLink";
 import { workstreamCardsData } from "@/components/blocks";
 import { SignatureStage } from "./SignatureStage";
 import { HeroCard } from "./HeroCard";

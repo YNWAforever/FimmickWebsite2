@@ -6,6 +6,7 @@ import { workstreams } from "@/content/transformation";
 import { members } from "@/content/ecosystem";
 import { cases } from "@/content/cases";
 import type { L } from "@/lib/i18n";
+import { contextKeys, parseContextWith, type ContextKey, type EnquiryContext, type Intent, type ParamSource } from "./intent-parse";
 
 /**
  * Enquiry context contract.
@@ -15,8 +16,7 @@ import type { L } from "@/lib/i18n";
  * is dropped. Personal data (name, email, phone, message) is never placed in
  * URLs, analytics or browser storage.
  */
-export const intents = ["demo", "configuration", "deployment", "managed", "transformation", "service", "partnership", "workshop", "event", "general"] as const;
-export type Intent = (typeof intents)[number];
+export { contextKeys, intents, type ContextKey, type EnquiryContext, type Intent } from "./intent-parse";
 
 export const intentLabels: Record<Intent, L> = {
   demo: { en: "Request a product demo", zh: "申請產品示範" },
@@ -31,7 +31,7 @@ export const intentLabels: Record<Intent, L> = {
   general: { en: "Something else", zh: "其他查詢" },
 };
 
-const ids = {
+const ids: Record<ContextKey, Set<string>> = {
   solution: new Set<string>(solutions.map((s) => s.id)),
   product: new Set<string>(products.map((p) => p.id)),
   service: new Set<string>(services.map((s) => s.id)),
@@ -43,48 +43,15 @@ const ids = {
   resource: new Set<string>(["ai-readiness-checklist", "workflow-planning-worksheet", "fimmick-aip-explainer", "workshop"]),
 };
 
-export type ContextKey = keyof typeof ids;
-export const contextKeys = Object.keys(ids) as ContextKey[];
-
-export type EnquiryContext = { intent: Intent } & Partial<Record<ContextKey, string>>;
-
-/** Legacy intents from the previous sites mapped to their meaning today. */
-const legacyIntent: Record<string, Intent> = {
-  benchmark: "transformation",
-  audit: "transformation",
-  consultation: "general",
-  ecosystem: "partnership",
-  "ai-workshop": "workshop",
-  seminar: "event",
-};
-
-type ParamSource = URLSearchParams | Record<string, string | string[] | undefined>;
-
-function read(source: ParamSource, key: string): string | undefined {
-  if (source instanceof URLSearchParams) return source.get(key) ?? undefined;
-  const value = source[key];
-  return Array.isArray(value) ? value[0] : value;
-}
-
 export function isKnownId(key: ContextKey, value: string): boolean {
   return ids[key].has(value);
 }
 
+/** Every ID a context key accepts. */
+export const knownIds = (key: ContextKey): string[] => [...ids[key]];
+
 export function parseContext(source: ParamSource): EnquiryContext {
-  const rawIntent = (read(source, "intent") || "").toLowerCase().slice(0, 40);
-  const context: EnquiryContext = {
-    intent: (intents as readonly string[]).includes(rawIntent) ? (rawIntent as Intent) : legacyIntent[rawIntent] ?? "general",
-  };
-  for (const key of contextKeys) {
-    const value = (read(source, key) || "").toLowerCase().slice(0, 80);
-    if (value && ids[key].has(value)) context[key] = value;
-  }
-  // Legacy links used ?intent=<member-slug> for ecosystem enquiries.
-  if (!context.member && ids.member.has(rawIntent)) {
-    context.member = rawIntent;
-    context.intent = "partnership";
-  }
-  return context;
+  return parseContextWith(source, isKnownId);
 }
 
 /** Serialise a context back to a query string (known keys only). */

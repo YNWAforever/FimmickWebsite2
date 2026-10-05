@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { href, formatDate, localeMeta, t, zh, type LegacyLocale, type Locale } from "@/lib/i18n";
-import { articleBySlug, articleIndex, articleLocales, getArticleBlocks, hasEnglish, isArchiveArticle } from "@/lib/resources";
+import { KNOWLEDGE_PAGE_SIZE, articleBySlug, articleLocales, getArticleBlocks, hasEnglish, isArchiveArticle, knowledgeArticles } from "@/lib/resources";
 import { resolveLegacyHref } from "@/lib/redirects";
 import { canonicalOrigin } from "@/lib/env";
 import { localeUrl, organizationId } from "@/lib/seo";
@@ -12,17 +12,19 @@ import { paths } from "@/lib/routes";
 import { Crumbs, RichText } from "./ui";
 import { JsonLd } from "./JsonLd";
 
-/** Paginated archive list used by the Knowledge Hub and its category pages. */
-export function ArticleList({ locale, shellLocale, page, category, basePath }: { locale: LegacyLocale; shellLocale: Locale; page: number; category?: string; basePath: string }) {
-  const PAGE = 18;
+/**
+ * Paginated Knowledge Hub list. Page 1 is the hub itself and page n is the static path
+ * `<hub>/page/<n>` (award pass 2, 8.2.1).
+ */
+export function ArticleList({ locale, shellLocale, page, basePath }: { locale: LegacyLocale; shellLocale: Locale; page: number; basePath: string }) {
+  const PAGE = KNOWLEDGE_PAGE_SIZE;
   const en = locale === "en";
   const hans = locale === "zh-hans";
-  // English lists only genuinely English articles (8.1.1); Chinese ones list under zh-hant.
-  const list = articleIndex.filter((a) => (locale === "en" ? hasEnglish(a) : locale === "zh-hans" ? a.locales["zh-hans"] : a.locales[locale] || a.locales.en) && (!category || a.locales.en?.section === category));
+  const list = knowledgeArticles(locale);
   const pages = Math.max(1, Math.ceil(list.length / PAGE));
   const current = Math.min(Math.max(1, page), pages);
   const items = list.slice((current - 1) * PAGE, current * PAGE);
-  const pageHref = (n: number) => (n === 1 ? basePath : `${basePath}?page=${n}`);
+  const pageHref = (n: number) => (n === 1 ? basePath : `${basePath}/page/${n}`);
   return (
     <>
       <div className="result-meta" role="status">
@@ -41,7 +43,8 @@ export function ArticleList({ locale, shellLocale, page, category, basePath }: {
                 {formatDate(a.published, locale)}
                 {!own ? <span>· {hans ? zh("英文原文", locale) : zh("英文原文", locale)}</span> : null}
               </span>
-              <h3 lang={meta.contentLanguage === "en" ? "en" : undefined}>{meta.title}</h3>
+              {/* Card titles sit directly under the page’s h1 (a listing page). */}
+              <h2 lang={meta.contentLanguage === "en" ? "en" : undefined}>{meta.title}</h2>
               <p className="small muted" style={{ display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{meta.summary}</p>
             </Link>
           );
