@@ -1,0 +1,69 @@
+[WebServer] ⚠ Warning: Next.js ignored package-lock.json in C:\Users\laich because it is outside the current Git repository (C:\Users\laich\Documents\FimmickWebsite2).
+[WebServer]  To use this directory, set `outputFileTracingRoot` in your Next.js config.
+[WebServer] 
+
+Running 2 tests using 2 workers
+
+  x  2 [chromium] › tests\e2e\behaviour.spec.ts:81:5 › signature stage › at 390 px the frames keep their height through hydration (2.8s)
+  x  1 [chromium] › tests\e2e\behaviour.spec.ts:81:5 › signature stage › at 1440 px the frames keep their height through hydration (2.9s)
+
+
+  1) [chromium] › tests\e2e\behaviour.spec.ts:81:5 › signature stage › at 1440 px the frames keep their height through hydration 
+
+    Error: 469.21875 → 362.84375
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 2
+    Received:    106.375
+
+       96 |       const before = await framesHeight(false);
+       97 |       const after = await framesHeight(true);
+    >  98 |       expect(Math.abs(before - after), `${before} → ${after}`).toBeLessThanOrEqual(2);
+          |                                                                ^
+       99 |     });
+      100 |   }
+      101 | });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:98:64
+
+    Error Context: test-results\behaviour-signature-stage--9db6b-ir-height-through-hydration-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-signature-stage--9db6b-ir-height-through-hydration-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-signature-stage--9db6b-ir-height-through-hydration-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\behaviour.spec.ts:81:5 › signature stage › at 390 px the frames keep their height through hydration 
+
+    Error: 1495.203125 → 427.921875
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 2
+    Received:    1067.28125
+
+       96 |       const before = await framesHeight(false);
+       97 |       const after = await framesHeight(true);
+    >  98 |       expect(Math.abs(before - after), `${before} → ${after}`).toBeLessThanOrEqual(2);
+          |                                                                ^
+       99 |     });
+      100 |   }
+      101 | });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:98:64
+
+    Error Context: test-results\behaviour-signature-stage--dee93-ir-height-through-hydration-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-signature-stage--dee93-ir-height-through-hydration-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-signature-stage--dee93-ir-height-through-hydration-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests\e2e\behaviour.spec.ts:81:5 › signature stage › at 1440 px the frames keep their height through hydration 
+    [chromium] › tests\e2e\behaviour.spec.ts:81:5 › signature stage › at 390 px the frames keep their height through hydration 

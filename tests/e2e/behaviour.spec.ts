@@ -74,6 +74,56 @@ test.describe("signature stage", () => {
     expect(await progress(page)).toBeGreaterThanOrEqual(paused - 0.02);
     await expect.poll(() => progress(page)).toBeGreaterThan(paused + 0.05);
   });
+
+  // The server renders all four frames; the stage then shows one (audit: 539 → 433 px at 1440,
+  // 1,683 → 615 px at 390). The page has to look like the stage before hydration too.
+  for (const width of [1440, 390]) {
+    test(`at ${width} px the frames keep their height through hydration`, async ({ browser }) => {
+      const framesHeight = async (hydrate: boolean) => {
+        const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: "no-preference" });
+        const page = await context.newPage();
+        // Blocking the app's scripts leaves the inline boot script (html.js): the state before hydration.
+        if (!hydrate) await page.route(/\/_next\/static\/chunks\/.+\.js/, (route) => route.abort());
+        await page.goto("/en");
+        if (hydrate) await expect(page.locator(".sig")).toHaveClass(/sig--stage/);
+        const frames = page.locator(".sig__frames");
+        await frames.evaluate((el) => el.scrollIntoView({ block: "start", behavior: "instant" }));
+        await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+        const height = await frames.evaluate((el) => el.getBoundingClientRect().height);
+        await context.close();
+        return height;
+      };
+      const before = await framesHeight(false);
+      const after = await framesHeight(true);
+      expect(Math.abs(before - after), `${before} → ${after}`).toBeLessThanOrEqual(2);
+    });
+  }
+
+  test("hydration does not replay the first frame's entrance; the next step still enters", async ({ page }) => {
+    /** The entrance animations (`sig-in`) on a frame and its contents, finished ones included (fill: both). */
+    const entrances = (role: string) =>
+      page.locator(`.sig__frame[data-role="${role}"]`).evaluate((el) =>
+        el.getAnimations({ subtree: true }).filter((a) => (a as CSSAnimation).animationName === "sig-in").length,
+      );
+    await page.goto("/en");
+    await expect(page.locator(".sig")).toHaveClass(/sig--stage/);
+    // Already on screen in the pending storyboard: fading it out and back in would be the blink this fix removes.
+    expect(await entrances("source")).toBe(0);
+    await page.locator('.sig__step').nth(1).click();
+    expect(await entrances("work")).toBeGreaterThan(0);
+  });
+
+  test("without JavaScript, or with reduced motion, the storyboard keeps all four frames", async ({ browser }) => {
+    for (const options of [{ javaScriptEnabled: false }, { reducedMotion: "reduce" as const }]) {
+      const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, ...options });
+      const page = await context.newPage();
+      await page.goto("/en");
+      const frames = page.locator(".sig__frame");
+      await frames.first().evaluate((el) => el.scrollIntoView({ block: "start", behavior: "instant" }));
+      await expect(frames.filter({ visible: true }), JSON.stringify(options)).toHaveCount(4);
+      await context.close();
+    }
+  });
 });
 
 test("the hero accent is the serif in English and emphasis marks in both Chinese scripts", async ({ page }) => {

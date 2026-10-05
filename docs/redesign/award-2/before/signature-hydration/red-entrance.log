@@ -1,0 +1,34 @@
+
+Running 1 test using 1 worker
+
+  x  1 [chromium] › tests\e2e\behaviour.spec.ts:102:3 › signature stage › hydration does not replay the first frame's entrance; the next step still enters (9.1s)
+
+
+  1) [chromium] › tests\e2e\behaviour.spec.ts:102:3 › signature stage › hydration does not replay the first frame's entrance; the next step still enters 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 8
+
+      109 |     await expect(page.locator(".sig")).toHaveClass(/sig--stage/);
+      110 |     // Already on screen in the pending storyboard: fading it out and back in would be the blink this fix removes.
+    > 111 |     expect(await entrances("source")).toBe(0);
+          |                                       ^
+      112 |     await page.locator('.sig__step').nth(1).click();
+      113 |     expect(await entrances("work")).toBeGreaterThan(0);
+      114 |   });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\behaviour.spec.ts:111:39
+
+    Error Context: test-results\behaviour-signature-stage--51aa9--the-next-step-still-enters-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\behaviour-signature-stage--51aa9--the-next-step-still-enters-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\behaviour-signature-stage--51aa9--the-next-step-still-enters-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests\e2e\behaviour.spec.ts:102:3 › signature stage › hydration does not replay the first frame's entrance; the next step still enters 

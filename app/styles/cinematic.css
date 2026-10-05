@@ -241,6 +241,23 @@
   .sig--stage .sig__artifact { grid-column: 1; grid-row: auto; }
   .sig__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+/* Until the stage has read the motion setting it renders the storyboard (all four frames: the no-JS and
+   reduced-motion view). With JavaScript on and motion allowed it is about to become the stage, so the
+   pending storyboard already looks like it (first frame, stage layout, empty bars) and hydration moves
+   nothing; it used to collapse from four frames to one. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .sig--pending .sig__frames { grid-template-columns: minmax(0, 1fr); }
+  .js .sig--pending .sig__frame:not(:first-child) { display: none; }
+  .js .sig--pending .sig__fill { transform: scaleX(0); opacity: 1; }
+  .js .sig--pending .sig__frame { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); grid-template-rows: auto 1fr; column-gap: clamp(24px, 5vw, 64px); min-height: 360px; padding: clamp(24px, 4vw, 48px); align-items: start; }
+  .js .sig--pending .sig__frame-label { grid-column: 1; }
+  .js .sig--pending .sig__frame-title { grid-column: 1; font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem); line-height: 1.1; }
+  .js .sig--pending .sig__artifact { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 799px) {
+  .js .sig--pending .sig__frame { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .js .sig--pending .sig__artifact { grid-column: 1; grid-row: auto; }
+}
 .sig__frame-label { display: flex; gap: 8px; font-size: var(--fs-micro); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--role-source); }
 .sig__frame[data-role="work"] .sig__frame-label { color: #ff6fb5; }
 .sig__frame[data-role="review"] .sig__frame-label { color: var(--lime); }
@@ -263,15 +280,16 @@
 .file-list li::before { content: ""; flex: none; width: 14px; height: 17px; border-radius: 2px 6px 2px 2px; border: 2px solid var(--ink); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .sig--stage .sig__frame.is-active { animation: sig-in 520ms var(--ease) both; }
-  .sig--stage .sig__frame.is-active .frame > * { animation: sig-in 520ms var(--ease) both; }
-  .sig--stage .sig__frame.is-active .frame > :nth-child(2) { animation-delay: 380ms; }
-  .sig--stage .sig__frame.is-active .frame > :nth-child(3) { animation-delay: 900ms; }
-  .sig--stage .sig__frame.is-active .fact-list li { animation: sig-in 420ms var(--ease) both; }
-  .sig--stage .sig__frame.is-active .fact-list li:nth-child(2) { animation-delay: 120ms; }
-  .sig--stage .sig__frame.is-active .fact-list li:nth-child(3) { animation-delay: 240ms; }
-  .sig--stage .sig__frame.is-active .fact-list li:nth-child(4) { animation-delay: 360ms; }
-  .sig--stage .sig__frame.is-active .fact-list li:nth-child(5) { animation-delay: 480ms; }
+  /* Frame entrances play once the stage has moved: at hydration its first frame is already on screen. */
+  .sig--stage.sig--moved .sig__frame.is-active { animation: sig-in 520ms var(--ease) both; }
+  .sig--stage.sig--moved .sig__frame.is-active .frame > * { animation: sig-in 520ms var(--ease) both; }
+  .sig--stage.sig--moved .sig__frame.is-active .frame > :nth-child(2) { animation-delay: 380ms; }
+  .sig--stage.sig--moved .sig__frame.is-active .frame > :nth-child(3) { animation-delay: 900ms; }
+  .sig--stage.sig--moved .sig__frame.is-active .fact-list li { animation: sig-in 420ms var(--ease) both; }
+  .sig--stage.sig--moved .sig__frame.is-active .fact-list li:nth-child(2) { animation-delay: 120ms; }
+  .sig--stage.sig--moved .sig__frame.is-active .fact-list li:nth-child(3) { animation-delay: 240ms; }
+  .sig--stage.sig--moved .sig__frame.is-active .fact-list li:nth-child(4) { animation-delay: 360ms; }
+  .sig--stage.sig--moved .sig__frame.is-active .fact-list li:nth-child(5) { animation-delay: 480ms; }
 }
 @keyframes sig-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 

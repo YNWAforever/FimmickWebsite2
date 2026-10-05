@@ -287,7 +287,23 @@ Checks: typecheck, lint, vitest 96/96 then the table and caption check, Playwrig
 
 CI Lighthouse baseline: 93, from this PR’s first green CI run (runs 93, 93, 93, 93, 94), so the CI gate fails below 91 from now on.
 
-Not done (in the PR): the signature stage still collapses from four frames to one at hydration (the audit’s other half of that item; it shifts content below the fold only).
+Not done (in the PR): the signature stage still collapses from four frames to one at hydration (the audit’s other half of that item; it shifts content below the fold only). Fixed after this PR; see “Signature stage hydration”.
+
+## Signature stage hydration (follow-up to Phase 9)
+
+The server renders the storyboard (all four frames), which no-JS and reduced-motion visitors keep. With JavaScript on and motion allowed, the stage then showed one frame, so everything below it moved up at hydration. Until the stage has read the motion setting, it is now marked `sig--pending`, and `.js .sig--pending` (motion allowed only) styles the storyboard as the stage will look: the first frame, the stage layout and empty step bars. That first frame also no longer replays its entrance when the stage takes over (`sig--moved`: entrances play once the stage changes frame or view).
+
+Evidence: `before/signature-hydration/` (`red.log`, `red-entrance.log`) and `after/signature-hydration/` (`heights.txt`, the stage at 1440 and 390 before and after hydration).
+
+| `.sig__frames` height, before → after hydration | Before | After |
+| --- | --- | --- |
+| 1440 × 900 | 469 → 363 px | 363 → 363 px |
+| 390 × 900 | 1,495 → 428 px | 428 → 428 px |
+| First-frame entrance animations replayed at hydration | 8 | 0 |
+
+Tests: 4 new in `behaviour.spec.ts`, 3 red before the change (both widths, the entrance), plus a guard that no-JS and reduced-motion visitors still get all four frames.
+
+Still changing at hydration: the play and view button labels (“Play sequence” → “Pause sequence” once it autoplays, “Step through” → “Show all four”), which moves the step bars about 3 px sideways at 1440; nothing moves vertically.
 
 ## Phase log
 
@@ -305,3 +321,4 @@ Not done (in the PR): the signature stage still collapses from four frames to on
 | 8.2 | feat/award-pass-2-perf | Static hubs (filter islands, static Knowledge Hub pages, contact context in the browser), prefetch on intent, CSS split by route, self-hosted fonts, 2× logos, CJK-first stacks on zh pages, shadow/progress/reduced-motion/header/print | dynamic hubs 4 → 0; `/en` full-scroll RSC 211 → 80 KB gz; `/en/services` CSS 111 → 50 KB; 31 new regression tests (17 + 2 axe red on `main`, plus the prototype-key test) |
 | 8.3 | feat/award-pass-2-i18n | zh-Hans glossary (12 mainland words), escaped phrase pattern and empty-list guard, 著称/卓著, zh-Hans tags and 简中 labels on the homepage samples, generated Simplified captions as the default on /zh-hans, table check in `npm test` and `check-hans` in CI, listings mark the Traditional originals they show | Hong Kong words on zh-Hans pages (the audit’s top 7: 175 occurrences in the source copy) → converted by the glossary; unmarked Traditional lines on zh-Hans pages 73 → 0; 23 new regression tests, 21 red on main |
 | 9 | feat/award-pass-2-tests | Firefox, WebKit, iPhone 14 and iPad-landscape smoke projects, reduced-motion axe pass, behaviour tests for the language switch (modifier keys, hash) and the signature stage (pause/resume) with their fixes, quality-gate script and CI Lighthouse gate, PR template, ground-rules test | browser projects 1 → 5; Playwright 202 → 260 tests; 3 new behaviour tests red on main |
+| 9 follow-up | fix/signature-stage-hydration | The signature stage keeps its height through hydration (pending storyboard styled as the stage) and does not replay its first frame | `.sig__frames` shift at hydration 106 px → 0 (1440), 1,067 px → 0 (390); 4 new behaviour tests, 3 red before the change |

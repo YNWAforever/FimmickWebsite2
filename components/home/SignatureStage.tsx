@@ -10,7 +10,9 @@ export type StageStep = { id: string; label: string; title: string };
  * human review → usable output.
  *
  * - Server markup is the static storyboard (all four frames visible), which is
- *   also what no-JS and reduced-motion visitors keep.
+ *   also what no-JS and reduced-motion visitors keep. With JavaScript and motion
+ *   allowed it is styled as the stage before hydration (`sig--pending`), so the
+ *   switch to the stage moves nothing.
  * - With motion allowed, it becomes a stage that plays once, 5 s per step,
  *   when at least 40% of it is on screen, and pauses when it leaves the
  *   screen or the tab is hidden. It never loops and never scroll-jacks.
@@ -33,10 +35,18 @@ export function SignatureStage({
   /** The active step’s progress has begun: its bar keeps its place while paused (Phase 9). */
   const [started, setStarted] = useState(false);
   const [reduced, setReduced] = useState(true);
+  /** The motion setting has been read; until then the server’s storyboard is marked pending (CSS). */
+  const [resolved, setResolved] = useState(false);
+  /**
+   * The stage has changed frames (or views) since hydration set it up. Until then its first frame is
+   * the one the pending storyboard already showed, so it does not play its entrance again (CSS).
+   */
+  const [moved, setMoved] = useState(false);
   const autoStarted = useRef(false);
 
   usePrefersReducedMotion(
     useCallback((value: boolean) => {
+      setResolved(true);
       setReduced(value);
       if (value) {
         setPlaying(false);
@@ -74,6 +84,7 @@ export function SignatureStage({
   }, [reduced]);
 
   const advance = () => {
+    setMoved(true);
     if (active < steps.length - 1) setActive(active + 1);
     else {
       setPlaying(false);
@@ -83,7 +94,10 @@ export function SignatureStage({
 
   const togglePlay = () => {
     autoStarted.current = true;
-    if (mode === "all") setMode("stage");
+    if (mode === "all") {
+      setMode("stage");
+      setMoved(true);
+    }
     if (finished) {
       setActive(0);
       setFinished(false);
@@ -98,6 +112,7 @@ export function SignatureStage({
   const choose = (index: number) => {
     autoStarted.current = true;
     setMode("stage");
+    setMoved(true);
     setPlaying(false);
     setStarted(false);
     setFinished(index === steps.length - 1);
@@ -108,7 +123,7 @@ export function SignatureStage({
   const playLabel = playing ? labels.pause : finished ? labels.replay : labels.play;
 
   return (
-    <div ref={root} className={`sig ${staged ? "sig--stage" : "sig--all"}${playing ? " is-playing" : ""}`}>
+    <div ref={root} className={`sig ${staged ? "sig--stage" : "sig--all"}${resolved ? "" : " sig--pending"}${moved ? " sig--moved" : ""}${playing ? " is-playing" : ""}`}>
       <div className="sig__controls">
         <ol className="sig__steps">
           {steps.map((s, i) => {
@@ -152,6 +167,7 @@ export function SignatureStage({
             onClick={() => {
               autoStarted.current = true;
               setPlaying(false);
+              setMoved(true);
               setMode(staged ? "all" : "stage");
             }}
           >
