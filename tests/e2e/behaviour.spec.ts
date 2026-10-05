@@ -16,14 +16,33 @@ test.describe("language switch", () => {
     await expect(page).toHaveURL(/\/zh-hant\/contact\?intent=service&service=seo-aeo#form$/);
   });
 
-  test("a modified click opens the other language in a new tab and leaves this page alone", async ({ page, context }) => {
+  test("modified clicks are left to the browser (new tab, window); a plain click navigates in place", async ({ page }) => {
     await page.goto("/en/contact?intent=service&service=seo-aeo");
     const link = traditional(page);
+    // The new-tab destination is the full equivalent page.
     await expect(link).toHaveAttribute("href", "/zh-hant/contact?intent=service&service=seo-aeo");
-    const [tab] = await Promise.all([context.waitForEvent("page"), link.click({ modifiers: ["ControlOrMeta"] })]);
-    await tab.waitForURL(/\/zh-hant\/contact/);
-    expect(new URL(tab.url()).pathname + new URL(tab.url()).search).toBe("/zh-hant/contact?intent=service&service=seo-aeo");
-    expect(new URL(page.url()).pathname).toBe("/en/contact");
+    // Whether a headless browser actually opens a tab differs by platform, so check the contract: the
+    // switch cancels only a plain primary click. A window listener (after React's document listener)
+    // records the decision, then cancels the default itself so the test page stays put.
+    const prevented = await link.evaluate(
+      (a, variants) =>
+        variants.map((init) => {
+          let seen = false;
+          window.addEventListener(
+            "click",
+            (e) => {
+              seen = e.defaultPrevented;
+              e.preventDefault();
+            },
+            { once: true },
+          );
+          a.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, button: 0, ...init }));
+          return seen;
+        }),
+      [{ ctrlKey: true }, { metaKey: true }, { shiftKey: true }, { altKey: true }, {}],
+    );
+    expect(prevented).toEqual([false, false, false, false, true]);
+    await expect(page).toHaveURL(/\/zh-hant\/contact\?intent=service&service=seo-aeo$/);
   });
 });
 
