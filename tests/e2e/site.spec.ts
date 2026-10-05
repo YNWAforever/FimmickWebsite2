@@ -275,8 +275,9 @@ test.describe("locale continuity and media", () => {
   });
 
   test("award styles win the cascade in the production bundle", async ({ page }) => {
-    // award.css overrides cinematic.css at equal specificity, so it must load after it. Importing it
-    // from a second root layout hoists it into the shared chunk (loaded first) and silently undoes it.
+    // award-home.css overrides cinematic.css at equal specificity, so it must load after it (both are
+    // imported by the home route, in that order; 8.2.3). Importing award CSS from a second root layout
+    // would hoist it into the shared chunk (loaded first) and silently undo it.
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/en");
     const styles = await page.evaluate(() => ({

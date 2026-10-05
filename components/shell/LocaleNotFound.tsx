@@ -35,14 +35,15 @@ export function LocaleNotFound() {
         <ul className="chips" style={{ marginTop: 24 }}>
           {links.map(([path, label]) => (
             <li key={path}>
-              <Link className="chip" href={`${base}${path}`}>
+              {/* A 404 is a dead end, not a page to prefetch from (8.2.2). */}
+              <Link className="chip" href={`${base}${path}`} prefetch={false}>
                 {label}
               </Link>
             </li>
           ))}
         </ul>
         <p style={{ marginTop: 24 }}>
-          <Link className="btn" href={base}>
+          <Link className="btn" href={base} prefetch={false}>
             {chinese ? zh("返回首頁", locale) : "Go to the homepage"}
           </Link>
         </p>

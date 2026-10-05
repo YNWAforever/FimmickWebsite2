@@ -30,25 +30,35 @@ for (const route of routes) {
   console.log(`css ${route.padEnd(44)} ${hrefs.length} files  ${kb(raw)} KB raw  ${kb(zipped)} KB gz`);
 }
 
+/** Wait until no new RSC request has started for `quiet` × 250 ms. */
+async function settled(page, sent, quiet) {
+  let last = -1;
+  for (let still = 0, i = 0; still < quiet && i < 80; i++) {
+    await page.waitForTimeout(250);
+    still = sent.length === last ? still + 1 : 0;
+    last = sent.length;
+  }
+}
+
 const browser = await chromium.launch();
 const prefetch = {};
 for (const [route, width, height] of [["/en", 1440, 900], ["/en", 390, 844], ["/en/platform", 1440, 900]]) {
   const page = await (await browser.newContext({ viewport: { width, height } })).newPage();
-  const seen = [];
-  page.on("response", async (res) => {
-    const headers = res.request().headers();
-    if (!headers["rsc"] && !res.url().includes("_rsc=")) return;
-    try {
-      const body = await res.body();
-      seen.push({ url: res.url(), raw: body.length, gz: gz(body) });
-    } catch {
-      /* navigation aborted the body */
-    }
+  // Record the RSC requests and replay them afterwards with the same headers: reading bodies back from
+  // the browser is unreliable (Chrome may already have discarded them), and Next drops a queued
+  // prefetch whose link has scrolled away, so each step waits for its requests (award pass 2, 8.2.2).
+  const sent = [];
+  page.on("request", (req) => {
+    if (req.headers()["rsc"] || req.url().includes("_rsc=")) sent.push({ url: req.url(), headers: req.headers() });
   });
   await page.goto(base + route, { waitUntil: "load" });
-  await page.waitForTimeout(800);
-  await scrollThrough(page, { pause: 250 });
-  await page.waitForTimeout(1500);
+  await scrollThrough(page, { pause: 0, onStep: () => settled(page, sent, 3) });
+  await settled(page, sent, 8);
+  const seen = [];
+  for (const { url, headers } of sent) {
+    const body = Buffer.from(await (await page.request.get(url, { headers })).body());
+    seen.push({ url, raw: body.length, gz: gz(body) });
+  }
   const raw = seen.reduce((n, s) => n + s.raw, 0);
   const zipped = seen.reduce((n, s) => n + s.gz, 0);
   prefetch[`${route}@${width}`] = { requests: seen.length, rawKB: kb(raw), gzipKB: kb(zipped) };

@@ -1,0 +1,56 @@
+{
+  "css": {
+    "/en": {
+      "files": 2,
+      "rawKB": 111.3,
+      "gzipKB": 23.2
+    },
+    "/en/platform": {
+      "files": 2,
+      "rawKB": 111.3,
+      "gzipKB": 23.2
+    },
+    "/en/services": {
+      "files": 2,
+      "rawKB": 111.3,
+      "gzipKB": 23.2
+    },
+    "/en/solutions/content-production": {
+      "files": 2,
+      "rawKB": 111.3,
+      "gzipKB": 23.2
+    },
+    "/en/contact": {
+      "files": 2,
+      "rawKB": 111.3,
+      "gzipKB": 23.2
+    },
+    "/en/knowledge-hub/4-types-of-crm-system": {
+      "files": 2,
+      "rawKB": 111.3,
+      "gzipKB": 23.2
+    },
+    "/zh-hant": {
+      "files": 2,
+      "rawKB": 111.3,
+      "gzipKB": 23.2
+    }
+  },
+  "prefetch": {
+    "/en@1440": {
+      "requests": 82,
+      "rawKB": 882.3,
+      "gzipKB": 211.1
+    },
+    "/en@390": {
+      "requests": 73,
+      "rawKB": 859.5,
+      "gzipKB": 204.3
+    },
+    "/en/platform@1440": {
+      "requests": 39,
+      "rawKB": 512.1,
+      "gzipKB": 119.8
+    }
+  }
+}

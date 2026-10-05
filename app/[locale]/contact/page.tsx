@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { href, t, type Locale, zh } from "@/lib/i18n";
-import { resolveLocale } from "@/lib/page";
+import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
-import { contextKeys, intentLabels, intents, parseContext, type ContextKey } from "@/lib/intent";
+import { contextKeys, intentLabels, intents, knownIds, type ContextKey } from "@/lib/intent";
 import { solutionById } from "@/content/solutions";
 import { productById } from "@/content/products";
 import { serviceById } from "@/content/services";
@@ -14,16 +14,16 @@ import { exampleMeta } from "@/content/examples";
 import { guides, explainerVideo, workshopResource } from "@/content/resources";
 import { company, offices } from "@/content/company";
 import { PageHero } from "@/components/ui";
-import { ContactForm, type ContactStrings, type ContextItem } from "@/components/forms/ContactForm";
+import { ContactForm, type ContactStrings, type ContextOptions } from "@/components/forms/ContactForm";
+import "../../styles/contact.css";
 
-type Props = { params: Promise<{ locale: string }>; searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 const copy = {
   title: { en: "Contact FIMMICK", zh: "聯絡 FIMMICK" },
   lead: { en: "Tell us about the work you want to improve. A FIMMICK team member reviews every request and replies by email.", zh: "告訴我們你想改善的工作。FIMMICK 同事會審閱每個要求，並以電郵回覆。" },
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: LocaleParams): Promise<Metadata> {
   const locale = await resolveLocale(params);
   return pageMetadata({ locale, path: "/contact", title: t(copy.title, locale), description: t(copy.lead, locale) });
 }
@@ -47,11 +47,11 @@ function label(key: ContextKey, value: string, locale: Locale): { kind: string; 
   }
 }
 
-export default async function ContactPage({ params, searchParams }: Props) {
+/** Static: the form reads ?intent and the page context in the browser (8.2.1). */
+export default async function ContactPage({ params }: LocaleParams) {
   const locale = await resolveLocale(params);
   const en = locale === "en";
-  const context = parseContext(await searchParams);
-  const items: ContextItem[] = contextKeys.filter((k) => context[k]).map((k) => ({ key: k, value: context[k]!, ...label(k, context[k]!, locale) }));
+  const contextOptions = Object.fromEntries(contextKeys.map((k) => [k, Object.fromEntries(knownIds(k).map((id) => [id, label(k, id, locale)]))])) as ContextOptions;
   const s: ContactStrings = en
     ? {
         legend: "About you and the work", name: "Name", email: "Work email", company: "Company", work: "What work do you want to improve?", workHint: "One or two sentences is enough — e.g. “Product launch content takes too many rounds of approval.”", optional: "optional", more: "Add more detail (optional)", phone: "Phone", website: "Website", tools: "Current tools", message: "Anything else", intent: "Enquiry type", context: "Context from the page you came from", contextHint: "remove anything that doesn’t apply.", remove: "Remove", submit: "Send request", submitting: "Sending…", required: "Please fill this in.", invalidEmail: "Please enter a valid email address.", tooLong: "This is too long.", invalidPhone: "Please check the phone number.",
@@ -66,7 +66,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
       <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={en ? "Contact" : zh("聯絡我們", locale)} title={en ? "Let’s talk about the work." : zh("談談你的工作。", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container contact-grid">
-          <ContactForm lang={locale} action={href(locale, "/contact")} intents={intents.map((i) => ({ id: i, label: t(intentLabels[i], locale) }))} initialIntent={context.intent} initialContext={items} email={company.email} s={s} />
+          <ContactForm lang={locale} action={href(locale, "/contact")} intents={intents.map((i) => ({ id: i, label: t(intentLabels[i], locale) }))} contextOptions={contextOptions} email={company.email} s={s} />
           <aside className="stack" style={{ ["--stack" as string]: "16px" }}>
             <div className="io-card">
               <h2 style={{ fontSize: "1.05rem", marginBottom: 10 }}>{en ? "What happens next" : zh("接下來會怎樣", locale)}</h2>

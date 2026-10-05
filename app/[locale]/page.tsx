@@ -5,6 +5,15 @@ import { cinema, homeFaqs, sections } from "@/content/home";
 import { Faq, SectionHead } from "@/components/ui";
 import { BusinessOutputs, CaseEvidence, CinematicHero, ClosingChapter, EcosystemTiles, IndustryPhotos, Pathways, ResourcePreviews, SignatureWorkflow, StartDecision } from "@/components/home/sections";
 import { notFound } from "next/navigation";
+// The homepage’s own sheets (8.2.3); award-home.css overrides cinematic.css at equal specificity, so it
+// comes last.
+import "../styles/cinematic.css";
+import "../styles/award-home.css";
+import { preload } from "react-dom";
+
+/** The accent face’s file, as named in editorial.css’s @font-face (kept here, not imported from app/fonts.ts,
+ *  so this route does not pull the next/font stylesheet into a chunk of its own). */
+const accentFontUrl = "/fonts/instrument-serif-latin-400-italic-5.3.0.woff2";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -28,6 +37,10 @@ export default async function HomePage({ params }: Props) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
   const locale: Locale = raw;
+  // The hero headline’s accent phrase is set in the serif, above the fold: preload it on this route
+  // only (8.2.4), and only in English (Chinese accents keep the sans). Same URL as the @font-face in
+  // editorial.css, so it is one download on any page.
+  if (locale === "en") preload(accentFontUrl, { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
 
   return (
     <>

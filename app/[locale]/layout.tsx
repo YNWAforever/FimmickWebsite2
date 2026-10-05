@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+// Every route’s sheets (award pass 2, 8.2.3). Route-specific sheets load from their routes, after
+// these: cinematic.css + award-home.css (the homepage), diagrams.css and examples.css (the pages that
+// draw diagrams or show worked examples) and contact.css (contact).
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/components.css";
 import "../styles/shell.css";
-import "../styles/diagrams.css";
-import "../styles/examples.css";
 import "../styles/pages.css";
-import "../styles/cinematic.css";
 import "../styles/editorial.css";
 import "../styles/award.css";
 import { fontVariables } from "../fonts";

@@ -1,0 +1,667 @@
+
+Running 20 tests using 4 workers
+
+  ok  1 [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/services is prerendered and served from the cache (191ms)
+  x   4 [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/contact is prerendered and served from the cache (279ms)
+  x   3 [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/knowledge-hub is prerendered and served from the cache (265ms)
+  x   2 [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/resources is prerendered and served from the cache (312ms)
+  x   5 [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/case-studies is prerendered and served from the cache (223ms)
+  ok  9 [chromium] › tests\e2e\perf.spec.ts:96:3 › 8.2.1 static hubs › contact reads ?intent and the page context in the browser (1.2s)
+  ok  8 [chromium] › tests\e2e\perf.spec.ts:87:3 › 8.2.1 static hubs › case-study filters run in the browser (2.2s)
+  x   6 [chromium] › tests\e2e\perf.spec.ts:46:3 › 8.2.1 static hubs › knowledge-hub pages are static paths with self-canonicals; old ?page= links move there in one hop (935ms)
+  x  11 [chromium] › tests\e2e\perf.spec.ts:118:1 › 8.2.2 the header logo does not prefetch the page it is on; nav links prefetch on intent (3.7s)
+  x  12 [chromium] › tests\e2e\perf.spec.ts:132:1 › 8.2.3 /en/services loads at most 50 KB of CSS; the home route still gets the cinematic sheet (155ms)
+  x   7 [chromium] › tests\e2e\perf.spec.ts:65:3 › 8.2.1 static hubs › resource filters, search and paging run in the browser and keep the URL in step (11.6s)
+  x  13 [chromium] › tests\e2e\perf.spec.ts:153:1 › 8.2.4 fonts are self-hosted; the serif is preloaded on the home route only (844ms)
+  x  14 [chromium] › tests\e2e\perf.spec.ts:181:1 › 8.2.5 the header logo is at most 248 px wide (2.1s)
+  x  15 [chromium] › tests\e2e\perf.spec.ts:190:1 › 8.2.6 Chinese pages name CJK families first (2.3s)
+  x  18 [chromium] › tests\e2e\perf.spec.ts:233:3 › 8.2.7 smaller items › with reduced motion nothing animates or transitions (991ms)
+  x  16 [chromium] › tests\e2e\perf.spec.ts:215:3 › 8.2.7 smaller items › no transition animates box-shadow (2.5s)
+  x  17 [chromium] › tests\e2e\perf.spec.ts:223:3 › 8.2.7 smaller items › the signature progress bar scales instead of animating width (2.2s)
+  x  19 [chromium] › tests\e2e\perf.spec.ts:252:3 › 8.2.7 smaller items › the header is a solid fill, not a backdrop blur (1.6s)
+  x  20 [chromium] › tests\e2e\perf.spec.ts:259:3 › 8.2.7 smaller items › print hides the site chrome (5.7s)
+  x  10 [chromium] › tests\e2e\perf.spec.ts:103:1 › 8.2.2 a full scroll of /en prefetches at most 120 KB of RSC (gzip) (28.1s)
+
+
+  1) [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/resources is prerendered and served from the cache 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /s-maxage/
+    Received string:  "private, no-cache, no-store, max-age=0, must-revalidate"
+
+      38 |       const res = await request.get(`/en/${hub}`);
+      39 |       expect(res.status()).toBe(200);
+    > 40 |       expect(res.headers()["cache-control"]).toMatch(/s-maxage/);
+         |                                              ^
+      41 |       expect(res.headers()["x-nextjs-cache"]).toBe("HIT");
+      42 |       expect(fs.existsSync(path.join(".next", "server", "app", "en", `${hub}.html`)), `${hub}.html`).toBe(true);
+      43 |     });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:40:46
+
+    Error Context: test-results\perf-8-2-1-static-hubs-en--ccd1c-d-and-served-from-the-cache-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-1-static-hubs-en--ccd1c-d-and-served-from-the-cache-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-1-static-hubs-en--ccd1c-d-and-served-from-the-cache-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/case-studies is prerendered and served from the cache 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /s-maxage/
+    Received string:  "private, no-cache, no-store, max-age=0, must-revalidate"
+
+      38 |       const res = await request.get(`/en/${hub}`);
+      39 |       expect(res.status()).toBe(200);
+    > 40 |       expect(res.headers()["cache-control"]).toMatch(/s-maxage/);
+         |                                              ^
+      41 |       expect(res.headers()["x-nextjs-cache"]).toBe("HIT");
+      42 |       expect(fs.existsSync(path.join(".next", "server", "app", "en", `${hub}.html`)), `${hub}.html`).toBe(true);
+      43 |     });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:40:46
+
+    Error Context: test-results\perf-8-2-1-static-hubs-en--05ee2-d-and-served-from-the-cache-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-1-static-hubs-en--05ee2-d-and-served-from-the-cache-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-1-static-hubs-en--05ee2-d-and-served-from-the-cache-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/knowledge-hub is prerendered and served from the cache 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /s-maxage/
+    Received string:  "private, no-cache, no-store, max-age=0, must-revalidate"
+
+      38 |       const res = await request.get(`/en/${hub}`);
+      39 |       expect(res.status()).toBe(200);
+    > 40 |       expect(res.headers()["cache-control"]).toMatch(/s-maxage/);
+         |                                              ^
+      41 |       expect(res.headers()["x-nextjs-cache"]).toBe("HIT");
+      42 |       expect(fs.existsSync(path.join(".next", "server", "app", "en", `${hub}.html`)), `${hub}.html`).toBe(true);
+      43 |     });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:40:46
+
+    Error Context: test-results\perf-8-2-1-static-hubs-en--a3675-d-and-served-from-the-cache-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-1-static-hubs-en--a3675-d-and-served-from-the-cache-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-1-static-hubs-en--a3675-d-and-served-from-the-cache-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/contact is prerendered and served from the cache 
+
+    Error: expect(received).toMatch(expected)
+
+    Expected pattern: /s-maxage/
+    Received string:  "private, no-cache, no-store, max-age=0, must-revalidate"
+
+      38 |       const res = await request.get(`/en/${hub}`);
+      39 |       expect(res.status()).toBe(200);
+    > 40 |       expect(res.headers()["cache-control"]).toMatch(/s-maxage/);
+         |                                              ^
+      41 |       expect(res.headers()["x-nextjs-cache"]).toBe("HIT");
+      42 |       expect(fs.existsSync(path.join(".next", "server", "app", "en", `${hub}.html`)), `${hub}.html`).toBe(true);
+      43 |     });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:40:46
+
+    Error Context: test-results\perf-8-2-1-static-hubs-en--98d3b-d-and-served-from-the-cache-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-1-static-hubs-en--98d3b-d-and-served-from-the-cache-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-1-static-hubs-en--98d3b-d-and-served-from-the-cache-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests\e2e\perf.spec.ts:46:3 › 8.2.1 static hubs › knowledge-hub pages are static paths with self-canonicals; old ?page= links move there in one hop 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 404
+
+      46 |   test("knowledge-hub pages are static paths with self-canonicals; old ?page= links move there in one hop", async ({ page, request }) => {
+      47 |     const res = await request.get("/en/knowledge-hub/page/2");
+    > 48 |     expect(res.status()).toBe(200);
+         |                          ^
+      49 |     expect(res.headers()["x-nextjs-cache"]).toBe("HIT");
+      50 |     expect(fs.existsSync(path.join(".next", "server", "app", "en", "knowledge-hub", "page", "2.html"))).toBe(true);
+      51 |     const old = await request.get("/en/knowledge-hub?page=2", { maxRedirects: 0 });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:48:26
+
+    Error Context: test-results\perf-8-2-1-static-hubs-kno-afb52-links-move-there-in-one-hop-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-1-static-hubs-kno-afb52-links-move-there-in-one-hop-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-1-static-hubs-kno-afb52-links-move-there-in-one-hop-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests\e2e\perf.spec.ts:65:3 › 8.2.1 static hubs › resource filters, search and paging run in the browser and keep the URL in step 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /\/en\/resources$/
+    Received string:  "http://localhost:3101/en/resources?q="
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        13 × locator resolved to <html lang="en" data-scroll="top" data-scroll-behavior="smooth" class="manrope_9f32bb2a-module__DaAy_W__variable instrument_serif_9a3be11b-module__yZTBbW__variable js has-bubble">…</html>
+           - unexpected value "http://localhost:3101/en/resources?q="
+
+
+      79 |     await page.locator("#resource-q").fill("");
+      80 |     await page.locator("#resource-q").press("Enter");
+    > 81 |     await expect(page).toHaveURL(/\/en\/resources$/);
+         |                        ^
+      82 |     await page.locator(".pagination a[rel=next]").click();
+      83 |     await expect(page).toHaveURL(/[?&]page=2/);
+      84 |     await expect(page.locator(".result-meta")).toContainText("Page 2 /");
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:81:24
+
+    Error Context: test-results\perf-8-2-1-static-hubs-res-069b3-er-and-keep-the-URL-in-step-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-1-static-hubs-res-069b3-er-and-keep-the-URL-in-step-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-1-static-hubs-res-069b3-er-and-keep-the-URL-in-step-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › tests\e2e\perf.spec.ts:103:1 › 8.2.2 a full scroll of /en prefetches at most 120 KB of RSC (gzip) 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 120
+    Received:    212
+
+      113 |   let bytes = 0;
+      114 |   for (const { url, headers } of sent) bytes += gz(await (await page.request.get(url, { headers })).body());
+    > 115 |   expect(Math.round(bytes / 1024)).toBeLessThanOrEqual(120);
+          |                                    ^
+      116 | });
+      117 |
+      118 | test("8.2.2 the header logo does not prefetch the page it is on; nav links prefetch on intent", async ({ page }) => {
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:115:36
+
+    Error Context: test-results\perf-8-2-2-a-full-scroll-o-57c29-at-most-120-KB-of-RSC-gzip--chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-2-a-full-scroll-o-57c29-at-most-120-KB-of-RSC-gzip--chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-2-a-full-scroll-o-57c29-at-most-120-KB-of-RSC-gzip--chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › tests\e2e\perf.spec.ts:118:1 › 8.2.2 the header logo does not prefetch the page it is on; nav links prefetch on intent 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 4
+
+    - Array []
+    + Array [
+    +   "/en",
+    +   "/en",
+    + ]
+
+      124 |   await page.goto("/en", { waitUntil: "load" });
+      125 |   await page.waitForTimeout(1500);
+    > 126 |   expect(prefetched.filter((p) => p === "/en")).toEqual([]);
+          |                                                 ^
+      127 |   expect(prefetched.filter((p) => p === "/en/about")).toEqual([]);
+      128 |   await page.locator(".utility-about").hover();
+      129 |   await expect.poll(() => prefetched.includes("/en/about")).toBe(true);
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:126:49
+
+    Error Context: test-results\perf-8-2-2-the-header-logo-8105b-av-links-prefetch-on-intent-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-2-the-header-logo-8105b-av-links-prefetch-on-intent-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-2-the-header-logo-8105b-av-links-prefetch-on-intent-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [chromium] › tests\e2e\perf.spec.ts:132:1 › 8.2.3 /en/services loads at most 50 KB of CSS; the home route still gets the cinematic sheet 
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 50
+    Received:    111
+
+      146 |   const cinematic = /\.cine-hero\{/;
+      147 |   const services = await sheets("/en/services");
+    > 148 |   expect(Math.round(services.raw / 1024)).toBeLessThanOrEqual(50);
+          |                                           ^
+      149 |   expect(services.text).not.toMatch(cinematic);
+      150 |   expect((await sheets("/en")).text).toMatch(cinematic);
+      151 | });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:148:43
+
+    Error Context: test-results\perf-8-2-3-en-services-loa-47f45-ll-gets-the-cinematic-sheet-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-3-en-services-loa-47f45-ll-gets-the-cinematic-sheet-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-3-en-services-loa-47f45-ll-gets-the-cinematic-sheet-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [chromium] › tests\e2e\perf.spec.ts:153:1 › 8.2.4 fonts are self-hosted; the serif is preloaded on the home route only 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  ["/_next/static/media/7ebf22b5a21034f8-s.p.3j3877k49yy0l.woff2", "/_next/static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2"]
+
+      160 |   const inner = await preloads("/en/services");
+      161 |   const home = await preloads("/en");
+    > 162 |   expect(inner).toHaveLength(1);
+          |                 ^
+      163 |   expect(inner[0]).toMatch(/manrope/);
+      164 |   expect(home).toHaveLength(2);
+      165 |   const serif = home.find((h) => /instrument-serif/.test(h));
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:162:17
+
+    Error Context: test-results\perf-8-2-4-fonts-are-self--a5bdf-aded-on-the-home-route-only-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-4-fonts-are-self--a5bdf-aded-on-the-home-route-only-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-4-fonts-are-self--a5bdf-aded-on-the-home-route-only-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) [chromium] › tests\e2e\perf.spec.ts:181:1 › 8.2.5 the header logo is at most 248 px wide ─────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 248
+    Received:    467
+
+      185 |   const width = await logo.evaluate((img) => (img as HTMLImageElement).naturalWidth);
+      186 |   expect(width).toBeGreaterThan(0);
+    > 187 |   expect(width).toBeLessThanOrEqual(248);
+          |                 ^
+      188 | });
+      189 |
+      190 | test("8.2.6 Chinese pages name CJK families first", async ({ page }) => {
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:187:17
+
+    Error Context: test-results\perf-8-2-5-the-header-logo-is-at-most-248-px-wide-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-5-the-header-logo-is-at-most-248-px-wide-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-5-the-header-logo-is-at-most-248-px-wide-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) [chromium] › tests\e2e\perf.spec.ts:190:1 › 8.2.6 Chinese pages name CJK families first ──────
+
+    Error: /zh-hant
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "PingFang HK"
+    Received: "Manrope"
+
+      192 |     await page.goto(route);
+      193 |     const family = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
+    > 194 |     expect(family.split(",")[0].replace(/["']/g, "").trim(), route).toBe(first);
+          |                                                                     ^
+      195 |   }
+      196 |   await page.goto("/en");
+      197 |   expect((await page.evaluate(() => getComputedStyle(document.body).fontFamily)).split(",")[0]).not.toMatch(/PingFang/);
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:194:69
+
+    Error Context: test-results\perf-8-2-6-Chinese-pages-name-CJK-families-first-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-6-Chinese-pages-name-CJK-families-first-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-6-Chinese-pages-name-CJK-families-first-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) [chromium] › tests\e2e\perf.spec.ts:215:3 › 8.2.7 smaller items › no transition animates box-shadow 
+
+    Error: /en
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 14
+
+    - Array []
+    + Array [
+    +   ".btn",
+    +   ".card",
+    +   ".job-card",
+    +   ".hub-card",
+    +   ".output-tile",
+    +   ".case-photo",
+    +   ".brand-tiles a",
+    +   ".shelf__item",
+    +   ".output-tile, .case-photo, .door, .decision__opt, .shelf__item",
+    +   ".output-tile__paper",
+    +   ".brand-tiles a",
+    +   ".btn",
+    + ]
+
+      217 |       await page.goto(route);
+      218 |       const offenders = (await rules(page)).filter((r) => /transition[^;]*box-shadow/.test(r.text)).map((r) => r.selector);
+    > 219 |       expect(offenders, route).toEqual([]);
+          |                                ^
+      220 |     }
+      221 |   });
+      222 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:219:32
+
+    Error Context: test-results\perf-8-2-7-smaller-items-no-transition-animates-box-shadow-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-7-smaller-items-no-transition-animates-box-shadow-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-7-smaller-items-no-transition-animates-box-shadow-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) [chromium] › tests\e2e\perf.spec.ts:223:3 › 8.2.7 smaller items › the signature progress bar scales instead of animating width 
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "scaleX"
+    Received string:    "@keyframes sig-progress {·
+      0% { width: 0px; }
+      100% { width: 100%; }
+    }"
+
+      227 |       return "";
+      228 |     });
+    > 229 |     expect(keyframes).toContain("scaleX");
+          |                       ^
+      230 |     expect(keyframes).not.toMatch(/width/);
+      231 |   });
+      232 |
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:229:23
+
+    Error Context: test-results\perf-8-2-7-smaller-items-t-014bc--instead-of-animating-width-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-7-smaller-items-t-014bc--instead-of-animating-width-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-7-smaller-items-t-014bc--instead-of-animating-width-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) [chromium] › tests\e2e\perf.spec.ts:233:3 › 8.2.7 smaller items › with reduced motion nothing animates or transitions 
+
+    Error: /en
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -   1
+    + Received  + 129
+
+    - Array []
+    + Array [
+    +   "btn btn--small",
+    +   "arrow",
+    +   "btn btn--small",
+    +   "arrow",
+    +   "btn btn--small",
+    +   "arrow",
+    +   "btn btn--small",
+    +   "arrow",
+    +   "btn btn--small",
+    +   "arrow",
+    +   "btn btn--small",
+    +   "arrow",
+    +   "btn btn--small",
+    +   "arrow",
+    +   "btn btn--small",
+    +   "arrow",
+    +   "btn btn--accent btn--small header-cta",
+    +   "SPAN",
+    +   "SPAN",
+    +   "btn btn--accent",
+    +   "btn btn--ghost",
+    +   "btn",
+    +   "arrow",
+    +   "btn btn--ghost",
+    +   "arrow",
+    +   "output-tile reveal",
+    +   "output-tile__paper",
+    +   "output-tile__go",
+    +   "output-tile reveal output-tile--featured",
+    +   "IMG",
+    +   "output-tile__paper",
+    +   "output-tile__go",
+    +   "output-tile reveal",
+    +   "output-tile__paper",
+    +   "output-tile__go",
+    +   "output-tile reveal",
+    +   "output-tile__paper",
+    +   "output-tile__go",
+    +   "text-link",
+    +   "arrow",
+    +   "text-link",
+    +   "arrow",
+    +   "btn btn--ghost btn--small",
+    +   "arrow",
+    +   "case-photo reveal",
+    +   "IMG",
+    +   "H3",
+    +   "case-photo reveal",
+    +   "IMG",
+    +   "H3",
+    +   "case-photo reveal",
+    +   "IMG",
+    +   "H3",
+    +   "text-link",
+    +   "arrow",
+    +   "text-link",
+    +   "arrow",
+    +   "door reveal",
+    +   "IMG",
+    +   "btn",
+    +   "arrow",
+    +   "text-link",
+    +   "arrow",
+    +   "door door--services reveal",
+    +   "IMG",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "btn",
+    +   "arrow",
+    +   "text-link",
+    +   "arrow",
+    +   "text-link",
+    +   "arrow",
+    +   "IMG",
+    +   "industry-shot__text",
+    +   "SPAN",
+    +   "IMG",
+    +   "industry-shot__text",
+    +   "SPAN",
+    +   "IMG",
+    +   "industry-shot__text",
+    +   "SPAN",
+    +   "IMG",
+    +   "industry-shot__text",
+    +   "SPAN",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "text-link",
+    +   "arrow",
+    +   "text-link",
+    +   "arrow",
+    +   "btn btn--ghost btn--small",
+    +   "arrow",
+    +   "player__play",
+    +   "shelf__item shelf__item--guide",
+    +   "shelf__item shelf__item--article",
+    +   "shelf__item shelf__item--workshop",
+    +   "text-link",
+    +   "arrow",
+    +   "decision__opt reveal",
+    +   "text-link",
+    +   "arrow",
+    +   "decision__opt reveal",
+    +   "text-link",
+    +   "arrow",
+    +   "decision__opt reveal",
+    +   "text-link",
+    +   "arrow",
+    +   "btn btn--accent",
+    +   "arrow",
+    +   "btn btn--light",
+    +   "arrow",
+    +   "footer-cta__mail",
+    +   "btn btn--accent",
+    +   "arrow",
+    +   "A",
+    +   "A",
+    +   "A",
+    +   "A",
+    + ]
+
+      245 |           .map((el) => el.className.toString().slice(0, 60) || el.tagName);
+      246 |       });
+    > 247 |       expect(moving, route).toEqual([]);
+          |                             ^
+      248 |     }
+      249 |     await context.close();
+      250 |   });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:247:29
+
+    Error Context: test-results\perf-8-2-7-smaller-items-w-e08e5-ing-animates-or-transitions-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-7-smaller-items-w-e08e5-ing-animates-or-transitions-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-7-smaller-items-w-e08e5-ing-animates-or-transitions-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  16) [chromium] › tests\e2e\perf.spec.ts:252:3 › 8.2.7 smaller items › the header is a solid fill, not a backdrop blur 
+
+    Error: ::before
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "none"
+    Received: "saturate(1.6) blur(16px)"
+
+      254 |     await page.evaluate(() => window.scrollTo({ top: 600, behavior: "instant" }));
+      255 |     const header = page.locator(".site-header");
+    > 256 |     for (const pseudo of [null, "::before", "::after"]) expect(await header.evaluate((el, p) => getComputedStyle(el, p).backdropFilter, pseudo), String(pseudo)).toBe("none");
+          |                                                                                                                                                                  ^
+      257 |   });
+      258 |
+      259 |   test("print hides the site chrome", async ({ page }) => {
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:256:162
+
+    Error Context: test-results\perf-8-2-7-smaller-items-t-0fb3c-id-fill-not-a-backdrop-blur-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-7-smaller-items-t-0fb3c-id-fill-not-a-backdrop-blur-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-7-smaller-items-t-0fb3c-id-fill-not-a-backdrop-blur-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  17) [chromium] › tests\e2e\perf.spec.ts:259:3 › 8.2.7 smaller items › print hides the site chrome 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  locator('.site-header')
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" locator('.site-header') with timeout 5000ms
+      - waiting for locator('.site-header')
+        14 × locator resolved to <header class="site-header">…</header>
+           - unexpected value "visible"
+
+
+      260 |     await page.goto("/en/services");
+      261 |     await page.emulateMedia({ media: "print" });
+    > 262 |     await expect(page.locator(".site-header")).toBeHidden();
+          |                                                ^
+      263 |     await expect(page.locator(".site-footer")).toBeHidden();
+      264 |     await expect(page.locator("main h1")).toBeVisible();
+      265 |   });
+        at C:\Users\laich\Documents\FimmickWebsite2\tests\e2e\perf.spec.ts:262:48
+
+    Error Context: test-results\perf-8-2-7-smaller-items-print-hides-the-site-chrome-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\perf-8-2-7-smaller-items-print-hides-the-site-chrome-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\perf-8-2-7-smaller-items-print-hides-the-site-chrome-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  17 failed
+    [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/resources is prerendered and served from the cache 
+    [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/case-studies is prerendered and served from the cache 
+    [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/knowledge-hub is prerendered and served from the cache 
+    [chromium] › tests\e2e\perf.spec.ts:37:5 › 8.2.1 static hubs › /en/contact is prerendered and served from the cache 
+    [chromium] › tests\e2e\perf.spec.ts:46:3 › 8.2.1 static hubs › knowledge-hub pages are static paths with self-canonicals; old ?page= links move there in one hop 
+    [chromium] › tests\e2e\perf.spec.ts:65:3 › 8.2.1 static hubs › resource filters, search and paging run in the browser and keep the URL in step 
+    [chromium] › tests\e2e\perf.spec.ts:103:1 › 8.2.2 a full scroll of /en prefetches at most 120 KB of RSC (gzip) 
+    [chromium] › tests\e2e\perf.spec.ts:118:1 › 8.2.2 the header logo does not prefetch the page it is on; nav links prefetch on intent 
+    [chromium] › tests\e2e\perf.spec.ts:132:1 › 8.2.3 /en/services loads at most 50 KB of CSS; the home route still gets the cinematic sheet 
+    [chromium] › tests\e2e\perf.spec.ts:153:1 › 8.2.4 fonts are self-hosted; the serif is preloaded on the home route only 
+    [chromium] › tests\e2e\perf.spec.ts:181:1 › 8.2.5 the header logo is at most 248 px wide ───────
+    [chromium] › tests\e2e\perf.spec.ts:190:1 › 8.2.6 Chinese pages name CJK families first ────────
+    [chromium] › tests\e2e\perf.spec.ts:215:3 › 8.2.7 smaller items › no transition animates box-shadow 
+    [chromium] › tests\e2e\perf.spec.ts:223:3 › 8.2.7 smaller items › the signature progress bar scales instead of animating width 
+    [chromium] › tests\e2e\perf.spec.ts:233:3 › 8.2.7 smaller items › with reduced motion nothing animates or transitions 
+    [chromium] › tests\e2e\perf.spec.ts:252:3 › 8.2.7 smaller items › the header is a solid fill, not a backdrop blur 
+    [chromium] › tests\e2e\perf.spec.ts:259:3 › 8.2.7 smaller items › print hides the site chrome ──
+  3 passed (38.7s)

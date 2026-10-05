@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
       {
+        // Font files carry their version in the name (renamed when they change), 8.2.4.
+        source: "/fonts/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
         // Brand files keep stable names, so they are cached for a day and revalidated in the background.
         source: "/brand/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
@@ -69,6 +74,11 @@ const nextConfig: NextConfig = {
         { source: `/en/knowledge-hub/${slug}`, destination: `/zh-hant/knowledge-hub/${slug}`, permanent: true },
         { source: `/knowledge-hub/${slug}`, destination: `/zh-hant/knowledge-hub/${slug}`, permanent: true },
       ]),
+      // Knowledge Hub pages are static paths (8.2.1): an old ?page=N link goes to /page/N (N ≥ 2;
+      // ?page=1 is the hub itself) and /page/1 to the hub, each in one hop.
+      { source: "/:locale(en|zh-hant|zh-hans)/knowledge-hub", has: [{ type: "query", key: "page", value: "(?<page>[2-9]|[1-9]\\d+)" }], destination: "/:locale/knowledge-hub/page/:page", permanent: true },
+      { source: "/knowledge-hub", has: [{ type: "query", key: "page", value: "(?<page>[2-9]|[1-9]\\d+)" }], destination: "/en/knowledge-hub/page/:page", permanent: true },
+      { source: "/:locale(en|zh-hant|zh-hans)/knowledge-hub/page/1", destination: "/:locale/knowledge-hub", permanent: true },
       // Reference-site Traditional Chinese prefix → production convention.
       { source: "/zh-hk", destination: "/zh-hant", permanent: true },
       { source: "/zh-hk/:path*", destination: "/zh-hant/:path*", permanent: true },

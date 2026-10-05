@@ -10,8 +10,9 @@ import { t, type Locale } from "./i18n";
  * accent phrase in the editorial serif (Chinese: the accent colour), the wordmark and the tagline.
  *
  * next/og (satori) reads TTF, OTF and WOFF but not WOFF2, so the site's next/font files cannot be
- * reused. Manrope and Instrument Serif are fetched as TTF from the Google Fonts CSS API (the source
- * next/font/google already uses at build) and kept for the life of the process; Chinese uses a Noto
+ * reused. Instrument Serif is the committed WOFF in app/fonts; Manrope is fetched as TTF from the
+ * Google Fonts CSS API (the self-hosted file is a variable WOFF2, which satori cannot read); both are
+ * kept for the life of the process. Chinese uses a Noto
  * Sans HK / SC subset of the card's own text. If a font cannot be fetched, the static public/og.png
  * is served instead, so a share never fails.
  */
@@ -32,9 +33,11 @@ async function googleFont(family: string, text?: string): Promise<ArrayBuffer> {
   return res.arrayBuffer();
 }
 
+const localFont = (file: string) => readFile(join(process.cwd(), "app", "fonts", file)).then((b) => b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer);
+
 let latinFonts: Promise<[ArrayBuffer, ArrayBuffer]> | undefined;
 function loadLatinFonts() {
-  latinFonts ??= Promise.all([googleFont("Manrope:wght@700"), googleFont("Instrument+Serif:ital@1")]).catch((error) => {
+  latinFonts ??= Promise.all([googleFont("Manrope:wght@700"), localFont("instrument-serif-latin-400-italic.woff")]).catch((error) => {
     latinFonts = undefined;
     throw error;
   });

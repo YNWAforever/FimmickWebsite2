@@ -5,8 +5,30 @@
    before layout-only CSS. Nothing here overrides cinematic.css or the
    other layout-only stylesheets, so its place in the bundle does not matter.
 ------------------------------------------------------------------- */
+/* The accent face (award pass 2, 8.2.4): Instrument Serif italic, Latin, from @fontsource/instrument-serif
+   5.3.0 (SIL OFL 1.1; licence in app/fonts). A plain @font-face on a stable, versioned URL rather than
+   next/font: the homepage preloads exactly this file (app/[locale]/page.tsx), and every page shares
+   it. A next/font preload is a separate file, which a prefetched homepage's hint would also fetch on
+   inner pages. Rename the file when it changes (it is cached as immutable). The fallback face is the
+   metric-matched Arial next/font generated. */
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/instrument-serif-latin-400-italic-5.3.0.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Instrument Serif Fallback";
+  src: local("Arial");
+  ascent-override: 121.98%;
+  descent-override: 38.19%;
+  line-gap-override: 0%;
+  size-adjust: 81.16%;
+}
 :root {
-  --font-display-accent: var(--font-serif), "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-display-accent: "Instrument Serif", "Instrument Serif Fallback", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 }
 
 /* One accented phrase per display headline (components/motion/Headline.tsx). */

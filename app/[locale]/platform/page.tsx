@@ -1,3 +1,6 @@
+// Route sheets (8.2.3), first so they keep their place before component sheets.
+import "@/app/styles/diagrams.css";
+import "@/app/styles/examples.css";
 import type { Metadata } from "next";
 import { href, t, zh, type L } from "@/lib/i18n";
 import { resolveLocale, type LocaleParams } from "@/lib/page";

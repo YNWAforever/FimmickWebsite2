@@ -1,0 +1,51 @@
+/* Contact page: the enquiry form (imported by app/[locale]/contact/page.tsx). */
+/* ------------------------------------------------------------------
+   Contact
+------------------------------------------------------------------- */
+.contact-grid { display: grid; gap: 32px; }
+@media (min-width: 1000px) { .contact-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: start; } }
+.form { display: grid; gap: 18px; padding: clamp(22px, 3vw, 36px); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-2); }
+.form fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 14px; }
+.form legend { font-weight: 800; color: var(--ink); margin-bottom: 10px; }
+.form-row { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+/* A field: label, control, then hint and error as siblings (not inside the label, so the accessible
+   name is the label alone and the hint/error are read as its description). */
+.form .f { display: grid; gap: 6px; }
+.form .f > label { font-size: var(--fs-small); font-weight: 750; color: var(--ink); }
+.form .f .opt { font-weight: 600; color: var(--subtle); }
+/* The card is the wrapper, so the status region and the email handoff (outside the <form>, which
+   success replaces) stay inside the same panel. */
+.enquiry { display: grid; gap: 18px; padding: clamp(22px, 3vw, 36px); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-2); }
+.enquiry > .form { padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.form-live:empty { display: none; }
+.form--done h2 { font-size: 1.15rem; line-height: 1.4; }
+.form--done h2:focus-visible { outline-offset: 4px; }
+/* The chip's remove control: a 44 px target that does not enlarge the chip (negative margins). */
+.chip__remove { display: inline-grid; place-items: center; width: 44px; height: 44px; margin: -12px -14px -12px -6px; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit; font-weight: 800; font-size: 1.05rem; }
+.form input[type="text"], .form input[type="email"], .form input[type="tel"], .form input[type="url"], .form select, .form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--subtle); /* field edges need 3:1 (WCAG 1.4.11); --line-strong is 1.58:1 */
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 1rem;
+}
+.form textarea { min-height: 120px; resize: vertical; }
+.form [aria-invalid="true"] { border-color: #c0243f; box-shadow: 0 0 0 3px #fde8e8; }
+.field-error { color: #a11b3a; font-size: var(--fs-micro); font-weight: 700; }
+.context-box { display: grid; gap: 10px; padding: 16px; border-radius: var(--radius); background: var(--canvas); }
+.context-box p { font-size: var(--fs-small); color: var(--muted); }
+.form-status { padding: 16px 18px; border-radius: var(--radius); font-weight: 650; }
+.form-status[data-kind="success"] { background: var(--lime-soft); color: var(--lime-ink); }
+.form-status[data-kind="error"] { background: #fde8e8; color: #8a1c1c; }
+.form-status[data-kind="info"] { background: var(--sky-soft); color: var(--ink); }
+/* The prepared email reads as a letter: a card in the body face, not a code block. */
+.email-preview { white-space: pre-wrap; margin: 0; padding: 18px 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-1); font-family: inherit; font-size: var(--fs-small); line-height: 1.6; color: var(--ink); max-height: 300px; overflow: auto; }
+/* "More detail" disclosure: the FAQ's + / × indicator. */
+.form-disclosure { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; cursor: pointer; list-style: none; font-size: var(--fs-small); font-weight: 750; color: var(--ink); }
+.form-disclosure::-webkit-details-marker { display: none; }
+.form-disclosure::after { content: "+"; font-size: 1.4rem; line-height: 1; color: var(--magenta-ink); transition: transform var(--t-fast) var(--ease); }
+details[open] > .form-disclosure::after { transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { .form-disclosure::after { transition: none; } }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }

@@ -62,7 +62,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         <div className="footer-top">
           <div className="footer-brand">
             {/* eslint-disable-next-line @next/next/no-img-element -- fixed-size raster logo */}
-            <img src="/brand/fimmick-logo-light.webp" width={132} height={33} alt="FIMMICK" loading="lazy" />
+            <img src="/brand/fimmick-logo-light-264.webp" width={132} height={33} alt="FIMMICK" loading="lazy" />
             <p>{t(ui.footerTagline, locale)}</p>
             <p className="small footer-contact">
               <a href={`mailto:${company.email}`}>{company.email}</a>

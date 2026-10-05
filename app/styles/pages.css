@@ -14,9 +14,11 @@
   border: 1px solid var(--line);
   text-decoration: none;
   color: inherit;
-  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), border-color var(--t-fast);
+  position: relative;
+  transition: transform var(--t-fast) var(--ease), border-color var(--t-fast);
 }
-.job-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); border-color: var(--line-strong); }
+/* The raised shadow fades in on ::after (components.css, Lift). */
+.job-card:hover { transform: translateY(-4px); border-color: var(--line-strong); }
 .job-card h3 { font-size: 1.3rem; }
 .job-card__deliverable { padding: 14px; border-radius: var(--radius); background: var(--canvas); }
 .job-card__deliverable span { display: block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime-ink); margin-bottom: 4px; }
@@ -68,8 +70,8 @@
 .anchor-nav a { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: var(--fs-micro); font-weight: 750; text-decoration: none; color: var(--ink-2); background: var(--surface); }
 
 /* Hubs */
-.hub-card { display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: var(--radius-l); background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease); }
-.hub-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+.hub-card { display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: var(--radius-l); background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; position: relative; transition: transform var(--t-fast) var(--ease); }
+.hub-card:hover { transform: translateY(-3px); }
 .hub-card h3 { font-size: 1.2rem; }
 .hub-card .card-foot { margin-top: auto; font-weight: 750; color: var(--ink); }
 
@@ -91,56 +93,7 @@
 .archive-banner { display: grid; gap: 6px; padding: 16px 20px; border-radius: var(--radius); background: var(--amber-soft); color: var(--amber-ink); font-size: var(--fs-small); font-weight: 650; margin-bottom: 28px; }
 .meta-row { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 18px; color: var(--muted); font-size: var(--fs-small); font-weight: 650; }
 
-/* ------------------------------------------------------------------
-   Contact
-------------------------------------------------------------------- */
-.contact-grid { display: grid; gap: 32px; }
-@media (min-width: 1000px) { .contact-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: start; } }
-.form { display: grid; gap: 18px; padding: clamp(22px, 3vw, 36px); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-2); }
-.form fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 14px; }
-.form legend { font-weight: 800; color: var(--ink); margin-bottom: 10px; }
-.form-row { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
-/* A field: label, control, then hint and error as siblings (not inside the label, so the accessible
-   name is the label alone and the hint/error are read as its description). */
-.form .f { display: grid; gap: 6px; }
-.form .f > label { font-size: var(--fs-small); font-weight: 750; color: var(--ink); }
-.form .f .opt { font-weight: 600; color: var(--subtle); }
-/* The card is the wrapper, so the status region and the email handoff (outside the <form>, which
-   success replaces) stay inside the same panel. */
-.enquiry { display: grid; gap: 18px; padding: clamp(22px, 3vw, 36px); border-radius: 24px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-2); }
-.enquiry > .form { padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
-.form-live:empty { display: none; }
-.form--done h2 { font-size: 1.15rem; line-height: 1.4; }
-.form--done h2:focus-visible { outline-offset: 4px; }
-/* The chip's remove control: a 44 px target that does not enlarge the chip (negative margins). */
-.chip__remove { display: inline-grid; place-items: center; width: 44px; height: 44px; margin: -12px -14px -12px -6px; padding: 0; border: 0; border-radius: 50%; background: none; color: inherit; font-weight: 800; font-size: 1.05rem; }
-.form input[type="text"], .form input[type="email"], .form input[type="tel"], .form input[type="url"], .form select, .form textarea {
-  width: 100%;
-  min-height: 48px;
-  padding: 10px 14px;
-  border: 1px solid var(--subtle); /* field edges need 3:1 (WCAG 1.4.11); --line-strong is 1.58:1 */
-  border-radius: 12px;
-  background: var(--surface);
-  font-size: 1rem;
-}
-.form textarea { min-height: 120px; resize: vertical; }
-.form [aria-invalid="true"] { border-color: #c0243f; box-shadow: 0 0 0 3px #fde8e8; }
-.field-error { color: #a11b3a; font-size: var(--fs-micro); font-weight: 700; }
-.context-box { display: grid; gap: 10px; padding: 16px; border-radius: var(--radius); background: var(--canvas); }
-.context-box p { font-size: var(--fs-small); color: var(--muted); }
-.form-status { padding: 16px 18px; border-radius: var(--radius); font-weight: 650; }
-.form-status[data-kind="success"] { background: var(--lime-soft); color: var(--lime-ink); }
-.form-status[data-kind="error"] { background: #fde8e8; color: #8a1c1c; }
-.form-status[data-kind="info"] { background: var(--sky-soft); color: var(--ink); }
-/* The prepared email reads as a letter: a card in the body face, not a code block. */
-.email-preview { white-space: pre-wrap; margin: 0; padding: 18px 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-1); font-family: inherit; font-size: var(--fs-small); line-height: 1.6; color: var(--ink); max-height: 300px; overflow: auto; }
-/* "More detail" disclosure: the FAQ's + / × indicator. */
-.form-disclosure { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; cursor: pointer; list-style: none; font-size: var(--fs-small); font-weight: 750; color: var(--ink); }
-.form-disclosure::-webkit-details-marker { display: none; }
-.form-disclosure::after { content: "+"; font-size: 1.4rem; line-height: 1; color: var(--magenta-ink); transition: transform var(--t-fast) var(--ease); }
-details[open] > .form-disclosure::after { transform: rotate(45deg); }
-@media (prefers-reduced-motion: reduce) { .form-disclosure::after { transition: none; } }
-.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+/* Offices (contact and about) */
 .office-list { display: grid; gap: 12px; }
 .office { padding: 16px 18px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-small); }
 .office strong, .office__address, .office__contact { display: block; }
@@ -160,3 +113,48 @@ details[open] > .form-disclosure::after { transform: rotate(45deg); }
 .leader:first-child { padding-top: 0; border-top: 0; }
 .leader h2 { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); letter-spacing: -0.02em; }
 .leader .muted { max-width: 60ch; }
+
+/* ------------------------------------------------------------------
+   Shared with the homepage (moved from examples.css and cinematic.css, award pass 2, 8.2.3: those
+   sheets now load only on the routes that use them; these rules are used on other pages too)
+------------------------------------------------------------------- */
+.fact-list { list-style: none; display: grid; gap: 6px; }
+.fact-list li { padding: 7px 10px; border-radius: 8px; background: var(--canvas); font-size: var(--fs-small); color: var(--ink-2); }
+.diff { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+.diff th, .diff td { padding: 7px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.diff th { font-size: 0.72rem; color: var(--subtle); text-transform: uppercase; letter-spacing: 0.06em; }
+.diff tr[data-changed="true"] td.after { background: var(--lime-soft); font-weight: 700; }
+.diff tr[data-valid="false"] td.after { background: #fde8e8; color: #8a1c1c; font-weight: 700; }
+.diff td.before { color: var(--subtle); }
+/* ---------- Photograph primitive ---------- */
+.photo { position: relative; margin: 0; overflow: hidden; background: var(--photo-color, var(--desk)); }
+.photo picture, .photo img { display: block; width: 100%; height: 100%; }
+.photo img { object-fit: cover; }
+.photo__label {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 86%);
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+.artifact { display: grid; gap: 10px; font-size: 0.9rem; line-height: 1.45; color: var(--text); }
+.diff { display: grid; gap: 4px; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); }
+.diff del { color: var(--subtle); }
+.diff ins { text-decoration: none; background: var(--lime-soft); color: var(--ink); font-weight: 650; padding: 1px 4px; border-radius: 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.fact-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.fact-list li { padding: 7px 10px; border-radius: 8px; background: var(--surface-2); border-left: 3px solid var(--role-source); font-weight: 650; color: var(--ink); }
+.fact-list li:last-child { border-left-color: var(--amber-ink); background: var(--amber-soft); }
+.decision { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); margin: 0; padding: 0; list-style: none; }
+
+/* ================================================================
+   Inner-page template: cinematic photograph band under the page hero
+================================================================ */
+.page-hero--photo { padding-bottom: 0; border-bottom: 0; }
+.page-hero__photo { margin-top: clamp(32px, 4vw, 56px); aspect-ratio: 21 / 8; border-radius: 28px 28px 0 0; }
+@media (max-width: 799px) { .page-hero__photo { aspect-ratio: 3 / 2; margin-inline: calc(var(--gutter) * -1); border-radius: 0; } }

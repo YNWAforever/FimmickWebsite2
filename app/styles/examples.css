@@ -46,8 +46,6 @@
 .radio-row label:has(input:checked) { background: var(--ink); border-color: var(--ink); color: #fff; }
 .radio-row label:has(input:focus-visible) { box-shadow: var(--focus); }
 
-.fact-list { list-style: none; display: grid; gap: 6px; }
-.fact-list li { padding: 7px 10px; border-radius: 8px; background: var(--canvas); font-size: var(--fs-small); color: var(--ink-2); }
 .evidence { list-style: none; display: grid; gap: 8px; }
 .evidence li { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); font-size: var(--fs-small); }
 .evidence .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; font-size: 0.72rem; font-weight: 700; color: var(--subtle); }
@@ -79,12 +77,6 @@
 .output-card pre { margin: 0; white-space: pre-wrap; font-family: inherit; }
 .output-card .file { display: inline-flex; padding: 5px 10px; border-radius: 8px; background: var(--ink); color: #fff; font-size: var(--fs-micro); font-weight: 700; }
 
-.diff { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
-.diff th, .diff td { padding: 7px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-.diff th { font-size: 0.72rem; color: var(--subtle); text-transform: uppercase; letter-spacing: 0.06em; }
-.diff tr[data-changed="true"] td.after { background: var(--lime-soft); font-weight: 700; }
-.diff tr[data-valid="false"] td.after { background: #fde8e8; color: #8a1c1c; font-weight: 700; }
-.diff td.before { color: var(--subtle); }
 
 .page-preview { border-radius: var(--radius); border: 1px solid var(--line); overflow: hidden; background: #fff; }
 .page-preview .pp-bar { padding: 6px 10px; background: var(--surface-2); font-size: 0.7rem; color: var(--subtle); font-weight: 700; }
