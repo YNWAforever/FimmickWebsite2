@@ -36,7 +36,7 @@ export default async function GrowthPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Services" : zh("專業服務", locale), path: "/services" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Marketing & growth" : zh("市場推廣與增長", locale)}
-        title={en ? "Growth that runs as one system." : zh("以一套系統推動增長。", locale)}
+        title={en ? "Growth that runs as one system." : zh("以一套系統推動增長。", locale)} accent={en ? "as one system." : zh("以一套系統", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>

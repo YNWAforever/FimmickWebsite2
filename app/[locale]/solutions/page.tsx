@@ -34,7 +34,7 @@ export default async function SolutionsPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow={en ? "Platform & Solutions" : zh("平台與解決方案", locale)}
-        title={en ? "Choose the work you want to improve." : zh("選擇你想改善的工作。", locale)}
+        title={en ? "Choose the work you want to improve." : zh("選擇你想改善的工作。", locale)} accent={en ? "you want to improve." : zh("你想改善的工作", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>

@@ -29,7 +29,7 @@ export default async function ProductsPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow="FIMMICK AIP"
-        title={en ? "Six products for four business jobs." : zh("六個產品，對應四項業務工作。", locale)}
+        title={en ? "Six products for four business jobs." : zh("六個產品，對應四項業務工作。", locale)} accent={en ? "four business jobs." : zh("四項業務工作", locale)}
         lead={t(copy.lead, locale)}
         actions={<LinkButton to={href(locale, "/contact?intent=configuration")} variant="accent">{t(ui.discussConfiguration, locale)}</LinkButton>}
       />

@@ -187,8 +187,6 @@ button {
 
 @media (min-width: 960px) {
   .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
-  .split--even { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .split--wide-left { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
 }
 
 /* ---------- Typography helpers ---------- */
@@ -248,13 +246,6 @@ button {
   .section-head--row {
     grid-template-columns: minmax(0, 1fr) auto;
   }
-}
-
-.kicker-number {
-  font-variant-numeric: tabular-nums;
-  color: var(--subtle);
-  font-weight: 700;
-  font-size: var(--fs-small);
 }
 
 /* ------------------------------------------------------------------

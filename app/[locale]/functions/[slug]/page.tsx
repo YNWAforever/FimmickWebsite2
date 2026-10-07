@@ -47,7 +47,8 @@ export default async function FunctionPage({ params }: SlugParams) {
         locale={locale}
         crumbs={[{ label: hubLabel, path: "/functions" }, { label: t(f.name, locale) }]}
         eyebrow={t(f.owner, locale)}
-        title={t(f.name, locale)}
+        title={t(f.headline, locale)}
+        accent={t(f.headlineAccent, locale)}
         lead={t(f.summary, locale)}
         actions={
           <>

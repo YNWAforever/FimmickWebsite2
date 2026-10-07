@@ -34,7 +34,7 @@ export default async function AgentsPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Platform" : zh("平台", locale)}
-        title={en ? "Agents that prepare the work. People who decide." : zh("由智能體準備工作，由人作決定。", locale)}
+        title={en ? "Agents that prepare the work. People who decide." : zh("由智能體準備工作，由人作決定。", locale)} accent={en ? "People who decide." : zh("由人作決定", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>
@@ -121,17 +121,17 @@ export default async function AgentsPage({ params }: LocaleParams) {
           <Link className="hub-card" href={href(locale, "/platform/marketplace")}>
             <h3>{en ? "Workflow templates" : zh("流程範本", locale)}</h3>
             <p className="muted small">{en ? "Nine starting patterns, each configured for your data and reviewers." : zh("九個起步範本，按你的資料及審閱人配置。", locale)}</p>
-            <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+            <span className="card-foot">{t(ui.seeTemplates, locale)} →</span>
           </Link>
           <Link className="hub-card" href={href(locale, "/platform/architecture")}>
             <h3>{en ? "Architecture" : zh("平台架構", locale)}</h3>
             <p className="muted small">{en ? "How a workflow run moves from trigger to record." : zh("流程如何由觸發到記錄。", locale)}</p>
-            <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+            <span className="card-foot">{t(ui.readArchitecture, locale)} →</span>
           </Link>
           <Link className="hub-card" href={href(locale, "/functions")}>
             <h3>{en ? "Workflows by function" : zh("按職能劃分的流程", locale)}</h3>
             <p className="muted small">{en ? "Examples for marketing, operations, finance, HR, CX and leadership." : zh("市場、營運、財務、人力資源、顧客體驗及管理層的例子。", locale)}</p>
-            <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+            <span className="card-foot">{t(ui.seeWorkflows, locale)} →</span>
           </Link>
         </div>
         <div className="container">

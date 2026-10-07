@@ -16,6 +16,9 @@ export type FunctionWorkflow = { name: L; input: L; output: L; decision: L };
 export type BusinessFunction = {
   id: FunctionId;
   name: L;
+  /** Detail-page H1 (award pass 3) with one accented phrase; the name stays in the crumbs. */
+  headline: L;
+  headlineAccent: L;
   owner: L;
   summary: L;
   problem: L;
@@ -36,6 +39,8 @@ export const businessFunctions: BusinessFunction[] = [
   {
     id: "growth",
     name: { en: "Marketing & growth", zh: "市場推廣與增長" },
+    headline: { en: "Briefs, content and follow-up, each one reviewed before it goes out.", zh: "簡報、內容及跟進，每項發出前都經過審閱。" },
+    headlineAccent: { en: "each one reviewed before it goes out.", zh: "每項發出前都經過審閱" },
     owner: { en: "For marketing, brand and sales leaders", zh: "適合市場、品牌及銷售主管" },
     summary: {
       en: "Campaign briefs, content, search visibility and sales follow-up, prepared as reviewable workflows.",
@@ -71,6 +76,8 @@ export const businessFunctions: BusinessFunction[] = [
   {
     id: "operations",
     name: { en: "Operations", zh: "營運" },
+    headline: { en: "Website updates, requests and checks, each with a clear owner.", zh: "網站更新、要求及檢查，每項都有明確的負責人。" },
+    headlineAccent: { en: "each with a clear owner.", zh: "每項都有明確的負責人" },
     owner: { en: "For operations, digital and e-commerce leads", zh: "適合營運、數碼及電商主管" },
     summary: {
       en: "Website updates, request routing, data checks and status packs as workflows with visible owners.",
@@ -106,6 +113,8 @@ export const businessFunctions: BusinessFunction[] = [
   {
     id: "finance",
     name: { en: "Finance & reporting", zh: "財務與報告" },
+    headline: { en: "Report commentary drafted from reconciled data, with every figure traceable.", zh: "報告評述按已核對的數據草擬，每個數字都可追溯。" },
+    headlineAccent: { en: "every figure traceable.", zh: "每個數字都可追溯" },
     owner: { en: "For finance, commercial and planning teams", zh: "適合財務、商務及規劃團隊" },
     summary: {
       en: "KPI monitoring, variance commentary and management packs from reconciled data, every figure traceable.",
@@ -141,6 +150,8 @@ export const businessFunctions: BusinessFunction[] = [
   {
     id: "hr",
     name: { en: "People & HR", zh: "人力資源" },
+    headline: { en: "Policy answers and onboarding help, within clear privacy limits.", zh: "政策解答及入職支援，都在清楚的私隱界線之內。" },
+    headlineAccent: { en: "within clear privacy limits.", zh: "在清楚的私隱界線之內" },
     owner: { en: "For HR, learning and internal communications teams", zh: "適合人力資源、培訓及內部溝通團隊" },
     summary: {
       en: "Policy answers, onboarding, training and request triage as governed workflows with privacy boundaries.",
@@ -177,6 +188,8 @@ export const businessFunctions: BusinessFunction[] = [
   {
     id: "cx",
     name: { en: "Customer experience", zh: "顧客體驗" },
+    headline: { en: "Replies drawn from an approved answer library, with sensitive cases handed to a person.", zh: "回覆取自已批准的答案庫，敏感個案交由同事處理。" },
+    headlineAccent: { en: "sensitive cases handed to a person.", zh: "敏感個案交由同事處理" },
     owner: { en: "For customer service, CRM and loyalty leads", zh: "適合客戶服務、CRM 及會員主管" },
     summary: {
       en: "Enquiry replies prepared from an approved answer library, with sensitive cases routed to people.",
@@ -212,6 +225,8 @@ export const businessFunctions: BusinessFunction[] = [
   {
     id: "expansion",
     name: { en: "Market expansion", zh: "市場拓展" },
+    headline: { en: "Market scans and localisation, reviewed by people who know each market.", zh: "市場掃描及本地化，由熟悉當地市場的人審閱。" },
+    headlineAccent: { en: "reviewed by people who know each market.", zh: "由熟悉當地市場的人審閱" },
     owner: { en: "For regional, business development and strategy teams", zh: "適合區域、業務拓展及策略團隊" },
     summary: {
       en: "Market scans, competitor tracking and localisation, reviewed by people who know each market.",
@@ -247,6 +262,8 @@ export const businessFunctions: BusinessFunction[] = [
   {
     id: "executive",
     name: { en: "Leadership & executive reporting", zh: "管理層與行政報告" },
+    headline: { en: "What changed, why it changed, and what needs your decision.", zh: "改變了甚麼、為甚麼，以及哪些事需要你決定。" },
+    headlineAccent: { en: "what needs your decision.", zh: "哪些事需要你決定" },
     owner: { en: "For CEOs, general managers and leadership teams", zh: "適合行政總裁、總經理及管理團隊" },
     summary: {
       en: "Leadership briefs from your own reports: what changed, why, and what needs a decision.",

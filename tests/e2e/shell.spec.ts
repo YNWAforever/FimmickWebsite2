@@ -27,11 +27,14 @@ test.describe("4.1 footer", () => {
     expect(Math.max(...firstLinkTops) - Math.min(...firstLinkTops)).toBeLessThanOrEqual(2);
   });
 
-  test("one column of groups at 390", async ({ page }) => {
+  // Award pass 3: two columns on phones too (one column made the phone footer three screens long).
+  test("two columns of groups at 390", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/en/platform");
     await page.locator(".site-footer").scrollIntoViewIfNeeded();
-    expect((await footerColumns(page)).lefts).toHaveLength(1);
+    const { lefts, firstLinkTops } = await footerColumns(page);
+    expect(lefts).toHaveLength(2);
+    expect(Math.abs(firstLinkTops[0] - firstLinkTops[1])).toBeLessThanOrEqual(2);
   });
 
   test("social links are labelled 44 px icons", async ({ page }) => {

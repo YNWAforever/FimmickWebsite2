@@ -56,10 +56,12 @@
   letter-spacing: inherit;
   padding: 0;
 }
+/* Award pass 3: the small dot (•), not the circle (●): at display sizes the circles read as a row of
+   polka dots heavier than the words they mark. */
 :lang(zh-Hant-HK) em.accent, :lang(zh-Hans) em.accent {
   color: inherit;
-  -webkit-text-emphasis: filled circle var(--magenta-ink);
-  text-emphasis: filled circle var(--magenta-ink);
+  -webkit-text-emphasis: filled dot var(--magenta-ink);
+  text-emphasis: filled dot var(--magenta-ink);
   -webkit-text-emphasis-position: under;
   text-emphasis-position: under left;
 }

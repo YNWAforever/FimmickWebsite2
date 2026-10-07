@@ -26,7 +26,7 @@ export default async function GovernancePage({ params }: LocaleParams) {
   const ws = workstreamById("governance-adoption");
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Platform" : zh("平台", locale)} title={en ? "Useful AI work, with people in charge." : zh("讓 AI 做有用的工作，由人掌舵。", locale)} lead={t(copy.lead, locale)} actions={<LinkButton to={href(locale, paths.workstream(ws.id))} variant="ghost">{t(ws.name, locale)}</LinkButton>} />
+      <PageHero locale={locale} crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Platform" : zh("平台", locale)} title={en ? "Useful AI work, with people in charge." : zh("讓 AI 做有用的工作，由人掌舵。", locale)} accent={en ? "with people in charge." : zh("由人掌舵", locale)} lead={t(copy.lead, locale)} actions={<LinkButton to={href(locale, paths.workstream(ws.id))} variant="ghost">{t(ws.name, locale)}</LinkButton>} />
       <section className="section">
         <div className="container">
           <div className="grid grid-2">

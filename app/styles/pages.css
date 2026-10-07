@@ -41,8 +41,11 @@
 .player { position: relative; width: 100%; border-radius: 20px; overflow: hidden; background: var(--night); box-shadow: var(--shadow-2); }
 .player__poster { position: absolute; inset: 0; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: var(--night); cursor: pointer; }
 .player__poster img { width: 100%; height: 100%; object-fit: cover; }
-.player__play { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: var(--magenta); color: #fff; box-shadow: 0 10px 30px rgb(229 0 127 / 45%); transition: transform var(--t-fast) var(--ease); }
+/* Below the poster's brief card (award pass 3): centred, the button covered the sample text. */
+.player__play { position: absolute; left: 50%; top: 70%; display: grid; place-items: center; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: var(--magenta); color: #fff; box-shadow: 0 10px 30px rgb(229 0 127 / 45%); transition: transform var(--t-fast) var(--ease); }
 .player__poster:hover .player__play, .player__poster:focus-visible .player__play { transform: scale(1.06); }
+/* Narrow players: the caption bar wraps to two lines, so the button moves right of the brief card. */
+@media (max-width: 699px) { .player__play { left: 80%; top: 44%; width: 60px; height: 60px; margin: -30px 0 0 -30px; } }
 .player__meta { position: absolute; left: 16px; bottom: 14px; right: 16px; padding: 6px 10px; border-radius: 8px; background: rgb(10 15 38 / 72%); color: #fff; font-size: var(--fs-micro); font-weight: 700; text-align: left; }
 .player__video { width: 100%; height: 100%; background: #000; }
 .player__error { position: absolute; left: 12px; right: 12px; top: 12px; padding: 10px 12px; border-radius: 10px; background: var(--amber-soft); color: var(--amber-ink); font-size: var(--fs-small); font-weight: 700; }
@@ -66,8 +69,6 @@
 .decision-callout strong { color: var(--lime-ink); font-size: var(--fs-micro); letter-spacing: 0.1em; text-transform: uppercase; }
 .decision-callout p { color: var(--ink); font-weight: 600; }
 .distinction { padding: 20px 24px; border-radius: var(--radius-l); background: var(--sky-soft); color: var(--ink); font-weight: 600; }
-.anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-.anchor-nav a { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: var(--fs-micro); font-weight: 750; text-decoration: none; color: var(--ink-2); background: var(--surface); }
 
 /* Hubs */
 .hub-card { display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: var(--radius-l); background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; position: relative; transition: transform var(--t-fast) var(--ease); }
@@ -75,7 +76,6 @@
 .hub-card h3 { font-size: 1.2rem; }
 .hub-card .card-foot { margin-top: auto; font-weight: 750; color: var(--ink); }
 
-.member-hero { display: grid; gap: 24px; }
 .member-mark { display: grid; place-items: center; min-height: 220px; padding: 32px; border-radius: 28px; background: var(--night); color: #fff; text-align: center; }
 .member-mark strong { display: block; font-size: clamp(2rem, 1.5rem + 2vw, 3.2rem); letter-spacing: -0.03em; }
 .member-mark span { color: var(--night-muted); font-weight: 650; }

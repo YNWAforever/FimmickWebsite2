@@ -30,7 +30,7 @@ const zhSample = (locale: Locale) => (locale === "zh-hans" ? { lang: "zh-Hans", 
 import { workstreamCardsData } from "@/components/blocks";
 import { SignatureStage } from "./SignatureStage";
 import { HeroCard } from "./HeroCard";
-import { Headline } from "@/components/motion/Headline";
+import { Headline, zhBreaks } from "@/components/motion/Headline";
 
 /** One accented phrase per display headline (Traditional copy is converted for Simplified). */
 const accents: Record<string, L> = {
@@ -409,7 +409,7 @@ export function SignatureWorkflow({ locale }: P) {
           <p className="lead">{t(s.lead, locale)}</p>
         </div>
         <SignatureStage
-          steps={s.steps.map((st) => ({ id: st.id, label: t(st.label, locale), title: t(st.title, locale) }))}
+          steps={s.steps.map((st) => ({ id: st.id, label: t(st.label, locale), title: t(st.title, locale), note: t(st.note, locale) }))}
           frames={frames}
           labels={{
             play: t(s.play, locale),
@@ -563,23 +563,32 @@ export function IndustryPhotos({ locale }: P) {
           </div>
           <TextLink to={href(locale, "/industries")}>{t(cinema.industries.all, locale)}</TextLink>
         </div>
-        <ul className="industry-reel">
+        {/* Award pass 3: a big-type index instead of four photo tiles, so the case photographs above are
+            not repeated on the same page. On hover-capable screens the sector's scene opens beside
+            the row as a preview of the page it links to; the row itself is the link. */}
+        <ol className="sector-index">
           {ids.map((id, i) => {
             const ind = industryById(id);
             return (
               <li key={id} className="reveal" style={{ ["--delay" as string]: `${i * 70}ms` }}>
-                <Link className="industry-shot" data-cursor={locale === "en" ? "Explore" : zh("探索", locale)} href={href(locale, paths.industry(id))}>
-                  <Photo id={industryPhotos[id]} locale={locale} crop="portrait" sizes="(min-width: 1000px) 24vw, (min-width: 600px) 45vw, 80vw" label="caption" className="industry-shot__img" />
-                  <span className="industry-shot__text">
-                    <strong>{t(ind.name, locale)}</strong>
-                    <span>{t(ind.output, locale)}</span>
+                <Link className="sector-row" href={href(locale, paths.industry(id))}>
+                  <span className="sector-row__index" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="sector-row__name">{zhBreaks(t(ind.name, locale))}</span>
+                  <span className="sector-row__rule">{t(ind.output, locale)}</span>
+                  <span className="sector-row__go" aria-hidden="true">
+                    →
+                  </span>
+                  <span className="sector-row__peek" aria-hidden="true">
+                    <Photo id={industryPhotos[id]} locale={locale} crop="portrait" sizes="280px" label="none" decorative />
                   </span>
                 </Link>
               </li>
             );
           })}
-        </ul>
-        <p className="micro muted photo-caption">{t(photoCaption, locale)}</p>
+        </ol>
+        <p className="micro muted photo-caption sector-index__caption">{t(photoCaption, locale)}</p>
       </div>
     </section>
   );
@@ -665,12 +674,12 @@ export function ResourcePreviews({ locale }: P) {
               </span>
               <strong>{meta.title}</strong>
             </Link>
+            {/* Text only (award pass 3): its photograph already leads chapter 04. */}
             <Link className="shelf__item shelf__item--workshop" href={href(locale, "/workshop")}>
-              <Photo id="workshop-wall" locale={locale} sizes="320px" label="none" decorative className="shelf__thumb" />
-              <span>
+              <span className="card-meta">
                 <span className="chip chip--magenta">{t(r.workshop, locale)}</span>
-                <strong>{t(workshopResource.title, locale)}</strong>
               </span>
+              <strong>{t(workshopResource.title, locale)}</strong>
             </Link>
           </div>
         </div>

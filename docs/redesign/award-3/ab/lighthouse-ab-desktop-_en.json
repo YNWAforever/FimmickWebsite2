@@ -1,0 +1,25 @@
+{
+  "page": "/en",
+  "form": "desktop",
+  "pairs": 3,
+  "main": {
+    "score": 99,
+    "lcp": 789,
+    "tbt": 0,
+    "scores": [
+      99,
+      100,
+      90
+    ]
+  },
+  "branch": {
+    "score": 99,
+    "lcp": 764,
+    "tbt": 3,
+    "scores": [
+      99,
+      99,
+      99
+    ]
+  }
+}

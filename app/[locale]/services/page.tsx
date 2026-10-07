@@ -66,7 +66,7 @@ export default async function ServicesPage({ params }: LocaleParams) {
         photo={"specialist-desk"}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow={en ? "Specialist services" : zh("專業服務", locale)}
-        title={en ? "Specialists for a defined job." : zh("為明確的工作引入專家。", locale)}
+        title={en ? "Specialists for a defined job." : zh("為明確的工作引入專家。", locale)} accent={en ? "a defined job." : zh("明確的工作", locale)}
         lead={t(copy.lead, locale)}
         actions={<LinkButton to={href(locale, paths.contact({ intent: "service" }))} variant="accent">{en ? "Discuss a service" : zh("討論服務", locale)}</LinkButton>}
       />

@@ -43,7 +43,7 @@ export default async function TransformationPage({ params }: LocaleParams) {
         photo={"workshop-wall"}
         crumbs={[{ label: t(copy.title, locale) }]}
         eyebrow={en ? "For leadership teams" : zh("為管理團隊而設", locale)}
-        title={en ? "Plan the change before scaling the tools." : zh("先規劃轉變，再擴大工具應用。", locale)}
+        title={en ? "Plan the change before scaling the tools." : zh("先規劃轉變，再擴大工具應用。", locale)} accent={en ? "before scaling the tools." : zh("再擴大工具應用", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>
@@ -62,7 +62,7 @@ export default async function TransformationPage({ params }: LocaleParams) {
                 <h3>{t(w.name, locale)}</h3>
                 <p className="muted">{t(w.leadershipQuestion, locale)}</p>
                 <p className="small"><strong>{en ? "You receive: " : zh("你會得到：", locale)}</strong>{t(w.artifactLabel, locale)} — {w.deliverables.map((d) => t(d.title, locale)).join(", ")}</p>
-                <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+                <span className="card-foot">{t(ui.seeWorkstream, locale)} →</span>
               </Link>
             ))}
           </div>

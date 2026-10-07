@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/Reveal";
 
-export type StageStep = { id: string; label: string; title: string };
+export type StageStep = { id: string; label: string; title: string; note?: string };
 
 /**
  * The homepage’s one signature motion sequence: input → prepared work →
@@ -197,6 +197,7 @@ export function SignatureStage({
               <span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span> {steps[i].label}
             </p>
             <h3 className="sig__frame-title">{steps[i].title}</h3>
+            {steps[i].note ? <p className="sig__frame-note">{steps[i].note}</p> : null}
             <div className="sig__artifact">{frame}</div>
           </li>
         ))}

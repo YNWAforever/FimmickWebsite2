@@ -384,7 +384,7 @@ export function ProductCards({ locale, ids }: { locale: Locale; ids: ProductId[]
             <h3>{p.name}</h3>
             <p className="small muted">{tr(p.descriptor, locale)}</p>
             <span className="card-foot">
-              {tr(ui.learnMore, locale)} <span aria-hidden="true">→</span>
+              {tr(ui.howItWorks, locale)} <span aria-hidden="true">→</span>
             </span>
           </Link>
         );
@@ -404,7 +404,7 @@ export function ServiceCards({ locale, ids }: { locale: Locale; ids: ServiceId[]
             <h3>{tr(s.name, locale)}</h3>
             <p className="small muted">{tr(s.summary, locale)}</p>
             <span className="card-foot">
-              {tr(ui.learnMore, locale)} <span aria-hidden="true">→</span>
+              {tr(ui.seeDeliverables, locale)} <span aria-hidden="true">→</span>
             </span>
           </Link>
         );
@@ -423,7 +423,7 @@ export function IndustryCards({ locale, ids }: { locale: Locale; ids: IndustryId
             <h3>{tr(i.name, locale)}</h3>
             <p className="small muted">{tr(i.output, locale)}</p>
             <span className="card-foot">
-              {tr(ui.learnMore, locale)} <span aria-hidden="true">→</span>
+              {tr(ui.seeSector, locale)} <span aria-hidden="true">→</span>
             </span>
           </Link>
         );
@@ -443,7 +443,7 @@ export function SolutionCards({ locale, ids }: { locale: Locale; ids: SolutionId
             <h3>{tr(s.name, locale)}</h3>
             <p className="small muted">{tr(s.job, locale)}</p>
             <span className="card-foot">
-              {tr(ui.learnMore, locale)} <span aria-hidden="true">→</span>
+              {tr(ui.howItWorks, locale)} <span aria-hidden="true">→</span>
             </span>
           </Link>
         );
@@ -463,7 +463,7 @@ export function FunctionCards({ locale, ids }: { locale: Locale; ids: FunctionId
             <h3>{tr(f.name, locale)}</h3>
             <p className="small muted">{tr(f.summary, locale)}</p>
             <span className="card-foot">
-              {tr(ui.learnMore, locale)} <span aria-hidden="true">→</span>
+              {tr(ui.seeWorkflows, locale)} <span aria-hidden="true">→</span>
             </span>
           </Link>
         );

@@ -40,6 +40,7 @@ export default async function WorkshopPage({ params }: LocaleParams) {
         crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: en ? "Workshop" : zh("工作坊", locale) }]}
         eyebrow={en ? "Workshops & training" : zh("工作坊與培訓", locale)}
         title={t(workshopResource.title, locale)}
+        accent={en ? "for leadership teams" : zh("管理團隊", locale)}
         lead={t(workshopResource.summary, locale)}
         actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Request a workshop" : zh("申請工作坊", locale)}</LinkButton>}
         notice={en ? "Status: available on request — dates are agreed with each team." : zh("狀態：按需安排——日期與各團隊議定。", locale)}

@@ -40,7 +40,7 @@ export default async function PricingPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Platform" : zh("平台", locale)}
-        title={en ? "Price the workflow, not just the software." : zh("按流程定價，而不只是按軟件定價。", locale)}
+        title={en ? "Price the workflow, not just the software." : zh("按流程定價，而不只是按軟件定價。", locale)} accent={en ? "not just the software." : zh("而不只是按軟件定價", locale)}
         lead={t(copy.lead, locale)}
         notice={en ? "Price plans previously published on this page have been withdrawn and no longer apply." : zh("以前在此頁公布的價格方案已經撤回，不再適用。", locale)}
         actions={

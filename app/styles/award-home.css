@@ -19,6 +19,15 @@
 }
 .cine-hero__title { font-size: var(--fs-cine); line-height: 0.98; letter-spacing: -0.045em; max-width: 11ch; }
 .cine-hero__title .accent { color: var(--magenta); display: inline; }
+/* Award pass 3: the English accent sentence starts its own line at every width, so "Your" never hangs
+   at the end of "the work." (against the sample card on wide screens). */
+/* The serif sentence is ~7.2 em wide; min(5vw, 4.1rem) keeps it on one line in the copy column from
+   1000 px up, clear of the sample card, which overhangs the column by ~85 px at 1280–1679 px. */
+:lang(en) .cine-hero__title .accent { display: block; }
+/* Below 1000 px the title keeps its 11ch measure for "AI prepares / the work.", but the sentence may run
+   to the container's width, so it wraps only on the narrowest phones. */
+@media (max-width: 999px) { :lang(en) .cine-hero__title .accent { width: max-content; max-width: calc(100vw - 2 * var(--gutter)); } }
+@media (min-width: 1000px) { :lang(en) .cine-hero__title { font-size: min(5vw, 4.1rem); max-width: none; } }
 /* CJK: the accent line is one unbroken phrase (keep-all), so size it to fit the copy column. */
 :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: clamp(2.1rem, 0.4rem + 3.6vw, 4rem); }
 @media (max-width: 999px) { :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: min(11vw, 3.4rem); } }
@@ -77,8 +86,8 @@
 /* Hover zoom lives on the <img>, independent of any drift on <picture>. */
 .door__photo img, .output-tile__photo img { transition: transform 1200ms var(--ease-out); }
 .door:hover .door__photo img, .output-tile:hover .output-tile__photo img { transform: scale(1.04); }
-.case-photo__img img, .industry-shot__img img { transition-duration: 1200ms; transition-timing-function: var(--ease-out); }
-.case-photo:hover .case-photo__img img, .industry-shot:hover .industry-shot__img img { transform: scale(1.06); }
+.case-photo__img img { transition-duration: 1200ms; transition-timing-function: var(--ease-out); }
+.case-photo:hover .case-photo__img img { transform: scale(1.06); }
 
 /* ================================================================
    Cards: fewer borders, more depth; consistent lift language
@@ -101,15 +110,45 @@
 .output-tile__go, .case-photo h3 { transition: transform 500ms var(--ease-out), color 300ms ease; }
 .output-tile:hover .output-tile__go { transform: translateX(6px); color: var(--magenta-ink); }
 .case-photo:hover h3 { color: var(--magenta-ink); }
-.industry-shot__text { transition: transform 700ms var(--ease-out); }
-.industry-shot__text > span { transition: opacity 600ms var(--ease-out); }
-@media (hover: hover) and (min-width: 1000px) {
-  .industry-shot__text { transform: translateY(calc(100% - 3.6rem)); }
-  .industry-shot__text > span { opacity: 0; }
-  .industry-shot:hover .industry-shot__text, .industry-shot:focus-visible .industry-shot__text { transform: none; }
-  .industry-shot:hover .industry-shot__text > span, .industry-shot:focus-visible .industry-shot__text > span { opacity: 1; }
+/* ================================================================
+   Sector index (award pass 3): chapter 05 as a big-type list. One row per sector: index, name, the
+   sector's rule, an arrow disc. Hover (or keyboard focus) wipes a pale panel across the row and,
+   on wide hover-capable screens, opens the sector's scene in the reserved right-hand zone. Only
+   transform, opacity and clip-path move.
+================================================================ */
+.sector-index { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.sector-row { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 8px 16px; align-items: start; padding: 24px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.sector-row::before { content: ""; position: absolute; z-index: -1; inset: 0 calc(-1 * clamp(12px, 1.6vw, 24px)); border-radius: 18px; background: var(--canvas); transform: scaleX(0); transform-origin: 0 50%; transition: transform 700ms var(--ease-out); }
+.sector-row:hover::before, .sector-row:focus-visible::before { transform: none; }
+.sector-row:focus-visible { box-shadow: none; outline: none; }
+.sector-row:focus-visible::before { outline: 3px solid transparent; box-shadow: var(--focus); }
+@media (forced-colors: active) { .sector-row:focus-visible::before { outline-color: Highlight; } }
+.sector-row__index { grid-column: 1; grid-row: 1; font-family: var(--font-display-accent); font-style: italic; font-size: 1.3rem; line-height: 1; color: var(--magenta-ink); }
+.sector-row__name { grid-column: 1; grid-row: 2; font-size: clamp(1.75rem, 0.9rem + 2.5vw, 3.4rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance; transition: transform 700ms var(--ease-out); }
+:lang(zh-Hant-HK) .sector-row__name, :lang(zh-Hans) .sector-row__name { letter-spacing: 0; line-height: 1.2; word-break: keep-all; }
+.sector-row__rule { grid-column: 1; grid-row: 3; max-width: 46ch; color: var(--muted); font-size: var(--fs-small); line-height: 1.55; }
+.sector-row__go { grid-column: 2; grid-row: 2; display: grid; place-items: center; width: 44px; height: 44px; margin-top: 0.15em; border: 1px solid var(--line-strong); border-radius: 50%; font-size: 1.1rem; color: var(--ink); transition: transform 500ms var(--ease-out), background-color 300ms ease, color 300ms ease, border-color 300ms ease; }
+.sector-row:hover .sector-row__go, .sector-row:focus-visible .sector-row__go { background: var(--ink); border-color: var(--ink); color: #fff; transform: translateX(4px); }
+.sector-row:hover .sector-row__name, .sector-row:focus-visible .sector-row__name { transform: translateX(10px); }
+.sector-row__peek { display: none; }
+@media (min-width: 1000px) {
+  .sector-row { grid-template-columns: 4.5rem minmax(0, 1fr) 240px 56px; gap: 8px 32px; padding: 34px 0; }
+  .sector-row__index { grid-row: 1 / span 2; padding-top: 0.5em; font-size: 1.5rem; }
+  .sector-row__name { grid-column: 2; grid-row: 1; }
+  .sector-row__rule { grid-column: 2; grid-row: 2; }
+  .sector-row__go { grid-column: 4; grid-row: 1; width: 56px; height: 56px; }
+  .sector-row__rule { font-size: 1rem; }
 }
-.industry-shot::after { background: linear-gradient(180deg, rgb(7 11 31 / 0%) 40%, rgb(7 11 31 / 82%) 100%); }
+/* The scene opens in the reserved column, centred on the row and taller than it, above its
+   neighbours. Decorative (aria-hidden): the row's text is the link's name. */
+@media (hover: hover) and (min-width: 1000px) {
+  .sector-row__peek { display: block; grid-column: 3; grid-row: 1 / span 2; align-self: center; position: relative; z-index: 2; height: 0; pointer-events: none; }
+  .sector-row__peek .photo { position: absolute; left: 0; right: 0; top: 50%; aspect-ratio: 4 / 5; margin: 0; translate: 0 -50%; border-radius: 20px; overflow: clip; box-shadow: 0 40px 70px -36px rgb(13 20 51 / 60%); clip-path: inset(50% 0 50% 0 round 20px); opacity: 0; transition: clip-path 700ms var(--ease-out), opacity 300ms ease; }
+  .sector-row__peek img { transform: scale(1.12); transition: transform 1100ms var(--ease-out); }
+  .sector-row:hover .sector-row__peek .photo, .sector-row:focus-visible .sector-row__peek .photo { clip-path: inset(0 round 20px); opacity: 1; }
+  .sector-row:hover .sector-row__peek img, .sector-row:focus-visible .sector-row__peek img { transform: none; }
+}
+@media (hover: none), (max-width: 999px) { .sector-index__caption { display: none; } }
 .brand-tiles a { box-shadow: 0 0 0 1px rgb(13 20 51 / 6%); border-color: transparent; transition: transform 600ms var(--ease-out); }
 .brand-tiles a:hover { transform: translateY(-3px); }
 .brand-tiles a::before { transition: width 600ms var(--ease-out); }
@@ -243,15 +282,15 @@ main:has(.closing) + .site-footer .footer-cta { display: none; }
    contain-intrinsic-block-size excludes padding). English and Chinese differ by up to 220 px a
    band on phones, so each locale has its own set. Re-measure after any change to the homepage's
    copy or layout. */
-html { --band-outputs: 2710px; --band-evidence: 2580px; --band-night: 1060px; --band-paths: 2410px; --band-industries: 1410px; --band-eco: 1750px; --band-resources: 1190px; --band-start: 1130px; --band-faq: 640px; --band-closing: 650px; --band-footer: 2500px; }
-html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2540px; --band-evidence: 2320px; --band-night: 1070px; --band-paths: 2210px; --band-industries: 1450px; --band-eco: 1720px; --band-resources: 1200px; --band-start: 1150px; --band-faq: 550px; --band-closing: 650px; --band-footer: 2570px; }
+html { --band-outputs: 2710px; --band-evidence: 2580px; --band-night: 1150px; --band-paths: 2410px; --band-industries: 1000px; --band-eco: 1750px; --band-resources: 1170px; --band-start: 1130px; --band-faq: 730px; --band-closing: 650px; --band-footer: 1660px; }
+html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2540px; --band-evidence: 2320px; --band-night: 1130px; --band-paths: 2210px; --band-industries: 980px; --band-eco: 1720px; --band-resources: 1160px; --band-start: 1150px; --band-faq: 660px; --band-closing: 650px; --band-footer: 1630px; }
 @media (min-width: 700px) {
-  html { --band-outputs: 2100px; --band-evidence: 1690px; --band-night: 920px; --band-paths: 2510px; --band-industries: 1140px; --band-eco: 1360px; --band-resources: 1040px; --band-start: 760px; --band-faq: 540px; --band-closing: 770px; --band-footer: 1500px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2120px; --band-evidence: 1690px; --band-night: 880px; --band-paths: 2550px; --band-industries: 1190px; --band-eco: 1310px; --band-resources: 1000px; --band-start: 830px; --band-faq: 570px; --band-closing: 770px; --band-footer: 1540px; }
+  html { --band-outputs: 2100px; --band-evidence: 1690px; --band-night: 920px; --band-paths: 2510px; --band-industries: 880px; --band-eco: 1360px; --band-resources: 1040px; --band-start: 760px; --band-faq: 630px; --band-closing: 770px; --band-footer: 1500px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2120px; --band-evidence: 1690px; --band-night: 880px; --band-paths: 2550px; --band-industries: 910px; --band-eco: 1310px; --band-resources: 1000px; --band-start: 830px; --band-faq: 670px; --band-closing: 770px; --band-footer: 1540px; }
 }
 @media (min-width: 1000px) {
-  html { --band-outputs: 1330px; --band-evidence: 1150px; --band-night: 980px; --band-paths: 1380px; --band-industries: 650px; --band-eco: 870px; --band-resources: 640px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 720px; }
-  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1330px; --band-evidence: 1130px; --band-night: 1010px; --band-paths: 1370px; --band-industries: 710px; --band-eco: 890px; --band-resources: 620px; --band-start: 560px; --band-faq: 390px; --band-closing: 690px; --band-footer: 700px; }
+  html { --band-outputs: 1330px; --band-evidence: 1150px; --band-night: 980px; --band-paths: 1380px; --band-industries: 1010px; --band-eco: 870px; --band-resources: 640px; --band-start: 570px; --band-faq: 370px; --band-closing: 690px; --band-footer: 720px; }
+  html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 1330px; --band-evidence: 1130px; --band-night: 1010px; --band-paths: 1370px; --band-industries: 1050px; --band-eco: 890px; --band-resources: 620px; --band-start: 560px; --band-faq: 390px; --band-closing: 690px; --band-footer: 700px; }
 }
 .photo-caption { margin-top: 16px; }
 
@@ -293,3 +332,34 @@ html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2540px; --band-evide
 @keyframes sheet-rise { from { transform: scale(0.94); } to { transform: none; } }
 @keyframes hero-stamp { from { opacity: 0; transform: scale(1.3); } to { opacity: 1; transform: none; } }
 @keyframes hero-type { from { width: 0; } to { width: 8ch; } }
+/* Questions (award pass 3): the left column says where anything else goes. */
+.home-faq__other { margin-top: 20px; max-width: 32ch; color: var(--muted); }
+.home-faq__other a { display: inline-block; margin-top: 6px; color: var(--ink); font-weight: 700; }
+
+/* ================================================================
+   Chapter rail (award pass 3): the eight chapters as ticks in the left margin, from 1480 px (where
+   the margin clears the rows' hover panels, which bleed 24 px into it), visible only while a chapter is current. ChapterRail.tsx sets
+   data-on, data-tone and aria-current; transform, opacity and colour do the rest. Hidden, it is
+   also unfocusable (visibility), so keyboard users never tab into an invisible index.
+================================================================ */
+.chapter-rail { display: none; }
+@media (min-width: 1480px) {
+  .chapter-rail {
+    --rail: var(--subtle); --rail-on: var(--magenta-ink); --rail-tick: var(--line-strong);
+    display: block; position: fixed; z-index: 40; top: 50%; left: calc((100vw - 1280px) / 2 - 80px);
+    translate: 0 -50%; opacity: 0; visibility: hidden; transform: translateX(-10px);
+    transition: opacity 400ms ease, transform 600ms var(--ease-out), visibility 0s linear 400ms;
+  }
+  .chapter-rail[data-on] { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .chapter-rail[data-tone="dark"] { --rail: rgb(255 255 255 / 60%); --rail-on: #ff6fb5; --rail-tick: rgb(255 255 255 / 28%); }
+  .chapter-rail ol { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+  .chapter-rail a { position: relative; display: flex; align-items: center; gap: 6px; height: 24px; color: var(--rail); font-size: 0.6875rem; font-weight: 750; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; text-decoration: none; transition: color 300ms ease; }
+  .chapter-rail__tick { width: 18px; height: 2px; border-radius: 2px; background: var(--rail-tick); transform: scaleX(0.5); transform-origin: 0 50%; transition: transform 500ms var(--ease-out), background-color 300ms ease; }
+  .chapter-rail a:hover .chapter-rail__tick { transform: scaleX(0.75); }
+  .chapter-rail a[aria-current] { color: var(--rail-on); }
+  .chapter-rail a[aria-current] .chapter-rail__tick { transform: none; background: currentColor; }
+  .chapter-rail__label { position: absolute; top: 50%; left: calc(100% + 8px); padding: 5px 10px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 0.75rem; letter-spacing: 0.02em; white-space: nowrap; opacity: 0; transform: translate(-6px, -50%); transition: opacity 250ms ease, transform 400ms var(--ease-out); pointer-events: none; }
+  .chapter-rail a:hover .chapter-rail__label, .chapter-rail a:focus-visible .chapter-rail__label { opacity: 1; transform: translate(0, -50%); }
+  .chapter-rail[data-tone="dark"] .chapter-rail__label { background: #fff; color: var(--ink); }
+}
+@media print { .chapter-rail { display: none; } }

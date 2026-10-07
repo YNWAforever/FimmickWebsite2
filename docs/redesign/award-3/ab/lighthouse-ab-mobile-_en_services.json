@@ -1,0 +1,29 @@
+{
+  "page": "/en/services",
+  "form": "mobile",
+  "pairs": 5,
+  "main": {
+    "score": 85,
+    "lcp": 3626,
+    "tbt": 231,
+    "scores": [
+      92,
+      92,
+      83,
+      84,
+      85
+    ]
+  },
+  "branch": {
+    "score": 88,
+    "lcp": 3599,
+    "tbt": 124,
+    "scores": [
+      88,
+      88,
+      86,
+      91,
+      93
+    ]
+  }
+}

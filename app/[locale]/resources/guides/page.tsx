@@ -10,6 +10,9 @@ import { PageHero } from "@/components/ui";
 import { EnquirySection } from "@/components/blocks";
 
 const copy = {
+  // The H1 (award pass 3); `title` stays the page's name in the crumbs and <title>.
+  headline: { en: "Guides you can use before talking to anyone.", zh: "無須先找任何人傾談，下載即可使用。" },
+  accent: { en: "before talking to anyone.", zh: "下載即可使用" },
   title: { en: "Guides & playbooks", zh: "指南與實務手冊" },
   lead: { en: "Practical downloads you can use before talking to anyone. Sample rows are labelled as samples.", zh: "無須先與任何人傾談便可使用的實用下載資料；示例內容已清楚標示。" },
 };
@@ -24,7 +27,7 @@ export default async function GuidesPage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Resources" : zh("資源中心", locale)} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Resources" : zh("資源中心", locale)} title={t(copy.headline, locale)} accent={t(copy.accent, locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container stack" style={{ ["--stack" as string]: "24px" }}>
           {guides.map((g) => {

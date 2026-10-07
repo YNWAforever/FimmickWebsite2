@@ -3,6 +3,8 @@ import { isLocale, t, type Locale, zh } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
 import { cinema, homeFaqs, sections } from "@/content/home";
 import { Faq, SectionHead } from "@/components/ui";
+import { company } from "@/content/company";
+import { ChapterRail } from "@/components/home/ChapterRail";
 import { BusinessOutputs, CaseEvidence, CinematicHero, ClosingChapter, EcosystemTiles, IndustryPhotos, Pathways, ResourcePreviews, SignatureWorkflow, StartDecision } from "@/components/home/sections";
 import { notFound } from "next/navigation";
 // The homepage’s own sheets (8.2.3); award-home.css overrides cinematic.css at equal specificity, so it
@@ -42,8 +44,22 @@ export default async function HomePage({ params }: Props) {
   // editorial.css, so it is one download on any page.
   if (locale === "en") preload(accentFontUrl, { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
 
+  const en = locale === "en";
+  // The chapter rail (award pass 3): each chapter by its eyebrow, linked to its heading.
+  const rail = [
+    { id: "outputs", label: t(cinema.outputs.eyebrow, locale) },
+    { id: "cases", label: t(cinema.evidence.eyebrow, locale) },
+    { id: "signature", label: t(cinema.signature.eyebrow, locale), dark: true },
+    { id: "change", label: t(cinema.pathways.eyebrow, locale) },
+    { id: "industries", label: t(cinema.industries.eyebrow, locale) },
+    { id: "ecosystem", label: t(cinema.ecosystem.eyebrow, locale) },
+    { id: "resources", label: t(cinema.resources.eyebrow, locale) },
+    { id: "start", label: en ? "How to start" : zh("如何開始", locale) },
+  ].map((c, i) => ({ ...c, num: String(i + 1).padStart(2, "0") }));
+
   return (
     <>
+      <ChapterRail chapters={rail} label={en ? "Chapters" : zh("章節", locale)} />
       {/* 1. Cinematic hero: headline, one sample output and the approval moment */}
       <CinematicHero locale={locale} />
       {/* 2. Four business outputs, shown as readable sample artefacts */}
@@ -66,6 +82,10 @@ export default async function HomePage({ params }: Props) {
         <div className="container split">
           <div>
             <SectionHead eyebrow={t(sections.faq.eyebrow, locale)} title={<span id="faq">{t(sections.faq.title, locale)}</span>} />
+            <p className="home-faq__other">
+              {t(sections.faq.other, locale)}{" "}
+              <a href={`mailto:${company.email}`}>{company.email}</a>
+            </p>
           </div>
           <Faq items={homeFaqs} locale={locale} />
         </div>

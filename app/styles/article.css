@@ -1,0 +1,8 @@
+/* ------------------------------------------------------------------
+   Knowledge Hub article (award pass 3), imported by the article route only: a related archive article,
+   where the WordPress export left its "Explore Further" card as a bare title.
+------------------------------------------------------------------- */
+.prose .article-rel { display: grid; gap: 4px; margin-block: 1.6em; padding: 14px 20px; border-left: 3px solid var(--magenta); border-radius: 0 14px 14px 0; background: var(--surface); }
+.article-rel span:first-child { font-size: var(--fs-micro); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); }
+.article-rel a { justify-self: start; color: var(--ink); font-weight: 700; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat; transition: background-size 450ms var(--ease-out); }
+.article-rel a:hover { background-size: 100% 1.5px; }

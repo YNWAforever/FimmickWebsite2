@@ -42,9 +42,10 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* A 96 % solid fill, not a backdrop blur (8.2.7): the blur re-rendered everything under the header on
-     every scrolled frame. */
-  background: rgb(255 255 255 / 96%);
+  /* A solid fill, not a backdrop blur (8.2.7): the blur re-rendered everything under the header on
+     every scrolled frame. Fully opaque since award pass 3: at 96 % without a blur, scrolled headings
+     ghosted through between the logo and the navigation. */
+  background: var(--surface);
   box-shadow: 0 1px 0 var(--line);
 }
 .utility-bar { height: var(--utility-h); background: transparent; }
@@ -186,6 +187,9 @@ body[data-menu-open="true"] .site-header { transform: none !important; }
 @media (min-width: 1000px) { .footer-cta__actions { justify-items: end; } }
 .footer-cta__mail { color: #fff; font-size: clamp(1.2rem, 1rem + 0.8vw, 1.7rem); font-weight: 650; letter-spacing: -0.01em; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1.5px no-repeat; padding-bottom: 4px; transition: background-size 600ms var(--ease-out), color 300ms ease; }
 .footer-cta__mail:hover { color: #ff7dbd; background-size: 0 1.5px; background-position: 100% 100%; }
+/* Award pass 3: a page that already closes on its own call to action (CtaBand, with the page's
+   intent) does not get a second, generic one in the footer. */
+main:has(.cta-band) + .site-footer .footer-cta { display: none; }
 
 .site-footer .footer-brand p { color: var(--night-muted); }
 .site-footer .footer-contact { margin-top: 14px; line-height: 1.9; }
@@ -291,7 +295,7 @@ html.has-bubble [data-cursor] { cursor: none; }
 ================================================================ */
 .editorial-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .editorial-row { position: relative; display: grid; gap: 16px 48px; padding-block: 32px; border-bottom: 1px solid var(--line); }
-@media (min-width: 900px) { .editorial-row { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; } }
+@media (min-width: 900px) { .editorial-row { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr) auto; align-items: start; } }
 .editorial-row__meta { display: flex; align-items: baseline; gap: 14px; margin: 0; }
 .editorial-row__index { font-family: var(--font-display-accent); font-style: italic; font-size: 1.6rem; line-height: 1; color: var(--magenta-ink); }
 .editorial-row__label { font-size: var(--fs-micro); font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); }
@@ -303,17 +307,32 @@ html.has-bubble [data-cursor] { cursor: none; }
 .editorial-row__title a:focus-visible::after { outline: 3px solid transparent; box-shadow: var(--focus); }
 @media (forced-colors: active) { .editorial-row__title a:focus-visible::after { outline-color: Highlight; } }
 .editorial-row__line { margin-top: 10px; color: var(--muted); max-width: 56ch; }
-.editorial-row__cue { display: inline-flex; gap: 6px; justify-self: start; font-size: var(--fs-small); font-weight: 750; color: var(--ink); }
-.editorial-row__cue .arrow { display: inline-block; transition: transform var(--t-fast) var(--ease); }
-.editorial-row:hover .editorial-row__cue .arrow { transform: translateX(4px); }
+/* Award pass 3: the cue is an arrow disc (with its label when the row has one) at the row's end,
+   not a stray arrow under the text; hover wipes a pale panel across the row and fills the disc. */
+.editorial-row { isolation: isolate; }
+.editorial-row::before { content: ""; position: absolute; z-index: -1; inset: 0 calc(-1 * clamp(12px, 1.6vw, 24px)); border-radius: 18px; background: var(--surface); transform: scaleX(0); transform-origin: 0 50%; transition: transform 700ms var(--ease-out); pointer-events: none; }
+.editorial-row:hover::before, .editorial-row:focus-within::before { transform: none; }
+.editorial-row__title { transition: color 300ms ease; }
+.editorial-row:hover .editorial-row__title { color: var(--magenta-ink); }
+.editorial-row__cue { display: inline-flex; align-items: center; gap: 12px; justify-self: start; font-size: var(--fs-small); font-weight: 750; color: var(--ink); }
+.editorial-row__cue .arrow { display: inline-grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line-strong); border-radius: 50%; transition: transform 500ms var(--ease-out), background-color 300ms ease, color 300ms ease, border-color 300ms ease; }
+.editorial-row:hover .editorial-row__cue .arrow { transform: translateX(4px); background: var(--ink); border-color: var(--ink); color: #fff; }
 @media (prefers-reduced-motion: reduce) {
-  .editorial-row__cue .arrow { transition: none; }
   .editorial-row:hover .editorial-row__cue .arrow { transform: none; }
 }
 .editorial-row__aside { font-size: var(--fs-small); color: var(--ink-2); }
+/* Below 900 px the disc sits top-right beside the label, not alone at the bottom of the row. */
+@media (max-width: 899px) {
+  .editorial-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .editorial-row__main, .editorial-row__aside { grid-column: 1; }
+  .editorial-row__cue { grid-column: 2; grid-row: 1; align-self: start; }
+  /* The disc alone: the cue's label is decorative (the headline names the link). */
+  .editorial-row__cue { font-size: 0; gap: 0; }
+  .editorial-row__cue .arrow { font-size: 1rem; }
+}
 @media (min-width: 900px) {
-  .editorial-row__aside { grid-column: 2; grid-row: 1 / span 2; padding-top: 38px; }
-  .editorial-row__cue { grid-column: 1; grid-row: 2; }
+  .editorial-row__aside { grid-column: 2; grid-row: 1; padding-top: 38px; }
+  .editorial-row__cue { grid-column: 3; grid-row: 1; align-self: center; justify-self: end; }
 }
 .editorial-row__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .editorial-row__list li { position: relative; padding-left: 18px; }

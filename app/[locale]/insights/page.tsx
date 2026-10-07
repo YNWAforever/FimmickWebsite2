@@ -5,7 +5,6 @@ import { resolveLocale, type LocaleParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";
 import { allResources } from "@/lib/resources";
 import { resourceTopics } from "@/content/resources";
-import { ui } from "@/content/ui";
 import { PageHero, SectionHead, LinkButton } from "@/components/ui";
 import { EnquirySection } from "@/components/blocks";
 
@@ -36,7 +35,7 @@ export default async function InsightsPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Resources" : zh("資源中心", locale)}
-        title={en ? "What we are learning about AI in real business work." : zh("我們在真實業務中對 AI 的所學所得。", locale)}
+        title={en ? "What we are learning about AI in real business work." : zh("我們在真實業務中對 AI 的所學所得。", locale)} accent={en ? "in real business work." : zh("在真實業務中", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>
@@ -54,7 +53,7 @@ export default async function InsightsPage({ params }: LocaleParams) {
                 <span className="card-meta">{i.format === "guide" ? (en ? "Guide" : zh("指南", locale)) : en ? "Video" : zh("影片", locale)}{i.date ? ` · ${formatDate(i.date, locale)}` : ""}</span>
                 <h3>{i.title}</h3>
                 <p className="small muted">{i.summary.slice(0, 180)}</p>
-                <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+                <span className="card-foot">{i.format === "guide" ? (en ? "Open the guide" : zh("打開指南", locale)) : en ? "Watch the video" : zh("觀看影片", locale)} →</span>
               </Link>
             ))}
           </div>

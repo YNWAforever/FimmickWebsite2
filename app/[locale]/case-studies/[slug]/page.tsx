@@ -45,8 +45,10 @@ export default async function CasePage({ params }: SlugParams) {
         locale={locale}
         photo={casePhotos[c.slug]}
         crumbs={[{ label: en ? "Case studies" : zh("客戶案例", locale), path: "/case-studies" }, { label: t(c.title, locale) }]}
-        eyebrow={`${t(caseKindLabel[c.kind], locale)} · ${t(c.sector, locale)} · ${t(c.market, locale)}`}
-        title={t(c.title, locale)}
+        // With a headline as the H1 the case name moves to the eyebrow; the lead keeps sector and market.
+        eyebrow={c.headline ? `${t(caseKindLabel[c.kind], locale)} · ${t(c.title, locale)}` : `${t(caseKindLabel[c.kind], locale)} · ${t(c.sector, locale)} · ${t(c.market, locale)}`}
+        title={t(c.headline ?? c.title, locale)}
+        accent={c.headlineAccent ? t(c.headlineAccent, locale) : undefined}
         lead={t(c.context, locale)}
         actions={<LinkButton to={href(locale, contact)} variant="accent">{en ? "Discuss similar work" : zh("討論類似工作", locale)}</LinkButton>}
         aside={
