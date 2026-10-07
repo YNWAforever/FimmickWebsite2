@@ -56,6 +56,8 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 | --- | --- | --- | --- |
 | Lighthouse mobile `/en`, 7 interleaved pairs, median (after round 4) | 88 | 91 | +3 |
 | Lighthouse desktop `/en`, 3 pairs, median | 99 | 99 | 0 |
+| Lighthouse mobile `/en/services`, 5 pairs, median (after round 6) | 85 | 88 | +3 |
+| Lighthouse mobile article (`4-types-of-crm-system`), 5 pairs (after round 6) | 90 | 91 | +1 |
 | CSS on `/en/services` | ≤50 KB | 49.8 KB | budget 50 |
 | Playwright, all projects (axe, cascade, smoke) | — | 274 pass, 1 skipped | |
 | Unit tests + hans table, `test:i18n` (134 zh-Hans pages) | — | pass | |

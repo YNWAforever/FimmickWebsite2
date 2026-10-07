@@ -1,0 +1,29 @@
+{
+  "page": "/en/knowledge-hub/4-types-of-crm-system",
+  "form": "mobile",
+  "pairs": 5,
+  "main": {
+    "score": 90,
+    "lcp": 3362,
+    "tbt": 165,
+    "scores": [
+      84,
+      95,
+      90,
+      92,
+      89
+    ]
+  },
+  "branch": {
+    "score": 91,
+    "lcp": 2914,
+    "tbt": 179,
+    "scores": [
+      87,
+      95,
+      93,
+      79,
+      91
+    ]
+  }
+}
