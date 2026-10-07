@@ -72,3 +72,17 @@ Extends the cinematic redesign; full report in `docs/redesign/award/README.md`.
 - **Stylesheet order is part of the design.** `award.css` overrides `cinematic.css` at equal specificity, so it is imported only by the locale layout, after `cinematic.css`. CSS imported by both root layouts is hoisted into the shared chunk and loads first, which would silently undo those overrides. Shared rules go in `editorial.css`, which overrides nothing. An e2e test checks the order in the production bundle.
 - **Scroll-driven effects need non-scrolling ancestors.** Use `overflow: clip`, not `hidden`, on any box that contains a `view()` timeline subject; `hidden` creates a scroll container and freezes the timeline.
 - **Runtime dependencies unchanged:** `next`, `react`, `react-dom`.
+
+## Award pass 3 (7 Oct 2026)
+
+Extends award pass 2; critique log and measurements in `docs/redesign/award-3/README.md`.
+
+- **A photograph appears once per page.** The homepage repeated the case photographs in the industries chapter; chapter 05 is now a big-type sector index whose scenes open only as hover previews (hover-capable screens ≥1000 px). New homepage chapters should not reuse a photograph another chapter already shows.
+- **One closing call to action per page.** A page that ends with its own `CtaBand` (with the page's intent) hides the footer's generic one (`main:has(.cta-band) + .site-footer .footer-cta`).
+- **Rows end in an arrow disc.** Editorial rows (hubs, platform, sector index) end in a 44–56 px arrow disc at the row's end; hover wipes a pale panel across the row (transform only) and fills the disc. No arrow sits alone under text.
+- **Link cues name their object** ("How it works", "See the deliverables", "See the sector"); "Learn more" is retired.
+- **The English hero accent starts its own line** beside the photo, sized (`min(5vw, 4.1rem)`) so the sentence stays on one line clear of the sample card.
+- **Chapter rail.** From 1400 px the homepage shows its eight chapters as ticks in the left margin while a chapter is current. JavaScript (an IntersectionObserver) only sets the current chapter; the links are ordinary anchors, so scrolling is untouched. Hidden, it is also unfocusable.
+- **The 404 speaks the product's language:** the address comes back as a returned request record. Its styles ship as a hoisted `<style>` from `LocaleNotFound`, because a stylesheet imported by `not-found.tsx` is preloaded on every route of the layout.
+- **Phone footer in two columns.** One column made it three screens long.
+- **Runtime dependencies unchanged:** `next`, `react`, `react-dom`.

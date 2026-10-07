@@ -320,6 +320,15 @@ html.has-bubble [data-cursor] { cursor: none; }
   .editorial-row:hover .editorial-row__cue .arrow { transform: none; }
 }
 .editorial-row__aside { font-size: var(--fs-small); color: var(--ink-2); }
+/* Below 900 px the disc sits top-right beside the label, not alone at the bottom of the row. */
+@media (max-width: 899px) {
+  .editorial-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .editorial-row__main, .editorial-row__aside { grid-column: 1; }
+  .editorial-row__cue { grid-column: 2; grid-row: 1; align-self: start; }
+  /* The disc alone: the cue's label is decorative (the headline names the link). */
+  .editorial-row__cue { font-size: 0; gap: 0; }
+  .editorial-row__cue .arrow { font-size: 1rem; }
+}
 @media (min-width: 900px) {
   .editorial-row__aside { grid-column: 2; grid-row: 1; padding-top: 38px; }
   .editorial-row__cue { grid-column: 3; grid-row: 1; align-self: center; justify-self: end; }

@@ -17,7 +17,7 @@ test("the hero states the idea, and its Chinese accent uses emphasis marks", asy
   await expect(page.locator("h1")).toHaveText("AI prepares the work. Your people decide.");
   await page.goto("/zh-hant");
   const emphasis = await page.locator("h1 em.accent").evaluate((el) => getComputedStyle(el).getPropertyValue("text-emphasis-style") || getComputedStyle(el).getPropertyValue("-webkit-text-emphasis-style"));
-  expect(emphasis).toContain("circle");
+  expect(emphasis).toContain("dot");
 });
 
 /** Distinct line tops of a word inside an element: one entry means the word sits on one line. */

@@ -177,7 +177,8 @@ test("the hero accent is the serif in English and emphasis marks in both Chinese
       const s = getComputedStyle(el);
       return { family: s.fontFamily, emphasis: s.getPropertyValue("text-emphasis-style") || s.getPropertyValue("-webkit-text-emphasis-style") };
     });
-    expect(style.emphasis, route).toContain("circle");
+    // The small filled dot (award pass 3), not the circle.
+    expect(style.emphasis, route).toContain("dot");
     expect(style.family, route).not.toMatch(/Instrument Serif/);
   }
 });

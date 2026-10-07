@@ -57,3 +57,20 @@ test("the 404 returns the address as a request record", async ({ page }) => {
   await expect(record.locator(".nf__stamp")).toHaveText("已退回");
   await expect(record).toHaveCSS("border-radius", "22px");
 });
+
+test("the chapter rail marks the current chapter from 1400 px and stays out of the way elsewhere", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/en");
+  const rail = page.locator(".chapter-rail");
+  // Over the hero no chapter is current: hidden, and so not focusable.
+  await expect(rail).toBeHidden();
+  await page.locator("#cases").evaluate((el) => el.scrollIntoView({ behavior: "instant", block: "center" }));
+  await expect(rail).toBeVisible();
+  await expect(rail.locator('a[aria-current="true"]')).toHaveAttribute("href", "#cases");
+  await page.locator("#signature").evaluate((el) => el.scrollIntoView({ behavior: "instant", block: "center" }));
+  await expect(rail).toHaveAttribute("data-tone", "dark");
+  await expect(rail.locator('a[aria-current="true"]')).toHaveAttribute("href", "#signature");
+  // No room in the margin below 1400 px.
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await expect(rail).toBeHidden();
+});
