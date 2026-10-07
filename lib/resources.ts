@@ -167,5 +167,61 @@ export async function getArticleBlocks(locale: LegacyLocale, slug: string): Prom
   return ((data as unknown as Record<string, Block[]>)[slug] ?? null) as Block[] | null;
 }
 
+/** A body block as rendered: the stored blocks, plus resolved "Explore Further" references. */
+export type ArticleBlock = Block | { t: "rel"; slug: string; title: string; titleLocale: LegacyLocale };
+
+const looseKey = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/&amp;|&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+let relKeys: [string, string][] | null = null;
+/** The archived article a WordPress "Explore Further" title or slug pointed at, if it was migrated. */
+function relatedSlug(text: string, self: string): string | null {
+  relKeys ??= articleIndex.flatMap((a) => [[looseKey(a.slug), a.slug] as [string, string], ...Object.values(a.locales).flatMap((m) => (m?.title ? [[looseKey(m.title), a.slug] as [string, string]] : []))]);
+  const key = looseKey(text);
+  if (key.length < 4) return null;
+  const hit = relKeys.find(([k]) => k === key) ?? relKeys.find(([k]) => key.length > 12 && k.includes(key)) ?? relKeys.find(([k]) => k.length > 12 && key.includes(k));
+  return hit && hit[1] !== self ? hit[1] : null;
+}
+
+/**
+ * Award pass 3: two artefacts of the WordPress export, fixed at render time (the stored archive stays
+ * verbatim).
+ * - "Explore Further:" was followed by a related post's card, which survived only as its bare title or
+ *   slug ("what-is-trigger-and-drip-marketing") set as a heading. It becomes a link to that article
+ *   when it was migrated, and is dropped (with a stray "?" left from a split title) when it was not.
+ * - Every article ended with the same "About FIMMICK" / "Get Started" blurb, which states agent and brand
+ *   counts and a monthly price the site no longer publishes. The page's own aside and footer carry the
+ *   call to action instead.
+ */
+export function tidyArticleBlocks(blocks: Block[], slug: string, locale: LegacyLocale): ArticleBlock[] {
+  let body: Block[] = blocks;
+  const n = body.length;
+  const heading = (b: Block | undefined, text: string) => b?.t === "h" && b.x.trim() === text;
+  if (n >= 4 && heading(body[n - 4], "About FIMMICK") && heading(body[n - 2], "Get Started")) body = body.slice(0, n - 4);
+  const out: ArticleBlock[] = [];
+  for (let i = 0; i < body.length; i++) {
+    const b = body[i];
+    const next = body[i + 1];
+    if (b.t === "p" && /^explore further\s*[:：]?\s*$/i.test(b.x.trim()) && next && next.t !== "ul") {
+      const target = relatedSlug(next.x, slug);
+      if (target) {
+        const entry = articleBySlug(target)!;
+        // The target's title in this article's language when it has one; otherwise its own language.
+        const titleLocale = entry.locales[locale] ? locale : entry.locales.en ? "en" : (Object.keys(entry.locales)[0] as LegacyLocale);
+        out.push({ t: "rel", slug: target, title: entry.locales[titleLocale]!.title, titleLocale });
+      }
+      i += 1;
+      const after = body[i + 1];
+      if (after?.t === "p" && /^[?？]$/.test(after.x.trim())) i += 1;
+      continue;
+    }
+    out.push(b);
+  }
+  return out;
+}
+
 export const articleBySlug = (slug: string) => articleIndex.find((a) => a.slug === slug);
 export const eventById = (id: string) => legacyEvents.find((e) => e.id === id);

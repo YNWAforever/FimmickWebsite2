@@ -185,6 +185,9 @@ export type CaseStudy = {
   slug: string;
   kind: CaseKind;
   title: L;
+  /** Detail-page H1 (award pass 3): what changed, with one accented phrase; the title stays the name. */
+  headline?: L;
+  headlineAccent?: L;
   sector: L;
   market: L;
   industries: IndustryId[];

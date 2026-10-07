@@ -40,6 +40,11 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 - **The hero orphan was also on phones** ("the work. *Your* / *people decide.*"). The English accent sentence now starts its own line at every width and may run to the container's width, so it is one line at 390 px and wraps only inside itself at 360 px.
 - **The film's play button covered its two-line caption bar** on narrow players; below 700 px it sits right of the poster's brief card, at 60 px.
 
+## Round 5 — the templates behind the homepage
+
+- **Article (about 1,000 pages across three languages).** The WordPress export had left each "Explore Further" card as its bare title or slug set as a heading ("what-is-trigger-and-drip-marketing"): 54 of 97 now link to the migrated article, the rest (articles never migrated) are dropped. Every article ended with a company blurb stating "4,000+ AI agents", "500+ brands" and "Starting at $980/month", figures the site withdrew; it is no longer rendered. Unit-tested over the whole archive.
+- **Case pages** had the record's name as the H1. All 21 now lead with what changed and who decides ("Every buyer gets a follow-up draft, *sent by the sales owner.*"), EN and zh-Hant drafted here.
+
 ## Measurements (local build, Windows, Lighthouse 13.5, simulated throttling)
 
 | Check | main@6673908 | branch | |
@@ -55,5 +60,5 @@ Single Lighthouse runs on this machine swing by up to 10 points, so only interle
 ## Still open (decisions for Willy)
 
 - **Photography.** Masters are 1536 px, so inner-page heroes are soft on 2× screens; ≥2560 px masters are needed (pass 2, Decision #5). Six scenes were briefed for regeneration in the pass 2 audit.
-- **Case-page headlines** are still the case names; a job headline per case (as solutions, products and services now have) needs copy for 20 records in two languages.
-- **Native zh-Hans review** (runbook B3) and the zh strings added here: the four signature notes, the 404 record, the FAQ line and five link cues.
+- **Native zh-Hans review** (runbook B3) and the zh strings added here: the four signature notes, the 404 record, the FAQ line, five link cues and the 21 case headlines (copy owner to confirm the EN ones too).
+- **Recent articles repeat retired claims in their own prose** ("over 4,000 AI agents across 500+ brands", the "AI workforce" framing): what-is-an-ai-agent-platform, ai-workforce-vs-ai-tools, ai-marketing-agency-hong-kong-guide, fimmick-vs-sprinklr, state-of-ai-marketing-asia-2026, marketing-automation-hong-kong, fimmick-vs-salesforce-marketing-cloud, in all three languages. Rewriting article prose is an editorial decision.

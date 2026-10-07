@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@/app/styles/article.css";
 import { notFound } from "next/navigation";
 import { resolveLocale, type SlugParams } from "@/lib/page";
 import { pageMetadata } from "@/lib/seo";

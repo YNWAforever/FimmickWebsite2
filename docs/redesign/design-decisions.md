@@ -86,4 +86,6 @@ Extends award pass 2; critique log and measurements in `docs/redesign/award-3/RE
 - **The 404 speaks the product's language:** the address comes back as a returned request record. Its styles ship as a hoisted `<style>` from `LocaleNotFound`, because a stylesheet imported by `not-found.tsx` is preloaded on every route of the layout.
 - **Phone footer in two columns.** One column made it three screens long.
 - **The header is fully opaque.** At 96 % without a blur, scrolled headings ghosted through it.
+- **Case pages lead with what changed.** Each case has a job headline with one accent phrase (`headline`, `headlineAccent`), as solutions, products and services do; the case name moves to the eyebrow and stays the page title.
+- **Archive articles are tidied at render, never rewritten.** `tidyArticleBlocks` turns WordPress "Explore Further" remnants into links to the migrated article (labelled with its language when it is in another one) and drops the trailing "About FIMMICK" / "Get Started" blurb, whose agent counts and monthly price the site no longer publishes. The stored JSON stays verbatim.
 - **Runtime dependencies unchanged:** `next`, `react`, `react-dom`.

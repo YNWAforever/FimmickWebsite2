@@ -31,6 +31,8 @@ export const cases: CaseStudy[] = [
     slug: "fimmick-ai-native-operating-model",
     kind: "internal-application",
     title: { en: "Redesigning FIMMICK’s own delivery work before offering it to clients", zh: "先改造 FIMMICK 自身的工作方式，再提供給客戶" },
+    headline: { en: "We rebuilt our own delivery before selling the method.", zh: "先改造自己的交付，再把方法交給客戶。" },
+    headlineAccent: { en: "before selling the method.", zh: "再把方法交給客戶" },
     sector: { en: "FIMMICK · internal operations", zh: "FIMMICK·內部營運" },
     market: { en: "Hong Kong", zh: "香港" },
     industries: [],
@@ -58,6 +60,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "omni-channel-retail-intelligence", legacyId: 1,
     title: { en: "Omni-channel retail intelligence", zh: "全渠道零售數據洞察" },
+    headline: { en: "One view of the signals; management decides the shifts.", zh: "訊號集中一處，由管理層決定調整。" },
+    headlineAccent: { en: "management decides the shifts.", zh: "由管理層決定調整" },
     sector: { en: "Retail", zh: "零售" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["retail-ecommerce"], services: ["data-hub", "business-intelligence"], products: ["social-listening"],
     problem: { en: "A multi-store retailer’s data was split across POS, e-commerce, CRM, media and social. Teams could see activity but not which campaigns, channels or products were working.", zh: "一家多店零售商的資料分散於 POS、網店、CRM、媒體及社交平台。團隊看得到活動，卻看不清哪些宣傳、渠道或產品真正奏效。" },
@@ -72,6 +76,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "ai-assisted-lead-generation", legacyId: 2,
     title: { en: "AI-assisted lead generation for a financial brand", zh: "金融品牌的 AI 輔助獲客" },
+    headline: { en: "AI flags the stronger segments; the team approves each one.", zh: "AI 標出較強的客群，由團隊逐項批准。" },
+    headlineAccent: { en: "the team approves each one.", zh: "由團隊逐項批准" },
     sector: { en: "Financial services", zh: "金融服務" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["financial-services"], services: ["digitalmarketing", "crm-sales"], products: ["creativemax"],
     problem: { en: "Manual campaign optimisation and slow lead review made it hard to respond to market changes.", zh: "人手優化宣傳及緩慢的商機審閱，令團隊難以回應市場變化。" },
@@ -86,6 +92,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "social-commerce-growth-system", legacyId: 3,
     title: { en: "Social commerce growth system", zh: "社交電商增長系統" },
+    headline: { en: "Creators work from approved briefs, on one shared calendar.", zh: "創作者按已批准的簡報工作，共用同一份日程。" },
+    headlineAccent: { en: "on one shared calendar.", zh: "共用同一份日程" },
     sector: { en: "D2C e-commerce", zh: "直銷電商" }, market: { en: "Southeast Asia", zh: "東南亞" },
     industries: ["retail-ecommerce"], services: ["digitalmarketing", "koc-community", "content-creative"], products: ["creativemax", "whatsapp-aigc"],
     problem: { en: "Organic reach was declining and the brand needed content, creator coordination and learning at speed across platforms.", zh: "自然觸及下降，品牌需要在不同平台快速處理內容、協調創作者並從中學習。" },
@@ -100,6 +108,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "crm-loyalty-workflow-revamp", legacyId: 4,
     title: { en: "CRM and loyalty workflow revamp", zh: "CRM 及會員流程革新" },
+    headline: { en: "Every loyalty message is approved before it goes out.", zh: "每則會員訊息發出前都經批准。" },
+    headlineAccent: { en: "approved before it goes out.", zh: "發出前都經批准" },
     sector: { en: "FMCG", zh: "快速消費品" }, market: { en: "Greater Bay Area", zh: "大灣區" },
     industries: ["retail-ecommerce"], services: ["marketing-automation", "crm-sales", "customer-experience"], products: ["customer-ops"],
     problem: { en: "Loyalty data existed but was not used to create timely, relevant customer journeys.", zh: "雖有會員資料，卻未用於建立適時而相關的顧客旅程。" },
@@ -114,6 +124,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "luxury-data-unification", legacyId: 5,
     title: { en: "Luxury customer data unification", zh: "奢侈品牌顧客資料整合" },
+    headline: { en: "Every touchpoint in one view, read by leadership.", zh: "所有接觸點集中一處，由管理層解讀。" },
+    headlineAccent: { en: "read by leadership.", zh: "由管理層解讀" },
     sector: { en: "Luxury", zh: "奢侈品" }, market: { en: "Taiwan", zh: "台灣" },
     industries: ["beauty-luxury"], services: ["data-hub", "business-intelligence"], products: [],
     problem: { en: "Customer data was fragmented across boutiques, e-commerce, media and campaign tools.", zh: "顧客資料分散於專門店、網店、媒體及宣傳工具之間。" },
@@ -128,6 +140,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "healthcare-digital-outreach", legacyId: 6,
     title: { en: "Healthcare digital outreach with review built in", zh: "設有審閱機制的醫療數碼推廣" },
+    headline: { en: "A professional approves every piece before it is published.", zh: "每篇內容發布前，都由專業人員批准。" },
+    headlineAccent: { en: "before it is published.", zh: "都由專業人員批准" },
     sector: { en: "Healthcare", zh: "醫療" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["healthcare-wellness"], services: ["seo-aeo", "digitalmarketing", "content-creative"], products: ["creativemax"],
     problem: { en: "The organisation needed more awareness and patient engagement while keeping strict content standards.", zh: "機構需要提升知名度及病人參與，同時維持嚴格的內容標準。" },
@@ -142,6 +156,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "reporting-knowledge-automation", legacyId: 7,
     title: { en: "Reporting and knowledge automation", zh: "報告及知識自動化" },
+    headline: { en: "AI drafts the sections; leads sign off each one.", zh: "AI 草擬各部分，由負責人逐一批准。" },
+    headlineAccent: { en: "leads sign off each one.", zh: "由負責人逐一批准" },
     sector: { en: "Non-profit organisation", zh: "非牟利機構" }, market: { en: "Regional", zh: "區域" },
     industries: [], services: ["workflow-automation", "business-intelligence"], products: [],
     problem: { en: "Teams spent too much time collecting updates and turning scattered project knowledge into management-ready reports.", zh: "團隊花大量時間收集進度，並把零散的項目知識整理成管理層報告。" },
@@ -156,6 +172,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "real-estate-sales-follow-up", legacyId: 8,
     title: { en: "Property sales follow-up workflow", zh: "物業銷售跟進流程" },
+    headline: { en: "Every buyer gets a follow-up draft, sent by the sales owner.", zh: "每位買家都有跟進草稿，由負責的同事發出。" },
+    headlineAccent: { en: "sent by the sales owner.", zh: "由負責的同事發出" },
     sector: { en: "Real estate", zh: "地產" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["property-real-estate"], services: ["crm-sales", "whatsapp-automation", "workflow-automation"], products: ["customer-ops", "website-cms"],
     problem: { en: "Property enquiries arrived from several channels; response quality and timing varied by team, and managers could not see which leads had been followed up.", zh: "物業查詢來自多個渠道，回覆質素及時間因團隊而異，管理層亦看不到哪些商機已被跟進。" },
@@ -170,6 +188,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "hotel-guest-experience-recovery", legacyId: 9,
     title: { en: "Hotel guest experience recovery", zh: "酒店住客體驗補救" },
+    headline: { en: "Recovery replies go out only after a manager approves.", zh: "補救回覆須由經理批准才會發出。" },
+    headlineAccent: { en: "only after a manager approves.", zh: "須由經理批准" },
     sector: { en: "Hospitality", zh: "酒店" }, market: { en: "Japan", zh: "日本" },
     industries: ["hospitality-travel"], services: ["customer-experience", "social-listening"], products: ["social-listening", "customer-ops"],
     problem: { en: "Guest feedback was spread across review sites, surveys, emails and front-desk logs.", zh: "住客意見分散於評論網站、問卷、電郵及前台記錄。" },
@@ -184,6 +204,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "travel-koc-campaign-engine", legacyId: 10,
     title: { en: "Travel creator campaign workflow", zh: "旅遊創作者宣傳流程" },
+    headline: { en: "Creator submissions arrive sorted; the brand approves what runs.", zh: "創作者投稿已分類，由品牌批准刊出的內容。" },
+    headlineAccent: { en: "the brand approves what runs.", zh: "由品牌批准刊出的內容" },
     sector: { en: "Travel", zh: "旅遊" }, market: { en: "Regional", zh: "區域" },
     industries: ["hospitality-travel"], services: ["koc-community", "content-creative"], products: ["whatsapp-aigc"],
     problem: { en: "Scaling creator content was held back by inconsistent briefs, submission tracking, approvals and reporting.", zh: "簡報不一致、提交追蹤、批核及報告等問題，令創作者內容難以擴展。" },
@@ -198,6 +220,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "education-course-enquiry-automation", legacyId: 11,
     title: { en: "Course enquiry handling", zh: "課程查詢處理" },
+    headline: { en: "Course replies drafted from approved facts; sensitive cases go to staff.", zh: "課程回覆按已確認資料草擬，敏感個案交由職員處理。" },
+    headlineAccent: { en: "sensitive cases go to staff.", zh: "敏感個案交由職員處理" },
     sector: { en: "Education", zh: "教育" }, market: { en: "Hong Kong", zh: "香港" },
     industries: [], services: ["customer-experience", "crm-sales", "whatsapp-automation"], products: ["customer-ops"],
     problem: { en: "Repeated questions about courses, schedules, fees and admissions created heavy manual work.", zh: "有關課程、時間表、學費及入學的重複查詢，帶來大量人手工作。" },
@@ -212,6 +236,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "b2b-trading-supplier-intelligence", legacyId: 12,
     title: { en: "Supplier quotation comparison", zh: "供應商報價比較" },
+    headline: { en: "Quotations side by side; the team picks the supplier.", zh: "報價並排比較，由團隊選定供應商。" },
+    headlineAccent: { en: "the team picks the supplier.", zh: "由團隊選定供應商" },
     sector: { en: "B2B trading", zh: "企業貿易" }, market: { en: "Greater Bay Area", zh: "大灣區" },
     industries: ["b2b-professional-services"], services: ["workflow-automation", "data-hub"], products: [],
     problem: { en: "Quotations arrived by email, PDF, spreadsheet and chat; comparing them by hand was slow and missed details.", zh: "報價經電郵、PDF、試算表及聊天訊息傳來，人手比較既慢且易遺漏細節。" },
@@ -226,6 +252,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "professional-services-proposal-drafting", legacyId: 13,
     title: { en: "Proposal first-draft support", zh: "建議書初稿支援" },
+    headline: { en: "First drafts from approved material; the consultant refines them.", zh: "初稿只取自已批准的資料，由顧問修訂。" },
+    headlineAccent: { en: "the consultant refines them.", zh: "由顧問修訂" },
     sector: { en: "Professional services", zh: "專業服務" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["b2b-professional-services"], services: ["workflow-automation", "ai-training"], products: [],
     problem: { en: "Consultants spent too long searching past proposals and drafting from scratch.", zh: "顧問花太多時間翻查過往建議書，並由零開始撰寫。" },
@@ -240,6 +268,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "finance-management-reporting", legacyId: 14,
     title: { en: "Management reporting commentary", zh: "管理報告評述" },
+    headline: { en: "Unusual movements flagged; finance writes the context.", zh: "異常變動先被標出，由財務補上背景。" },
+    headlineAccent: { en: "finance writes the context.", zh: "由財務補上背景" },
     sector: { en: "Financial services", zh: "金融服務" }, market: { en: "Regional", zh: "區域" },
     industries: ["financial-services"], services: ["business-intelligence", "workflow-automation"], products: [],
     problem: { en: "The monthly pack required manual consolidation of spreadsheets, dashboards, budgets and variance commentary.", zh: "每月報告需要人手整合試算表、儀表板、預算及差異評述。" },
@@ -254,6 +284,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "hr-knowledge-onboarding", legacyId: 15,
     title: { en: "HR policy and onboarding knowledge", zh: "人力資源政策及入職知識" },
+    headline: { en: "Answers from approved policy; HR keeps the sensitive ones.", zh: "答案來自已批准的政策，敏感事項交由人力資源部。" },
+    headlineAccent: { en: "HR keeps the sensitive ones.", zh: "敏感事項交由人力資源部" },
     sector: { en: "Professional services", zh: "專業服務" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["b2b-professional-services"], services: ["ai-training", "workflow-automation"], products: [],
     problem: { en: "HR repeatedly answered the same policy, onboarding, leave and training questions.", zh: "人力資源部反覆回答相同的政策、入職、假期及培訓問題。" },
@@ -268,6 +300,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "restaurant-group-local-growth", legacyId: 16,
     title: { en: "Restaurant group local visibility", zh: "餐飲集團地區曝光" },
+    headline: { en: "Each branch gets its own drafts; the manager approves the replies.", zh: "每間分店有自己的草稿，回覆由分店經理批准。" },
+    headlineAccent: { en: "the manager approves the replies.", zh: "回覆由分店經理批准" },
     sector: { en: "Food & beverage", zh: "餐飲" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["food-beverage"], services: ["seo-aeo", "digitalmarketing", "social-listening"], products: ["website-cms", "creativemax"],
     problem: { en: "Each branch managed search, maps, social and review content inconsistently.", zh: "各分店處理搜尋、地圖、社交及評論內容的方式不一。" },
@@ -282,6 +316,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "automotive-lead-test-drive", legacyId: 17,
     title: { en: "Lead to test-drive follow-up", zh: "由商機到試車跟進" },
+    headline: { en: "Every prospect followed up, with sales approving each draft.", zh: "每位潛在客戶都有跟進，每份草稿由銷售批准。" },
+    headlineAccent: { en: "with sales approving each draft.", zh: "每份草稿由銷售批准" },
     sector: { en: "Automotive", zh: "汽車" }, market: { en: "Hong Kong", zh: "香港" },
     industries: [], services: ["crm-sales", "digitalmarketing"], products: ["customer-ops"],
     problem: { en: "Leads from ads, landing pages, social and showroom events were followed up inconsistently.", zh: "來自廣告、登陸頁、社交及陳列室活動的商機跟進不一致。" },
@@ -296,6 +332,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "property-management-resident-support", legacyId: 18,
     title: { en: "Resident request routing", zh: "住戶要求分流" },
+    headline: { en: "Resident requests reach the right team; managers take the escalations.", zh: "住戶要求分派到合適團隊，升級個案由經理處理。" },
+    headlineAccent: { en: "managers take the escalations.", zh: "升級個案由經理處理" },
     sector: { en: "Property management", zh: "物業管理" }, market: { en: "Hong Kong", zh: "香港" },
     industries: ["property-real-estate"], services: ["customer-experience", "workflow-automation"], products: ["customer-ops"],
     problem: { en: "Requests came through forms, calls, chat and email, making prioritisation slow.", zh: "要求經表格、電話、聊天及電郵傳來，難以迅速排序。" },
@@ -310,6 +348,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "cross-border-market-expansion-desk", legacyId: 19,
     title: { en: "Cross-border market intelligence desk", zh: "跨境市場情報平台" },
+    headline: { en: "Market briefs on a steady cycle; strategy makes the call.", zh: "市場簡報定期送達，由策略團隊作決定。" },
+    headlineAccent: { en: "strategy makes the call.", zh: "由策略團隊作決定" },
     sector: { en: "E-commerce", zh: "電商" }, market: { en: "Cross-border", zh: "跨境" },
     industries: ["retail-ecommerce"], services: ["social-listening", "seo-aeo", "business-intelligence"], products: ["social-listening", "aiso"],
     problem: { en: "Expansion needed ongoing intelligence on local competitors, platforms, search demand and localisation risk.", zh: "拓展市場需要持續掌握當地競爭對手、平台、搜尋需求及本地化風險。" },
@@ -324,6 +364,8 @@ export const cases: CaseStudy[] = [
   client({
     slug: "public-sector-community-feedback", legacyId: 20,
     title: { en: "Community feedback analysis", zh: "社區意見分析" },
+    headline: { en: "Every summary is reviewed before it is used.", zh: "每份摘要使用前都經審閱。" },
+    headlineAccent: { en: "reviewed before it is used.", zh: "使用前都經審閱" },
     sector: { en: "Public sector", zh: "公營機構" }, market: { en: "Hong Kong", zh: "香港" },
     industries: [], services: ["social-listening", "business-intelligence"], products: ["social-listening"],
     problem: { en: "Feedback from surveys, events, email and social platforms took too long to analyse.", zh: "來自問卷、活動、電郵及社交平台的意見分析費時。" },

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { href, formatDate, localeMeta, t, zh, type LegacyLocale, type Locale } from "@/lib/i18n";
-import { KNOWLEDGE_PAGE_SIZE, articleBySlug, articleListing, articleLocales, contentLang as langFor, getArticleBlocks, isArchiveArticle, knowledgeArticles } from "@/lib/resources";
+import { KNOWLEDGE_PAGE_SIZE, articleBySlug, articleListing, articleLocales, contentLang as langFor, getArticleBlocks, isArchiveArticle, knowledgeArticles, tidyArticleBlocks } from "@/lib/resources";
 import { resolveLegacyHref } from "@/lib/redirects";
 import { canonicalOrigin } from "@/lib/env";
 import { localeUrl, organizationId } from "@/lib/seo";
@@ -81,11 +81,18 @@ export function articleSource(slug: string, locale: LegacyLocale) {
  * language, plus an archive notice; the body is rendered from structured
  * blocks (no source HTML).
  */
+/** A language named in the reader's own language and script (for a related link to another language). */
+const languageName: Record<LegacyLocale, Record<LegacyLocale, string>> = {
+  en: { en: "English", "zh-hant": "Traditional Chinese", "zh-hans": "Simplified Chinese" },
+  "zh-hant": { en: "英文", "zh-hant": "繁體中文", "zh-hans": "簡體中文" },
+  "zh-hans": { en: "英文", "zh-hant": "繁体中文", "zh-hans": "简体中文" },
+};
+
 export async function ArticleView({ slug, locale, shellLocale }: { slug: string; locale: LegacyLocale; shellLocale: Locale }) {
   const found = articleSource(slug, locale);
   if (!found) return null;
   const { entry, source, meta, fallback } = found;
-  const blocks = (await getArticleBlocks(source, slug)) ?? [];
+  const blocks = tidyArticleBlocks((await getArticleBlocks(source, slug)) ?? [], slug, source);
   const en = locale === "en";
   const hans = locale === "zh-hans";
   const archived = isArchiveArticle(entry.published);
@@ -154,6 +161,18 @@ export async function ArticleView({ slug, locale, shellLocale }: { slug: string;
                 {blocks.map((b, i) =>
                   b.t === "h" ? (
                     <h2 key={i}>{b.x}</h2>
+                  ) : b.t === "rel" ? (
+                    // A related archive article (the WordPress "Explore Further" card), in the body's language.
+                    <p key={i} className="article-rel">
+                      <span>
+                        {source === "en" ? "Related reading" : source === "zh-hans" ? "延伸阅读" : "延伸閱讀"}
+                        {/* A target only in another language says so before the click. */}
+                        {b.titleLocale !== source ? ` · ${languageName[source][b.titleLocale]}` : null}
+                      </span>
+                      <Link href={href(shellLocale, paths.article(b.slug))} prefetch={false} lang={localeMeta[b.titleLocale].htmlLang}>
+                        {b.title} <span aria-hidden="true">→</span>
+                      </Link>
+                    </p>
                   ) : b.t === "ul" ? (
                     <ul key={i}>{b.items.map((it, j) => <li key={j}><RichText text={it} resolveHref={resolve} /></li>)}</ul>
                   ) : (
