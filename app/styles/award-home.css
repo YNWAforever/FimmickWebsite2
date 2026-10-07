@@ -336,24 +336,24 @@ html:lang(zh-Hant-HK), html:lang(zh-Hans) { --band-outputs: 2540px; --band-evide
 .home-faq__other a { display: inline-block; margin-top: 6px; color: var(--ink); font-weight: 700; }
 
 /* ================================================================
-   Chapter rail (award pass 3): the eight chapters as ticks in the left margin, from 1400 px (where
-   the margin is wide enough), visible only while a chapter is current. ChapterRail.tsx sets
+   Chapter rail (award pass 3): the eight chapters as ticks in the left margin, from 1480 px (where
+   the margin clears the rows' hover panels, which bleed 24 px into it), visible only while a chapter is current. ChapterRail.tsx sets
    data-on, data-tone and aria-current; transform, opacity and colour do the rest. Hidden, it is
    also unfocusable (visibility), so keyboard users never tab into an invisible index.
 ================================================================ */
 .chapter-rail { display: none; }
-@media (min-width: 1400px) {
+@media (min-width: 1480px) {
   .chapter-rail {
     --rail: var(--subtle); --rail-on: var(--magenta-ink); --rail-tick: var(--line-strong);
-    display: block; position: fixed; z-index: 40; top: 50%; left: max(10px, calc((100vw - 1280px) / 2 - 54px));
+    display: block; position: fixed; z-index: 40; top: 50%; left: calc((100vw - 1280px) / 2 - 80px);
     translate: 0 -50%; opacity: 0; visibility: hidden; transform: translateX(-10px);
     transition: opacity 400ms ease, transform 600ms var(--ease-out), visibility 0s linear 400ms;
   }
   .chapter-rail[data-on] { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
   .chapter-rail[data-tone="dark"] { --rail: rgb(255 255 255 / 60%); --rail-on: #ff6fb5; --rail-tick: rgb(255 255 255 / 28%); }
   .chapter-rail ol { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
-  .chapter-rail a { position: relative; display: flex; align-items: center; gap: 8px; height: 24px; color: var(--rail); font-size: 0.6875rem; font-weight: 750; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; text-decoration: none; transition: color 300ms ease; }
-  .chapter-rail__tick { width: 24px; height: 2px; border-radius: 2px; background: var(--rail-tick); transform: scaleX(0.5); transform-origin: 0 50%; transition: transform 500ms var(--ease-out), background-color 300ms ease; }
+  .chapter-rail a { position: relative; display: flex; align-items: center; gap: 6px; height: 24px; color: var(--rail); font-size: 0.6875rem; font-weight: 750; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; text-decoration: none; transition: color 300ms ease; }
+  .chapter-rail__tick { width: 18px; height: 2px; border-radius: 2px; background: var(--rail-tick); transform: scaleX(0.5); transform-origin: 0 50%; transition: transform 500ms var(--ease-out), background-color 300ms ease; }
   .chapter-rail a:hover .chapter-rail__tick { transform: scaleX(0.75); }
   .chapter-rail a[aria-current] { color: var(--rail-on); }
   .chapter-rail a[aria-current] .chapter-rail__tick { transform: none; background: currentColor; }

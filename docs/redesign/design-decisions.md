@@ -82,7 +82,8 @@ Extends award pass 2; critique log and measurements in `docs/redesign/award-3/RE
 - **Rows end in an arrow disc.** Editorial rows (hubs, platform, sector index) end in a 44–56 px arrow disc at the row's end; hover wipes a pale panel across the row (transform only) and fills the disc. No arrow sits alone under text.
 - **Link cues name their object** ("How it works", "See the deliverables", "See the sector"); "Learn more" is retired.
 - **The English hero accent starts its own line** beside the photo, sized (`min(5vw, 4.1rem)`) so the sentence stays on one line clear of the sample card.
-- **Chapter rail.** From 1400 px the homepage shows its eight chapters as ticks in the left margin while a chapter is current. JavaScript (an IntersectionObserver) only sets the current chapter; the links are ordinary anchors, so scrolling is untouched. Hidden, it is also unfocusable.
+- **Chapter rail.** From 1480 px the homepage shows its eight chapters as ticks in the left margin while a chapter is current, clear of the rows' hover panels. JavaScript (an IntersectionObserver) only sets the current chapter; the links are ordinary anchors, so scrolling is untouched. Hidden, it is also unfocusable.
 - **The 404 speaks the product's language:** the address comes back as a returned request record. Its styles ship as a hoisted `<style>` from `LocaleNotFound`, because a stylesheet imported by `not-found.tsx` is preloaded on every route of the layout.
 - **Phone footer in two columns.** One column made it three screens long.
+- **The header is fully opaque.** At 96 % without a blur, scrolled headings ghosted through it.
 - **Runtime dependencies unchanged:** `next`, `react`, `react-dom`.

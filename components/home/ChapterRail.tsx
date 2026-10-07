@@ -6,7 +6,7 @@ export type RailChapter = { id: string; num: string; label: string; dark?: boole
 
 /**
  * The homepage's chapter rail (award pass 3): a slim index of the eight chapters in the left margin,
- * shown only where the margin has room (≥1400 px) and only while a chapter crosses the middle of the
+ * shown only where the margin has room (≥1480 px) and only while a chapter crosses the middle of the
  * viewport. JavaScript sets which chapter is current; the movement is CSS. The links are ordinary
  * in-page anchors, so nothing about scrolling changes.
  */
@@ -14,7 +14,7 @@ export function ChapterRail({ chapters, label }: { chapters: RailChapter[]; labe
   const [active, setActive] = useState(-1);
 
   useEffect(() => {
-    const wide = window.matchMedia("(min-width: 1400px)");
+    const wide = window.matchMedia("(min-width: 1480px)");
     let observer: IntersectionObserver | null = null;
     const start = () => {
       observer?.disconnect();

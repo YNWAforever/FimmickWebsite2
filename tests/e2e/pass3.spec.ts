@@ -19,11 +19,16 @@ test("chapter 05 is a sector index: four linked rows, scenes only as hover previ
   await expect(rows).toHaveCount(4);
   for (const row of await rows.all()) await expect(row).toHaveAttribute("href", /^\/en\/industries\/[a-z0-9-]+$/);
   const first = rows.first();
-  await first.scrollIntoViewIfNeeded();
+  // Centred, so the pointer is not over the sticky header.
+  await first.evaluate((el) => el.scrollIntoView({ behavior: "instant", block: "center" }));
   const peek = first.locator(".sector-row__peek .photo");
   await expect(peek).toHaveCSS("opacity", "0");
-  await first.hover();
-  await expect(peek).toHaveCSS("opacity", "1");
+  // Re-hover until it opens: an instant jump into lazily rendered bands can shift the row from under
+  // the pointer while the bands above it lay out.
+  await expect(async () => {
+    await first.hover();
+    await expect(peek).toHaveCSS("opacity", "1", { timeout: 1500 });
+  }).toPass({ timeout: 10_000 });
   await expect(page.locator(".industry-shot")).toHaveCount(0);
 });
 
@@ -58,8 +63,8 @@ test("the 404 returns the address as a request record", async ({ page }) => {
   await expect(record).toHaveCSS("border-radius", "22px");
 });
 
-test("the chapter rail marks the current chapter from 1400 px and stays out of the way elsewhere", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 });
+test("the chapter rail marks the current chapter from 1480 px and stays out of the way elsewhere", async ({ page }) => {
+  await page.setViewportSize({ width: 1512, height: 900 });
   await page.goto("/en");
   const rail = page.locator(".chapter-rail");
   // Over the hero no chapter is current: hidden, and so not focusable.
@@ -70,7 +75,14 @@ test("the chapter rail marks the current chapter from 1400 px and stays out of t
   await page.locator("#signature").evaluate((el) => el.scrollIntoView({ behavior: "instant", block: "center" }));
   await expect(rail).toHaveAttribute("data-tone", "dark");
   await expect(rail.locator('a[aria-current="true"]')).toHaveAttribute("href", "#signature");
-  // No room in the margin below 1400 px.
-  await page.setViewportSize({ width: 1280, height: 800 });
+  // No room in the margin below 1480 px.
+  await page.setViewportSize({ width: 1440, height: 900 });
   await expect(rail).toBeHidden();
+});
+
+test("the header is opaque, so scrolled headings never ghost through it", async ({ page }) => {
+  await page.goto("/en/services");
+  await page.evaluate(() => window.scrollTo({ top: 900, behavior: "instant" }));
+  const fill = await page.locator(".site-header").evaluate((el) => getComputedStyle(el, "::before").backgroundColor);
+  expect(fill).toBe("rgb(255, 255, 255)");
 });

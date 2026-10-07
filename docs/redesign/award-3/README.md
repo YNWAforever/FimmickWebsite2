@@ -24,9 +24,16 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 ## Round 2 — measurement and craft
 
 - **A regression the critique would have missed.** The 404 record's stylesheet, imported by `not-found.tsx`, was preloaded on every route (an extra high-priority request before the LCP image): A/B −5 on mobile `/en`. The rules now ship as a hoisted `<style>` from `LocaleNotFound`; dead global rules were removed so `/en/services` is back under its 50 KB CSS budget.
-- **Chapter rail.** From 1400 px the homepage's eight chapters are ticks in the left margin while a chapter is current (light and dark palettes, hover labels, ordinary anchors). JavaScript only sets the current chapter.
+- **Chapter rail.** From 1480 px the homepage's eight chapters are ticks in the left margin while a chapter is current (light and dark palettes, hover labels, ordinary anchors). JavaScript only sets the current chapter.
 - **Chinese emphasis marks** are the small dot, not the circle, which read as a row of polka dots at display sizes.
 - **Below 900 px** the row's arrow disc sits top-right beside its label.
+
+## Round 3 — adversarial pass
+
+- **Keyboard.** Tabbing into the sector index shows the row panel with a focus ring and opens the scene; the rail's links are reachable and labelled ("02 Case-study evidence"). At 1440 px the row panel overlapped the rail's ticks, so the rail starts at 1480 px, 80 px left of the container, clear of every row panel.
+- **Bleed-through.** The header was 96 % white without a blur: scrolled headings ghosted between the logo and the navigation. It is opaque now (test).
+- **Containment.** The last sector's hover scene stays inside its band (content-visibility clips paint at the band edge): 100 px of margin.
+- **Flaky test found and fixed.** An instant jump into lazily rendered bands can shift a row from under the pointer; the hover test retries.
 
 ## Measurements (local build, Windows, Lighthouse 13.5, simulated throttling)
 
@@ -35,7 +42,7 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 | Lighthouse mobile `/en`, 7 interleaved pairs, median | 87 | 88 | +1 |
 | Lighthouse desktop `/en`, 3 pairs, median | 99 | 99 | 0 |
 | CSS on `/en/services` | ≤50 KB | 49.8 KB | budget 50 |
-| Playwright, all projects (axe, cascade, smoke) | — | 272 pass, 1 skipped | |
+| Playwright, all projects (axe, cascade, smoke) | — | 273 pass, 1 skipped | |
 | Unit tests + hans table, `test:i18n` (134 zh-Hans pages) | — | pass | |
 
 Single Lighthouse runs on this machine swing by up to 10 points, so only interleaved medians are compared.

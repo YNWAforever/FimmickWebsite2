@@ -42,9 +42,10 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* A 96 % solid fill, not a backdrop blur (8.2.7): the blur re-rendered everything under the header on
-     every scrolled frame. */
-  background: rgb(255 255 255 / 96%);
+  /* A solid fill, not a backdrop blur (8.2.7): the blur re-rendered everything under the header on
+     every scrolled frame. Fully opaque since award pass 3: at 96 % without a blur, scrolled headings
+     ghosted through between the logo and the navigation. */
+  background: var(--surface);
   box-shadow: 0 1px 0 var(--line);
 }
 .utility-bar { height: var(--utility-h); background: transparent; }
