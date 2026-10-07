@@ -35,7 +35,7 @@ export default async function InsightsPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Resources" : zh("資源中心", locale)}
-        title={en ? "What we are learning about AI in real business work." : zh("我們在真實業務中對 AI 的所學所得。", locale)}
+        title={en ? "What we are learning about AI in real business work." : zh("我們在真實業務中對 AI 的所學所得。", locale)} accent={en ? "in real business work." : zh("在真實業務中", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>

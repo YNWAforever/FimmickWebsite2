@@ -34,7 +34,7 @@ export default async function AgentsPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Platform" : zh("平台", locale)}
-        title={en ? "Agents that prepare the work. People who decide." : zh("由智能體準備工作，由人作決定。", locale)}
+        title={en ? "Agents that prepare the work. People who decide." : zh("由智能體準備工作，由人作決定。", locale)} accent={en ? "People who decide." : zh("由人作決定", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>

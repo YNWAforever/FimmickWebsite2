@@ -45,6 +45,11 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 - **Article (about 1,000 pages across three languages).** The WordPress export had left each "Explore Further" card as its bare title or slug set as a heading ("what-is-trigger-and-drip-marketing"): 54 of 97 now link to the migrated article, the rest (articles never migrated) are dropped. Every article ended with a company blurb stating "4,000+ AI agents", "500+ brands" and "Starting at $980/month", figures the site withdrew; it is no longer rendered. Unit-tested over the whole archive.
 - **Case pages** had the record's name as the H1. All 21 now lead with what changed and who decides ("Every buyer gets a follow-up draft, *sent by the sales owner.*"), EN and zh-Hant drafted here.
 
+## Round 6 — one headline system on every page
+
+- **53 of 112 English pages had a display headline with no accent phrase**, so the editorial system the homepage sets up stopped at page two. Every page now carries one (scanned from the sitemap; an e2e test keeps it so): accents marked on 19 existing sentence headlines, job headlines written for the seven function pages, five about pages and six hubs (integrations, examples, guides, videos, Knowledge Hub, events), and the workstream questions accent their second clause. Brand-name pages (ecosystem members) and legal pages keep their names.
+- **About:** the five sub-page cards sat 4 + 1, "Regional delivery" alone on a row; they now run five across (3 + 2 on tablets).
+
 ## Measurements (local build, Windows, Lighthouse 13.5, simulated throttling)
 
 | Check | main@6673908 | branch | |
@@ -52,7 +57,7 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 | Lighthouse mobile `/en`, 7 interleaved pairs, median (after round 4) | 88 | 91 | +3 |
 | Lighthouse desktop `/en`, 3 pairs, median | 99 | 99 | 0 |
 | CSS on `/en/services` | ≤50 KB | 49.8 KB | budget 50 |
-| Playwright, all projects (axe, cascade, smoke) | — | 273 pass, 1 skipped | |
+| Playwright, all projects (axe, cascade, smoke) | — | 274 pass, 1 skipped | |
 | Unit tests + hans table, `test:i18n` (134 zh-Hans pages) | — | pass | |
 
 Single Lighthouse runs on this machine swing by up to 10 points, so only interleaved medians are compared.
@@ -60,5 +65,5 @@ Single Lighthouse runs on this machine swing by up to 10 points, so only interle
 ## Still open (decisions for Willy)
 
 - **Photography.** Masters are 1536 px, so inner-page heroes are soft on 2× screens; ≥2560 px masters are needed (pass 2, Decision #5). Six scenes were briefed for regeneration in the pass 2 audit.
-- **Native zh-Hans review** (runbook B3) and the zh strings added here: the four signature notes, the 404 record, the FAQ line, five link cues and the 21 case headlines (copy owner to confirm the EN ones too).
+- **Native zh-Hans review** (runbook B3) and the zh strings added here: the four signature notes, the 404 record, the FAQ line, five link cues, the 21 case headlines and the 18 page headlines of round 6 (copy owner to confirm the EN ones too).
 - **Recent articles repeat retired claims in their own prose** ("over 4,000 AI agents across 500+ brands", the "AI workforce" framing): what-is-an-ai-agent-platform, ai-workforce-vs-ai-tools, ai-marketing-agency-hong-kong-guide, fimmick-vs-sprinklr, state-of-ai-marketing-asia-2026, marketing-automation-hong-kong, fimmick-vs-salesforce-marketing-cloud, in all three languages. Rewriting article prose is an editorial decision.

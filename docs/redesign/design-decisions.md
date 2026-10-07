@@ -88,4 +88,5 @@ Extends award pass 2; critique log and measurements in `docs/redesign/award-3/RE
 - **The header is fully opaque.** At 96 % without a blur, scrolled headings ghosted through it.
 - **Case pages lead with what changed.** Each case has a job headline with one accent phrase (`headline`, `headlineAccent`), as solutions, products and services do; the case name moves to the eyebrow and stays the page title.
 - **Archive articles are tidied at render, never rewritten.** `tidyArticleBlocks` turns WordPress "Explore Further" remnants into links to the migrated article (labelled with its language when it is in another one) and drops the trailing "About FIMMICK" / "Get Started" blurb, whose agent counts and monthly price the site no longer publishes. The stored JSON stays verbatim.
+- **Every display headline has one accent phrase**, inner pages included; a page whose H1 would be its bare name gets a job headline and keeps the name in its eyebrow, crumbs and `<title>`. Legal pages and ecosystem brand names are the exceptions (an e2e test scans the sitemap).
 - **Runtime dependencies unchanged:** `next`, `react`, `react-dom`.

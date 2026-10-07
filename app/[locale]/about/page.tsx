@@ -34,10 +34,11 @@ export default async function AboutPage({ params }: LocaleParams) {
   ];
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "We changed our own work first." : zh("我們先改變自己的工作方式。", locale)} lead={t(copy.lead, locale)} actions={<LinkButton to={href(locale, "/contact?intent=general")} variant="accent">{en ? "Contact us" : zh("聯絡我們", locale)}</LinkButton>} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "We changed our own work first." : zh("我們先改變自己的工作方式。", locale)} accent={en ? "own work first." : zh("自己的工作方式", locale)} lead={t(copy.lead, locale)} actions={<LinkButton to={href(locale, "/contact?intent=general")} variant="accent">{en ? "Contact us" : zh("聯絡我們", locale)}</LinkButton>} />
       <section className="section">
         <div className="container">
-          <div className="grid grid-3">
+          {/* Five pages in one row on desktop (award pass 3: grid-3 left "Regional delivery" alone on a second row). */}
+          <div className="grid grid-3" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))" }}>
             {sub.map((s) => (
               <Link key={s.path} className="hub-card" href={href(locale, s.path)}>
                 <h2 style={{ fontSize: "1.2rem" }}>{s.title}</h2>

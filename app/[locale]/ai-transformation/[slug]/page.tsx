@@ -147,6 +147,7 @@ export default async function WorkstreamPage({ params }: SlugParams) {
         crumbs={[{ label: en ? "AI Transformation" : zh("AI 轉型", locale), path: "/ai-transformation" }, { label: t(w.name, locale) }]}
         eyebrow={`${w.code} · ${t(w.name, locale)}`}
         title={t(w.leadershipQuestion, locale)}
+        accent={t(w.questionAccent, locale)}
         lead={t(w.answer, locale)}
         actions={
           <>

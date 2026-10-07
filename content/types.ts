@@ -98,6 +98,8 @@ export type Workstream = {
   code: string;
   name: L;
   leadershipQuestion: L;
+  /** Clause of the question set as the H1 accent (award pass 3). */
+  questionAccent: L;
   answer: L;
   buyerFit: L;
   problem: L;

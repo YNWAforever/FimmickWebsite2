@@ -86,3 +86,17 @@ test("the header is opaque, so scrolled headings never ghost through it", async 
   const fill = await page.locator(".site-header").evaluate((el) => getComputedStyle(el, "::before").backgroundColor);
   expect(fill).toBe("rgb(255, 255, 255)");
 });
+
+test("every display headline carries its accent phrase (legal pages and brand names excepted)", async ({ request }) => {
+  const xml = await (await request.get("/sitemap.xml")).text();
+  const exempt = /\/(knowledge-hub|events)\/|\/fimmick-ecosystem\/|\/(privacy|terms|cookies)$/;
+  const pages = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname).filter((p) => p.startsWith("/en") && !exempt.test(p));
+  expect(pages.length).toBeGreaterThan(80);
+  const bare: string[] = [];
+  for (const path of pages) {
+    const html = await (await request.get(path)).text();
+    const h1 = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? "";
+    if (!h1.includes('class="accent"')) bare.push(path);
+  }
+  expect(bare).toEqual([]);
+});

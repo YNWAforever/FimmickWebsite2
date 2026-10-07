@@ -30,7 +30,7 @@ export default async function FunctionsHub({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Platform & Solutions" : zh("平台與解決方案", locale)}
-        title={en ? "Find the work your team repeats every week." : zh("找出團隊每星期都在重複的工作。", locale)}
+        title={en ? "Find the work your team repeats every week." : zh("找出團隊每星期都在重複的工作。", locale)} accent={en ? "repeats every week." : zh("每星期都在重複的工作", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>

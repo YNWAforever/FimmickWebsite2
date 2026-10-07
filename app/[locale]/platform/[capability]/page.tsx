@@ -49,6 +49,7 @@ export default async function CapabilityPage({ params }: Props) {
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(c.name, locale) }]}
         eyebrow={`${t(c.name, locale)} · ${t(c.eyebrow, locale)}`}
         title={t(c.title, locale)}
+        accent={t(c.titleAccent, locale)}
         lead={t(c.intro, locale)}
         actions={
           <>

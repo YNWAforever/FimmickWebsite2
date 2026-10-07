@@ -17,6 +17,9 @@ import { ExplainerPlayer } from "@/components/media/ExplainerPlayer";
 import type { ExampleId } from "@/content/types";
 
 const copy = {
+  // The H1 (award pass 3); `title` stays the page's name in the crumbs and <title>.
+  headline: { en: "Try the workflow on sample data.", zh: "用示例資料試用流程。" },
+  accent: { en: "on sample data.", zh: "試用流程" },
   title: { en: "Examples & demos", zh: "示例與示範" },
   lead: { en: "Interactive examples and a product demonstration, all built on clearly labelled sample data. For client evidence, see the case library.", zh: "互動示例及產品示範，全部以清楚標示的示例資料製作。客戶實證請參閱案例庫。" },
 };
@@ -35,7 +38,7 @@ export default async function DemosPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Case studies" : zh("客戶案例", locale), path: "/case-studies" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Illustrative examples — sample data" : zh("流程示範·示例資料", locale)}
-        title={t(copy.title, locale)}
+        title={t(copy.headline, locale)} accent={t(copy.accent, locale)}
         lead={t(copy.lead, locale)}
         notice={en ? "Nothing on this page is a customer result." : zh("本頁內容均非客戶成果。", locale)}
       />

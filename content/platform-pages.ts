@@ -21,6 +21,8 @@ export type Capability = {
   name: L;
   eyebrow: L;
   title: L;
+  /** Phrase inside `title` set as the H1 accent (award pass 3). */
+  titleAccent: L;
   intro: L;
   principle: L;
   steps: TitledCopy[];
@@ -40,6 +42,7 @@ export const capabilities: Capability[] = [
     name: { en: "Market intelligence", zh: "市場情報" },
     eyebrow: { en: "Signals into priorities", zh: "由訊號到優先事項" },
     title: { en: "See the shift before it becomes the story.", zh: "在變化成為話題之前看見它。" },
+    titleAccent: { en: "before it becomes the story.", zh: "在變化成為話題之前" },
     intro: {
       en: "Turn scattered market, competitor, search and conversation signals into a regular brief your team can act on — with sources attached and people deciding what matters.",
       zh: "把分散的市場、競爭對手、搜尋及對話訊號，整理成團隊可以據此行動的定期簡報——附上來源，並由人決定甚麼才重要。",
@@ -74,6 +77,7 @@ export const capabilities: Capability[] = [
     name: { en: "Data analysis & reporting", zh: "數據分析與報告" },
     eyebrow: { en: "Metrics that lead somewhere", zh: "有方向的數據" },
     title: { en: "Every metric should lead to a decision.", zh: "每個指標都應指向一個決定。" },
+    titleAccent: { en: "lead to a decision.", zh: "指向一個決定" },
     intro: {
       en: "Connect campaign, CRM, commerce and operational exports so teams receive explanations, anomalies and next questions — not another reporting queue.",
       zh: "連繫宣傳、CRM、電商及營運資料，讓團隊得到解釋、異常提示及下一步要問的問題，而不是另一條報告輪候隊伍。",
@@ -106,6 +110,7 @@ export const capabilities: Capability[] = [
     name: { en: "Creative studio", zh: "創意工作室" },
     eyebrow: { en: "Creative operations", zh: "創意營運" },
     title: { en: "Scale expression. Keep the brand human.", zh: "擴大創作規模，保留品牌的人味。" },
+    titleAccent: { en: "Keep the brand human.", zh: "保留品牌的人味" },
     intro: {
       en: "Turn insight and brand rules into multilingual briefs, concepts, copy and variants — with human taste and approval at every publishable step.",
       zh: "把洞察及品牌規範轉化為多語言簡報、概念、文案及版本——每個可發布的步驟都由人把關及批准。",
@@ -140,6 +145,7 @@ export const capabilities: Capability[] = [
     name: { en: "Marketing strategy & planning", zh: "市場策略與規劃" },
     eyebrow: { en: "Plans that stay alive", zh: "持續更新的計劃" },
     title: { en: "Turn strategy into an operating rhythm.", zh: "把策略變成有節奏的日常運作。" },
+    titleAccent: { en: "an operating rhythm.", zh: "有節奏的日常運作" },
     intro: {
       en: "Coordinate audiences, channels, content, timing and budget around one measurable business priority — and keep the plan current as evidence arrives.",
       zh: "圍繞一個可衡量的業務重點，協調受眾、渠道、內容、時間及預算，並在新證據出現時更新計劃。",
@@ -172,6 +178,7 @@ export const capabilities: Capability[] = [
     name: { en: "Workflow automation", zh: "流程自動化" },
     eyebrow: { en: "Multi-step workflows", zh: "多步驟流程" },
     title: { en: "Remove the queue. Keep the judgement.", zh: "減少輪候，保留判斷。" },
+    titleAccent: { en: "Keep the judgement.", zh: "保留判斷" },
     intro: {
       en: "Redesign recurring work as visible workflows with approved inputs, clear owners, escalation rules and people deciding where it matters.",
       zh: "把重複工作重新設計為清晰可見的流程：輸入已確認、負責人清楚、設有轉交規則，重要環節由人決定。",

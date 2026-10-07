@@ -26,7 +26,7 @@ export default async function IndustriesPage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "One set of products, configured for your sector." : zh("同一套產品，按你的行業配置。", locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "One set of products, configured for your sector." : zh("同一套產品，按你的行業配置。", locale)} accent={en ? "configured for your sector." : zh("按你的行業配置", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
           <div className="grid grid-4">

@@ -34,7 +34,7 @@ export default async function TemplatesPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Template library" : zh("範本庫", locale)}
-        title={en ? "Start from a proven pattern. Configure it for your work." : zh("由成熟的範本開始，按你的工作配置。", locale)}
+        title={en ? "Start from a proven pattern. Configure it for your work." : zh("由成熟的範本開始，按你的工作配置。", locale)} accent={en ? "Configure it for your work." : zh("按你的工作配置", locale)}
         lead={t(copy.lead, locale)}
         actions={<LinkButton to={href(locale, paths.contact({ intent: "configuration" }))} variant="accent">{t(ui.discussConfiguration, locale)}</LinkButton>}
         notice={en ? "Templates are design starting points, not ready-to-buy apps. Availability of each is confirmed when we scope your workflow." : zh("範本是設計的起點，並非可即時購買的應用程式；每個範本的供應安排會在界定流程範圍時確認。", locale)}

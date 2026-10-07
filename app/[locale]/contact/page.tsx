@@ -63,7 +63,7 @@ export default async function ContactPage({ params }: LocaleParams) {
       };
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={en ? "Contact" : zh("聯絡我們", locale)} title={en ? "Let’s talk about the work." : zh("談談你的工作。", locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={en ? "Contact" : zh("聯絡我們", locale)} title={en ? "Let’s talk about the work." : zh("談談你的工作。", locale)} accent={en ? "about the work." : zh("你的工作", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container contact-grid">
           <ContactForm lang={locale} action={href(locale, "/contact")} intents={intents.map((i) => ({ id: i, label: t(intentLabels[i], locale) }))} contextOptions={contextOptions} email={company.email} s={s} />

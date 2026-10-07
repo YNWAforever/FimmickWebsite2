@@ -38,7 +38,7 @@ export default async function HowToStartPage({ params }: LocaleParams) {
   const en = locale === "en";
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Start with one defined workflow." : zh("由一個清楚的流程開始。", locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: t(copy.title, locale) }]} eyebrow={t(copy.title, locale)} title={en ? "Start with one defined workflow." : zh("由一個清楚的流程開始。", locale)} accent={en ? "one defined workflow." : zh("一個清楚的流程", locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
           <SectionHead eyebrow={en ? "Three ways to work with us" : zh("三種合作方式", locale)} title={en ? "How much should FIMMICK do?" : zh("由 FIMMICK 承擔多少？", locale)} />

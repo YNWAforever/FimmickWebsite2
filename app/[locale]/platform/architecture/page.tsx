@@ -34,7 +34,7 @@ export default async function ArchitecturePage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Platform" : zh("平台", locale), path: "/platform" }, { label: t(copy.title, locale) }]}
         eyebrow={en ? "Platform" : zh("平台", locale)}
-        title={en ? "Context in. Reviewed work out. A record of both." : zh("資料輸入，經審閱的工作輸出，兩者都有紀錄。", locale)}
+        title={en ? "Context in. Reviewed work out. A record of both." : zh("資料輸入，經審閱的工作輸出，兩者都有紀錄。", locale)} accent={en ? "A record of both." : zh("兩者都有紀錄", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>

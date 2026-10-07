@@ -12,6 +12,9 @@ import { knowledgeCategories } from "./categories";
  * (award pass 2, 8.2.1: no searchParams, so every page is prerendered).
  */
 const copy = {
+  // The H1 (award pass 3); `title` stays the page's name in the crumbs and <title>.
+  headline: { en: "Our article archive, with its original dates.", zh: "文章存檔，保留原本的發布日期。" },
+  accent: { en: "with its original dates.", zh: "保留原本的發布日期" },
   title: { en: "Knowledge Hub", zh: "知識庫" },
   lead: { en: "FIMMICK’s article archive since 2015 — kept at its original addresses, with original dates and language. Newer guides and the product explainer are in the Resource Centre.", zh: "FIMMICK 自 2015 年起的文章存檔，保留原有網址、日期及語言。較新的指南及產品示範影片見資源中心。" },
 };
@@ -33,7 +36,7 @@ export function knowledgeHubMetadata(locale: Locale, page: number): Metadata {
 export function KnowledgeHubView({ locale, page }: { locale: Locale; page: number }) {
   return (
     <>
-      <PageHero locale={locale} crumbs={[{ label: locale === "en" ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={locale === "en" ? "Insights & articles" : zh("洞察與文章", locale)} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: locale === "en" ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={locale === "en" ? "Insights & articles" : zh("洞察與文章", locale)} title={t(copy.headline, locale)} accent={t(copy.accent, locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container">
           <nav className="filter-bar" aria-label={locale === "en" ? "Categories" : zh("分類", locale)}>

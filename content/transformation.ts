@@ -10,6 +10,7 @@ export const workstreams: Workstream[] = [
       en: "Where is the organisation genuinely ready for AI — and where would scaling introduce friction?",
       zh: "機構在哪些方面真正準備好採用 AI？擴大規模又會在哪裏遇到阻力？",
     },
+    questionAccent: { en: "where would scaling introduce friction?", zh: "擴大規模又會在哪裏遇到阻力" },
     answer: {
       en: "FIMMICK builds a shared evidence base across leadership, operations, data, systems and people. The result is not a generic maturity score. It is a view of what can move now, what needs preparation and what should wait.",
       zh: "FIMMICK 在管理層、營運、資料、系統及人員之間建立共同的事實基礎。成果不是一個籠統的成熟度分數，而是清楚列出哪些可以即時推進、哪些需要準備、哪些應該暫緩。",
@@ -61,6 +62,7 @@ export const workstreams: Workstream[] = [
       en: "How should we sequence AI investment so each deployment builds reusable capability?",
       zh: "AI 投資應如何排序，令每次部署都能累積可重用的能力？",
     },
+    questionAccent: { en: "builds reusable capability?", zh: "累積可重用的能力" },
     answer: {
       en: "FIMMICK turns a portfolio of ideas into a sequenced plan: which outcomes matter, which workflows change first, which data and platform capabilities can be reused, who owns each step and when leadership reviews progress.",
       zh: "FIMMICK 把一堆構思整理成有次序的計劃：哪些成果重要、哪些流程先變、哪些資料及平台能力可以重用、每一步由誰負責，以及管理層何時檢視進度。",
@@ -112,6 +114,7 @@ export const workstreams: Workstream[] = [
       en: "What should AI prepare or execute in this workflow — and where must people decide?",
       zh: "在這個流程中，AI 應準備或執行甚麼？哪些地方必須由人決定？",
     },
+    questionAccent: { en: "where must people decide?", zh: "哪些地方必須由人決定" },
     answer: {
       en: "FIMMICK starts from the work itself: triggers, inputs, tasks, handoffs, standards and exceptions. We then define each AI task’s permitted actions and the human decisions around it, so the outcome always has an owner.",
       zh: "FIMMICK 由工作本身出發：觸發點、輸入、任務、交接、標準及例外情況；再界定每項 AI 任務可採取的行動，以及周邊的人手決策，確保每個結果都有負責人。",
@@ -163,6 +166,7 @@ export const workstreams: Workstream[] = [
       en: "How do we give AI useful work while keeping judgement, risk and accountability visible?",
       zh: "如何讓 AI 承擔有用的工作，同時令判斷、風險及問責保持清晰可見？",
     },
+    questionAccent: { en: "judgement, risk and accountability visible?", zh: "判斷、風險及問責保持清晰可見" },
     answer: {
       en: "FIMMICK builds governance into the workflow rather than into a document beside it. Teams can see what each AI task may access, prepare and escalate, and leaders can see the evidence they need to adjust policy.",
       zh: "FIMMICK 把管治融入流程本身，而不是另寫一份文件擺在一旁。團隊可以看到每項 AI 任務可存取、準備及上報的內容；管理層亦可掌握調整政策所需的證據。",

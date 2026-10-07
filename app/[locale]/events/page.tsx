@@ -27,7 +27,8 @@ export default async function EventsPage({ params }: LocaleParams) {
         locale={locale}
         crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]}
         eyebrow={t(copy.title, locale)}
-        title={en ? "Events archive" : zh("活動檔案", locale)}
+        title={en ? "Seminars and workshops we have run." : zh("我們舉辦過的講座及工作坊。", locale)}
+        accent={en ? "we have run." : zh("講座及工作坊", locale)}
         lead={t(copy.lead, locale)}
         actions={
           <>

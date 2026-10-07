@@ -13,6 +13,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { canonicalOrigin } from "@/lib/env";
 
 const copy = {
+  // The H1 (award pass 3); `title` stays the page's name in the crumbs and <title>.
+  headline: { en: "One workflow on film, from brief to record.", zh: "一個流程的短片，由簡報到紀錄。" },
+  accent: { en: "from brief to record.", zh: "由簡報到紀錄" },
   title: { en: "Videos & demos", zh: "影片與示範" },
   lead: { en: "A short product demonstration with captions and a full transcript. The film uses the same sample data as the interactive examples.", zh: "附字幕及完整文字稿的簡短產品示範；影片使用與互動示例相同的示例資料。" },
 };
@@ -42,7 +45,7 @@ export default async function VideosPage({ params }: LocaleParams) {
           inLanguage: en ? "en" : "zh-Hant-HK",
         }}
       />
-      <PageHero locale={locale} crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Resources" : zh("資源中心", locale)} title={t(copy.title, locale)} lead={t(copy.lead, locale)} />
+      <PageHero locale={locale} crumbs={[{ label: en ? "Resources" : zh("資源中心", locale), path: "/resources" }, { label: t(copy.title, locale) }]} eyebrow={en ? "Resources" : zh("資源中心", locale)} title={t(copy.headline, locale)} accent={t(copy.accent, locale)} lead={t(copy.lead, locale)} />
       <section className="section">
         <div className="container detail-grid">
           <div className="stack">
