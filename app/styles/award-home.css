@@ -19,14 +19,15 @@
 }
 .cine-hero__title { font-size: var(--fs-cine); line-height: 0.98; letter-spacing: -0.045em; max-width: 11ch; }
 .cine-hero__title .accent { color: var(--magenta); display: inline; }
-/* Award pass 3: beside the photo the English accent sentence starts its own line, so "Your" never
-   hangs at the end of "the work." against the sample card. */
+/* Award pass 3: the English accent sentence starts its own line at every width, so "Your" never hangs
+   at the end of "the work." (against the sample card on wide screens). */
 /* The serif sentence is ~7.2 em wide; min(5vw, 4.1rem) keeps it on one line in the copy column from
    1000 px up, clear of the sample card, which overhangs the column by ~85 px at 1280–1679 px. */
-@media (min-width: 1000px) {
-  :lang(en) .cine-hero__title { font-size: min(5vw, 4.1rem); max-width: none; }
-  :lang(en) .cine-hero__title .accent { display: block; }
-}
+:lang(en) .cine-hero__title .accent { display: block; }
+/* Below 1000 px the title keeps its 11ch measure for "AI prepares / the work.", but the sentence may run
+   to the container's width, so it wraps only on the narrowest phones. */
+@media (max-width: 999px) { :lang(en) .cine-hero__title .accent { width: max-content; max-width: calc(100vw - 2 * var(--gutter)); } }
+@media (min-width: 1000px) { :lang(en) .cine-hero__title { font-size: min(5vw, 4.1rem); max-width: none; } }
 /* CJK: the accent line is one unbroken phrase (keep-all), so size it to fit the copy column. */
 :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: clamp(2.1rem, 0.4rem + 3.6vw, 4rem); }
 @media (max-width: 999px) { :lang(zh-Hant-HK) .cine-hero__title, :lang(zh-Hans) .cine-hero__title { font-size: min(11vw, 3.4rem); } }

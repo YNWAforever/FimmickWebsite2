@@ -35,6 +35,11 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 - **Containment.** The last sector's hover scene stays inside its band (content-visibility clips paint at the band edge): 100 px of margin.
 - **Flaky test found and fixed.** An instant jump into lazily rendered bands can shift a row from under the pointer; the hover test retries.
 
+## Round 4 — phones
+
+- **The hero orphan was also on phones** ("the work. *Your* / *people decide.*"). The English accent sentence now starts its own line at every width and may run to the container's width, so it is one line at 390 px and wraps only inside itself at 360 px.
+- **The film's play button covered its two-line caption bar** on narrow players; below 700 px it sits right of the poster's brief card, at 60 px.
+
 ## Measurements (local build, Windows, Lighthouse 13.5, simulated throttling)
 
 | Check | main@6673908 | branch | |
