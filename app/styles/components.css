@@ -106,7 +106,6 @@ a.chip:hover { border-color: var(--ink-2); }
 .chip--lime { background: var(--lime-soft); border-color: transparent; color: var(--lime-ink); }
 .chip--sky { background: var(--sky-soft); border-color: transparent; color: var(--ink-2); }
 .chip--amber { background: var(--amber-soft); border-color: transparent; color: var(--amber-ink); }
-.chip--night { background: var(--night-2); border-color: var(--night-line); color: var(--night-text); }
 
 .notice {
   display: inline-flex;
@@ -163,8 +162,6 @@ a.chip:hover { border-color: var(--ink-2); }
 :lang(zh-Hant-HK) .card h2, :lang(zh-Hans) .card h2 { letter-spacing: 0; }
 .card .card-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--subtle); font-size: var(--fs-micro); font-weight: 700; }
 .card .card-foot { margin-top: auto; padding-top: 8px; display: flex; align-items: center; gap: 8px; font-weight: 750; color: var(--ink); }
-.card--flat { box-shadow: none; }
-.card--tint { background: var(--canvas); border-color: transparent; box-shadow: none; }
 .section--night .card { background: var(--night-2); border-color: var(--night-line); color: var(--night-text); box-shadow: none; }
 .section--night .card::after { content: none; }
 .section--night .card :is(h2, h3) { color: #fff; }

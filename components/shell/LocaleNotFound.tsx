@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Headline } from "@/components/motion/Headline";
 import { stripLocale, zh, type Locale } from "@/lib/i18n";
+import { notFoundCss } from "./not-found-css";
 
 /**
  * Body of the locale 404. `not-found.tsx` receives no params, so the locale comes from the URL;
@@ -33,6 +34,9 @@ export function LocaleNotFound() {
     : { label: "Request record", address: "Address", status: "Status", returned: "Returned", reason: "Reason", why: "No approved page at this address.", next: "Next step", then: "Five starting points attached." };
   return (
     <section className="nf">
+      <style href="nf-record" precedence="default">
+        {notFoundCss}
+      </style>
       <div className="container nf__grid">
         <div className="stack">
           <p className="eyebrow">404</p>
