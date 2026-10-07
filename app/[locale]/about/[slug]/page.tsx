@@ -21,32 +21,32 @@ export function generateStaticParams() {
 const meta: Record<AboutPage, { title: { en: string; zh: string }; headline: { en: string; zh: string }; accent: { en: string; zh: string }; lead: { en: string; zh: string } }> = {
   "our-story": {
     title: { en: "Our story", zh: "我們的故事" },
-    headline: { en: "We saw where work gets lost before we automated any of it.", zh: "我們先看清工作在哪裡流失，才開始把它自動化。" },
-    accent: { en: "before we automated any of it.", zh: "才開始把它自動化" },
+    headline: { en: "We learned where work gets lost before automating any of it.", zh: "我們先看清工作在哪裏流失，才開始把它自動化。" },
+    accent: { en: "before automating any of it.", zh: "才開始把它自動化" },
     lead: { en: "Years of campaigns, content, CRM and reporting showed us where work gets lost between people and systems. That experience now shapes how FIMMICK designs AI workflows.", zh: "多年處理宣傳、內容、CRM 及報告的經驗，讓我們看清工作如何在人與系統之間流失；這些經驗塑造了 FIMMICK 設計 AI 流程的方式。" },
   },
   "how-we-work": {
     title: { en: "How we work", zh: "工作方式" },
-    headline: { en: "Outcome first, the whole workflow next, one piece of work to prove it.", zh: "先定成果，再設計完整流程，用一項工作驗證。" },
-    accent: { en: "one piece of work to prove it.", zh: "用一項工作驗證" },
+    headline: { en: "Start with the outcome, design the whole workflow, then prove it on one job.", zh: "先定成果，再設計完整流程，然後用一項工作驗證。" },
+    accent: { en: "prove it on one job.", zh: "然後用一項工作驗證" },
     lead: { en: "Start from the business outcome, design the whole workflow — including where people decide — and prove it on one piece of work before extending it.", zh: "由業務成果出發，設計完整流程（包括由人決定的環節），先在一項工作上驗證，再逐步擴展。" },
   },
   "why-fimmick": {
     title: { en: "Why FIMMICK", zh: "為何選擇 FIMMICK" },
-    headline: { en: "Understand the work, design it with you, then hand it over.", zh: "理解工作、與你一同設計，然後移交能力。" },
-    accent: { en: "then hand it over.", zh: "然後移交能力" },
+    headline: { en: "Understand the work, design it with you, then hand it over.", zh: "理解工作，與你一同設計，然後把能力交給你。" },
+    accent: { en: "then hand it over.", zh: "然後把能力交給你" },
     lead: { en: "A partner should understand the work, design it with you, run the first version and hand over capability. FIMMICK combines platform, transformation and specialist services to do that.", zh: "合作夥伴應該理解工作、與你一同設計、推行首個版本並移交能力。FIMMICK 結合平台、轉型及專業服務做到這一點。" },
   },
   "asia-delivery": {
     title: { en: "Regional delivery", zh: "區域交付" },
-    headline: { en: "Run from Hong Kong, working across markets.", zh: "以香港為基地，跨市場運作。" },
-    accent: { en: "working across markets.", zh: "跨市場運作" },
+    headline: { en: "Based in Hong Kong, with contacts in five more markets.", zh: "以香港為基地，另有五個市場的聯絡點。" },
+    accent: { en: "five more markets.", zh: "五個市場的聯絡點" },
     lead: { en: "FIMMICK works from Hong Kong with an office in Taiwan and contact points in Singapore, Mainland China, the United Kingdom and the UAE. Here is how multi-market work is organised.", zh: "FIMMICK 以香港為基地，在台灣設有辦事處，並在新加坡、中國內地、英國及阿聯酋設有聯絡點。以下說明跨市場工作的組織方式。" },
   },
   team: {
     title: { en: "Leadership", zh: "領導團隊" },
-    headline: { en: "Led from Hong Kong by the people who built it.", zh: "在香港，由創立 FIMMICK 的人帶領。" },
-    accent: { en: "by the people who built it.", zh: "由創立 FIMMICK 的人帶領" },
+    headline: { en: "Led from Hong Kong by the people who built it.", zh: "在香港，由創辦 FIMMICK 的人領導。" },
+    accent: { en: "by the people who built it.", zh: "由創辦 FIMMICK 的人領導" },
     lead: { en: "FIMMICK is led from Hong Kong by its founder and chairman and its co-founder and CEO.", zh: "FIMMICK 由創辦人及主席，以及聯合創辦人及行政總裁在香港領導。" },
   },
 };

@@ -9,7 +9,7 @@ import { EnquirySection, ServiceCards } from "@/components/blocks";
 
 const copy = {
   // The H1 (award pass 3); `title` stays the page's name in the crumbs and <title>.
-  headline: { en: "Connections scoped per workflow, approved by the system owner.", zh: "按流程界定的串接，由系統負責人批准。" },
+  headline: { en: "Each connection is scoped to a workflow and approved by the system owner.", zh: "每項串接按流程界定，並由系統負責人批准。" },
   accent: { en: "approved by the system owner.", zh: "由系統負責人批准" },
   title: { en: "Integrations", zh: "系統串接" },
   lead: { en: "Connections are configured per workflow, tested with you and approved by the system owner. Where a connection is not in place, the output is a labelled export.", zh: "系統串接按流程設定，與你一同測試，並由系統負責人批准。未有串接時，輸出會以已標示的匯出檔提供。" },

@@ -11,7 +11,7 @@ import { EnquirySection } from "@/components/blocks";
 
 const copy = {
   // The H1 (award pass 3); `title` stays the page's name in the crumbs and <title>.
-  headline: { en: "Downloads you can use before talking to anyone.", zh: "無須先找任何人傾談，下載即可使用。" },
+  headline: { en: "Guides you can use before talking to anyone.", zh: "無須先找任何人傾談，下載即可使用。" },
   accent: { en: "before talking to anyone.", zh: "下載即可使用" },
   title: { en: "Guides & playbooks", zh: "指南與實務手冊" },
   lead: { en: "Practical downloads you can use before talking to anyone. Sample rows are labelled as samples.", zh: "無須先與任何人傾談便可使用的實用下載資料；示例內容已清楚標示。" },

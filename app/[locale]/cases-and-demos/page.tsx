@@ -18,8 +18,8 @@ import type { ExampleId } from "@/content/types";
 
 const copy = {
   // The H1 (award pass 3); `title` stays the page's name in the crumbs and <title>.
-  headline: { en: "Try the workflow on sample data.", zh: "用示例資料試用流程。" },
-  accent: { en: "on sample data.", zh: "試用流程" },
+  headline: { en: "Try the workflow yourself, on sample data.", zh: "用示例資料，親手試用流程。" },
+  accent: { en: "on sample data.", zh: "親手試用流程" },
   title: { en: "Examples & demos", zh: "示例與示範" },
   lead: { en: "Interactive examples and a product demonstration, all built on clearly labelled sample data. For client evidence, see the case library.", zh: "互動示例及產品示範，全部以清楚標示的示例資料製作。客戶實證請參閱案例庫。" },
 };

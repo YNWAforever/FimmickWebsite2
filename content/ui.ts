@@ -18,7 +18,7 @@ export const ui = {
   meetAgents: { en: "Meet the agents", zh: "認識智能體" },
   seeTemplates: { en: "See the templates", zh: "查看流程範本" },
   seeDeliverables: { en: "See the deliverables", zh: "查看交付內容" },
-  seeSector: { en: "See the sector", zh: "查看行業應用" },
+  seeSector: { en: "Explore the sector", zh: "查看行業應用" },
   seeWorkstream: { en: "See the workstream", zh: "查看工作範疇" },
   seeConnections: { en: "See the connections", zh: "查看串接方式" },
   seeControls: { en: "See the controls", zh: "查看管治措施" },

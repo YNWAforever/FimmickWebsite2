@@ -14,8 +14,8 @@ import { canonicalOrigin } from "@/lib/env";
 
 const copy = {
   // The H1 (award pass 3); `title` stays the page's name in the crumbs and <title>.
-  headline: { en: "One workflow on film, from brief to record.", zh: "一個流程的短片，由簡報到紀錄。" },
-  accent: { en: "from brief to record.", zh: "由簡報到紀錄" },
+  headline: { en: "Watch one workflow go from brief to record.", zh: "看一個流程由簡報走到紀錄。" },
+  accent: { en: "from brief to record.", zh: "由簡報走到紀錄" },
   title: { en: "Videos & demos", zh: "影片與示範" },
   lead: { en: "A short product demonstration with captions and a full transcript. The film uses the same sample data as the interactive examples.", zh: "附字幕及完整文字稿的簡短產品示範；影片使用與互動示例相同的示例資料。" },
 };

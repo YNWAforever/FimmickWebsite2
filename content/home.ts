@@ -9,7 +9,7 @@ export const hero = {
 };
 
 export const sections = {
-  faq: { eyebrow: { en: "Questions", zh: "常見問題" }, title: { en: "What happens next?", zh: "接下來會怎樣？" }, other: { en: "Something else? Write to us and a member of the team replies by email.", zh: "還有其他問題？歡迎來信，團隊同事會以電郵回覆。" } },
+  faq: { eyebrow: { en: "Questions", zh: "常見問題" }, title: { en: "What happens next?", zh: "接下來會怎樣？" }, other: { en: "Something else? Email us and someone on the team will reply.", zh: "還有其他問題？歡迎電郵給我們，團隊同事會回覆你。" } },
 } satisfies Record<string, { eyebrow: L; title: L; other?: L }>;
 
 /**
