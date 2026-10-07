@@ -255,14 +255,15 @@ body[data-menu-open="true"] { overflow: hidden; }
 @media (min-width: 1000px) { .footer-top { grid-template-columns: minmax(0, 1.2fr) minmax(0, 3fr); } }
 .footer-brand p { margin-top: 16px; color: var(--muted); font-size: var(--fs-small); max-width: 36ch; }
 .footer-brand img { width: 132px; }
-/* Four columns of two stacked groups (two columns on tablets, one on phones). Headings reserve two
-   lines where columns sit side by side, so every list starts at the same height. */
-.footer-cols { display: grid; gap: 36px 28px; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 560px) { .footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Four columns of two stacked groups (two columns below 1000 px, phones included: one column made
+   the phone footer three screens long). Headings reserve two lines, so lists side by side start at
+   the same height. */
+.footer-cols { display: grid; gap: 36px 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 560px) { .footer-cols { column-gap: 28px; } }
 @media (min-width: 1000px) { .footer-cols { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .footer-col { display: grid; gap: 36px; align-content: start; }
-.footer-cols h2 { font-size: var(--fs-micro); letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); margin-bottom: 12px; }
-@media (min-width: 560px) { .footer-cols h2 { min-height: 2lh; } }
+.footer-cols h2 { min-height: 2lh; font-size: var(--fs-micro); letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); margin-bottom: 12px; }
+@media (max-width: 559px) { .footer-cols a { font-size: 0.875rem; line-height: 1.35; } }
 .footer-cols ul { list-style: none; display: grid; gap: 2px; }
 .footer-cols a { display: inline-flex; min-height: 32px; align-items: center; color: var(--ink); text-decoration: none; font-size: var(--fs-small); font-weight: 600; }
 .footer-cols a:hover { text-decoration: underline; }

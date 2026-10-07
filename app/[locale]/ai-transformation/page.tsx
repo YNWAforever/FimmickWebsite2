@@ -62,7 +62,7 @@ export default async function TransformationPage({ params }: LocaleParams) {
                 <h3>{t(w.name, locale)}</h3>
                 <p className="muted">{t(w.leadershipQuestion, locale)}</p>
                 <p className="small"><strong>{en ? "You receive: " : zh("你會得到：", locale)}</strong>{t(w.artifactLabel, locale)} — {w.deliverables.map((d) => t(d.title, locale)).join(", ")}</p>
-                <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+                <span className="card-foot">{t(ui.seeWorkstream, locale)} →</span>
               </Link>
             ))}
           </div>

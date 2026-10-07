@@ -9,8 +9,8 @@ export const hero = {
 };
 
 export const sections = {
-  faq: { eyebrow: { en: "Questions", zh: "常見問題" }, title: { en: "What happens next?", zh: "接下來會怎樣？" } },
-} satisfies Record<string, { eyebrow: L; title: L }>;
+  faq: { eyebrow: { en: "Questions", zh: "常見問題" }, title: { en: "What happens next?", zh: "接下來會怎樣？" }, other: { en: "Something else? Write to us and a member of the team replies by email.", zh: "還有其他問題？歡迎來信，團隊同事會以電郵回覆。" } },
+} satisfies Record<string, { eyebrow: L; title: L; other?: L }>;
 
 /**
  * Cinematic homepage copy. Short by design: the page shows outputs, evidence
@@ -91,11 +91,11 @@ export const cinema = {
     platformLink: { en: "How the platform coordinates this", zh: "平台如何協調這些工作" } as L,
     filmLink: { en: "Watch the 42-second film", zh: "觀看 42 秒短片" } as L,
     steps: [
-      { id: "source", label: { en: "Input", zh: "輸入" }, title: { en: "Approved facts go in", zh: "放入已確認資料" } },
-      { id: "work", label: { en: "Prepared work", zh: "準備好的工作" }, title: { en: "AI drafts in two languages", zh: "AI 草擬雙語內容" } },
-      { id: "review", label: { en: "Human review", zh: "人手審閱" }, title: { en: "A named person decides", zh: "由指定的人決定" } },
-      { id: "result", label: { en: "Usable output", zh: "可用成果" }, title: { en: "Exported with its record", zh: "連紀錄一併匯出" } },
-    ] as { id: "source" | "work" | "review" | "result"; label: L; title: L }[],
+      { id: "source", label: { en: "Input", zh: "輸入" }, title: { en: "Approved facts go in", zh: "放入已確認資料" }, note: { en: "The brand team lists what may be said, and what may not. Nothing else reaches the draft.", zh: "品牌團隊列出可以說和不可以說的內容，草稿不會用上其他資料。" } },
+      { id: "work", label: { en: "Prepared work", zh: "準備好的工作" }, title: { en: "AI drafts in two languages", zh: "AI 草擬雙語內容" }, note: { en: "An English and a Traditional Chinese caption, each line traceable to the facts it used.", zh: "英文及繁體中文文案各一，每一句都能追溯到所用的資料。" } },
+      { id: "review", label: { en: "Human review", zh: "人手審閱" }, title: { en: "A named person decides", zh: "由指定的人決定" }, note: { en: "The brand manager edits, approves or returns each item. Nothing moves until they do.", zh: "品牌經理逐項修改、批准或退回；未有決定，甚麼都不會發出。" } },
+      { id: "result", label: { en: "Usable output", zh: "可用成果" }, title: { en: "Exported with its record", zh: "連紀錄一併匯出" }, note: { en: "Only approved items leave, with their sources, edits and the decision attached.", zh: "只有已批准的項目會匯出，並附上來源、修改及決定。" } },
+    ] as { id: "source" | "work" | "review" | "result"; label: L; title: L; note: L }[],
     brief: { en: "Brief: launch post · Instagram · EN + 繁中", zh: "簡報：推出貼文·Instagram·英文＋繁中" } as L,
     linked: { en: "Uses only the listed facts", zh: "只使用所列資料" } as L,
     edit: { en: "Tone softened", zh: "語氣調整" } as L,

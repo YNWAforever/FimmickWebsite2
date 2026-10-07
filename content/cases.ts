@@ -165,7 +165,7 @@ export const cases: CaseStudy[] = [
     humanDecisions: { en: "Sales agents reviewed and sent every follow-up themselves; managers monitored the pipeline.", zh: "每則跟進均由經紀審閱後親自發送；管理層監察銷售管道。" },
     dataFoundation: { en: "Listing data, CRM lead records, buyer requirement forms, messaging channels.", zh: "物業資料、CRM 商機紀錄、買家需要表格、訊息渠道。" },
     outcome: { en: "Buyer summaries are prepared from listing and CRM data, the sales owner gets a follow-up draft, and managers read pipeline status from the record.", zh: "買家摘要根據物業及 CRM 資料準備，銷售負責人收到跟進草稿，管理層直接從紀錄查看銷售管道狀況。" },
-    reusable: { en: "Listing-to-enquiry follow-up workflow (see Property & Real Estate).", zh: "由物業資料到查詢跟進的流程（見「地產及物業」）。" },
+    reusable: { en: "A listing-to-enquiry follow-up workflow.", zh: "由物業資料到查詢跟進的流程。" },
   }),
   client({
     slug: "hotel-guest-experience-recovery", legacyId: 9,

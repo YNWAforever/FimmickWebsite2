@@ -104,7 +104,7 @@ export default async function SolutionPage({ params }: SlugParams) {
                   <h3>{p.name}</h3>
                   <p className="muted">{t(p.summary, locale)}</p>
                   <p className="small">{t(p.distinction, locale)}</p>
-                  <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+                  <span className="card-foot">{t(ui.howItWorks, locale)} →</span>
                 </a>
               );
             })}

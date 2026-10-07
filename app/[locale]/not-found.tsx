@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { LocaleNotFound } from "@/components/shell/LocaleNotFound";
 import { isLocale, zh } from "@/lib/i18n";
+// The request record's styles ship with the 404 only (award pass 3).
+import "../styles/not-found.css";
 
 /**
  * Locale-aware 404 for unknown paths and missing records inside /en, /zh-hant and /zh-hans.

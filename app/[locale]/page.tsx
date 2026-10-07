@@ -3,6 +3,7 @@ import { isLocale, t, type Locale, zh } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
 import { cinema, homeFaqs, sections } from "@/content/home";
 import { Faq, SectionHead } from "@/components/ui";
+import { company } from "@/content/company";
 import { BusinessOutputs, CaseEvidence, CinematicHero, ClosingChapter, EcosystemTiles, IndustryPhotos, Pathways, ResourcePreviews, SignatureWorkflow, StartDecision } from "@/components/home/sections";
 import { notFound } from "next/navigation";
 // The homepage’s own sheets (8.2.3); award-home.css overrides cinematic.css at equal specificity, so it
@@ -66,6 +67,10 @@ export default async function HomePage({ params }: Props) {
         <div className="container split">
           <div>
             <SectionHead eyebrow={t(sections.faq.eyebrow, locale)} title={<span id="faq">{t(sections.faq.title, locale)}</span>} />
+            <p className="home-faq__other">
+              {t(sections.faq.other, locale)}{" "}
+              <a href={`mailto:${company.email}`}>{company.email}</a>
+            </p>
           </div>
           <Faq items={homeFaqs} locale={locale} />
         </div>

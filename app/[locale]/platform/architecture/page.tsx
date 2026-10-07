@@ -108,17 +108,17 @@ export default async function ArchitecturePage({ params }: LocaleParams) {
             <Link className="hub-card" href={href(locale, "/platform/integrations")}>
               <h3>{en ? "Integrations" : zh("系統串接", locale)}</h3>
               <p className="muted small">{en ? "Connection types and how each is scoped." : zh("串接類型及界定方式。", locale)}</p>
-              <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+              <span className="card-foot">{t(ui.seeConnections, locale)} →</span>
             </Link>
             <Link className="hub-card" href={href(locale, "/platform/governance")}>
               <h3>{en ? "Governance" : zh("管治", locale)}</h3>
               <p className="muted small">{en ? "Access, decisions and records." : zh("存取、決定及紀錄。", locale)}</p>
-              <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+              <span className="card-foot">{t(ui.seeControls, locale)} →</span>
             </Link>
             <Link className="hub-card" href={href(locale, "/platform/agents")}>
               <h3>{en ? "AI agents & tasks" : zh("AI 智能體與任務", locale)}</h3>
               <p className="muted small">{en ? "What an agent must define before it runs." : zh("智能體運作前必須界定的內容。", locale)}</p>
-              <span className="card-foot">{t(ui.learnMore, locale)} →</span>
+              <span className="card-foot">{t(ui.meetAgents, locale)} →</span>
             </Link>
           </div>
         </div>
