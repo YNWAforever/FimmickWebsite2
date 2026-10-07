@@ -64,8 +64,8 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 
 Single Lighthouse runs on this machine swing by up to 10 points, so only interleaved medians are compared.
 
-## Still open (decisions for Willy)
+## Decided (8 Oct 2026)
 
-- **Photography.** Masters are 1536 px, so inner-page heroes are soft on 2× screens; ≥2560 px masters are needed (pass 2, Decision #5). Six scenes were briefed for regeneration in the pass 2 audit.
-- **Native zh-Hans review** (runbook B3) and the zh strings added here: the four signature notes, the 404 record, the FAQ line, five link cues, the 21 case headlines and the 18 page headlines of round 6 (copy owner to confirm the EN ones too).
-- **Recent articles repeat retired claims in their own prose** ("over 4,000 AI agents across 500+ brands", the "AI workforce" framing): what-is-an-ai-agent-platform, ai-workforce-vs-ai-tools, ai-marketing-agency-hong-kong-guide, fimmick-vs-sprinklr, state-of-ai-marketing-asia-2026, marketing-automation-hong-kong, fimmick-vs-salesforce-marketing-cloud, in all three languages. Rewriting article prose is an editorial decision.
+- **Photography stays on the 1536 px masters**; no larger masters will be supplied. Tested on the solution and services heroes at 2×: a Lanczos-plus-sharpen 2560 px upscale was indistinguishable from the browser's own scaling (the softness is in the sources), a smaller drift scale rendered softer, not sharper, and a grain overlay was invisible on light paper. None was shipped; the current treatment is the best these masters allow.
+- **The drafted headlines and Chinese copy stand** (case, function, about and hub headlines, signature notes, 404 record, FAQ line, link cues), after the natural-phrasing pass in PR #18; no separate native review.
+- **Recent articles keep their prose**, including the agent and brand figures in the seven 2026 articles; only the closing blurb is suppressed (round 5).
