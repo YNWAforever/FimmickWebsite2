@@ -44,7 +44,7 @@ Self-critique rounds after award pass 2 (main@6673908), aimed at Awwwards / Webb
 
 | Check | main@6673908 | branch | |
 | --- | --- | --- | --- |
-| Lighthouse mobile `/en`, 7 interleaved pairs, median | 87 | 88 | +1 |
+| Lighthouse mobile `/en`, 7 interleaved pairs, median (after round 4) | 88 | 91 | +3 |
 | Lighthouse desktop `/en`, 3 pairs, median | 99 | 99 | 0 |
 | CSS on `/en/services` | ≤50 KB | 49.8 KB | budget 50 |
 | Playwright, all projects (axe, cascade, smoke) | — | 273 pass, 1 skipped | |
