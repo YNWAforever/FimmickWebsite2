@@ -14,6 +14,7 @@ import "../styles/award.css";
 import { fontVariables } from "../fonts";
 import { Shell } from "@/components/shell/Shell";
 import { Gtm } from "@/components/analytics/Gtm";
+import { ClickTracker } from "@/components/analytics/ClickTracker";
 import { JsonLd } from "@/components/JsonLd";
 import { isLocale, localeMeta, locales, zh } from "@/lib/i18n";
 import { canonicalOrigin, isProduction } from "@/lib/env";
@@ -58,6 +59,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
       </head>
       <body>
         <Gtm />
+        <ClickTracker />
         <Shell locale={locale}>{children}</Shell>
       </body>
     </html>

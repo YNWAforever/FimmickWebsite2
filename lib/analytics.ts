@@ -11,7 +11,14 @@ export type AnalyticsEvent =
   | "video_completed"
   | "enquiry_started"
   | "enquiry_accepted"
-  | "enquiry_email_prepared";
+  | "enquiry_email_prepared"
+  // Post-launch measurement (docs/analytics.md): why a send did not go through, which call to action
+  // led to the form and from where, language changes, links that leave the site, dead ends.
+  | "enquiry_failed"
+  | "cta_clicked"
+  | "locale_switched"
+  | "outbound_clicked"
+  | "page_not_found";
 
 type Props = Record<string, string | number | boolean | undefined>;
 

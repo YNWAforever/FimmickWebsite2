@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Headline } from "@/components/motion/Headline";
 import { stripLocale, zh, type Locale } from "@/lib/i18n";
 import { notFoundCss } from "./not-found-css";
+import { track } from "@/lib/analytics";
 
 /**
  * Body of the locale 404. `not-found.tsx` receives no params, so the locale comes from the URL;
@@ -23,6 +24,10 @@ export function LocaleNotFound() {
   useEffect(() => {
     document.title = title;
   }, [title]);
+  // The path only (no query or hash): dead links worth a redirect show up in analytics after launch.
+  useEffect(() => {
+    track("page_not_found", { path: pathname.slice(0, 80), referrer: document.referrer ? new URL(document.referrer).hostname : "direct" });
+  }, [pathname]);
   const base = `/${locale}`;
   const links = chinese
     ? [["/solutions", "業務解決方案"], ["/services", "專業服務"], ["/industries", "行業應用"], ["/resources", "資源中心"], ["/contact", "聯絡我們"]].map(([p, l]) => [p, zh(l, locale)])
