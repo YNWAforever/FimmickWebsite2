@@ -161,7 +161,11 @@ export function ContactForm({ lang, action, intents, contextOptions, email, s }:
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (status === "submitting" || !validate()) return;
+    if (status === "submitting") return;
+    if (!validate()) {
+      track("enquiry_failed", { intent, reason: "validation" });
+      return;
+    }
     setStatus("submitting");
     const ctx: Record<string, string> = { intent };
     for (const c of context) ctx[c.key] = c.value;
@@ -188,13 +192,18 @@ export function ContactForm({ lang, action, intents, contextOptions, email, s }:
         setErrors(map);
         setStatus("idle");
         focusFirst(map);
+        track("enquiry_failed", { intent, reason: "server_validation", status: 422 });
         return;
       }
-      setStatus(response.status === 503 ? "unavailable" : response.status === 504 ? "timeout" : response.status === 429 ? "rate_limited" : "failed");
+      const outcome = response.status === 503 ? "unavailable" : response.status === 504 ? "timeout" : response.status === 429 ? "rate_limited" : "failed";
+      setStatus(outcome);
+      track("enquiry_failed", { intent, reason: outcome, status: response.status });
     } catch {
       // Our own timer: the request may have arrived, so it is safe to retry with the same key.
       // Anything else (offline, DNS, connection refused): nothing was confirmed sent.
-      setStatus(controller.signal.aborted ? "timeout" : "failed");
+      const outcome = controller.signal.aborted ? "timeout" : "failed";
+      setStatus(outcome);
+      track("enquiry_failed", { intent, reason: outcome === "timeout" ? "timeout" : "network" });
     } finally {
       clearTimeout(timer);
     }
