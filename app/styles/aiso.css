@@ -51,6 +51,13 @@
 .aiso-files strong { display: block; font-size: 15px; margin: 10px 0 4px; }
 .aiso-file-icon { color: var(--aiso-blue); font-size: 20px; }
 .aiso-screen__foot { border-top: 1px solid var(--aiso-line); color: var(--aiso-muted); font-size: 11px; }
+/* Live product screens. The card chrome comes from .card; the frame clips the capture to the top radius. */
+.aiso-shots--lead { display: grid; gap: 24px; }
+.aiso-shot { padding: 0; gap: 0; }
+.aiso-shot__frame { display: block; overflow: hidden; border-bottom: 1px solid var(--line); border-radius: var(--radius-l) var(--radius-l) 0 0; }
+.aiso-shot img { width: 100%; height: auto; background: #f7f9fc; }
+.aiso-shot__copy { display: grid; gap: 6px; padding: 16px 18px 18px; }
+
 @media (max-width: 720px) {
  .aiso-screen__bar, .aiso-screen__foot { padding: 16px 18px; }
  .aiso-steps { grid-template-columns: 1fr 1fr; }

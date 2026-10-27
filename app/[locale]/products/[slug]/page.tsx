@@ -1,6 +1,7 @@
 // Route sheets (8.2.3), first so they keep their place before component sheets.
 import "@/app/styles/diagrams.css";
 import "@/app/styles/examples.css";
+import { AisoProductShots } from "@/components/AisoProductShots";
 import { AisoReadiness } from "@/components/AisoReadiness";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -60,7 +61,12 @@ export default async function ProductPage({ params }: SlugParams) {
           </div>
         }
       />
-      {p.id === "aiso" ? <AisoReadiness locale={locale} /> : null}
+      {p.id === "aiso" ? (
+        <>
+          <AisoReadiness locale={locale} />
+          <AisoProductShots locale={locale} />
+        </>
+      ) : null}
       <section className="section">
         <div className="container">
           <SectionHead eyebrow={en ? "Scope" : zh("範圍", locale)} title={en ? "What it does — and what it does not do" : zh("它做甚麼——以及不做甚麼", locale)} />

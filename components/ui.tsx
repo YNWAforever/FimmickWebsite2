@@ -82,13 +82,13 @@ export function PageHero({
   );
 }
 
-export function SectionHead({ eyebrow, title, accent, lead, action, as = "h2" }: { eyebrow?: string; title: ReactNode; accent?: string; lead?: ReactNode; action?: ReactNode; as?: "h2" | "h3" }) {
+export function SectionHead({ eyebrow, title, accent, lead, action, as = "h2", titleId }: { eyebrow?: string; title: ReactNode; accent?: string; lead?: ReactNode; action?: ReactNode; as?: "h2" | "h3"; titleId?: string }) {
   const Heading = as;
   return (
     <div className={action ? "section-head section-head--row reveal" : "section-head reveal"}>
       <div className="stack" style={{ ["--stack" as string]: "14px" }}>
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        {typeof title === "string" && accent ? <Headline as={as} text={title} accent={accent} /> : <Heading>{title}</Heading>}
+        {typeof title === "string" && accent ? <Headline as={as} id={titleId} text={title} accent={accent} /> : <Heading id={titleId}>{title}</Heading>}
         {lead ? <p className="lead">{lead}</p> : null}
       </div>
       {action ? <div>{action}</div> : null}
