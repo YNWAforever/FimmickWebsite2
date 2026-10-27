@@ -1,9 +1,4 @@
 /* Product UI follows the AISO reference: blue actions, pale surfaces, evidence cards. */
-.aiso-screenshots { display: grid; gap: 28px; }
-.aiso-screenshot { min-width: 0; margin: 0; }
-.aiso-screenshot > a { display: block; overflow: hidden; border: 1px solid #dce4ef; border-radius: 18px; background: #f7f9fc; box-shadow: 0 22px 60px -30px #19355855; }
-.aiso-screenshot img { display: block; width: 100%; height: auto; }
-.aiso-screenshot figcaption { margin-top: 12px; color: var(--muted); font-size: 14px; line-height: 1.65; }
 .aiso-screen { --aiso-blue: #245cf5; --aiso-ink: #111a2e; --aiso-muted: #596e8f; --aiso-line: #dce4ef; background: #f7f9fc; color: var(--aiso-ink); border: 1px solid var(--aiso-line); border-radius: 22px; overflow: hidden; box-shadow: 0 22px 60px -30px #19355855; font-size: 15px; }
 .aiso-screen h3, .aiso-screen h4, .aiso-screen h5 { color: var(--aiso-ink); margin: 0; letter-spacing: -.025em; }
 .aiso-screen p { color: var(--aiso-muted); font-size: 14px; line-height: 1.65; margin: 0; }
@@ -15,9 +10,9 @@
 .aiso-brand b { color: var(--aiso-blue); }
 .aiso-badge { display: inline-flex; padding: 5px 10px; background: #eff5ff; border: 1px solid var(--aiso-line); border-radius: 20px; color: #2047b5; font-size: 12px; font-weight: 700; }
 .aiso-steps { display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; padding: 0; margin: 0; border-bottom: 1px solid var(--aiso-line); }
-.aiso-steps li { display: flex; align-items: center; gap: 10px; padding: 17px 24px; font-weight: 750; border-right: 1px solid var(--aiso-line); }
+.aiso-steps li { display: flex; align-items: center; padding: 0; border-right: 1px solid var(--aiso-line); }
 .aiso-steps li:last-child { border-right: 0; }
-.aiso-steps li > span { color: var(--aiso-blue); font-size: 12px; }
+.aiso-steps button > span { color: var(--aiso-blue); font-size: 12px; }
 .aiso-screen__body { padding: clamp(18px, 3vw, 40px); display: grid; gap: 28px; }
 .aiso-scan { display: flex; align-items: end; gap: 16px; background: #fff; border: 1px solid var(--aiso-line); padding: 20px; border-radius: 16px; }
 .aiso-scan > div { flex: 1; min-width: 0; }
@@ -59,7 +54,7 @@
 @media (max-width: 720px) {
  .aiso-screen__bar, .aiso-screen__foot { padding: 16px 18px; }
  .aiso-steps { grid-template-columns: 1fr 1fr; }
- .aiso-steps li { padding: 12px 18px; font-size: 12px; }
+ .aiso-steps button { padding: 12px 18px; font-size: 12px; }
  .aiso-steps li:nth-child(-n+2) { border-bottom: 1px solid var(--aiso-line); }
  .aiso-report-grid, .aiso-files { grid-template-columns: 1fr; }
  .aiso-scan, .aiso-report-head { flex-direction: column; align-items: stretch; }
@@ -67,4 +62,20 @@
  .aiso-score { width: 116px; height: 116px; }
  .aiso-score > div { width: 98px; height: 98px; }
  .aiso-files > div { padding: 14px 18px; }
+}
+
+.aiso-steps button { display: flex; align-items: center; gap: 10px; width: 100%; height: 100%; padding: 17px 24px; border: 0; background: transparent; color: var(--aiso-muted); font: inherit; font-weight: 750; cursor: pointer; text-align: left; transition: background .25s, color .25s; }
+.aiso-steps button[aria-selected="true"] { background: #e8efff; color: #1748cc; box-shadow: inset 0 -3px var(--aiso-blue); }
+.aiso-steps button:focus-visible { outline: 3px solid var(--aiso-blue); outline-offset: -4px; }
+.aiso-screen__body { grid-template-columns: minmax(0, 1fr); }
+.aiso-stage { grid-area: 1 / 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 28px; visibility: hidden; opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s, visibility .3s; }
+.aiso-stage.is-active { visibility: visible; opacity: 1; transform: none; }
+.aiso-stage.is-active .aiso-fixes li, .aiso-stage.is-active .aiso-files > div { animation: aiso-reveal .45s both; }
+.aiso-stage.is-active .aiso-fixes li:nth-child(2), .aiso-stage.is-active .aiso-files > div:nth-child(2) { animation-delay: .1s; }
+.aiso-stage.is-active .aiso-fixes li:nth-child(3), .aiso-stage.is-active .aiso-files > div:nth-child(3) { animation-delay: .2s; }
+@keyframes aiso-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (max-width: 720px) { .aiso-steps button { padding: 12px 18px; font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) {
+ .aiso-stage, .aiso-steps button { transition: none; transform: none; }
+ .aiso-stage.is-active .aiso-fixes li, .aiso-stage.is-active .aiso-files > div { animation: none; }
 }
