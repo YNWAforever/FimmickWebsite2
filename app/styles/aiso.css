@@ -1,4 +1,9 @@
 /* Product UI follows the AISO reference: blue actions, pale surfaces, evidence cards. */
+.aiso-screenshots { display: grid; gap: 28px; }
+.aiso-screenshot { min-width: 0; margin: 0; }
+.aiso-screenshot > a { display: block; overflow: hidden; border: 1px solid #dce4ef; border-radius: 18px; background: #f7f9fc; box-shadow: 0 22px 60px -30px #19355855; }
+.aiso-screenshot img { display: block; width: 100%; height: auto; }
+.aiso-screenshot figcaption { margin-top: 12px; color: var(--muted); font-size: 14px; line-height: 1.65; }
 .aiso-screen { --aiso-blue: #245cf5; --aiso-ink: #111a2e; --aiso-muted: #596e8f; --aiso-line: #dce4ef; background: #f7f9fc; color: var(--aiso-ink); border: 1px solid var(--aiso-line); border-radius: 22px; overflow: hidden; box-shadow: 0 22px 60px -30px #19355855; font-size: 15px; }
 .aiso-screen h3, .aiso-screen h4, .aiso-screen h5 { color: var(--aiso-ink); margin: 0; letter-spacing: -.025em; }
 .aiso-screen p { color: var(--aiso-muted); font-size: 14px; line-height: 1.65; margin: 0; }

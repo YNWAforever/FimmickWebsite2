@@ -1,3 +1,6 @@
+import Image from "next/image";
+import homeScreenshot from "@/public/media/products/aiso/01-home-hero.png";
+import reportScreenshot from "@/public/media/products/aiso/03-sample-report.png";
 import { LinkButton, SectionHead } from "@/components/ui";
 import { zh, type Locale } from "@/lib/i18n";
 import "@/app/styles/aiso.css";
@@ -17,6 +20,20 @@ export function AisoReadiness({ locale }: { locale: Locale }) {
     <section className="section aiso-section" id="example">
       <div className="container stack">
         <SectionHead eyebrow={copy("Website readiness for AI search", "網站 AI 搜尋準備度")} title={copy("From a website scan to your next fix.", "從網站掃描到下一步修正。")} lead={copy("See the score, inspect the evidence and review practical files for your website. 20 checks. Three areas. 100 points.", "查看評分、檢視證據，並審閱適用於網站的實用檔案。20 項檢查、三個範疇、100 分。")} />
+        <div className="aiso-screenshots">
+          <figure className="aiso-screenshot">
+            <a href={scanUrl} aria-label={copy("Open AISO free scan", "開啟 AISO 免費掃描")}>
+              <Image src={homeScreenshot} alt={copy("AISO homepage with the website URL field and Run Free Scan button", "AISO 首頁，展示網站網址欄位及免費掃描按鈕")} sizes="(min-width: 1320px) 1240px, 100vw" />
+            </a>
+            <figcaption>{copy("AISO homepage — start with your website URL. Screenshots show the English product interface.", "AISO 首頁 — 從輸入網站網址開始。截圖展示英文版產品介面。")}</figcaption>
+          </figure>
+          <figure className="aiso-screenshot">
+            <a href={reportUrl} aria-label={copy("Open AISO sample report", "開啟 AISO 示例報告")}>
+              <Image src={reportScreenshot} alt={copy("AISO sample report showing Example Brand's 62 out of 100 readiness score, Grade C and score history", "AISO 示例報告，展示 Example Brand 的準備度評分 62/100、C 級及評分歷史")} sizes="(min-width: 1320px) 1240px, 100vw" />
+            </a>
+            <figcaption>{copy("AISO sample report — synthetic example data, with a readiness score and evidence to review.", "AISO 示例報告 — 使用合成示例資料，展示準備度評分及可供審閱的證據。")}</figcaption>
+          </figure>
+        </div>
         <div className="aiso-screen" aria-label={copy("AISO readiness product preview", "AISO 準備度產品預覽")}>
           <div className="aiso-screen__bar"><span className="aiso-brand"><span aria-hidden="true">ϟ</span> Fimmick <b>AISO</b></span><span className="aiso-badge">{copy("Synthetic sample · no customer data", "合成示例 · 不含客戶資料")}</span></div>
           <ol className="aiso-steps" aria-label={copy("Readiness workflow", "準備度流程")}>
