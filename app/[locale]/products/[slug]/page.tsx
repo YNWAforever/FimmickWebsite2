@@ -60,6 +60,7 @@ export default async function ProductPage({ params }: SlugParams) {
           </div>
         }
       />
+      {p.id === "aiso" ? <AisoReadiness locale={locale} /> : null}
       <section className="section">
         <div className="container">
           <SectionHead eyebrow={en ? "Scope" : zh("範圍", locale)} title={en ? "What it does — and what it does not do" : zh("它做甚麼——以及不做甚麼", locale)} />
@@ -86,12 +87,12 @@ export default async function ProductPage({ params }: SlugParams) {
           <FlowStrip locale={locale} steps={p.workflow} humanIndex={p.id === "aiso" ? 2 : 3} />
         </div>
       </section>
-      {p.id === "aiso" ? <AisoReadiness locale={locale} /> : <section className="section" id="example">
+      {p.id !== "aiso" ? <section className="section" id="example">
         <div className="container">
           <SectionHead eyebrow={en ? "Sample" : zh("示例", locale)} title={en ? "Try the workflow on sample data" : zh("以示例資料試用流程", locale)} />
           <ExampleBlock locale={locale} id={p.example} />
         </div>
-      </section>}
+      </section> : null}
       <section className="section section--surface">
         <div className="container split">
           <div className="stack">
