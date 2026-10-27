@@ -1,9 +1,8 @@
 import type { Product, ProductId } from "./types";
 
 /**
- * Availability for all six products is "discuss": public release status was
- * not verified for this redesign, so pages offer "Discuss Configuration" and a
- * labelled illustrative workflow. Update per product once confirmed.
+ * AISO links to the available live readiness product. Other products retain
+ * configuration availability and labelled illustrative workflows.
  */
 export const products: Product[] = [
   {
@@ -51,43 +50,48 @@ export const products: Product[] = [
   },
   {
     id: "aiso",
-    headlineAccent: { en: "and improvements", zh: "檢視與改善" },
-    name: "AISO — AI Search Operations",
-    descriptor: { en: "Defined AI-search review and improvements", zh: "具明確範圍的 AI 搜尋檢視與改善" },
+    headlineAccent: { en: "recommend your business?", zh: "推薦你的業務嗎？" },
+    name: "AISO",
+    descriptor: { en: "Can AI recommend your business?", zh: "AI 能推薦你的業務嗎？" },
+    seoTitle: { en: "AISO — Website readiness for AI search", zh: "AISO — 網站 AI 搜尋準備度" },
     solution: "market-intelligence",
-    availability: "discuss",
-    exampleMode: "illustrative-sample",
+    availability: "available",
+    exampleMode: "live-product",
     summary: {
-      en: "Records how named AI assistants answer questions about your category, and prioritises page improvements.",
-      zh: "記錄指定 AI 助手如何回答關於你品類的問題，並排列頁面改善的優先次序。",
+      en: "Checks whether ChatGPT, Perplexity, Google AI, Claude and Gemini can find, read and quote your website.",
+      zh: "檢查網站的 AI 搜尋準備度，了解 ChatGPT、Perplexity、Google AI、Claude 及 Gemini 能否找到、讀取及引用你的網站。",
     },
-    whoFor: { en: "Marketing, SEO and web teams who want to know how their brand appears when people ask AI for recommendations.", zh: "想知道顧客向 AI 查詢推薦時品牌如何出現的市場推廣、SEO 及網站團隊。" },
+    whoFor: { en: "Marketing, SEO and web teams preparing their website for AI search. First scan free, with no sign-up or credit card required for the scan itself.", zh: "適合為網站準備 AI 搜尋的市場推廣、SEO 及網站團隊。首次掃描免費，掃描本身毋須註冊或信用卡。" },
     supportedActions: {
-      en: ["Maintain a defined question set", "Record answers from named assistants on a date", "Compare mentions and cited sources", "Prioritise page and content improvements"],
-      zh: ["維護一組既定問題", "按日期記錄指定 AI 助手的答案", "比較品牌被提及情況及引用來源", "排列頁面及內容改善的優先次序"],
+      en: ["Website readiness scans", "20-check score out of 100, with grades A+ to F", "Fix Pack: llms.txt, robots.txt patch and FAQ JSON-LD", "Prioritised fixes", "Score history per plan", "Client-attributed reports on Pro and above"],
+      zh: ["網站準備度掃描", "20 項檢查、100 分制，評級由 A+ 至 F", "修正套件：llms.txt、robots.txt 修補及 FAQ JSON-LD", "按優先次序排列的修正建議", "按方案提供分數歷史", "Pro 或以上方案提供註明客戶的報告"],
     },
     exclusions: {
-      en: ["Guaranteed rankings or placements", "Changing third-party AI systems", "Social conversation analysis (that is Social Listening)"],
-      zh: ["保證排名或位置", "更改第三方 AI 系統", "社交討論分析（屬社交聆聽範圍）"],
+      en: ["Guaranteed rankings or citations", "Changing third-party AI systems", "Social conversation analysis — see Social Listening", "Treating readiness as live mention monitoring"],
+      zh: ["保證排名或引用", "更改第三方 AI 系統", "社交討論分析 — 請參閱社交聆聽", "把準備度當作即時品牌提及監察"],
     },
     dependencies: {
-      en: ["Access to the AI assistants in scope", "An agreed question set and markets", "Ability to update your own web pages"],
-      zh: ["可使用範圍內的 AI 助手", "已確認的問題組合及市場", "可更新自家網頁"],
+      en: ["Ability to update your own website", "Public crawlability of the page", "A free account to save the result and Fix Pack"],
+      zh: ["可更新自家網站", "頁面可供公開爬取", "儲存結果及修正套件需要免費帳戶"],
     },
-    output: { en: "A dated AI-search review and a prioritised improvement list.", zh: "註明日期的 AI 搜尋檢視及優先改善清單。" },
+    output: { en: "An AI-search readiness score, prioritised fixes and a Fix Pack. Scan → Fix → Track through re-scans.", zh: "AI 搜尋準備度分數、優先修正清單及修正套件。掃描 → 修正 → 重新掃描追蹤。" },
     workflow: [
-      { title: { en: "Question set", zh: "問題組合" }, copy: { en: "Define the questions buyers actually ask.", zh: "界定買家真正會問的問題。" } },
-      { title: { en: "Answer capture", zh: "記錄答案" }, copy: { en: "Record answers from named assistants on a date.", zh: "按日期記錄指定 AI 助手的答案。" } },
-      { title: { en: "Gap analysis", zh: "差距分析" }, copy: { en: "AI compares answers with your approved facts and pages.", zh: "AI 比較答案與你的已確認資料及頁面。" } },
-      { title: { en: "Prioritise", zh: "排序" }, copy: { en: "A specialist decides which improvements to make first.", zh: "由專家決定先處理哪些改善。" } },
+      { title: { en: "Scan", zh: "掃描" }, copy: { en: "Enter a website URL. The scan evaluates an origin page across 20 readiness checks.", zh: "輸入網站網址，掃描會就來源頁面進行 20 項準備度檢查。" } },
+      { title: { en: "Review", zh: "檢視" }, copy: { en: "Review the score, grade and prioritised fixes. Create a free account to save the result and Fix Pack.", zh: "檢視分數、評級及優先修正清單，建立免費帳戶以儲存結果及修正套件。" } },
+      { title: { en: "Fix", zh: "修正" }, copy: { en: "Your web team reviews and applies the llms.txt, robots.txt patch and FAQ JSON-LD to your website.", zh: "由網站團隊審閱並在網站套用 llms.txt、robots.txt 修補及 FAQ JSON-LD。" } },
+      { title: { en: "Track", zh: "追蹤" }, copy: { en: "Re-scan and compare score history within your plan. Score changes alone do not prove which change caused them.", zh: "重新掃描並按方案比較分數歷史；單憑分數變化不能證明由哪項改動造成。" } },
     ],
     distinction: {
-      en: "AISO reviews AI-assistant answers for defined questions. It does not measure social conversation, and it cannot promise how an assistant will answer.",
-      zh: "AISO 檢視 AI 助手就既定問題的答案，不量度社交討論，亦不能保證 AI 助手的回答方式。",
+      en: "AISO measures website readiness for AI search, not live mentions or assistant answers. It cannot guarantee that an assistant will recommend or cite your business.",
+      zh: "AISO 量度網站的 AI 搜尋準備度，並非即時提及或助手答案；不能保證助手會推薦或引用你的業務。",
     },
     example: "intelligence",
     faqs: [
-      { q: { en: "How does AISO relate to SEO?", zh: "AISO 與 SEO 有何關係？" }, a: { en: "AISO focuses on AI-generated answers; SEO focuses on search engines. The improvements often overlap — clear facts, structured pages and credible sources — so they are planned together in the SEO, GEO & AEO service.", zh: "AISO 聚焦於 AI 生成的答案，SEO 聚焦於搜尋引擎；兩者的改善方向常有重疊（清晰資料、結構化頁面、可信來源），因此會在 SEO、GEO 及 AEO 服務中一併規劃。" } },
+      { q: { en: "Is the first scan really free?", zh: "首次掃描真的免費嗎？" }, a: { en: "Yes. The scan itself needs no sign-up and no credit card. Create a free account to save your result and Fix Pack.", zh: "是。掃描本身毋須註冊或信用卡。儲存結果及修正套件則需要建立免費帳戶。" } },
+      { q: { en: "What does the score measure?", zh: "分數量度甚麼？" }, a: { en: "20 checks in three areas total 100 points: Core 45, Extended 30 and GEO 25, with letter grades A+ to F. They assess whether your site is ready to be found, read and quoted by ChatGPT, Google AI, Perplexity, Claude and Gemini; they do not measure live mentions.", zh: "三個範疇共 20 項檢查，總分 100：Core 45、Extended 30、GEO 25，評級由 A+ 至 F。檢查網站是否準備好讓 ChatGPT、Google AI、Perplexity、Claude 及 Gemini 找到、讀取及引用，並非量度即時提及。" } },
+      { q: { en: "What is in the Fix Pack?", zh: "修正套件包含甚麼？" }, a: { en: "llms.txt, a robots.txt patch and FAQ JSON-LD for your web team to review and apply. Pro adds Advanced Fix Packs.", zh: "包含 llms.txt、robots.txt 修補及 FAQ JSON-LD，供網站團隊審閱及套用。Pro 另有進階修正套件。" } },
+      { q: { en: "Does a higher score guarantee citations?", zh: "分數提高是否保證獲引用？" }, a: { en: "No. Readiness is not a ranking or citation guarantee. A scan evaluates an origin page, and later score changes alone do not prove causation or a change in live AI answers.", zh: "不會。準備度不保證排名或引用。掃描評估來源頁面，之後的分數變化本身不能證明因果關係，亦不能證明即時 AI 答案有所改變。" } },
+      { q: { en: "How does AISO differ from Social Listening?", zh: "AISO 與社交聆聽有何分別？" }, a: { en: "AISO checks your website’s readiness for AI search. Social Listening analyses public conversation about brands and competitors.", zh: "AISO 檢查網站的 AI 搜尋準備度；社交聆聽則分析品牌及競爭對手的公開討論。" } },
     ],
     services: ["seo-aeo"],
   },

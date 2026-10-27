@@ -1,6 +1,7 @@
 // Route sheets (8.2.3), first so they keep their place before component sheets.
 import "@/app/styles/diagrams.css";
 import "@/app/styles/examples.css";
+import { AisoReadiness } from "@/components/AisoReadiness";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -45,11 +46,11 @@ export default async function ProductPage({ params }: SlugParams) {
         eyebrow={p.name}
         title={t(p.descriptor, locale)}
         accent={p.headlineAccent ? t(p.headlineAccent, locale) : undefined}
-        lead={t(p.summary, locale)}
+        lead={p.id === "aiso" ? `${en ? "Website readiness for AI search." : zh("網站 AI 搜尋準備度。", locale)} ${t(p.summary, locale)}` : t(p.summary, locale)}
         actions={
           <>
-            <LinkButton to={href(locale, contact)} variant="accent">{t(ui.discussConfiguration, locale)}</LinkButton>
-            <LinkButton to="#example" variant="ghost">{en ? "Try the example" : zh("試用示例", locale)}</LinkButton>
+            <LinkButton to={p.id === "aiso" ? "https://aiso-kappa.vercel.app/en/scan" : href(locale, contact)} variant="accent">{p.id === "aiso" ? (en ? "Run free scan" : zh("免費掃描", locale)) : t(ui.discussConfiguration, locale)}</LinkButton>
+            <LinkButton to={p.id === "aiso" ? "https://aiso-kappa.vercel.app/en/sample-report" : "#example"} variant="ghost">{p.id === "aiso" ? (en ? "View sample report" : zh("查看示例報告", locale)) : (en ? "Try the example" : zh("試用示例", locale))}</LinkButton>
           </>
         }
         aside={
@@ -81,16 +82,16 @@ export default async function ProductPage({ params }: SlugParams) {
       </section>
       <section className="section section--surface">
         <div className="container stack" style={{ ["--stack" as string]: "24px" }}>
-          <SectionHead eyebrow={en ? "Workflow" : zh("流程", locale)} title={en ? "Illustrative workflow" : zh("示例流程", locale)} lead={t(p.output, locale)} />
-          <FlowStrip locale={locale} steps={p.workflow} humanIndex={3} />
+          <SectionHead eyebrow={en ? "Workflow" : zh("流程", locale)} title={p.id === "aiso" ? (en ? "Scan → Fix → Track" : zh("掃描 → 修正 → 追蹤", locale)) : (en ? "Illustrative workflow" : zh("示例流程", locale))} lead={t(p.output, locale)} />
+          <FlowStrip locale={locale} steps={p.workflow} humanIndex={p.id === "aiso" ? 2 : 3} />
         </div>
       </section>
-      <section className="section" id="example">
+      {p.id === "aiso" ? <AisoReadiness locale={locale} /> : <section className="section" id="example">
         <div className="container">
           <SectionHead eyebrow={en ? "Sample" : zh("示例", locale)} title={en ? "Try the workflow on sample data" : zh("以示例資料試用流程", locale)} />
           <ExampleBlock locale={locale} id={p.example} />
         </div>
-      </section>
+      </section>}
       <section className="section section--surface">
         <div className="container split">
           <div className="stack">
