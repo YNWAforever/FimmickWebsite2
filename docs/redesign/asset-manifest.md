@@ -18,6 +18,7 @@
 | Editorial photography | `public/media/photography/<id>-{1536,1024,640}.{avif,webp}`, `<id>-p-{800,480}.{avif,webp}` | 10 scenes, 100 files, 2.9 MB total; hero AVIF 48 KB | **Generated illustrations** (OpenAI Codex CLI image generation, 29 Sep 2026). Prompts, per-scene inspection notes and original hashes are in `docs/redesign/cinematic/photography-provenance.md`. Rebuilt by `scripts/build-photography.mjs`. |
 | Photography masters | `assets-src/photography/masters/*.webp` | 1536×1024, q90 | As above. |
 | Guide previews | `public/media/guides/*.webp` | 480 px first-page renders, 11–21 KB | Rendered from the guide HTML by `PREVIEWS_ONLY=1 node scripts/build-guides.mjs`. |
+| AISO product screens | `public/media/products/aiso/{home-hero,scan,sample-report,site-health,ai-visibility}.png` | 1920×1113 captures of the live product | Screens of Fimmick AISO (aiso-kappa). Shown on the AISO product page beside the readiness walkthrough. The pricing screen is omitted; pricing stays a link-out. Not illustrative photography. |
 | Cinematic review evidence | `docs/redesign/cinematic/{before,after,motion}` | Viewport and full-page captures, `metrics.json`, motion recordings (WebM) and `motion-checks.json` | `scripts/capture-audit.mjs`, `scripts/capture-motion.mjs`. |
 
 No stock imagery, voice or third-party footage is used. The generated photographs show people only from behind, at the edge of frame or out of focus. Every photograph is labelled as illustrative on the page, and none is presented as FIMMICK staff, client premises or a product interface.
